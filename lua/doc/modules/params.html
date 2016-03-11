@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MAOOAM</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+<li><a href="#Tables">Tables</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/maooam.html">maooam</a></li>
+  <li><a href="../modules/maooam_tl_ad.html">maooam_tl_ad</a></li>
+  <li><a href="../modules/aotensor.html">aotensor</a></li>
+  <li><a href="../modules/array.html">array</a></li>
+  <li><a href="../modules/inprod_analytic.html">inprod_analytic</a></li>
+  <li><a href="../modules/restore.html">restore</a></li>
+  <li><a href="../modules/rk2.html">rk2</a></li>
+  <li><a href="../modules/stat.html">stat</a></li>
+  <li><a href="../modules/tensor.html">tensor</a></li>
+  <li><a href="../modules/gz.html">gz</a></li>
+  <li><a href="../modules/rk4.html">rk4</a></li>
+  <li><strong>params</strong></li>
+  <li><a href="../modules/modeselection.html">modeselection</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>params</code></h1>
+<p>Integration parameters and physical parameters for the modular
+ arbitrary-order ocean-atmosphere model MAOOAM.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#i.getoutfn">i.getoutfn (suffix)</a></td>
+	<td class="summary">Generator for output file name
+ Adapt this function if you want to have a custom file name (e.g.</td>
+	</tr>
+</table>
+<h2><a href="#Tables">Tables</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#i">i</a></td>
+	<td class="summary">Integration parameters</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#m">m</a></td>
+	<td class="summary">Model parameters</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "i.getoutfn"></a>
+    <strong>i.getoutfn (suffix)</strong>
+    </dt>
+    <dd>
+    Generator for output file name
+ Adapt this function if you want to have a custom file name (e.g.  if you want
+ it to contain certain parameters)
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">suffix</span>
+         Extension, e.g. '.txt' or '.gz'
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        output name
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Tables"></a>Tables</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "i"></a>
+    <strong>i</strong>
+    </dt>
+    <dd>
+    Integration parameters
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">t_trans</span>
+        transient period (e.g. 1e7)
+        </li>
+        <li><span class="parameter">t_run</span>
+        length of trajectory on the attractor (e.g. 5e8)
+        </li>
+        <li><span class="parameter">dt</span>
+        the time step
+        </li>
+        <li><span class="parameter">out_prefix</span>
+        prefix for the output file name
+        </li>
+        <li><span class="parameter">writeout</span>
+        write out all variables every 'writeout' time units
+        </li>
+        <li><span class="parameter">statistics</span>
+        accumulate statistics every 'statistics' time units
+        </li>
+        <li><span class="parameter">compression</span>
+        compress output of trajectory (if writeout == true)
+        </li>
+        <li><span class="parameter">snapshot</span>
+        write out state every 'snapshot' time units (false = no writeout)
+        </li>
+        <li><span class="parameter">integrator</span>
+        numerical integration scheme, e.g. "rk2" or "rk4"
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "m"></a>
+    <strong>m</strong>
+    </dt>
+    <dd>
+    Model parameters
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">scale</span>
+        the characteristic space scale, L*pi
+        </li>
+        <li><span class="parameter">f0</span>
+        Coriolis parameter at 45 degrees latitude
+        </li>
+        <li><span class="parameter">n</span>
+        aspect ratio (n = 2Ly/Lx ; Lx = 2<em>pi</em>L/n; Ly = pi*L)
+        </li>
+        <li><span class="parameter">rra</span>
+        earth radius
+        </li>
+        <li><span class="parameter">phi0</span>
+        latitude Parameters for the ocean
+        </li>
+        <li><span class="parameter">gp</span>
+        reduced gravity
+        </li>
+        <li><span class="parameter">r</span>
+        frictional coefficient at the bottom of the ocean
+        </li>
+        <li><span class="parameter">H</span>
+        depth of the water layer
+        </li>
+        <li><span class="parameter">alpha</span>
+        coefficient characterizing the intensification of the flow on the western boundaries
+        </li>
+        <li><span class="parameter">d</span>
+        the coupling parameter (should be divided by f0 in order to be adimensional) Parameters for the atmosphere
+        </li>
+        <li><span class="parameter">k</span>
+        bottom friction coefficient
+        </li>
+        <li><span class="parameter">kp</span>
+        internal friction coefficient
+        </li>
+        <li><span class="parameter">sig0</span>
+        static stability Temperature-related parameters for the ocean
+        </li>
+        <li><span class="parameter">Go</span>
+        Specific heat capacity of the ocean (50m layer)
+        </li>
+        <li><span class="parameter">Co</span>
+        Constant short-wave radiation of the ocean
+        </li>
+        <li><span class="parameter">To0</span>
+        Stationary solution for the 0-th order ocean temperature Temperature-related parameters for the atmosphere
+        </li>
+        <li><span class="parameter">Ga</span>
+        Specific heat capacity of the atmosphere
+        </li>
+        <li><span class="parameter">Ca</span>
+        Constant short-wave radiation of the atmosphere
+        </li>
+        <li><span class="parameter">epsa</span>
+        Emissivity coefficient for the grey-body atmosphere
+        </li>
+        <li><span class="parameter">Ta0</span>
+        Stationary solution for the 0-th order atmospheric temperature Other temperature-related parameters/constants
+        </li>
+        <li><span class="parameter">sc</span>
+        Ratio of surface to atmosphere temperature
+        </li>
+        <li><span class="parameter">lambda</span>
+        Sensible + turbulent heat exchange between ocean and atmosphere
+        </li>
+        <li><span class="parameter">R</span>
+        Gas constant of dry air
+        </li>
+        <li><span class="parameter">sB</span>
+        Stefan–Boltzmann constant
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-03-11 15:53:17 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

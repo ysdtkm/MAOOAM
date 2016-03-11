@@ -1,0 +1,517 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MAOOAM</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/maooam.html">maooam</a></li>
+  <li><a href="../modules/maooam_tl_ad.html">maooam_tl_ad</a></li>
+  <li><a href="../modules/aotensor.html">aotensor</a></li>
+  <li><a href="../modules/array.html">array</a></li>
+  <li><a href="../modules/inprod_analytic.html">inprod_analytic</a></li>
+  <li><a href="../modules/restore.html">restore</a></li>
+  <li><a href="../modules/rk2.html">rk2</a></li>
+  <li><a href="../modules/stat.html">stat</a></li>
+  <li><strong>tensor</strong></li>
+  <li><a href="../modules/gz.html">gz</a></li>
+  <li><a href="../modules/rk4.html">rk4</a></li>
+  <li><a href="../modules/params.html">params</a></li>
+  <li><a href="../modules/modeselection.html">modeselection</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>tensor</code></h1>
+<p>Sparse tensor tools.</p>
+<p> Tensors are entered as coordinate lists:</p>
+
+<pre>
+{ {x1,y1,z1,val1}, {x2,y2,z2,val2},...}
+</pre>
+
+<p> This module provides functions to convert a coordinate lists to a nested
+ sparse table or to a (non-growable) fast ffi coordinate list.</p>
+
+<p> While not the most (space-)efficient sparse tensor storage method, it's
+ simple, generic (for variable dimensions) and fast enough for
+ contractions with 1D arrays.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#coo_to_sparse_table">coo_to_sparse_table (coo_list)</a></td>
+	<td class="summary">Convert a coordinate list of arbitrary dimension to a sparse nested table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#new_sparse_table">new_sparse_table ()</a></td>
+	<td class="summary">Create a new sparse table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sparse_table_to_coo">sparse_table_to_coo (sparse_table)</a></td>
+	<td class="summary">Convert a sparse tensor encoded as a nested table into a coordinate list.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#simplify_coo">simplify_coo (coo_list)</a></td>
+	<td class="summary">Merge duplicate entries in a coordinate list.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#coo_to_fficoo">coo_to_fficoo (coo_list)</a></td>
+	<td class="summary">Convert a coordinate list of arbitrary dimension to an ffi coordinate list.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sparse_mul2">sparse_mul2 (fficoo_ij, arr_j, res)</a></td>
+	<td class="summary">Sparse multiplication of two tensors, C[i][j] a[j].</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sparse_mul3">sparse_mul3 (fficoo_ijk, arr_j, arr_k, res)</a></td>
+	<td class="summary">Sparse multiplication of three tensors, C[i][j][k] a[j] b[k].</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#jsparse_mul">jsparse_mul (fficoo_ijk, arr_j)</a></td>
+	<td class="summary">
+<p>Sparse multiplication of two tensors to determine the Jacobian:</p>
+<pre><code>J[i][j] = C[i][j][k] a[k] + C[i][k][j] a[k].
+</code></pre>
+</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sparse_mul4">sparse_mul4 (fficoo_ijkl, arr_j, arr_k, arr_l, res)</a></td>
+	<td class="summary">Sparse multiplication of four tensors, C[i][j][k][l] a[j] b[k] c[l]
+ Note that it is NOT safe to pass <code>arr_j/k/l</code> as a result buffer,
+ as this operation does multiple passes.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sparse_mul5">sparse_mul5 (fficoo_ijklm, arr_j, arr_k, arr_l, arr_m, res)</a></td>
+	<td class="summary">Sparse multiplication of five tensors, C[i][j][k][l][m] a[j] b[k] c[l] d[m]
+ Note that it is NOT safe to pass <code>arr_j/k/l/m</code> as a result buffer,
+ as this operation does multiple passes.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#append_coo">append_coo (coo1, coo2)</a></td>
+	<td class="summary">Append a coo_list to another one.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "coo_to_sparse_table"></a>
+    <strong>coo_to_sparse_table (coo_list)</strong>
+    </dt>
+    <dd>
+    Convert a coordinate list of arbitrary dimension to a sparse nested table.
+ Input format: { {x1,y1,z1,val1}, {x2,y2,z2,val2},...}
+ In the returned table, we have</p>
+<pre><code> t[x1][y1][z1]==val1
+</code></pre>
+<p> e.g.</p>
+<pre><code> mycoolist = {{1, 5, 0.1},{2, 3, 3.14}}
+</code></pre>
+<p> yields</p>
+<pre><code> {[1]={[5]=0.1},[2]={[3]=3.14}}
+</code></pre>
+<p> Missing entries are treated as zero in mathematical operations.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">coo_list</span>
+         coordinate list (Lua table)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        sparse table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "new_sparse_table"></a>
+    <strong>new_sparse_table ()</strong>
+    </dt>
+    <dd>
+    Create a new sparse table.
+ Missing entries are treated as zero in mathematical operations.
+ This sparse table cannot be filled up with st[i][j][k]=val
+ Instead, use the assign method sparse_t:assign(val,indices...)
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        sparse table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sparse_table_to_coo"></a>
+    <strong>sparse_table_to_coo (sparse_table)</strong>
+    </dt>
+    <dd>
+    Convert a sparse tensor encoded as a nested table into a coordinate list.
+ Don't include elements with value equal to zero.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">sparse_table</span>
+         sparse, nested table
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        coordinate list (Lua table)
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "simplify_coo"></a>
+    <strong>simplify_coo (coo_list)</strong>
+    </dt>
+    <dd>
+    Merge duplicate entries in a coordinate list.
+ This is done by converting it to a sparse table and back.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">coo_list</span>
+         coordinate list (Lua table)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        simplified coordinate list (Lua table)
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "coo_to_fficoo"></a>
+    <strong>coo_to_fficoo (coo_list)</strong>
+    </dt>
+    <dd>
+    Convert a coordinate list of arbitrary dimension to an ffi coordinate list.
+ Input format:</p>
+<pre><code> { {x1,y1,z1,val1}, {x2,y2,z2,val2},...}
+</code></pre>
+<p> e.g.</p>
+<pre><code> mycoolist = {{1, 5, 0.1}, {2, 3, 3.14}, {3, 2, 10}}
+</code></pre>
+<p> yields a struct fficoo which has</p>
+<pre><code> fficoo.dim == 2
+ fficoo.nelem == 3
+ fficoo.data[0].c[0] == 1
+ fficoo.data[0].c[1] == 5
+ fficoo.data[0].v == 0.1
+ fficoo.data[1].c[0] == 2
+</code></pre>
+<p>  etc.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">coo_list</span>
+         coordinate list (Lua table)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        ffi coordinate list (ffi struct)
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sparse_mul2"></a>
+    <strong>sparse_mul2 (fficoo_ij, arr_j, res)</strong>
+    </dt>
+    <dd>
+    Sparse multiplication of two tensors, C[i][j] a[j].
+ Note that it is NOT safe to pass <code>arr_j</code> as a result buffer,
+ as this operation does multiple passes.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fficoo_ij</span>
+         an ffi coordinate list (ffi struct) of which index
+ 2 will be contracted.
+        </li>
+        <li><span class="parameter">arr_j</span>
+         the array to be contracted with index 2 of ffi<em>coo</em>ij
+        </li>
+        <li><span class="parameter">res</span>
+         array (buffer) to store the result of the contraction
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result array
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sparse_mul3"></a>
+    <strong>sparse_mul3 (fficoo_ijk, arr_j, arr_k, res)</strong>
+    </dt>
+    <dd>
+    Sparse multiplication of three tensors, C[i][j][k] a[j] b[k].
+ Note that it is NOT safe to pass <code>arr_j</code>/<code>arr_k</code> as a result buffer,
+ as this operation does multiple passes.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fficoo_ijk</span>
+         an ffi coordinate list (ffi struct) of which index
+ 2 and 3 will be contracted.
+        </li>
+        <li><span class="parameter">arr_j</span>
+         the array to be contracted with index 2 of ffi<em>coo</em>ijk
+        </li>
+        <li><span class="parameter">arr_k</span>
+         the array to be contracted with index 3 of ffi<em>coo</em>ijk
+        </li>
+        <li><span class="parameter">res</span>
+         array (buffer) to store the result of the contraction
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result array
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "jsparse_mul"></a>
+    <strong>jsparse_mul (fficoo_ijk, arr_j)</strong>
+    </dt>
+    <dd>
+    Sparse multiplication of two tensors to determine the Jacobian:</p>
+<pre><code>J[i][j] = C[i][j][k] a[k] + C[i][k][j] a[k].
+</code></pre>
+<p> It's implemented slightly differently: for every C[i][j][k], we add to J as follows:</p>
+<pre><code>J[i][j] += C[i][j][k] a[k];
+J[i][k] += C[i][j][k] a[j]
+</code></pre>
+<p> Return a tensor in the form of a coolist.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fficoo_ijk</span>
+         an ffi coordinate list (ffi struct) of which index
+ 2 or 3 will be contracted.
+        </li>
+        <li><span class="parameter">arr_j</span>
+         the array to be contracted with index 2 and then index 3 of ffi<em>coo</em>ijk
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        jcoo_ij a coolist with the result of the contraction
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sparse_mul4"></a>
+    <strong>sparse_mul4 (fficoo_ijkl, arr_j, arr_k, arr_l, res)</strong>
+    </dt>
+    <dd>
+    Sparse multiplication of four tensors, C[i][j][k][l] a[j] b[k] c[l]
+ Note that it is NOT safe to pass <code>arr_j/k/l</code> as a result buffer,
+ as this operation does multiple passes.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fficoo_ijkl</span>
+         an ffi coordinate list (ffi struct) of which index
+ 2,3,4 will be contracted.
+        </li>
+        <li><span class="parameter">arr_j</span>
+         the array to be contracted with index 2 of ffi<em>coo</em>ijkl
+        </li>
+        <li><span class="parameter">arr_k</span>
+         the array to be contracted with index 3 of ffi<em>coo</em>ijkl
+        </li>
+        <li><span class="parameter">arr_l</span>
+         the array to be contracted with index 4 of ffi<em>coo</em>ijkl
+        </li>
+        <li><span class="parameter">res</span>
+         array (buffer) to store the result of the contraction
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result array
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sparse_mul5"></a>
+    <strong>sparse_mul5 (fficoo_ijklm, arr_j, arr_k, arr_l, arr_m, res)</strong>
+    </dt>
+    <dd>
+    Sparse multiplication of five tensors, C[i][j][k][l][m] a[j] b[k] c[l] d[m]
+ Note that it is NOT safe to pass <code>arr_j/k/l/m</code> as a result buffer,
+ as this operation does multiple passes.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fficoo_ijklm</span>
+         an ffi coordinate list (ffi struct) of which index
+ 2,3,4,5 will be contracted.
+        </li>
+        <li><span class="parameter">arr_j</span>
+         the array to be contracted with index 2 of ffi<em>coo</em>ijklm
+        </li>
+        <li><span class="parameter">arr_k</span>
+         the array to be contracted with index 3 of ffi<em>coo</em>ijklm
+        </li>
+        <li><span class="parameter">arr_l</span>
+         the array to be contracted with index 4 of ffi<em>coo</em>ijklm
+        </li>
+        <li><span class="parameter">arr_m</span>
+         the array to be contracted with index 5 of ffi<em>coo</em>ijklm
+        </li>
+        <li><span class="parameter">res</span>
+         array (buffer) to store the result of the contraction
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the result array
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "append_coo"></a>
+    <strong>append_coo (coo1, coo2)</strong>
+    </dt>
+    <dd>
+    Append a coo_list to another one.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">coo1</span>
+         the target coo_list
+        </li>
+        <li><span class="parameter">coo2</span>
+         the coo_list that will be appended to coo1
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-03-11 15:53:17 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

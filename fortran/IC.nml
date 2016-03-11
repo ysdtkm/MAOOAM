@@ -1,0 +1,48 @@
+!------------------------------------------------------------------------------!
+! Namelist file :                                                              !
+! Initial condition.                                                           !
+!------------------------------------------------------------------------------!
+ 
+&ICLIST
+  ! psi variables
+  IC(1) = 0.D0   ! typ= A, Nx= 0.0, Ny= 1.0
+  IC(2) = 0.D0   ! typ= K, Nx= 1.0, Ny= 1.0
+  IC(3) = 0.D0   ! typ= L, Nx= 1.0, Ny= 1.0
+  IC(4) = 0.D0   ! typ= A, Nx= 0.0, Ny= 2.0
+  IC(5) = 0.D0   ! typ= K, Nx= 1.0, Ny= 2.0
+  IC(6) = 0.D0   ! typ= L, Nx= 1.0, Ny= 2.0
+  IC(7) = 0.D0   ! typ= K, Nx= 2.0, Ny= 1.0
+  IC(8) = 0.D0   ! typ= L, Nx= 2.0, Ny= 1.0
+  IC(9) = 0.D0   ! typ= K, Nx= 2.0, Ny= 2.0
+  IC(10) = 0.D0   ! typ= L, Nx= 2.0, Ny= 2.0
+  ! theta variables
+  IC(11) = 0.D0   ! typ= A, Nx= 0.0, Ny= 1.0
+  IC(12) = 0.D0   ! typ= K, Nx= 1.0, Ny= 1.0
+  IC(13) = 0.D0   ! typ= L, Nx= 1.0, Ny= 1.0
+  IC(14) = 0.D0   ! typ= A, Nx= 0.0, Ny= 2.0
+  IC(15) = 0.D0   ! typ= K, Nx= 1.0, Ny= 2.0
+  IC(16) = 0.D0   ! typ= L, Nx= 1.0, Ny= 2.0
+  IC(17) = 0.D0   ! typ= K, Nx= 2.0, Ny= 1.0
+  IC(18) = 0.D0   ! typ= L, Nx= 2.0, Ny= 1.0
+  IC(19) = 0.D0   ! typ= K, Nx= 2.0, Ny= 2.0
+  IC(20) = 0.D0   ! typ= L, Nx= 2.0, Ny= 2.0
+  ! A variables
+  IC(21) = 0.D0   ! Nx= 0.5, Ny= 1.0
+  IC(22) = 0.D0   ! Nx= 0.5, Ny= 2.0
+  IC(23) = 0.D0   ! Nx= 0.5, Ny= 3.0
+  IC(24) = 0.D0   ! Nx= 0.5, Ny= 4.0
+  IC(25) = 0.D0   ! Nx= 1.0, Ny= 1.0
+  IC(26) = 0.D0   ! Nx= 1.0, Ny= 2.0
+  IC(27) = 0.D0   ! Nx= 1.0, Ny= 3.0
+  IC(28) = 0.D0   ! Nx= 1.0, Ny= 4.0
+  ! T variables
+  IC(29) = 0.D0   ! Nx= 0.5, Ny= 1.0
+  IC(30) = 0.D0   ! Nx= 0.5, Ny= 2.0
+  IC(31) = 0.D0   ! Nx= 0.5, Ny= 3.0
+  IC(32) = 0.D0   ! Nx= 0.5, Ny= 4.0
+  IC(33) = 0.D0   ! Nx= 1.0, Ny= 1.0
+  IC(34) = 0.D0   ! Nx= 1.0, Ny= 2.0
+  IC(35) = 0.D0   ! Nx= 1.0, Ny= 3.0
+  IC(36) = 0.D0   ! Nx= 1.0, Ny= 4.0
+&END
+ 

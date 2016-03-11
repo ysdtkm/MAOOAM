@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MAOOAM</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Fields">Fields</a></li>
+<li><a href="#Local_Functions">Local Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/maooam.html">maooam</a></li>
+  <li><a href="../modules/maooam_tl_ad.html">maooam_tl_ad</a></li>
+  <li><a href="../modules/aotensor.html">aotensor</a></li>
+  <li><a href="../modules/array.html">array</a></li>
+  <li><strong>inprod_analytic</strong></li>
+  <li><a href="../modules/restore.html">restore</a></li>
+  <li><a href="../modules/rk2.html">rk2</a></li>
+  <li><a href="../modules/stat.html">stat</a></li>
+  <li><a href="../modules/tensor.html">tensor</a></li>
+  <li><a href="../modules/gz.html">gz</a></li>
+  <li><a href="../modules/rk4.html">rk4</a></li>
+  <li><a href="../modules/params.html">params</a></li>
+  <li><a href="../modules/modeselection.html">modeselection</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>inprod_analytic</code></h1>
+<p>Inner products between the truncated set of basis functions for the
+ ocean and atmosphere streamfunction fields.</p>
+<p> These are partly calculated using the analytical expressions from
+ Cehelsky, P., &amp; Tung, K. K. 87). Theories of multiple equilibria and
+ weather regimes-A critical reexamination. Part II: Baroclinic two-layer
+ models. Journal of the atmospheric sciences, 44(21), 3282-3303, 1987.</p>
+
+
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#atmos.a">atmos.a</a></td>
+	<td class="summary"><code>a_{i,j} = (F_i, \nabla^2 F_j)</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#atmos.b">atmos.b</a></td>
+	<td class="summary"><code>b_{i,j,k} = (F_i, J(F_j, \nabla^2 F_k))</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#atmos.c">atmos.c</a></td>
+	<td class="summary"><code>c_{i,j} = (F_i, \partial_x F_j)</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#atmos.d">atmos.d</a></td>
+	<td class="summary"><code>d_{i,j} = (F_i, \nabla^2 \eta_j)</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#atmos.g">atmos.g</a></td>
+	<td class="summary"><code>g_{i,j,k} = (F_i, J(F_j, F_k))</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#atmos.s">atmos.s</a></td>
+	<td class="summary"><code>s_{i,j} = (F_i, \eta_j)</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ocean.K">ocean.K</a></td>
+	<td class="summary"><code>K_{i,j} = (\eta_i, \nabla^2 F_j)</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ocean.M">ocean.M</a></td>
+	<td class="summary"><code>M_{i,j} = (eta_i, \nabla^2 \eta_j)</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ocean.N">ocean.N</a></td>
+	<td class="summary"><code>N_{i,j} = (eta_i, \partial_x \eta_j)</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ocean.O">ocean.O</a></td>
+	<td class="summary"><code>O_{i,j,k} = (eta_i, J(\eta_j, \eta_k))</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ocean.C">ocean.C</a></td>
+	<td class="summary"><code>C_{i,j,k} = (\eta_i, J(\eta_j,\nabla^2 \eta_k))</code>.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ocean.W">ocean.W</a></td>
+	<td class="summary"><code>W_{i,j} = (\eta_i, F_j)</code>.</td>
+	</tr>
+</table>
+<h2><a href="#Local_Functions">Local Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#permute">permute (a, n, sign)</a></td>
+	<td class="summary">Generate permutations, yielding the in-place permutation and the sign of the
+ permutation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fill_permutations">fill_permutations (indices, sparse_t, value)</a></td>
+	<td class="summary">Fill the (sparse) table <code>tofill</code> using the permutations of <code>indices</code> with
+ <code>value</code> multiplied by the sign of the permutation.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "atmos.a"></a>
+    <strong>atmos.a</strong>
+    </dt>
+    <dd>
+    <code>a_{i,j} = (F_i, \nabla^2 F_j)</code>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "atmos.b"></a>
+    <strong>atmos.b</strong>
+    </dt>
+    <dd>
+    <code>b_{i,j,k} = (F_i, J(F_j, \nabla^2 F_k))</code>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "atmos.c"></a>
+    <strong>atmos.c</strong>
+    </dt>
+    <dd>
+    <code>c_{i,j} = (F_i, \partial_x F_j)</code>.
+ Beta term for the atmosphere
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "atmos.d"></a>
+    <strong>atmos.d</strong>
+    </dt>
+    <dd>
+    <code>d_{i,j} = (F_i, \nabla^2 \eta_j)</code>.
+ Forcing of the ocean on the atmosphere.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "atmos.g"></a>
+    <strong>atmos.g</strong>
+    </dt>
+    <dd>
+    <code>g_{i,j,k} = (F_i, J(F_j, F_k))</code>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "atmos.s"></a>
+    <strong>atmos.s</strong>
+    </dt>
+    <dd>
+    <code>s_{i,j} = (F_i, \eta_j)</code>.
+ Forcing (thermal) of the ocean on the atmosphere.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ocean.K"></a>
+    <strong>ocean.K</strong>
+    </dt>
+    <dd>
+    <code>K_{i,j} = (\eta_i, \nabla^2 F_j)</code>.
+ Forcing of the atmosphere on the ocean.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ocean.M"></a>
+    <strong>ocean.M</strong>
+    </dt>
+    <dd>
+    <code>M_{i,j} = (eta_i, \nabla^2 \eta_j)</code>.
+ Forcing of the ocean fields on the ocean.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ocean.N"></a>
+    <strong>ocean.N</strong>
+    </dt>
+    <dd>
+    <code>N_{i,j} = (eta_i, \partial_x \eta_j)</code>.
+ Beta term for the ocean
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ocean.O"></a>
+    <strong>ocean.O</strong>
+    </dt>
+    <dd>
+    <code>O_{i,j,k} = (eta_i, J(\eta_j, \eta_k))</code>.
+ Temperature advection term (passive scalar)
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ocean.C"></a>
+    <strong>ocean.C</strong>
+    </dt>
+    <dd>
+    <code>C_{i,j,k} = (\eta_i, J(\eta_j,\nabla^2 \eta_k))</code>.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ocean.W"></a>
+    <strong>ocean.W</strong>
+    </dt>
+    <dd>
+    <code>W_{i,j} = (\eta_i, F_j)</code>.
+ Short-wave radiative forcing of the ocean.
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Local_Functions"></a>Local Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "permute"></a>
+    <strong>permute (a, n, sign)</strong>
+    </dt>
+    <dd>
+    Generate permutations, yielding the in-place permutation and the sign of the
+ permutation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+
+
+
+        </li>
+        <li><span class="parameter">n</span>
+
+
+
+        </li>
+        <li><span class="parameter">sign</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fill_permutations"></a>
+    <strong>fill_permutations (indices, sparse_t, value)</strong>
+    </dt>
+    <dd>
+    Fill the (sparse) table <code>tofill</code> using the permutations of <code>indices</code> with
+ <code>value</code> multiplied by the sign of the permutation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">indices</span>
+
+
+
+        </li>
+        <li><span class="parameter">sparse_t</span>
+
+
+
+        </li>
+        <li><span class="parameter">value</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-03-11 15:53:17 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

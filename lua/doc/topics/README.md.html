@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MAOOAM</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#About">About </a></li>
+<li><a href="#Usage">Usage </a></li>
+<li><a href="#Implementation_notes">Implementation notes </a></li>
+</ul>
+
+
+<h2>Topics</h2>
+<ul class="">
+  <li><strong>README</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/maooam.html">maooam</a></li>
+  <li><a href="../modules/maooam_tl_ad.html">maooam_tl_ad</a></li>
+  <li><a href="../modules/aotensor.html">aotensor</a></li>
+  <li><a href="../modules/array.html">array</a></li>
+  <li><a href="../modules/inprod_analytic.html">inprod_analytic</a></li>
+  <li><a href="../modules/restore.html">restore</a></li>
+  <li><a href="../modules/rk2.html">rk2</a></li>
+  <li><a href="../modules/stat.html">stat</a></li>
+  <li><a href="../modules/tensor.html">tensor</a></li>
+  <li><a href="../modules/gz.html">gz</a></li>
+  <li><a href="../modules/rk4.html">rk4</a></li>
+  <li><a href="../modules/params.html">params</a></li>
+  <li><a href="../modules/modeselection.html">modeselection</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+
+<h1>Modular arbitrary-order ocean-atmosphere model: MAOOAM -- Lua implementation</h1>
+
+<hr/>
+
+<p><a name="About"></a></p>
+<h2>About</h2>
+
+<p>(c) 2013-2016 Lesley De Cruz and Jonathan Demaeyer</p>
+
+<p>See LICENSE.txt for license information.</p>
+
+<p>This software is provided as supplementary material with:</p>
+
+<ul>
+    <li>De Cruz, L., Demaeyer, J. and Vannitsem, S.: A modular arbitrary-order
+    ocean-atmosphere model: MAOOAM, Geosci. Model Dev. Discuss.,
+    <a href="http://dx.doi.org/xx/xxx">doi:xx/xxx</a>, 2016.</li>
+</ul>
+
+<p><strong>Please cite this article if you use (a part of) this software for a
+publication.</strong></p>
+
+<p>The authors would appreciate it if you could also send a reprint of
+your paper to <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;l&#101;&#x73;&#108;&#x65;&#121;&#x2e;&#100;&#x65;c&#114;&#x75;&#122;&#x40;&#109;&#x65;&#116;&#x65;&#111;&#x2e;b&#101;">&#x6c;&#101;&#x73;&#108;&#x65;&#121;&#x2e;d&#101;&#x63;&#114;&#x75;&#122;&#x40;&#109;&#x65;t&#101;&#x6f;&#46;&#x62;&#101;</a>, <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;j&#111;&#x6e;&#97;&#x74;&#104;&#x61;&#110;&#x2e;d&#101;&#x6d;&#97;&#x65;&#121;&#x65;&#114;&#x40;&#109;&#x65;t&#101;&#x6f;&#46;&#x62;&#101;">&#x6a;&#111;&#x6e;&#97;&#x74;&#104;&#x61;n&#46;&#x64;&#101;&#x6d;&#97;&#x65;&#121;&#x65;r&#64;&#x6d;&#101;&#x74;&#101;&#x6f;&#46;&#x62;&#101;</a> and
+<a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;s&#118;&#x6e;&#64;&#x6d;&#101;&#x74;&#101;&#x6f;.&#98;&#x65;">&#x73;&#118;&#x6e;&#64;&#x6d;&#101;&#x74;e&#111;&#x2e;&#98;&#x65;</a>. </p>
+
+<p>Consult the MAOOAM code repository at <a href="http://dx.doi.org/yy/yyy">doi:yy/yyy</a>
+for updates, and <a href="http://climdyn.meteo.be">our website</a> for additional
+resources.</p>
+
+<hr/>
+
+<p><a name="Usage"></a></p>
+<h2>Usage</h2>
+
+<p>Model and integration parameters can be specified in <a href="../modules/params.html#">params.lua</a>.</p>
+
+<p>The resolution of the model can be modified by specifying which modes should be
+included in the file <a href="../modules/modeselection.html#">modeselection.lua</a>.</p>
+
+<p>The initial conditions for each of the variables are defined in IC.lua.
+To obtain an example of this file corresponding to the model you have defined
+in {modeselection|modeselection.lua}, simply delete the current IC.lua file (if
+it exists) and run the program. It will generate a new one and exit. Just fill
+the newly generated one.</p>
+
+<p>To run a simulation, just run:</p>
+
+<pre>
+luajit maooam.lua
+</pre>
+
+<p>In Windows:</p>
+
+<pre>
+luajit.exe maooam.lua
+</pre>
+
+<p>This will generate several files:</p>
+
+<ul>
+    <li><code>output_maooam_meanfields.txt</code> : the <a href="../modules/stat.html#">mean and variance</a> (climatology) of the variables</li>
+    <li><code>output_maooam_snapshot.txt</code> : snapshots of the dynamical state of the model</li>
+    <li><code>output_maooam_trajectory.txt_NNNN.gz</code> : the recorded time evolution of the variables; gzipped.</li>
+</ul>
+
+<p>To continue a previous run, use the "continue" argument:</p>
+
+<pre>
+luajit maooam.lua continue
+</pre>
+
+<p>The tangent linear and adjoint models of MAOOAM are provided in
+<a href="../modules/maooam_tl_ad.html#">maooam_tl_ad.lua</a>.</p>
+
+<p>The LuaJIT source code can be obtained <a href="http://luajit.org/download.html">here</a>.</p>
+
+<hr/>
+
+<p><a name="Implementation_notes"></a></p>
+<h2>Implementation notes</h2>
+
+<p>As the system of differential equations is at most bilinear in y[j] (j=1..n), y
+being the <a href="../modules/array.html#">array</a> of variables, it can be expressed as a <a href="../modules/tensor.html#">tensor</a> contraction
+(written using Einstein convention, i.e. indices that occur twice on one side
+of an equation are summed over):</p>
+
+
+<pre>
+dy  / dt =  T        y   y      (y  == <span class="number">1</span>)
+  i          i,j,k    j   k       <span class="number">0</span>
+</pre>
+
+<p>The tensor T that encodes the differential equations is composed so that:</p>
+
+<ul>
+    <li>T[i][j][k] contains the contribution of dy[i]/dt proportional to y[j]*y[k].</li>
+    <li>Furthermore, y[0] is always equal to 1, so that T[i][0][0] is the constant
+    contribution to var dy[i]/dt.</li>
+    <li>T[i][j][0] + T[i][0][j] is the contribution to  dy[i]/dt which is linear in
+    y[j].</li>
+</ul>
+
+<p>Ideally, the tensor is composed as an upper triangular matrix (in the last two
+coordinates).</p>
+
+<p>The tensor for this model is composed in <a href="../modules/aotensor.html#">aotensor.lua</a> and uses the
+inner products defined in <a href="../modules/inprod_analytic.html#">inprod_analytic.lua</a>.</p>
+
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-03-11 15:53:17 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

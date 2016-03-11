@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MAOOAM</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/maooam.html">maooam</a></li>
+  <li><a href="../modules/maooam_tl_ad.html">maooam_tl_ad</a></li>
+  <li><a href="../modules/aotensor.html">aotensor</a></li>
+  <li><strong>array</strong></li>
+  <li><a href="../modules/inprod_analytic.html">inprod_analytic</a></li>
+  <li><a href="../modules/restore.html">restore</a></li>
+  <li><a href="../modules/rk2.html">rk2</a></li>
+  <li><a href="../modules/stat.html">stat</a></li>
+  <li><a href="../modules/tensor.html">tensor</a></li>
+  <li><a href="../modules/gz.html">gz</a></li>
+  <li><a href="../modules/rk4.html">rk4</a></li>
+  <li><a href="../modules/params.html">params</a></li>
+  <li><a href="../modules/modeselection.html">modeselection</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>array</code></h1>
+<p>Arrays with operations.</p>
+<p>
+
+
+<p> This module provides a function which returns a specialized
+ constructor for ffi-based arrays of size n (zero-filled by default).</p>
+
+<p> The arrays created with this constructor have overloaded (pointwise)
+ operators + (add), - (sub), * (mul), / (div) and unary - (unm), as
+ well as __tostring and #. The modulo operator % (mod) calculates the
+ scalar product.</p>
+
+<p> However, as these mathematical operations are not allowed to modify
+ the original arrays, they create new arrays for each operation. If
+ you do not want this, use the functions add, sub, mul, smul, div, unm
+ provided as methods of an array object. These functions take an extra
+ argument, namely a result buffer, which in turn is returned by these
+ functions, so that the operations can be chained.</p>
+
+<p> To clear (i.e. zero-fill) an array, the <code>clear()</code> method can be called.</p>
+
+<p> e.g.</p>
+
+<pre>
+<span class="keyword">local</span> narray = <span class="global">require</span>(<span class="string">"array"</span>)(<span class="number">10</span>)
+<span class="keyword">local</span> x, y = narray(), narray()
+x[<span class="number">2</span>] = <span class="number">29</span>
+y:add(x,y) <span class="comment">-- add y to x
+</span><span class="global">print</span>(y)
+y:clear()
+</pre>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#array">array (n)</a></td>
+	<td class="summary">Create a constructor for n-arrays.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#nmul">nmul (lhs, factor, res)</a></td>
+	<td class="summary">Multiplication with a number.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#add">add (lhs, rhs, res)</a></td>
+	<td class="summary">Pointwise addition</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#sub">sub (lhs, rhs, res)</a></td>
+	<td class="summary">Pointwise subtraction</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#mul">mul (lhs, rhs, res)</a></td>
+	<td class="summary">Pointwise product</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#smul">smul (lhs, rhs)</a></td>
+	<td class="summary">Scalar product</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#div">div (lhs, rhs, res)</a></td>
+	<td class="summary">Pointwise division</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unm">unm (lhs, res)</a></td>
+	<td class="summary">Unary minus</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#clear">clear (lhs)</a></td>
+	<td class="summary">Zero-fill the array</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "array"></a>
+    <strong>array (n)</strong>
+    </dt>
+    <dd>
+    Create a constructor for n-arrays.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         array length
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        n-array constructor
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "nmul"></a>
+    <strong>nmul (lhs, factor, res)</strong>
+    </dt>
+    <dd>
+    Multiplication with a number.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lhs</span>
+         n-array
+        </li>
+        <li><span class="parameter">factor</span>
+         number
+        </li>
+        <li><span class="parameter">res</span>
+         result n-array (buffer)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        result n-array
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "add"></a>
+    <strong>add (lhs, rhs, res)</strong>
+    </dt>
+    <dd>
+    Pointwise addition
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">rhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">res</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "sub"></a>
+    <strong>sub (lhs, rhs, res)</strong>
+    </dt>
+    <dd>
+    Pointwise subtraction
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">rhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">res</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "mul"></a>
+    <strong>mul (lhs, rhs, res)</strong>
+    </dt>
+    <dd>
+    Pointwise product
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">rhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">res</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "smul"></a>
+    <strong>smul (lhs, rhs)</strong>
+    </dt>
+    <dd>
+    Scalar product
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">rhs</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "div"></a>
+    <strong>div (lhs, rhs, res)</strong>
+    </dt>
+    <dd>
+    Pointwise division
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">rhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">res</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "unm"></a>
+    <strong>unm (lhs, res)</strong>
+    </dt>
+    <dd>
+    Unary minus
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lhs</span>
+
+
+
+        </li>
+        <li><span class="parameter">res</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "clear"></a>
+    <strong>clear (lhs)</strong>
+    </dt>
+    <dd>
+    Zero-fill the array
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">lhs</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-03-11 15:53:17 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
