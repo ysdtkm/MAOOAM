@@ -23,14 +23,14 @@ local params = require("params")
 -- Tensor with the coefficients of the nonlinear (polynomial) system of
 -- diffeqs. N.B.: the model tensor is fixed, so changes to model parameters
 -- will only be effective up to this point!
-local n, aotensor, sparse_mul3
+local n
 do
   local inprod = require("inprod_analytic")
   n = inprod.natm*2+inprod.noc*2 + 1
-  local tensor = require("tensor")
-  aotensor = tensor.coo_to_fficoo(tensor.simplify_coo(require("aotensor")))
-  sparse_mul3 = tensor.sparse_mul3
-  if require("write_IC")(inprod) then print("Wrote template in IC.lua.\nWrote translation table in translation.txt."); os.exit(1) end
+  if require("write_IC")(inprod) then
+    print("Wrote template in IC.lua.\nWrote translation table in translation.txt.")
+    os.exit(1)
+  end
 end
 
 -- Utilities
@@ -77,14 +77,26 @@ local function close(f) if f and f~=io.stdout then f:close() end end
 -- Integrate coupled ocean-atmosphere model.
 ------------------------------------------------------------------------
 
---- Function that calculates the time derivative of the n variables.
--- The function reduces to a sparse tensor contraction due to the bilinear
--- nature of the equations.
--- @param t time
--- @param y array with variables at time t
--- @param buf n-arrayi (buffer) to store derivatives.
-local function ao(t,y,buf)
-  return sparse_mul3(aotensor,y,y,buf)
+-- ao is the function that calculates the time derivative of the n variables.
+-- logf is the file in which the trajectory will be logged.
+local ao, rank
+do
+  local mpi = require("mpi")
+  local comm = mpi.comm_world
+  rank = comm:rank()
+  local size = comm:size()
+
+  -- Get a rank-dependent version of ao.
+  ao = require("ao_mpi")(rank,size,comm)
+
+  -- Determine output based on MPI rank.
+  if rank~=0 then
+    local noop = function() return end
+    fprintf, write, take_snapshot = noop, noop, function() return true end
+    io.write = noop
+    io.stderr = {write=noop}
+    io.stdout = {write=noop}
+  end
 end
 
 -- Check some input values.
@@ -115,7 +127,7 @@ end
 -- Set up snapshot file
 local snapf
 local mode = arg[1]=="continue" and "a" or "w" -- append or (over)write
-if snapshot then
+if snapshot and rank==0 then
   local snapfn = params.i.getoutfn("_snapshot")
   snapf = io.open(snapfn,mode)
   fprintf(io.stdout,"* Writing snapshots to: %s\n", snapfn)
@@ -142,7 +154,7 @@ end
 
 -- Setup output files.
 local logf
-if writeout then -- setup trajectory file
+if writeout and rank==0 then -- setup trajectory file
   local logfn_base = params.i.getoutfn("_trajectory")
   local logfn = logfn_base
   if params.i.compression then

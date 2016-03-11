@@ -40,11 +40,14 @@ in {modeselection|modeselection.lua}, simply delete the current IC.lua file (if
 it exists) and run the program. It will generate a new one and exit. Just fill
 the newly generated one.
 
-To run a simulation, just run:
-    luajit maooam.lua
+This version is parallellized for MPI, using the
+[lua-mpi](https://colberg.org/lua-mpi/) module.
 
-In Windows:
-    luajit.exe maooam.lua
+To run a simulation, just run, e.g.
+    mpirun -n 2 luajit maooam.lua
+
+where 'mpirun -n 2' should be replaced by the MPI run command available at
+your system.
 
 This will generate several files:
 

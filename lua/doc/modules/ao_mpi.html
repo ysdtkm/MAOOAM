@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
+<li><a href="#Local_Functions">Local Functions</a></li>
 </ul>
 
 
@@ -40,13 +41,13 @@
 <ul class="nowrap">
   <li><a href="../modules/maooam.html">maooam</a></li>
   <li><a href="../modules/maooam_tl_ad.html">maooam_tl_ad</a></li>
-  <li><a href="../modules/ao_mpi.html">ao_mpi</a></li>
+  <li><strong>ao_mpi</strong></li>
   <li><a href="../modules/aotensor.html">aotensor</a></li>
   <li><a href="../modules/array.html">array</a></li>
   <li><a href="../modules/inprod_analytic.html">inprod_analytic</a></li>
   <li><a href="../modules/restore.html">restore</a></li>
   <li><a href="../modules/rk2.html">rk2</a></li>
-  <li><strong>stat</strong></li>
+  <li><a href="../modules/stat.html">stat</a></li>
   <li><a href="../modules/tensor.html">tensor</a></li>
   <li><a href="../modules/gz.html">gz</a></li>
   <li><a href="../modules/rk4.html">rk4</a></li>
@@ -62,39 +63,30 @@
 
 <div id="content">
 
-<h1>Module <code>stat</code></h1>
-<p>Stable statistics accumulator for n-arrays.</p>
-<p>
+<h1>Module <code>ao_mpi</code></h1>
+<p>This file implements ao_mpi, a function which returns a parallel version of
+ ao, the function which computes the model tendencies.</p>
+<p> </p>
 
-</p>
+<p> The function returned by ao_mpi is a rank-specific function which
+ distributes the calculation of the model tendencies over multiple cores.</p>
+
+<p> It uses the lua-mpi module by Peter Colberg: https://colberg.org/lua-mpi/</p>
 
 
 <h2><a href="#Functions">Functions</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#acc">acc (item)</a></td>
-	<td class="summary">add the item to the incremental mean and variance and increase
- the iteration count</td>
+	<td class="name" nowrap><a href="#ao">ao (t, y, buf)</a></td>
+	<td class="summary">Rank-specific function that calculates the time derivative of the n variables.</td>
 	</tr>
+</table>
+<h2><a href="#Local_Functions">Local Functions</a></h2>
+<table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#mean">mean ()</a></td>
-	<td class="summary">get the incremental mean value</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#var">var ()</a></td>
-	<td class="summary">get the incremental variance (sigma^2)</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#iter">iter ()</a></td>
-	<td class="summary">get the iteration count</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#set">set (new_m, new_v, new_i)</a></td>
-	<td class="summary">set the statistics and counter</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#reset">reset ()</a></td>
-	<td class="summary">reset counter and clear statistics</td>
+	<td class="name" nowrap><a href="#ao_mpi">ao_mpi (rank, size, comm)</a></td>
+	<td class="summary">Get a rank-specific function which calculates part of the tensor contraction
+ and reduces the result to all cores.</td>
 	</tr>
 </table>
 
@@ -106,18 +98,25 @@
 
     <dl class="function">
     <dt>
-    <a name = "acc"></a>
-    <strong>acc (item)</strong>
+    <a name = "ao"></a>
+    <strong>ao (t, y, buf)</strong>
     </dt>
     <dd>
-    add the item to the incremental mean and variance and increase
- the iteration count
+    Rank-specific function that calculates the time derivative of the n variables.
+ The function reduces to a sparse tensor contraction due to the bilinear
+ nature of the equations.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">item</span>
-         n-array
+        <li><span class="parameter">t</span>
+         time
+        </li>
+        <li><span class="parameter">y</span>
+         array with variables at time t
+        </li>
+        <li><span class="parameter">buf</span>
+         n-array (buffer) to store derivatives.
         </li>
     </ul>
 
@@ -126,88 +125,35 @@
 
 
 </dd>
+</dl>
+    <h2 class="section-header "><a name="Local_Functions"></a>Local Functions</h2>
+
+    <dl class="function">
     <dt>
-    <a name = "mean"></a>
-    <strong>mean ()</strong>
+    <a name = "ao_mpi"></a>
+    <strong>ao_mpi (rank, size, comm)</strong>
     </dt>
     <dd>
-    get the incremental mean value
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "var"></a>
-    <strong>var ()</strong>
-    </dt>
-    <dd>
-    get the incremental variance (sigma^2)
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "iter"></a>
-    <strong>iter ()</strong>
-    </dt>
-    <dd>
-    get the iteration count
-
-
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "set"></a>
-    <strong>set (new_m, new_v, new_i)</strong>
-    </dt>
-    <dd>
-    set the statistics and counter
+    Get a rank-specific function which calculates part of the tensor contraction
+ and reduces the result to all cores.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">new_m</span>
+        <li><span class="parameter">rank</span>
 
 
 
         </li>
-        <li><span class="parameter">new_v</span>
+        <li><span class="parameter">size</span>
 
 
 
         </li>
-        <li><span class="parameter">new_i</span>
-
-
-
+        <li><span class="parameter">comm</span>
+        partition the tensor into subtensors for each core.
         </li>
     </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "reset"></a>
-    <strong>reset ()</strong>
-    </dt>
-    <dd>
-    reset counter and clear statistics
-
-
 
 
 
