@@ -10,8 +10,7 @@ See LICENSE.txt for license information.
 This software is provided as supplementary material with:
 
 * De Cruz, L., Demaeyer, J. and Vannitsem, S.: A modular arbitrary-order
-ocean-atmosphere model: MAOOAM, Geosci. Model Dev. Discuss.,
-[doi:xx/xxx](http://dx.doi.org/xx/xxx), 2016.
+ocean-atmosphere model: MAOOAM v1.0, Geosci. Model Dev. Discuss., 2016.
 
 **Please cite this article if you use (a part of) this software for a
 publication.**
@@ -20,7 +19,7 @@ The authors would appreciate it if you could also send a reprint of
 your paper to <lesley.decruz@meteo.be>, <jonathan.demaeyer@meteo.be> and
 <svn@meteo.be>. 
 
-Consult the MAOOAM code repository at [doi:yy/yyy](http://dx.doi.org/yy/yyy)
+Consult the MAOOAM [code repository](http://www.github.com/Climdyn/MAOOAM)
 for updates, and [our website](http://climdyn.meteo.be) for additional
 resources.
 
@@ -90,5 +89,4 @@ ocean-atmosphere model: OA-QG-WS v2, Geoscientific Model Development, 7,
 variability and heat transport in a loworder nonlinear coupled ocean-atmosphere
 model, Physica D: Nonlinear Phenomena, 309, 71-85, 2015. 
 
-Please see the [article](http://dx.doi.org/xx/xxx) for
-the full list of references.
+Please see the main article for the full list of references.
