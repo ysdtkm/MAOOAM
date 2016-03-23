@@ -1,4 +1,5 @@
 # Modular arbitrary-order ocean-atmosphere model: MAOOAM
+
 ------------------------------------------------------------------------
 
 ## About ##
@@ -27,13 +28,12 @@ resources.
 
 ## Model description ##
 
- For a full description of the model, please see the paper above.
-
- The atmospheric component of the model is based on the papers of Charney and Straus (1980),
- Reinhold and Pierrehumbert (1982) and  Cehelsky and Tung (1987), all published in the
- Journal of Atmospheric Sciences. The ocean component is based on the papers of Pierini (2012),
- Barsugli and Battisti (1998). The coupling between the two components includes wind forcings,
- radiative and heat exchanges.
+The atmospheric component of the model is based on the papers of Charney and
+Straus (1980), Reinhold and Pierrehumbert (1982) and  Cehelsky and Tung (1987),
+all published in the Journal of Atmospheric Sciences. The ocean component is
+based on the papers of Pierini (2012), Barsugli and Battisti (1998). The
+coupling between the two components includes wind forcings, radiative and heat
+exchanges.
 
 ------------------------------------------------------------------------
 
@@ -51,9 +51,9 @@ The tensor T that encodes the differential equations is composed so that:
 
 * T[i][j][k] contains the contribution of dy[i]/dt proportional to y[j]*y[k].
 * Furthermore, y[0] is always equal to 1, so that T[i][0][0] is the constant
-contribution to var dy[i]/dt.
+  contribution to var dy[i]/dt.
 * T[i][j][0] + T[i][0][j] is the contribution to  dy[i]/dt which is linear in
-y[j].
+  y[j].
 
 Ideally, the tensor is composed as an upper triangular matrix (in the last two
 coordinates).

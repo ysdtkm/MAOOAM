@@ -11,8 +11,7 @@ See LICENSE.txt for license information.
 This software is provided as supplementary material with:
 
 * De Cruz, L., Demaeyer, J. and Vannitsem, S.: A modular arbitrary-order
-ocean-atmosphere model: MAOOAM, Geosci. Model Dev. Discuss.,
-[doi:xx/xxx](http://dx.doi.org/xx/xxx), 2016.
+ocean-atmosphere model: MAOOAM v1.0, Geosci. Model Dev. Discuss., 2016.
 
 **Please cite this article if you use (a part of) this software for a
 publication.**
@@ -21,9 +20,54 @@ The authors would appreciate it if you could also send a reprint of
 your paper to <lesley.decruz@meteo.be>, <jonathan.demaeyer@meteo.be> and
 <svn@meteo.be>. 
 
-Consult the MAOOAM code repository at [doi:yy/yyy](http://dx.doi.org/yy/yyy)
+Consult the MAOOAM [code repository](http://www.github.com/Climdyn/MAOOAM)
 for updates, and [our website](http://climdyn.meteo.be) for additional
 resources.
+
+------------------------------------------------------------------------
+
+## Installation ##
+
+Unpack the archive in a folder. There is no compilation required to run the
+model once you have LuaJIT. 
+
+Installation instructions for LuaJIT can be found on the [LuaJIT
+website](http://luajit.org/install.html). In short, you can install it with the
+following commands (on Linux):
+
+```
+git clone http://luajit.org/git/luajit-2.0.git
+cd luajit-2.0
+make && sudo make install
+```
+
+------------------------------------------------------------------------
+
+##  Description of the files ##
+
+The model tendencies are represented through a tensor called aotensor which
+includes all the coefficients. This tensor is computed once at the program
+initialization.
+
+* maooam.lua : Main program.
+* aotensor.lua : Tensor aotensor computation module.
+* inprod_analytic.lua : Inner products computation module.
+* restore.lua : Function to restore a previous model state.
+* write_IC.lua : Function to write an initial condition template.
+* array.lua : Module for arrays and their mathematical operations.
+* rk2.lua : Module with the Heun (second order Runge-Kutta) ODE integrator.
+* rk4.lua : Module with the fourth-order Runge-Kutta integrator.
+* tensor.lua : Sparse tensor tools.
+* gz.lua : Module with basic bindings to zlib.
+* stat.lua : A module for statistic accumulation.
+* maooam_tl_ad.lua : Module which defines the Tangent Linear and Adjoint models.
+* README.txt : The present file.
+* LICENSE.txt : The license text of the program.
+* params.lua : A configuration file to specify the integration and model parameters.
+* modeselection.lua : A configuration file to specify which spectral decomposition will be used.
+* test_inprod_analytic.lua : Program to write out the inner products. For testing purposes.
+* test_aotensor.lua : Program to write out the inner products. For testing purposes.
+* test_tl_ad.lua : Program which tests the Tangent Linear and Adjoint models.
 
 ------------------------------------------------------------------------
 
@@ -50,7 +94,8 @@ This will generate several files:
 
 * `output_maooam_meanfields.txt` : the @{stat|mean and variance} (climatology) of the variables
 * `output_maooam_snapshot.txt` : snapshots of the dynamical state of the model
-* `output_maooam_trajectory.txt_NNNN.gz` : the recorded time evolution of the variables; gzipped.
+* `output_maooam_trajectory.txt_NNNN.gz` : the recorded time evolution of the
+  variables (gzipped if compression is enabled).
 
 To continue a previous run, use the "continue" argument:
     luajit maooam.lua continue
