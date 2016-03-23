@@ -1,13 +1,14 @@
+
 !  maooam.f90
-!  (C) 2015 Lesley De Cruz & Jonathan Demaeyer
-!  See LICENSE.txt for license information.
-
+!
+!> Fortran 90 implementation of the modular arbitrary-order ocean-atmosphere !
+!> model MAOOAM.                                                             !
+!
+!> @copyright                                                               
+!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> See LICENSE.txt for license information.                                  
+!
 !---------------------------------------------------------------------------!
-! Fortran 90 implementation of the modular arbitrary-order ocean-atmosphere !
-! model MAOOAM.                                                             !
-!                                                                           !
-!---------------------------------------------------------------------------!
-
 
 PROGRAM maooam 
   USE params, only: ndim, dt, tw, t_trans, t_run, writeout
@@ -17,8 +18,9 @@ PROGRAM maooam
   USE stat
   IMPLICIT NONE
 
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: X,Xnew
-  REAL(KIND=8) :: t=0.D0
+  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: X       !< State variable in the model
+  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: Xnew    !< Updated state variable
+  REAL(KIND=8) :: t=0.D0                             !< Time variable
 
   PRINT*, 'Model MAOOAM v1.0'
   PRINT*, 'Loading information...'

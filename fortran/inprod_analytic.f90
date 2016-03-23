@@ -1,25 +1,33 @@
-! Generated Fortran90/95 code from ../../lua/maooam/inprod_analytic.lua
-MODULE inprod_analytic
 
-  !---------------------------------------------------------------------------!
-  ! inprod_analytic.f90                                                       !
-  ! (C) 2013-2014 Lesley De Cruz & Jonathan Demaeyer                          !
-  ! See LICENSE.txt for license information.                                  !
-  !---------------------------------------------------------------------------!
-  !  Inner products between the truncated set of basis functions for the      !
-  !  ocean and atmosphere streamfunction fields.                              !
-  !  These are partly calculated using the analytical expressions from        !
-  !  Cehelsky, P., & Tung, K. K. : Theories of multiple equilibria and        !
-  !  weather regimes-A critical reexamination. Part II: Baroclinic two-layer  !
-  !  models. Journal of the atmospheric sciences, 44(21), 3282-3303, 1987.    !
-  !---------------------------------------------------------------------------!
+! inprod_analytic.f90
+!
+!>  Inner products between the truncated set of basis functions for the
+!>  ocean and atmosphere streamfunction fields.
+!>  These are partly calculated using the analytical expressions from
+!>  Cehelsky, P., & Tung, K. K. : Theories of multiple equilibria and
+!>  weather regimes-A critical reexamination. Part II: Baroclinic two-layer
+!>  models. Journal of the atmospheric sciences, 44(21), 3282-3303, 1987.
+!
+!> @copyright                                                               
+!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> See LICENSE.txt for license information.                                  
+!
+!---------------------------------------------------------------------------!
+!                                                                           
+!> @remark                                                                 
+!> Generated Fortran90/95 code 
+!> from ../../lua/aomodel_extended/inprod_analytic.lua
+!                                                                           
+!---------------------------------------------------------------------------!
+
+MODULE inprod_analytic
 
   !-----------------------------------------------------!
   !                                                     !
   ! Preamble and variables declaration                  !
   !                                                     !
   !-----------------------------------------------------!
-  
+
   USE params, only: nbatm, nboc, natm, noc, n, oms, ams, pi
   IMPLICIT NONE
 
@@ -27,31 +35,39 @@ MODULE inprod_analytic
 
   PUBLIC :: init_inprod, deallocate_inprod
 
-  TYPE :: atm_wavenum
+  !> Atmospheric bloc specification type
+  TYPE :: atm_wavenum 
      CHARACTER :: typ
      INTEGER :: M=0,P=0,H=0
      REAL(KIND=8) :: Nx=0.,Ny=0.
   END TYPE atm_wavenum
 
+  !> Oceanic bloc specification type
   TYPE :: ocean_wavenum
      INTEGER :: P,H
      REAL(KIND=8) :: Nx,Ny
   END TYPE ocean_wavenum
-  
+
+  !> Type holding the atmospheric inner products tensors
   TYPE :: atm_tensors
      REAL(KIND=8), DIMENSION(:,:), ALLOCATABLE :: a,c,d,s
      REAL(KIND=8), DIMENSION(:,:,:), ALLOCATABLE :: b,g
   END TYPE atm_tensors
 
+  !> Type holding the oceanic inner products tensors
   TYPE :: ocean_tensors
      REAL(KIND=8), DIMENSION(:,:), ALLOCATABLE :: K,M,N,W
      REAL(KIND=8), DIMENSION(:,:,:), ALLOCATABLE :: O,C
   END TYPE ocean_tensors
 
-  TYPE(atm_wavenum), DIMENSION(:), ALLOCATABLE, PUBLIC :: awavenum
-  TYPE(ocean_wavenum), DIMENSION(:), ALLOCATABLE, PUBLIC :: owavenum
+  !> Atmospheric blocs specification
+  TYPE(atm_wavenum), DIMENSION(:), ALLOCATABLE, PUBLIC :: awavenum 
+  !> Oceanic blocs specification
+  TYPE(ocean_wavenum), DIMENSION(:), ALLOCATABLE, PUBLIC :: owavenum 
 
-  TYPE(atm_tensors), PUBLIC :: atmos
+  !> Atmospheric tensors
+  TYPE(atm_tensors), PUBLIC :: atmos 
+  !> Oceanic tensors
   TYPE(ocean_tensors), PUBLIC :: ocean
 
 
@@ -70,16 +86,19 @@ CONTAINS
   !                                                     !
   !-----------------------------------------------------!
 
+  !>  Cehelsky & Tung Helper functions
   REAL(KIND=8) FUNCTION B1(Pi, Pj, Pk)
     INTEGER :: Pi,Pj,Pk
     B1 = (Pk + Pj) / REAL(Pi)
   END FUNCTION B1
 
+  !>  Cehelsky & Tung Helper functions
   REAL(KIND=8) FUNCTION B2(Pi, Pj, Pk)
     INTEGER :: Pi,Pj,Pk
     B2 = (Pk - Pj) / REAL(Pi)
   END FUNCTION B2
 
+  !>  Integer Dirac delta function
   REAL(KIND=8) FUNCTION delta(r)
     INTEGER :: r
     IF (r==0) THEN
@@ -89,6 +108,7 @@ CONTAINS
     ENDIF
   END FUNCTION delta
 
+  !>  "Odd or even" function
   REAL(KIND=8) FUNCTION flambda(r)
     INTEGER :: r
     IF (mod(r,2)==0) THEN
@@ -98,21 +118,25 @@ CONTAINS
     ENDIF
   END FUNCTION flambda
 
+  !>  Cehelsky & Tung Helper functions
   REAL(KIND=8) FUNCTION S1(Pj, Pk, Mj, Hk)
     INTEGER :: Pk,Pj,Mj,Hk
     S1 = -((Pk * Mj + Pj * Hk)) / 2.D0
   END FUNCTION S1
 
+  !>  Cehelsky & Tung Helper functions
   REAL(KIND=8) FUNCTION S2(Pj, Pk, Mj, Hk)
     INTEGER :: Pk,Pj,Mj,Hk
     S2 = (Pk * Mj - Pj * Hk) / 2.D0
   END FUNCTION S2
 
+  !>  Cehelsky & Tung Helper functions
   REAL(KIND=8) FUNCTION S3(Pj, Pk, Hj, Hk)
     INTEGER :: Pj,Pk,Hj,Hk
     S3 = (Pk * Hj + Pj * Hk) / 2.D0
   END FUNCTION S3
-  
+
+  !>  Cehelsky & Tung Helper functions
   REAL(KIND=8) FUNCTION S4(Pj, Pk, Hj, Hk)
     INTEGER :: Pj,Pk,Hj,Hk
     S4 = (Pk * Hj - Pj * Hk) / 2.D0
@@ -123,9 +147,11 @@ CONTAINS
   !--------------------------------------------------------!
   ! 1. Inner products in the equations for the atmosphere  !
   !--------------------------------------------------------!
-
+  
+  !> Eigenvalues of the Laplacian (atmospheric)
+  !> 
+  !> \f$ a_{i,j} = (F_i, \nabla^2 F_j)\f$ .
   SUBROUTINE calculate_a
-    ! `a_{i,j} = (F_i, \nabla^2 F_j)`.
     INTEGER :: i
     TYPE(atm_wavenum) :: Ti
     INTEGER :: AllocStat 
@@ -145,13 +171,17 @@ CONTAINS
     ENDDO
   END SUBROUTINE calculate_a
 
+  !> Streamfunction advection terms (atmospheric)
+  !> 
+  !> \f$ b_{i,j,k} = (F_i, J(F_j, \nabla^2 F_k))\f$ .
+  !
+  !> @remark
+  !> Atmospheric g and a tensors must be computed before calling
+  !> this routine
   SUBROUTINE calculate_b
-    ! `b_{i,j,k} = (F_i, J(F_j, \nabla^2 F_k))`.
-    ! Atmospheric g and a tensors must be computed before calling
-    ! this routine
     INTEGER :: i,j,k
     INTEGER :: AllocStat 
-    
+
     IF ((.NOT. ALLOCATED(atmos%a)) .OR. (.NOT. ALLOCATED(atmos%g))) THEN
        STOP "*** atmos%a and atmos%g must be defined before calling calculate_b ! ***"
     END IF
@@ -165,7 +195,7 @@ CONTAINS
        END IF
     END IF
     atmos%b=0.D0
-    
+
     DO i=1,natm
        DO j=1,natm
           DO k=1,natm
@@ -175,16 +205,19 @@ CONTAINS
     END DO
   END SUBROUTINE calculate_b
 
+  !> Beta term for the atmosphere
+  !> 
+  !> \f$ c_{i,j} = (F_i, \partial_x F_j)\f$ .
+  !
+  !> @remark
+  !> Strict function !! Only accepts KL type.
+  !> For any other combination, it will not calculate anything
   SUBROUTINE calculate_c_atm
-    ! `c_{i,j} = (F_i, \partial_x F_j)`.
-    ! Beta term for the atmosphere
-    ! Strict function !! Only accepts KL type.
-    ! For any other combination, it will not calculate anything
     INTEGER :: i,j
     TYPE(atm_wavenum) :: Ti, Tj
     REAL(KIND=8) :: val
     INTEGER :: AllocStat 
-    
+
     IF (natm == 0 ) THEN
        STOP "*** Problem with calculate_c_atm : natm==0 ! ***"
     ELSE
@@ -211,11 +244,14 @@ CONTAINS
     END DO
   END SUBROUTINE calculate_c_atm
 
+  !> Forcing of the ocean on the atmosphere.
+  !> 
+  !> \f$ d_{i,j} = (F_i, \nabla^2 \eta_j)\f$ .
+  !
+  !> @remark
+  !> Atmospheric s tensor and oceanic M tensor must be computed before
+  !> calling this routine !
   SUBROUTINE calculate_d
-    ! `d_{i,j} = (F_i, \nabla^2 \eta_j)`.
-    ! Forcing of the ocean on the atmosphere.
-    ! Atmospheric s tensor and oceanic M tensor must be computed before
-    ! calling this routine !
     INTEGER :: i,j
     INTEGER :: AllocStat 
 
@@ -241,10 +277,14 @@ CONTAINS
     END DO
   END SUBROUTINE calculate_d
 
+  !> Temperature advection terms (atmospheric)
+  !> 
+  !> \f$ g_{i,j,k} = (F_i, J(F_j, F_k))\f$ .
+  !
+  ! @remark
+  ! This is a strict function: it only accepts AKL KKL and LLL types.
+  ! For any other combination, it will not calculate anything.
   SUBROUTINE calculate_g
-    ! `g_{i,j,k} = (F_i, J(F_j, F_k))`.
-    ! This is a strict function: it only accepts AKL KKL and LLL types.
-    ! For any other combination, it will not calculate anything.
     INTEGER :: i,j,k
     TYPE(atm_wavenum) :: Ti, Tj, Tk
     REAL(KIND=8) :: val,vb1, vb2, vs1, vs2, vs3, vs4
@@ -305,7 +345,7 @@ CONTAINS
              Tj = awavenum(j)
              Tk = awavenum(k)
              val=0.D0
-             
+
              IF ((Ti%typ == "L") .AND. (Tj%typ == "L") .AND. (Tk%typ == "L")) THEN
                 vs3 = S3(Tj%P,Tk%P,Tj%H,Tk%H)
                 vs4 = S4(Tj%P,Tk%P,Tj%H,Tk%H)
@@ -333,10 +373,10 @@ CONTAINS
 
   END SUBROUTINE calculate_g
 
-
+  !> Forcing (thermal) of the ocean on the atmosphere.
+  !> 
+  !> \f$ s_{i,j} = (F_i, \eta_j)\f$ .
   SUBROUTINE calculate_s
-    ! `s_{i,j} = (F_i, \eta_j)`.
-    ! Forcing (thermal) of the ocean on the atmosphere.
     INTEGER :: i,j
     TYPE(atm_wavenum) :: Ti
     TYPE(ocean_wavenum) :: Dj
@@ -383,11 +423,14 @@ CONTAINS
   ! 2. Inner products in the equations for the ocean       !
   !--------------------------------------------------------!
 
+  !> Forcing of the atmosphere on the ocean.
+  !> 
+  !> \f$ K_{i,j} = (\eta_i, \nabla^2 F_j)\f$ .
+  !
+  !> @remark
+  !> atmospheric a and s tensors must be computed before calling
+  !> this function !
   SUBROUTINE calculate_K
-    ! `K_{i,j} = (\eta_i, \nabla^2 F_j)`.
-    ! Forcing of the atmosphere on the ocean.
-    ! atmospheric a and s tensors must be computed before calling
-    ! this function !
     INTEGER :: i,j
     INTEGER :: AllocStat 
 
@@ -414,9 +457,10 @@ CONTAINS
     END DO
   END SUBROUTINE calculate_K
 
+  !> Forcing of the ocean fields on the ocean.
+  !> 
+  !> \f$ M_{i,j} = (eta_i, \nabla^2 \eta_j)\f$ .
   SUBROUTINE calculate_M
-    ! Forcing of the ocean fields on the ocean.
-    ! `M_{i,j} = (eta_i, \nabla^2 \eta_j)`.
     INTEGER :: i
     TYPE(ocean_wavenum) :: Di
     INTEGER :: AllocStat 
@@ -436,9 +480,10 @@ CONTAINS
     END DO
   END SUBROUTINE calculate_M
 
+  !> Beta term for the ocean
+  !> 
+  !> \f$ N_{i,j} = (\eta_i, \partial_x \eta_j) \f$.
   SUBROUTINE calculate_N
-    ! `N_{i,j} = (eta_i, \partial_x \eta_j)`.
-    ! Beta term for the ocean
     INTEGER :: i,j
     TYPE(ocean_wavenum) :: Di,Dj
     REAL(KIND=8) :: val
@@ -464,9 +509,10 @@ CONTAINS
     END DO
   END SUBROUTINE calculate_N
 
+  !> Temperature advection term (passive scalar)
+  !> 
+  !> \f$ O_{i,j,k} = (\eta_i, J(\eta_j, \eta_k))\f$ .
   SUBROUTINE calculate_O
-    ! `O_{i,j,k} = (eta_i, J(\eta_j, \eta_k))`.
-    ! Temperature advection term (passive scalar)
     INTEGER :: i,j,k
     REAL(KIND=8) :: vs3,vs4,val
     TYPE(ocean_wavenum) :: Di,Dj,Dk
@@ -481,7 +527,7 @@ CONTAINS
     END IF
     ocean%O=0.D0
     val=0.D0
-    
+
     DO i=1,noc
        DO j=i,noc
           DO k=i,noc
@@ -512,9 +558,13 @@ CONTAINS
     END DO
   END SUBROUTINE calculate_O
 
+  !> Streamfunction advection terms (oceanic)
+  !> 
+  !> \f$ C_{i,j,k} = (\eta_i, J(\eta_j,\nabla^2 \eta_k))\f$ .
+  !
+  !> @remark
+  !> Requires O_{i,j,k} and M_{i,j} to be calculated beforehand.
   SUBROUTINE calculate_C_oc
-    ! `C_{i,j,k} = (\eta_i, J(\eta_j,\nabla^2 \eta_k))`.
-    ! Requires O_{i,j,k} and M_{i,j} to be calculated beforehand.
     INTEGER :: i,j,k
     REAL(KIND=8) :: val
     INTEGER :: AllocStat 
@@ -544,12 +594,14 @@ CONTAINS
     END DO
   END SUBROUTINE calculate_C_oc
 
-
+  !> Short-wave radiative forcing of the ocean
+  !> 
+  !> \f$ W_{i,j} = (\eta_i, F_j)\f$ .
+  !
+  !> @remark
+  !> atmospheric s tensor must be computed before calling
+  !> this function !
   SUBROUTINE calculate_W
-    ! `W_{i,j} = (\eta_i, F_j)`.
-    ! Short-wave radiative forcing of the ocean.
-    ! atmospheric s tensor must be computed before calling
-    ! this function !
     INTEGER :: i,j
     INTEGER :: AllocStat 
 
@@ -581,6 +633,8 @@ CONTAINS
   ! Initialisation routine                              !
   !                                                     !
   !-----------------------------------------------------!
+
+  !> Initialisation of the inner product
   SUBROUTINE init_inprod
     INTEGER :: i,j
     INTEGER :: AllocStat
@@ -628,18 +682,18 @@ CONTAINS
 
        ENDIF
     ENDDO
-    
+
     DO i=1,noc
        owavenum(i)%H=oms(i,1)
        owavenum(i)%P=oms(i,2)
-       
+
        owavenum(i)%Nx=oms(i,1)/2.D0
        owavenum(i)%Ny=oms(i,2)
 
     ENDDO
-    
+
     ! Computation of the atmospheric inner products tensors
-  
+
     CALL calculate_a
     CALL calculate_g
     CALL calculate_s
@@ -647,7 +701,7 @@ CONTAINS
     CALL calculate_c_atm
 
     ! Computation of the oceanic inner products tensors
-  
+
     CALL calculate_M
     CALL calculate_N
     CALL calculate_O
@@ -663,6 +717,7 @@ CONTAINS
 
   END SUBROUTINE init_inprod
 
+  !> Deallocation of the inner products
   SUBROUTINE deallocate_inprod
     INTEGER :: AllocStat 
 

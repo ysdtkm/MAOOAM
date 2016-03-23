@@ -1,15 +1,24 @@
-! Generated Fortran90/95 code from aotensor.lua
-MODULE aotensor_def
 
-  !---------------------------------------------------------------------------!
-  ! aotensor.f90                                                              !
-  ! (C) 2013-2014 Lesley De Cruz & Jonathan Demaeyer                          !
-  ! See LICENSE.txt for license information.                                  !
-  !---------------------------------------------------------------------------!
-  !  The equation tensor for the coupled ocean-atmosphere model               !
-  !  with temperature which allows for an extensible set of modes             !
-  !  in the ocean and in the atmosphere.                                      !
-  !---------------------------------------------------------------------------!
+! aotensor_def.f90
+!
+!>  The equation tensor for the coupled ocean-atmosphere model
+!>  with temperature which allows for an extensible set of modes
+!>  in the ocean and in the atmosphere.
+!
+!> @copyright                                                               
+!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> See LICENSE.txt for license information.                                  
+!
+!---------------------------------------------------------------------------!
+!                                                                           
+!> @remark                                                                 
+!> Generated Fortran90/95 code 
+!> from ../../lua/aomodel_extended/aotensor.lua
+!                                                                           
+!---------------------------------------------------------------------------!
+
+
+MODULE aotensor_def
 
   !-----------------------------------------------------!
   !                                                     !
@@ -19,17 +28,20 @@ MODULE aotensor_def
 
   USE params
   USE inprod_analytic
-  USE tensor, only:coolist
+  USE tensor, only:coolist,simplify
   IMPLICIT NONE
 
   PRIVATE
 
+  !> Vector used to count the tensor elements
   INTEGER, DIMENSION(:), ALLOCATABLE :: count_elems
 
+  !> Epsilon to test equality with 0
   REAL(KIND=8), PARAMETER :: real_eps = 2.2204460492503131e-16
 
   PUBLIC :: init_aotensor
 
+  !> \f$\mathcal{T}_{i,j,k}\f$ - Tensor representation of the tendencies.
   TYPE(coolist), DIMENSION(:), ALLOCATABLE, PUBLIC :: aotensor
 
 
@@ -47,33 +59,42 @@ CONTAINS
   !                                                     !
   !-----------------------------------------------------!
 
-
+  !> Translate the \f$\psi_{a,i}\f$ coefficients into effective coordinates
   FUNCTION psi(i)
     INTEGER :: i,psi
     psi = i
   END FUNCTION psi
 
+  !> Translate the \f$\theta_{a,i}\f$ coefficients into effective coordinates
   FUNCTION theta(i)
     INTEGER :: i,theta
     theta = i + natm
   END FUNCTION theta
 
+  !> Translate the \f$\psi_{o,i}\f$ coefficients into effective coordinates
   FUNCTION A(i)
     INTEGER :: i,A
     A = i + 2 * natm
   END FUNCTION A
 
+  !> Translate the \f$\delta T_{o,i}\f$ coefficients into effective coordinates
   FUNCTION T(i)
     INTEGER :: i,T
     T = i + 2 * natm + noc
   END FUNCTION T
 
+  !> Kronecker delta function
   FUNCTION kdelta(i,j)
     INTEGER :: i,j,kdelta
     kdelta=0
     IF (i == j) kdelta = 1
   END FUNCTION kdelta
 
+  !> Subroutine to add element in the #aotensor \f$\mathcal{T}_{i,j,k}\f$ structure.
+  !> @param i tensor \f$i\f$ index
+  !> @param j tensor \f$j\f$ index
+  !> @param k tensor \f$k\f$ index
+  !> @param v value to add
   SUBROUTINE coeff(i,j,k,v)
     INTEGER, INTENT(IN) :: i,j,k
     REAL(KIND=8), INTENT(IN) :: v
@@ -83,68 +104,30 @@ CONTAINS
     IF (ABS(v) .ge. real_eps) THEN
        n=(aotensor(i)%nelems)+1
        IF (j .LE. k) THEN
-         aotensor(i)%elems(n)%j=j
-         aotensor(i)%elems(n)%k=k
+          aotensor(i)%elems(n)%j=j
+          aotensor(i)%elems(n)%k=k
        ELSE
-         aotensor(i)%elems(n)%j=k
-         aotensor(i)%elems(n)%k=j
+          aotensor(i)%elems(n)%j=k
+          aotensor(i)%elems(n)%k=j
        END IF
        aotensor(i)%elems(n)%v=v
        aotensor(i)%nelems=n
     END IF
   END SUBROUTINE coeff
 
-  SUBROUTINE simplify_aotensor
-    INTEGER :: i,j,k
-    INTEGER :: li,lii,liii,n
-    IF (.NOT. ALLOCATED(aotensor)) STOP "*** simplify_aotensor routine : tensor not yet allocated ***"
-    DO i= 1,ndim
-       IF (.NOT. ALLOCATED(aotensor(i)%elems)) STOP "*** simplify_aotensor routine : tensor not yet allocated ***"
-       n=aotensor(i)%nelems
-       DO li=n,2,-1
-          j=aotensor(i)%elems(li)%j
-          k=aotensor(i)%elems(li)%k
-          DO lii=li-1,1,-1
-             IF ((j==aotensor(i)%elems(lii)%j).AND.(k==aotensor(i)%elems(lii)%k)) THEN
-                ! Found another entry with the same i,j,k: merge both into
-                ! the one listed first (of those two). 
-                aotensor(i)%elems(lii)%v=aotensor(i)%elems(lii)%v+aotensor(i)%elems(li)%v
-                ! Shift the rest of the items one place down.
-                DO liii=li+1,n
-                   aotensor(i)%elems(liii-1)%j=aotensor(i)%elems(liii)%j
-                   aotensor(i)%elems(liii-1)%k=aotensor(i)%elems(liii)%k
-                   aotensor(i)%elems(liii-1)%v=aotensor(i)%elems(liii)%v
-                END DO
-                aotensor(i)%nelems=aotensor(i)%nelems-1
-                ! Here we should stop because the li no longer points to the
-                ! original i,j,k element
-                EXIT
-             ENDIF
-          ENDDO
-       ENDDO
-       n=aotensor(i)%nelems
-       DO li=1,n
-         ! Clear new "almost" zero entries and shift rest of the items one place down.
-         ! Make sure not to skip any entries while shifting!
-          DO WHILE (ABS(aotensor(i)%elems(li)%v) < real_eps)
-             DO liii=li+1,n
-                aotensor(i)%elems(liii-1)%j=aotensor(i)%elems(liii)%j
-                aotensor(i)%elems(liii-1)%k=aotensor(i)%elems(liii)%k
-                aotensor(i)%elems(liii-1)%v=aotensor(i)%elems(liii)%v
-             ENDDO
-             aotensor(i)%nelems=aotensor(i)%nelems-1
-          ENDDO
-       ENDDO
-
-    ENDDO
-  END SUBROUTINE simplify_aotensor
-                
+  !> Subroutine to count the elements of the #aotensor \f$\mathcal{T}_{i,j,k}\f$. Add +1 to count_elems(i) for each value that is added to the tensor i-th component.
+  !> @param i tensor \f$i\f$ index
+  !> @param j tensor \f$j\f$ index
+  !> @param k tensor \f$k\f$ index
+  !> @param v value that will be added
   SUBROUTINE add_count(i,j,k,v)
     INTEGER, INTENT(IN) :: i,j,k
     REAL(KIND=8), INTENT(IN)  :: v
     IF (ABS(v) .ge. real_eps) count_elems(i)=count_elems(i)+1
   END SUBROUTINE add_count
 
+  !> Subroutine to compute the tensor #aotensor
+  !> @param func External function to be used
   SUBROUTINE compute_aotensor(func)
     EXTERNAL :: func
     INTERFACE
@@ -211,6 +194,10 @@ CONTAINS
   !                                                     !
   !-----------------------------------------------------!
 
+  !> Subroutine to initialise the #aotensor tensor
+  !> @remark This procedure will also call params::init_params() and inprod_analytic::init_inprod() .
+  !> It will finally call inprod_analytic::deallocate_inprod() to remove the inner products, which are not needed
+  !> anymore at this point.
   SUBROUTINE init_aotensor
     INTEGER :: i
     INTEGER :: AllocStat 
@@ -235,7 +222,7 @@ CONTAINS
     
     CALL compute_aotensor(coeff)
 
-    CALL simplify_aotensor
+    CALL simplify(aotensor)
 
     CALL deallocate_inprod ! Clean the inner product tensors
 

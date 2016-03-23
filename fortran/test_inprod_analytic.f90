@@ -1,10 +1,14 @@
-  !---------------------------------------------------------------------------!
-  ! inprod_analytic_test.f90                                                  !
-  ! (C) 2013-2014 Lesley De Cruz & Jonathan Demaeyer                          !
-  ! See LICENSE.txt for license information.                                  !
-  !---------------------------------------------------------------------------!
-  !  Small progrem to print the inner products.                               !
-  !---------------------------------------------------------------------------!
+
+! test_inprod_analytic.f90
+!
+!> Small program to print the inner products.   
+!     
+!> @copyright                                                               
+!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> See LICENSE.txt for license information.                                  
+!
+!---------------------------------------------------------------------------!
+
 
 PROGRAM inprod_analytic_test
 
@@ -19,7 +23,7 @@ PROGRAM inprod_analytic_test
   CALL init_params  ! Iniatialise the parameter
   CALL init_inprod  ! Initialise the inner product tensors
 
-  ! Print in the same order as lua/maooam/test_inprod.lua
+  ! Print in the same order as lua/aomodel_extended/test_inprod.lua
 
   do i = 1, natm
     do j = 1, natm
