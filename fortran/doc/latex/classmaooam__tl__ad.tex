@@ -1,0 +1,516 @@
+\hypertarget{classmaooam__tl__ad}{\section{maooam\-\_\-tl\-\_\-ad Module Reference}
+\label{classmaooam__tl__ad}\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}}
+}
+
+
+Tangent Linear (T\-L) and Adjoint (A\-D) model versions of M\-A\-O\-O\-A\-M. Tensors definition module.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{classmaooam__tl__ad_aa9fa649b66f2ea950fc6a14fafa2f97e}{init\-\_\-tltensor}
+\begin{DoxyCompactList}\small\item\em Routine to initialize the T\-L tensor. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classmaooam__tl__ad_a5fa938c70062d80a0bf3f02c477a3bb6}{init\-\_\-adtensor}
+\begin{DoxyCompactList}\small\item\em Routine to initialize the A\-D tensor. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classmaooam__tl__ad_ab29255f54be1bc044a104398dbd3a072}{init\-\_\-adtensor\-\_\-ref}
+\begin{DoxyCompactList}\small\item\em Alternate method to initialize the A\-D tensor from the T\-L tensor. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classmaooam__tl__ad_aa429683bf8b3c441dee1bab717e6f7fb}{ad} (t, ystar, deltay, buf)
+\begin{DoxyCompactList}\small\item\em Tendencies for the A\-D of M\-A\-O\-O\-A\-M in point ystar for perturbation deltay. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classmaooam__tl__ad_a27dc302cf2e677f37ac6cf7887b06e1b}{tl} (t, ystar, deltay, buf)
+\begin{DoxyCompactList}\small\item\em Tendencies for the T\-L of M\-A\-O\-O\-A\-M in point ystar for perturbation deltay. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+type(coolist), dimension(\-:), \\*
+allocatable, public \hyperlink{classmaooam__tl__ad_a44e20f0d2365c0a256682dbf12c100c8}{tltensor}
+\begin{DoxyCompactList}\small\item\em Tensor representation of the Tangent Linear tendencies. \end{DoxyCompactList}\item 
+type(coolist), dimension(\-:), \\*
+allocatable, public \hyperlink{classmaooam__tl__ad_a7a38eb048440310ff37dbc97c401b00c}{adtensor}
+\begin{DoxyCompactList}\small\item\em Tensor representation of the Adjoint tendencies. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+type(coolist) function, \\*
+dimension(ndim) \hyperlink{classmaooam__tl__ad_a2b780ea6ad36ecf3d3f2941105a707f7}{jacobian} (ystar)
+\begin{DoxyCompactList}\small\item\em Compute the Jacobian of M\-A\-O\-O\-A\-M in point ystar. \end{DoxyCompactList}\item 
+real(kind=8) function, \\*
+dimension(ndim, ndim) \hyperlink{classmaooam__tl__ad_ad859ca2ff53ab788f26a13395a3f9e7f}{jacobian\-\_\-mat} (ystar)
+\begin{DoxyCompactList}\small\item\em Compute the Jacobian of M\-A\-O\-O\-A\-M in point ystar. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classmaooam__tl__ad_aafe6576927ac76c7cd1f88bd68440ddf}{compute\-\_\-tltensor} (func)
+\begin{DoxyCompactList}\small\item\em Routine to compute the T\-L tensor from the original M\-A\-O\-O\-A\-M one. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classmaooam__tl__ad_a989ca71183684f62e6ee189460b452ed}{tl\-\_\-add\-\_\-count} (i, j, k, v)
+\begin{DoxyCompactList}\small\item\em Subroutine used to count the number of T\-L tensor entries. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classmaooam__tl__ad_a55a808939f42b2ea438c2621cbb60345}{tl\-\_\-coeff} (i, j, k, v)
+\begin{DoxyCompactList}\small\item\em Subroutine used to compute the T\-L tensor entries. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classmaooam__tl__ad_a7180afb1052d2d5f0401003c731eb5c3}{compute\-\_\-adtensor} (func)
+\begin{DoxyCompactList}\small\item\em Subroutine to compute the A\-D tensor from the original M\-A\-O\-O\-A\-M one. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classmaooam__tl__ad_a8cf9c81589792424f545d4a4a9c57243}{ad\-\_\-add\-\_\-count} (i, j, k, v)
+\begin{DoxyCompactList}\small\item\em Subroutine used to count the number of A\-D tensor entries. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classmaooam__tl__ad_a48977110f6b5242f34ee0d5b7d75528f}{ad\-\_\-coeff} (i, j, k, v)
+\item 
+subroutine \hyperlink{classmaooam__tl__ad_ac9448944c562cc07b19d03d8152bf41e}{compute\-\_\-adtensor\-\_\-ref} (func)
+\begin{DoxyCompactList}\small\item\em Alternate subroutine to compute the A\-D tensor from the T\-L one. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classmaooam__tl__ad_ab661f6cb35357dce6750903d72b5e049}{ad\-\_\-add\-\_\-count\-\_\-ref} (i, j, k, v)
+\begin{DoxyCompactList}\small\item\em Alternate subroutine used to count the number of A\-D tensor entries from the T\-L tensor. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classmaooam__tl__ad_aeaac0beb5d8987446b867f3eed350858}{ad\-\_\-coeff\-\_\-ref} (i, j, k, v)
+\begin{DoxyCompactList}\small\item\em Alternate subroutine used to compute the A\-D tensor entries from the T\-L tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), parameter \hyperlink{classmaooam__tl__ad_a72b14cc94dc63d2edc24926298820c5c}{real\-\_\-eps} = 2.\-2204460492503131e-\/16
+\begin{DoxyCompactList}\small\item\em Epsilon to test equality with 0. \end{DoxyCompactList}\item 
+integer, dimension(\-:), allocatable \hyperlink{classmaooam__tl__ad_a99e3afa56cd46b38c6420a6e11f8b295}{count\-\_\-elems}
+\begin{DoxyCompactList}\small\item\em Vector used to count the tensor elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Tangent Linear (T\-L) and Adjoint (A\-D) model versions of M\-A\-O\-O\-A\-M. Tensors definition module. 
+
+\begin{DoxyCopyright}{Copyright}
+2016 Lesley De Cruz \& Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\-I\-C\-E\-N\-S\-E.\-txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+The routines of this module should be called only after \hyperlink{classparams_aa5d1f7f88b00cf3705691de2f6f92a08}{params\-::init\-\_\-params()} and \hyperlink{classaotensor__def_ac2d5a88885d06f6dc047bee3a4ab427a}{aotensor\-\_\-def\-::init\-\_\-aotensor()} have been called ! 
+\end{DoxyRemark}
+
+
+Definition at line 19 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+
+
+\subsection{Member Function/\-Subroutine Documentation}
+\hypertarget{classmaooam__tl__ad_aa429683bf8b3c441dee1bab717e6f7fb}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!ad@{ad}}
+\index{ad@{ad}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{ad}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public maooam\-\_\-tl\-\_\-ad\-::ad (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{t, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{ystar, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{deltay, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(out)}]{buf}
+\end{DoxyParamCaption}
+)}}\label{classmaooam__tl__ad_aa429683bf8b3c441dee1bab717e6f7fb}
+
+
+Tendencies for the A\-D of M\-A\-O\-O\-A\-M in point ystar for perturbation deltay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & time \\
+\hline
+{\em ystar} & vector with the variables (current point in trajectory) \\
+\hline
+{\em deltay} & vector with the perturbation of the variables at time t \\
+\hline
+{\em buf} & vector (buffer) to store derivatives. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 390 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a8cf9c81589792424f545d4a4a9c57243}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!ad\-\_\-add\-\_\-count@{ad\-\_\-add\-\_\-count}}
+\index{ad\-\_\-add\-\_\-count@{ad\-\_\-add\-\_\-count}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{ad\-\_\-add\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::ad\-\_\-add\-\_\-count (
+\begin{DoxyParamCaption}
+\item[{integer, intent(in)}]{i, }
+\item[{integer, intent(in)}]{j, }
+\item[{integer, intent(in)}]{k, }
+\item[{real(kind=8), intent(in)}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_a8cf9c81589792424f545d4a4a9c57243}
+
+
+Subroutine used to count the number of A\-D tensor entries. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & tensor $i$ index \\
+\hline
+{\em j} & tensor $j$ index \\
+\hline
+{\em k} & tensor $k$ index \\
+\hline
+{\em v} & value that will be added \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 249 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_ab661f6cb35357dce6750903d72b5e049}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!ad\-\_\-add\-\_\-count\-\_\-ref@{ad\-\_\-add\-\_\-count\-\_\-ref}}
+\index{ad\-\_\-add\-\_\-count\-\_\-ref@{ad\-\_\-add\-\_\-count\-\_\-ref}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{ad\-\_\-add\-\_\-count\-\_\-ref}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::ad\-\_\-add\-\_\-count\-\_\-ref (
+\begin{DoxyParamCaption}
+\item[{integer, intent(in)}]{i, }
+\item[{integer, intent(in)}]{j, }
+\item[{integer, intent(in)}]{k, }
+\item[{real(kind=8), intent(in)}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_ab661f6cb35357dce6750903d72b5e049}
+
+
+Alternate subroutine used to count the number of A\-D tensor entries from the T\-L tensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & tensor $i$ index \\
+\hline
+{\em j} & tensor $j$ index \\
+\hline
+{\em k} & tensor $k$ index \\
+\hline
+{\em v} & value that will be added \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 352 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a48977110f6b5242f34ee0d5b7d75528f}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!ad\-\_\-coeff@{ad\-\_\-coeff}}
+\index{ad\-\_\-coeff@{ad\-\_\-coeff}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{ad\-\_\-coeff}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::ad\-\_\-coeff (
+\begin{DoxyParamCaption}
+\item[{integer, intent(in)}]{i, }
+\item[{integer, intent(in)}]{j, }
+\item[{integer, intent(in)}]{k, }
+\item[{real(kind=8), intent(in)}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_a48977110f6b5242f34ee0d5b7d75528f}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & tensor $i$ index \\
+\hline
+{\em j} & tensor $j$ index \\
+\hline
+{\em k} & tensor $k$ index \\
+\hline
+{\em v} & value to add \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 263 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_aeaac0beb5d8987446b867f3eed350858}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!ad\-\_\-coeff\-\_\-ref@{ad\-\_\-coeff\-\_\-ref}}
+\index{ad\-\_\-coeff\-\_\-ref@{ad\-\_\-coeff\-\_\-ref}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{ad\-\_\-coeff\-\_\-ref}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::ad\-\_\-coeff\-\_\-ref (
+\begin{DoxyParamCaption}
+\item[{integer, intent(in)}]{i, }
+\item[{integer, intent(in)}]{j, }
+\item[{integer, intent(in)}]{k, }
+\item[{real(kind=8), intent(in)}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_aeaac0beb5d8987446b867f3eed350858}
+
+
+Alternate subroutine used to compute the A\-D tensor entries from the T\-L tensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & tensor $i$ index \\
+\hline
+{\em j} & tensor $j$ index \\
+\hline
+{\em k} & tensor $k$ index \\
+\hline
+{\em v} & value to add \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 364 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a7180afb1052d2d5f0401003c731eb5c3}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!compute\-\_\-adtensor@{compute\-\_\-adtensor}}
+\index{compute\-\_\-adtensor@{compute\-\_\-adtensor}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{compute\-\_\-adtensor}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::compute\-\_\-adtensor (
+\begin{DoxyParamCaption}
+\item[{external}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_a7180afb1052d2d5f0401003c731eb5c3}
+
+
+Subroutine to compute the A\-D tensor from the original M\-A\-O\-O\-A\-M one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & subroutine used to do the computation \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 223 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_ac9448944c562cc07b19d03d8152bf41e}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!compute\-\_\-adtensor\-\_\-ref@{compute\-\_\-adtensor\-\_\-ref}}
+\index{compute\-\_\-adtensor\-\_\-ref@{compute\-\_\-adtensor\-\_\-ref}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{compute\-\_\-adtensor\-\_\-ref}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::compute\-\_\-adtensor\-\_\-ref (
+\begin{DoxyParamCaption}
+\item[{external}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_ac9448944c562cc07b19d03d8152bf41e}
+
+
+Alternate subroutine to compute the A\-D tensor from the T\-L one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & subroutine used to do the computation \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 324 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_aafe6576927ac76c7cd1f88bd68440ddf}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!compute\-\_\-tltensor@{compute\-\_\-tltensor}}
+\index{compute\-\_\-tltensor@{compute\-\_\-tltensor}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{compute\-\_\-tltensor}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::compute\-\_\-tltensor (
+\begin{DoxyParamCaption}
+\item[{external}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_aafe6576927ac76c7cd1f88bd68440ddf}
+
+
+Routine to compute the T\-L tensor from the original M\-A\-O\-O\-A\-M one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & subroutine used to do the computation \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 127 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a5fa938c70062d80a0bf3f02c477a3bb6}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!init\-\_\-adtensor@{init\-\_\-adtensor}}
+\index{init\-\_\-adtensor@{init\-\_\-adtensor}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{init\-\_\-adtensor}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public maooam\-\_\-tl\-\_\-ad\-::init\-\_\-adtensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classmaooam__tl__ad_a5fa938c70062d80a0bf3f02c477a3bb6}
+
+
+Routine to initialize the A\-D tensor. 
+
+
+
+Definition at line 199 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_ab29255f54be1bc044a104398dbd3a072}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!init\-\_\-adtensor\-\_\-ref@{init\-\_\-adtensor\-\_\-ref}}
+\index{init\-\_\-adtensor\-\_\-ref@{init\-\_\-adtensor\-\_\-ref}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{init\-\_\-adtensor\-\_\-ref}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public maooam\-\_\-tl\-\_\-ad\-::init\-\_\-adtensor\-\_\-ref (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classmaooam__tl__ad_ab29255f54be1bc044a104398dbd3a072}
+
+
+Alternate method to initialize the A\-D tensor from the T\-L tensor. 
+
+\begin{DoxyRemark}{Remarks}
+The \hyperlink{classmaooam__tl__ad_a44e20f0d2365c0a256682dbf12c100c8}{tltensor} must be initialised before using this method. 
+\end{DoxyRemark}
+
+
+Definition at line 300 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_aa9fa649b66f2ea950fc6a14fafa2f97e}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!init\-\_\-tltensor@{init\-\_\-tltensor}}
+\index{init\-\_\-tltensor@{init\-\_\-tltensor}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{init\-\_\-tltensor}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public maooam\-\_\-tl\-\_\-ad\-::init\-\_\-tltensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classmaooam__tl__ad_aa9fa649b66f2ea950fc6a14fafa2f97e}
+
+
+Routine to initialize the T\-L tensor. 
+
+
+
+Definition at line 103 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a2b780ea6ad36ecf3d3f2941105a707f7}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!jacobian@{jacobian}}
+\index{jacobian@{jacobian}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{jacobian}]{\setlength{\rightskip}{0pt plus 5cm}type(coolist) function, dimension(ndim) maooam\-\_\-tl\-\_\-ad\-::jacobian (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{ystar}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_a2b780ea6ad36ecf3d3f2941105a707f7}
+
+
+Compute the Jacobian of M\-A\-O\-O\-A\-M in point ystar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ystar} & array with variables in which the jacobian should be evaluated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Jacobian in coolist-\/form (table of tuples \{i,j,0,value\}) 
+\end{DoxyReturn}
+
+
+Definition at line 81 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_ad859ca2ff53ab788f26a13395a3f9e7f}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!jacobian\-\_\-mat@{jacobian\-\_\-mat}}
+\index{jacobian\-\_\-mat@{jacobian\-\_\-mat}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{jacobian\-\_\-mat}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, dimension(ndim,ndim) maooam\-\_\-tl\-\_\-ad\-::jacobian\-\_\-mat (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{ystar}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_ad859ca2ff53ab788f26a13395a3f9e7f}
+
+
+Compute the Jacobian of M\-A\-O\-O\-A\-M in point ystar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ystar} & array with variables in which the jacobian should be evaluated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Jacobian in matrix form 
+\end{DoxyReturn}
+
+
+Definition at line 90 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a27dc302cf2e677f37ac6cf7887b06e1b}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!tl@{tl}}
+\index{tl@{tl}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{tl}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public maooam\-\_\-tl\-\_\-ad\-::tl (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{t, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{ystar, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{deltay, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(out)}]{buf}
+\end{DoxyParamCaption}
+)}}\label{classmaooam__tl__ad_a27dc302cf2e677f37ac6cf7887b06e1b}
+
+
+Tendencies for the T\-L of M\-A\-O\-O\-A\-M in point ystar for perturbation deltay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & time \\
+\hline
+{\em ystar} & vector with the variables (current point in trajectory) \\
+\hline
+{\em deltay} & vector with the perturbation of the variables at time t \\
+\hline
+{\em buf} & vector (buffer) to store derivatives. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 402 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a989ca71183684f62e6ee189460b452ed}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!tl\-\_\-add\-\_\-count@{tl\-\_\-add\-\_\-count}}
+\index{tl\-\_\-add\-\_\-count@{tl\-\_\-add\-\_\-count}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{tl\-\_\-add\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::tl\-\_\-add\-\_\-count (
+\begin{DoxyParamCaption}
+\item[{integer, intent(in)}]{i, }
+\item[{integer, intent(in)}]{j, }
+\item[{integer, intent(in)}]{k, }
+\item[{real(kind=8), intent(in)}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_a989ca71183684f62e6ee189460b452ed}
+
+
+Subroutine used to count the number of T\-L tensor entries. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & tensor $i$ index \\
+\hline
+{\em j} & tensor $j$ index \\
+\hline
+{\em k} & tensor $k$ index \\
+\hline
+{\em v} & value that will be added \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 153 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a55a808939f42b2ea438c2621cbb60345}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!tl\-\_\-coeff@{tl\-\_\-coeff}}
+\index{tl\-\_\-coeff@{tl\-\_\-coeff}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{tl\-\_\-coeff}]{\setlength{\rightskip}{0pt plus 5cm}subroutine maooam\-\_\-tl\-\_\-ad\-::tl\-\_\-coeff (
+\begin{DoxyParamCaption}
+\item[{integer, intent(in)}]{i, }
+\item[{integer, intent(in)}]{j, }
+\item[{integer, intent(in)}]{k, }
+\item[{real(kind=8), intent(in)}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_a55a808939f42b2ea438c2621cbb60345}
+
+
+Subroutine used to compute the T\-L tensor entries. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & tensor $i$ index \\
+\hline
+{\em j} & tensor $j$ index \\
+\hline
+{\em k} & tensor $k$ index \\
+\hline
+{\em v} & value to add \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 167 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classmaooam__tl__ad_a7a38eb048440310ff37dbc97c401b00c}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!adtensor@{adtensor}}
+\index{adtensor@{adtensor}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{adtensor}]{\setlength{\rightskip}{0pt plus 5cm}type(coolist), dimension(\-:), allocatable, public maooam\-\_\-tl\-\_\-ad\-::adtensor}}\label{classmaooam__tl__ad_a7a38eb048440310ff37dbc97c401b00c}
+
+
+Tensor representation of the Adjoint tendencies. 
+
+
+
+Definition at line 51 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a99e3afa56cd46b38c6420a6e11f8b295}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!count\-\_\-elems@{count\-\_\-elems}}
+\index{count\-\_\-elems@{count\-\_\-elems}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{count\-\_\-elems}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\-:), allocatable maooam\-\_\-tl\-\_\-ad\-::count\-\_\-elems\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_a99e3afa56cd46b38c6420a6e11f8b295}
+
+
+Vector used to count the tensor elements. 
+
+
+
+Definition at line 45 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a72b14cc94dc63d2edc24926298820c5c}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!real\-\_\-eps@{real\-\_\-eps}}
+\index{real\-\_\-eps@{real\-\_\-eps}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{real\-\_\-eps}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), parameter maooam\-\_\-tl\-\_\-ad\-::real\-\_\-eps = 2.\-2204460492503131e-\/16\hspace{0.3cm}{\ttfamily [private]}}}\label{classmaooam__tl__ad_a72b14cc94dc63d2edc24926298820c5c}
+
+
+Epsilon to test equality with 0. 
+
+
+
+Definition at line 42 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+\hypertarget{classmaooam__tl__ad_a44e20f0d2365c0a256682dbf12c100c8}{\index{maooam\-\_\-tl\-\_\-ad@{maooam\-\_\-tl\-\_\-ad}!tltensor@{tltensor}}
+\index{tltensor@{tltensor}!maooam_tl_ad@{maooam\-\_\-tl\-\_\-ad}}
+\subsubsection[{tltensor}]{\setlength{\rightskip}{0pt plus 5cm}type(coolist), dimension(\-:), allocatable, public maooam\-\_\-tl\-\_\-ad\-::tltensor}}\label{classmaooam__tl__ad_a44e20f0d2365c0a256682dbf12c100c8}
+
+
+Tensor representation of the Tangent Linear tendencies. 
+
+
+
+Definition at line 48 of file maooam\-\_\-tl\-\_\-ad.\-f90.
+
+
+
+The documentation for this module was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{maooam__tl__ad_8f90}{maooam\-\_\-tl\-\_\-ad.\-f90}\end{DoxyCompactItemize}
