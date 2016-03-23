@@ -1,0 +1,256 @@
+\hypertarget{classtensor}{\section{tensor Module Reference}
+\label{classtensor}\index{tensor@{tensor}}
+}
+
+
+Tensor utility module.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structtensor_1_1coolist}{coolist}
+\begin{DoxyCompactList}\small\item\em Coordinate list. Type used to represent the sparse tensor. \end{DoxyCompactList}\item 
+type \hyperlink{structtensor_1_1coolist__elem}{coolist\-\_\-elem}
+\begin{DoxyCompactList}\small\item\em Coordinate list element type. Elementary elements of the sparse tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{classtensor_a4a88ee8077278486c5128ad97617969e}{copy\-\_\-tensor} (src, dst)
+\begin{DoxyCompactList}\small\item\em Routine to copy a tensor. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classtensor_a75d1a9ca8b39e9ad4b151a7b4b45c70f}{mat\-\_\-to\-\_\-coo} (src, dst)
+\begin{DoxyCompactList}\small\item\em Routine to convert a matrix to a tensor. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classtensor_a11054027a386918658f8948231af53b1}{sparse\-\_\-mul3} (coolist\-\_\-ijk, arr\-\_\-j, arr\-\_\-k, res)
+\begin{DoxyCompactList}\small\item\em Sparse multiplication of a tensor with two vectors\-: ${\displaystyle \sum_{j,k=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k$. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classtensor_add2a6aa993cd8a23be60d1643b5c7942}{jsparse\-\_\-mul} (coolist\-\_\-ijk, arr\-\_\-j, jcoo\-\_\-ij)
+\begin{DoxyCompactList}\small\item\em Sparse multiplication of two tensors to determine the Jacobian\-: \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\] It's implemented slightly differently\-: for every $\mathcal{T}_{i,j,k}$, we add to $J_{i,j}$ as follows\-: \[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\] This version return a coolist (sparse tensor). \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classtensor_a4135cf70df5030070922ff199c79cc03}{jsparse\-\_\-mul\-\_\-mat} (coolist\-\_\-ijk, arr\-\_\-j, jcoo\-\_\-ij)
+\begin{DoxyCompactList}\small\item\em Sparse multiplication of two tensors to determine the Jacobian\-: \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\] It's implemented slightly differently\-: for every $\mathcal{T}_{i,j,k}$, we add to $J_{i,j}$ as follows\-: \[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\] This version return a matrix. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classtensor_a70230d57c615d9548905bc023f5fc01d}{sparse\-\_\-mul2} (coolist\-\_\-ij, arr\-\_\-j, res)
+\begin{DoxyCompactList}\small\item\em Sparse multiplication of a 2d sparse tensor with a vectors\-: ${\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k$. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{classtensor_a364522b80ab0f4785c331eb74fa1ba04}{simplify} (\hyperlink{classtensor}{tensor})
+\begin{DoxyCompactList}\small\item\em Routine to simplify a coolist (sparse tensor). For each index $i$, it upper triangularize the matrix \[\mathcal{T}_{i,j,k} \qquad 0 \leq j,k \leq ndim.\]. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), parameter \hyperlink{classtensor_a2a2ab182d86107e62533c3f0043652cc}{real\-\_\-eps} = 2.\-2204460492503131e-\/16
+\begin{DoxyCompactList}\small\item\em Parameter to test the equality with zero. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Tensor utility module. 
+
+\begin{DoxyCopyright}{Copyright}
+2015 Lesley De Cruz \& Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\-I\-C\-E\-N\-S\-E.\-txt} for license information. 
+\end{DoxyCopyright}
+
+
+Definition at line 13 of file tensor.\-f90.
+
+
+
+\subsection{Member Function/\-Subroutine Documentation}
+\hypertarget{classtensor_a4a88ee8077278486c5128ad97617969e}{\index{tensor@{tensor}!copy\-\_\-tensor@{copy\-\_\-tensor}}
+\index{copy\-\_\-tensor@{copy\-\_\-tensor}!tensor@{tensor}}
+\subsubsection[{copy\-\_\-tensor}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public tensor\-::copy\-\_\-tensor (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(in)}]{src, }
+\item[{type({\bf coolist}), dimension(ndim), intent(out)}]{dst}
+\end{DoxyParamCaption}
+)}}\label{classtensor_a4a88ee8077278486c5128ad97617969e}
+
+
+Routine to copy a tensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Source tensor \\
+\hline
+{\em dst} & Destination tensor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+The destination tensor have to be an empty tensor, i.\-e. with unallocated list of elements and nelems set to 0. 
+\end{DoxyRemark}
+
+
+Definition at line 43 of file tensor.\-f90.
+
+\hypertarget{classtensor_add2a6aa993cd8a23be60d1643b5c7942}{\index{tensor@{tensor}!jsparse\-\_\-mul@{jsparse\-\_\-mul}}
+\index{jsparse\-\_\-mul@{jsparse\-\_\-mul}!tensor@{tensor}}
+\subsubsection[{jsparse\-\_\-mul}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public tensor\-::jsparse\-\_\-mul (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(in)}]{coolist\-\_\-ijk, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{arr\-\_\-j, }
+\item[{type({\bf coolist}), dimension(ndim), intent(out)}]{jcoo\-\_\-ij}
+\end{DoxyParamCaption}
+)}}\label{classtensor_add2a6aa993cd8a23be60d1643b5c7942}
+
+
+Sparse multiplication of two tensors to determine the Jacobian\-: \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\] It's implemented slightly differently\-: for every $\mathcal{T}_{i,j,k}$, we add to $J_{i,j}$ as follows\-: \[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\] This version return a coolist (sparse tensor). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coolist\-\_\-ijk} & a coordinate list (sparse tensor) of which index 2 or 3 will be contracted. \\
+\hline
+{\em arr\-\_\-j} & the vector to be contracted with index 2 and then index 3 of ffi\-\_\-coo\-\_\-ijk \\
+\hline
+{\em jcoo\-\_\-ij} & a coolist (sparse tensor) to store the result of the contraction \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 122 of file tensor.\-f90.
+
+\hypertarget{classtensor_a4135cf70df5030070922ff199c79cc03}{\index{tensor@{tensor}!jsparse\-\_\-mul\-\_\-mat@{jsparse\-\_\-mul\-\_\-mat}}
+\index{jsparse\-\_\-mul\-\_\-mat@{jsparse\-\_\-mul\-\_\-mat}!tensor@{tensor}}
+\subsubsection[{jsparse\-\_\-mul\-\_\-mat}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public tensor\-::jsparse\-\_\-mul\-\_\-mat (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(in)}]{coolist\-\_\-ijk, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{arr\-\_\-j, }
+\item[{real(kind=8), dimension(ndim,ndim), intent(out)}]{jcoo\-\_\-ij}
+\end{DoxyParamCaption}
+)}}\label{classtensor_a4135cf70df5030070922ff199c79cc03}
+
+
+Sparse multiplication of two tensors to determine the Jacobian\-: \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\] It's implemented slightly differently\-: for every $\mathcal{T}_{i,j,k}$, we add to $J_{i,j}$ as follows\-: \[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\] This version return a matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coolist\-\_\-ijk} & a coordinate list (sparse tensor) of which index 2 or 3 will be contracted. \\
+\hline
+{\em arr\-\_\-j} & the vector to be contracted with index 2 and then index 3 of ffi\-\_\-coo\-\_\-ijk \\
+\hline
+{\em jcoo\-\_\-ij} & a matrix to store the result of the contraction \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 165 of file tensor.\-f90.
+
+\hypertarget{classtensor_a75d1a9ca8b39e9ad4b151a7b4b45c70f}{\index{tensor@{tensor}!mat\-\_\-to\-\_\-coo@{mat\-\_\-to\-\_\-coo}}
+\index{mat\-\_\-to\-\_\-coo@{mat\-\_\-to\-\_\-coo}!tensor@{tensor}}
+\subsubsection[{mat\-\_\-to\-\_\-coo}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public tensor\-::mat\-\_\-to\-\_\-coo (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\-:ndim,0\-:ndim), intent(in)}]{src, }
+\item[{type({\bf coolist}), dimension(ndim), intent(out)}]{dst}
+\end{DoxyParamCaption}
+)}}\label{classtensor_a75d1a9ca8b39e9ad4b151a7b4b45c70f}
+
+
+Routine to convert a matrix to a tensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & Source matrix \\
+\hline
+{\em dst} & Destination tensor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+The destination tensor have to be an empty tensor, i.\-e. with unallocated list of elements and nelems set to 0. 
+\end{DoxyRemark}
+
+
+Definition at line 65 of file tensor.\-f90.
+
+\hypertarget{classtensor_a364522b80ab0f4785c331eb74fa1ba04}{\index{tensor@{tensor}!simplify@{simplify}}
+\index{simplify@{simplify}!tensor@{tensor}}
+\subsubsection[{simplify}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public tensor\-::simplify (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(inout)}]{tensor}
+\end{DoxyParamCaption}
+)}}\label{classtensor_a364522b80ab0f4785c331eb74fa1ba04}
+
+
+Routine to simplify a coolist (sparse tensor). For each index $i$, it upper triangularize the matrix \[\mathcal{T}_{i,j,k} \qquad 0 \leq j,k \leq ndim.\]. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tensor} & a coordinate list (sparse tensor) which will be simplified. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 207 of file tensor.\-f90.
+
+\hypertarget{classtensor_a70230d57c615d9548905bc023f5fc01d}{\index{tensor@{tensor}!sparse\-\_\-mul2@{sparse\-\_\-mul2}}
+\index{sparse\-\_\-mul2@{sparse\-\_\-mul2}!tensor@{tensor}}
+\subsubsection[{sparse\-\_\-mul2}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public tensor\-::sparse\-\_\-mul2 (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(in)}]{coolist\-\_\-ij, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{arr\-\_\-j, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}}\label{classtensor_a70230d57c615d9548905bc023f5fc01d}
+
+
+Sparse multiplication of a 2d sparse tensor with a vectors\-: ${\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coolist\-\_\-ij} & a coordinate list (sparse tensor) of which index 2 will be contracted. \\
+\hline
+{\em arr\-\_\-j} & the vector to be contracted with index 2 of coolist\-\_\-ijk \\
+\hline
+{\em res} & vector (buffer) to store the result of the contraction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+Note that it is N\-O\-T safe to pass {\ttfamily arr\-\_\-j} as a result buffer, as this operation does multiple passes. 
+\end{DoxyRemark}
+
+
+Definition at line 190 of file tensor.\-f90.
+
+\hypertarget{classtensor_a11054027a386918658f8948231af53b1}{\index{tensor@{tensor}!sparse\-\_\-mul3@{sparse\-\_\-mul3}}
+\index{sparse\-\_\-mul3@{sparse\-\_\-mul3}!tensor@{tensor}}
+\subsubsection[{sparse\-\_\-mul3}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public tensor\-::sparse\-\_\-mul3 (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(in)}]{coolist\-\_\-ijk, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{arr\-\_\-j, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(in)}]{arr\-\_\-k, }
+\item[{real(kind=8), dimension(0\-:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}}\label{classtensor_a11054027a386918658f8948231af53b1}
+
+
+Sparse multiplication of a tensor with two vectors\-: ${\displaystyle \sum_{j,k=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coolist\-\_\-ijk} & a coordinate list (sparse tensor) of which index 2 and 3 will be contracted. \\
+\hline
+{\em arr\-\_\-j} & the vector to be contracted with index 2 of coolist\-\_\-ijk \\
+\hline
+{\em arr\-\_\-k} & the vector to be contracted with index 3 of coolist\-\_\-ijk \\
+\hline
+{\em res} & vector (buffer) to store the result of the contraction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+Note that it is N\-O\-T safe to pass {\ttfamily arr\-\_\-j}/{\ttfamily arr\-\_\-k} as a result buffer, as this operation does multiple passes. 
+\end{DoxyRemark}
+
+
+Definition at line 98 of file tensor.\-f90.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classtensor_a2a2ab182d86107e62533c3f0043652cc}{\index{tensor@{tensor}!real\-\_\-eps@{real\-\_\-eps}}
+\index{real\-\_\-eps@{real\-\_\-eps}!tensor@{tensor}}
+\subsubsection[{real\-\_\-eps}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), parameter tensor\-::real\-\_\-eps = 2.\-2204460492503131e-\/16}}\label{classtensor_a2a2ab182d86107e62533c3f0043652cc}
+
+
+Parameter to test the equality with zero. 
+
+
+
+Definition at line 33 of file tensor.\-f90.
+
+
+
+The documentation for this module was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{tensor_8f90}{tensor.\-f90}\end{DoxyCompactItemize}

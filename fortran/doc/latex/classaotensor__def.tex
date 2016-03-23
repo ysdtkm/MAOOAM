@@ -1,0 +1,276 @@
+\hypertarget{classaotensor__def}{\section{aotensor\-\_\-def Module Reference}
+\label{classaotensor__def}\index{aotensor\-\_\-def@{aotensor\-\_\-def}}
+}
+
+
+The equation tensor for the coupled ocean-\/atmosphere model with temperature which allows for an extensible set of modes in the ocean and in the atmosphere.  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{classaotensor__def_ac2d5a88885d06f6dc047bee3a4ab427a}{init\-\_\-aotensor}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor} tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+type(coolist), dimension(\-:), \\*
+allocatable, public \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor}
+\begin{DoxyCompactList}\small\item\em $\mathcal{T}_{i,j,k}$ -\/ Tensor representation of the tendencies. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+integer function \hyperlink{classaotensor__def_afa05aa849a8cb9e08b36dee6560986b8}{psi} (i)
+\begin{DoxyCompactList}\small\item\em Translate the $\psi_{a,i}$ coefficients into effective coordinates. \end{DoxyCompactList}\item 
+integer function \hyperlink{classaotensor__def_a506f7d7bc9671005e5ed9a403bb29394}{theta} (i)
+\begin{DoxyCompactList}\small\item\em Translate the $\theta_{a,i}$ coefficients into effective coordinates. \end{DoxyCompactList}\item 
+integer function \hyperlink{classaotensor__def_abdb4d710d4614fef61179c46d8e26b8e}{a} (i)
+\begin{DoxyCompactList}\small\item\em Translate the $\psi_{o,i}$ coefficients into effective coordinates. \end{DoxyCompactList}\item 
+integer function \hyperlink{classaotensor__def_aed72341f9a3de19b5e8c21fd27471ce6}{t} (i)
+\begin{DoxyCompactList}\small\item\em Translate the $\delta T_{o,i}$ coefficients into effective coordinates. \end{DoxyCompactList}\item 
+integer function \hyperlink{classaotensor__def_a13eb91ac3a121fd77c1cf644021cff5b}{kdelta} (i, j)
+\begin{DoxyCompactList}\small\item\em Kronecker delta function. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classaotensor__def_a0da983fc262aa15a3fde0d6138825660}{coeff} (i, j, k, v)
+\begin{DoxyCompactList}\small\item\em Subroutine to add element in the \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor} $\mathcal{T}_{i,j,k}$ structure. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classaotensor__def_ac8104c190904681c1fd27eec036114aa}{add\-\_\-count} (i, j, k, v)
+\begin{DoxyCompactList}\small\item\em Subroutine to count the elements of the \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor} $\mathcal{T}_{i,j,k}$. Add +1 to count\-\_\-elems(i) for each value that is added to the tensor i-\/th component. \end{DoxyCompactList}\item 
+subroutine \hyperlink{classaotensor__def_a3dfccbce01ca1616c616f855c0cfa45a}{compute\-\_\-aotensor} (func)
+\begin{DoxyCompactList}\small\item\em Subroutine to compute the tensor \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+integer, dimension(\-:), allocatable \hyperlink{classaotensor__def_aa9e30c84efc5a81409ba9c0286c87eac}{count\-\_\-elems}
+\begin{DoxyCompactList}\small\item\em Vector used to count the tensor elements. \end{DoxyCompactList}\item 
+real(kind=8), parameter \hyperlink{classaotensor__def_ab1cf9313fb1def1a17de539cfa922e35}{real\-\_\-eps} = 2.\-2204460492503131e-\/16
+\begin{DoxyCompactList}\small\item\em Epsilon to test equality with 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The equation tensor for the coupled ocean-\/atmosphere model with temperature which allows for an extensible set of modes in the ocean and in the atmosphere. 
+
+\begin{DoxyCopyright}{Copyright}
+2015 Lesley De Cruz \& Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\-I\-C\-E\-N\-S\-E.\-txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+Generated Fortran90/95 code from ../../lua/aomodel\-\_\-extended/aotensor.lua 
+\end{DoxyRemark}
+
+
+Definition at line 21 of file aotensor\-\_\-def.\-f90.
+
+
+
+\subsection{Member Function/\-Subroutine Documentation}
+\hypertarget{classaotensor__def_abdb4d710d4614fef61179c46d8e26b8e}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!a@{a}}
+\index{a@{a}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}integer function aotensor\-\_\-def\-::a (
+\begin{DoxyParamCaption}
+\item[{integer}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_abdb4d710d4614fef61179c46d8e26b8e}
+
+
+Translate the $\psi_{o,i}$ coefficients into effective coordinates. 
+
+
+
+Definition at line 75 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_ac8104c190904681c1fd27eec036114aa}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!add\-\_\-count@{add\-\_\-count}}
+\index{add\-\_\-count@{add\-\_\-count}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{add\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}subroutine aotensor\-\_\-def\-::add\-\_\-count (
+\begin{DoxyParamCaption}
+\item[{integer, intent(in)}]{i, }
+\item[{integer, intent(in)}]{j, }
+\item[{integer, intent(in)}]{k, }
+\item[{real(kind=8), intent(in)}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_ac8104c190904681c1fd27eec036114aa}
+
+
+Subroutine to count the elements of the \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor} $\mathcal{T}_{i,j,k}$. Add +1 to count\-\_\-elems(i) for each value that is added to the tensor i-\/th component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & tensor $i$ index \\
+\hline
+{\em j} & tensor $j$ index \\
+\hline
+{\em k} & tensor $k$ index \\
+\hline
+{\em v} & value that will be added \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 123 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_a0da983fc262aa15a3fde0d6138825660}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!coeff@{coeff}}
+\index{coeff@{coeff}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{coeff}]{\setlength{\rightskip}{0pt plus 5cm}subroutine aotensor\-\_\-def\-::coeff (
+\begin{DoxyParamCaption}
+\item[{integer, intent(in)}]{i, }
+\item[{integer, intent(in)}]{j, }
+\item[{integer, intent(in)}]{k, }
+\item[{real(kind=8), intent(in)}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_a0da983fc262aa15a3fde0d6138825660}
+
+
+Subroutine to add element in the \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor} $\mathcal{T}_{i,j,k}$ structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & tensor $i$ index \\
+\hline
+{\em j} & tensor $j$ index \\
+\hline
+{\em k} & tensor $k$ index \\
+\hline
+{\em v} & value to add \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 98 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_a3dfccbce01ca1616c616f855c0cfa45a}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!compute\-\_\-aotensor@{compute\-\_\-aotensor}}
+\index{compute\-\_\-aotensor@{compute\-\_\-aotensor}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{compute\-\_\-aotensor}]{\setlength{\rightskip}{0pt plus 5cm}subroutine aotensor\-\_\-def\-::compute\-\_\-aotensor (
+\begin{DoxyParamCaption}
+\item[{external}]{func}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_a3dfccbce01ca1616c616f855c0cfa45a}
+
+
+Subroutine to compute the tensor \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & External function to be used \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 131 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_ac2d5a88885d06f6dc047bee3a4ab427a}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!init\-\_\-aotensor@{init\-\_\-aotensor}}
+\index{init\-\_\-aotensor@{init\-\_\-aotensor}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{init\-\_\-aotensor}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public aotensor\-\_\-def\-::init\-\_\-aotensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classaotensor__def_ac2d5a88885d06f6dc047bee3a4ab427a}
+
+
+Subroutine to initialise the \hyperlink{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor} tensor. 
+
+\begin{DoxyRemark}{Remarks}
+This procedure will also call \hyperlink{classparams_aa5d1f7f88b00cf3705691de2f6f92a08}{params\-::init\-\_\-params()} and \hyperlink{classinprod__analytic_a7491dd2b8ba26eb10d160eb0bf072e56}{inprod\-\_\-analytic\-::init\-\_\-inprod()} . It will finally call \hyperlink{classinprod__analytic_a77718deee55b484b0946e6c8faf72cd6}{inprod\-\_\-analytic\-::deallocate\-\_\-inprod()} to remove the inner products, which are not needed anymore at this point. 
+\end{DoxyRemark}
+
+
+Definition at line 201 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_a13eb91ac3a121fd77c1cf644021cff5b}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!kdelta@{kdelta}}
+\index{kdelta@{kdelta}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{kdelta}]{\setlength{\rightskip}{0pt plus 5cm}integer function aotensor\-\_\-def\-::kdelta (
+\begin{DoxyParamCaption}
+\item[{integer}]{i, }
+\item[{integer}]{j}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_a13eb91ac3a121fd77c1cf644021cff5b}
+
+
+Kronecker delta function. 
+
+
+
+Definition at line 87 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_afa05aa849a8cb9e08b36dee6560986b8}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!psi@{psi}}
+\index{psi@{psi}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{psi}]{\setlength{\rightskip}{0pt plus 5cm}integer function aotensor\-\_\-def\-::psi (
+\begin{DoxyParamCaption}
+\item[{integer}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_afa05aa849a8cb9e08b36dee6560986b8}
+
+
+Translate the $\psi_{a,i}$ coefficients into effective coordinates. 
+
+
+
+Definition at line 63 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_aed72341f9a3de19b5e8c21fd27471ce6}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!t@{t}}
+\index{t@{t}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{t}]{\setlength{\rightskip}{0pt plus 5cm}integer function aotensor\-\_\-def\-::t (
+\begin{DoxyParamCaption}
+\item[{integer}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_aed72341f9a3de19b5e8c21fd27471ce6}
+
+
+Translate the $\delta T_{o,i}$ coefficients into effective coordinates. 
+
+
+
+Definition at line 81 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_a506f7d7bc9671005e5ed9a403bb29394}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!theta@{theta}}
+\index{theta@{theta}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{theta}]{\setlength{\rightskip}{0pt plus 5cm}integer function aotensor\-\_\-def\-::theta (
+\begin{DoxyParamCaption}
+\item[{integer}]{i}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_a506f7d7bc9671005e5ed9a403bb29394}
+
+
+Translate the $\theta_{a,i}$ coefficients into effective coordinates. 
+
+
+
+Definition at line 69 of file aotensor\-\_\-def.\-f90.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!aotensor@{aotensor}}
+\index{aotensor@{aotensor}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{aotensor}]{\setlength{\rightskip}{0pt plus 5cm}type(coolist), dimension(\-:), allocatable, public aotensor\-\_\-def\-::aotensor}}\label{classaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}
+
+
+$\mathcal{T}_{i,j,k}$ -\/ Tensor representation of the tendencies. 
+
+
+
+Definition at line 45 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_aa9e30c84efc5a81409ba9c0286c87eac}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!count\-\_\-elems@{count\-\_\-elems}}
+\index{count\-\_\-elems@{count\-\_\-elems}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{count\-\_\-elems}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\-:), allocatable aotensor\-\_\-def\-::count\-\_\-elems\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_aa9e30c84efc5a81409ba9c0286c87eac}
+
+
+Vector used to count the tensor elements. 
+
+
+
+Definition at line 37 of file aotensor\-\_\-def.\-f90.
+
+\hypertarget{classaotensor__def_ab1cf9313fb1def1a17de539cfa922e35}{\index{aotensor\-\_\-def@{aotensor\-\_\-def}!real\-\_\-eps@{real\-\_\-eps}}
+\index{real\-\_\-eps@{real\-\_\-eps}!aotensor_def@{aotensor\-\_\-def}}
+\subsubsection[{real\-\_\-eps}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), parameter aotensor\-\_\-def\-::real\-\_\-eps = 2.\-2204460492503131e-\/16\hspace{0.3cm}{\ttfamily [private]}}}\label{classaotensor__def_ab1cf9313fb1def1a17de539cfa922e35}
+
+
+Epsilon to test equality with 0. 
+
+
+
+Definition at line 40 of file aotensor\-\_\-def.\-f90.
+
+
+
+The documentation for this module was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{aotensor__def_8f90}{aotensor\-\_\-def.\-f90}\end{DoxyCompactItemize}

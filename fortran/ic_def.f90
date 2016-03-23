@@ -1,3 +1,14 @@
+
+! ic_def.f90
+!
+!>  Module to load the initial condition.
+!
+!> @copyright                                                               
+!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> See LICENSE.txt for license information.                                  
+!
+!---------------------------------------------------------------------------!
+
 MODULE ic_def
 
   USE params, only: natm,noc,ndim
@@ -7,14 +18,16 @@ MODULE ic_def
 
   PRIVATE
 
-  LOGICAL :: exists
+  LOGICAL :: exists !< Boolean to test for file existence.
   
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE, PUBLIC :: IC
+  REAL(KIND=8), DIMENSION(:), ALLOCATABLE, PUBLIC :: IC !< Initial condition vector
 
   PUBLIC ::load_IC
 
 CONTAINS
 
+  !> Subroutine to load the initial condition if IC.nml exists.
+  !> If it does not, then write IC.nml with 0 as initial condition.
   SUBROUTINE load_IC
     INTEGER :: i,AllocStat
     CHARACTER(len=20) :: fm

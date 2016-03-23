@@ -37,7 +37,7 @@ in namelists). Unpack the archive in a folder, and run:
  Remark: The command "make clean" removes the compiled files.
 
 For Windows users, a minimalistic GNU development environment
- (including gfortran and make) is available at www.mingw.org .
+ (including gfortran and make) is available at [www.mingw.org](http://www.mingw.org) .
 
 ------------------------------------------------------------------------
 
@@ -51,17 +51,22 @@ initialization.
 * aotensor_def.f90 : Tensor aotensor computation module.
 * IC_def.f90 : A module which loads the user specified initial condition.
 * inprod_analytic.f90 : Inner products computation module.
-* integrators.f90 : A module which contains the integrator for the model equations.
+* integrator.f90 : A module which contains the integrator for the model equations.
 * Makefile : The Makefile.
 * params.f90 : The model parameters module.
-* README.txt : The present file.
+* maooam_tl_ad.f90 : Tangent Linear (TL) and Adjoint (AD) model tensors definition module
+* tl_ad_integrator.f90 : Tangent Linear (TL) and Adjoint (AD) model integrators module
+* test_tl_ad.f90 : Tests for the Tangent Linear (TL) and Adjoint (AD) model versions
+* README.md : The present file.
 * LICENSE.txt : The license text of the program.
 * util.f90 : A module with various useful functions.
 * stat.f90 : A module for statistic accumulation.
 * params.nml : A namelist to specify the model parameters.
 * int_params.nml : A namelist to specify the integration parameters.
 * modeselection.nml : A namelist to specify which spectral decomposition will be used.
-  
+
+A documentation is available [here](./doc/html/index.html) (html) and [here](./doc/latex/Reference_manual.pdf) (pdf).
+ 
 ------------------------------------------------------------------------
 
 ## Usage ##
@@ -69,11 +74,11 @@ initialization.
 The user first has to fill the params.nml and int_params.nml namelist files according to their needs.
 
 The modeselection.nml namelist can then be filled : 
-* NBOC and NBATM specify the number of blocks that will be used in respectively the ocean and
+* params::nboc and params::nbatm specify the number of blocks that will be used in respectively the ocean and
   the atmosphere. Each block corresponds to a given x and y wavenumber.
-* The OMS and AMS arrays are integer arrays which specify which wavenumbers of
+* The params::oms and params::ams arrays are integer arrays which specify which wavenumbers of
   the spectral decomposition will be used in respectively the ocean and the
-  atmosphere. Their shapes are OMS(NBOC,2) and AMS(NBATM,2).
+  atmosphere. Their shapes are oms(nboc,2) and ams(nbatm,2).
 * The first dimension specifies the number attributed by the user to the block and the second
   dimension specifies the x and the y wavenumbers.
 * The VDDG model, described in Vannitsem et al. (2015) is given as an example
@@ -99,6 +104,39 @@ initial condition, stop the program, fill the newly generated file and restart :
 It will generate two files :
  * evol_field.dat : the recorded time evolution of the variables.
  * mean_field.dat : the mean field (the climatology)
+
+The tangent linear and adjoint models of MAOOAM are provided in the
+maooam_tl_ad and tl_ad_integrator module. It is documented [here](./md_README_TL_AD.html).
+
+
+------------------------------------------------------------------------
+
+## Implementation notes ##
+
+As the system of differential equations is at most bilinear in y[j] (j=1..n), y
+being the array of variables, it can be expressed as a tensor contraction
+(written using Einstein convention, i.e. indices that occur twice on one side
+of an equation are summed over):
+
+    dy  / dt =  T        y   y      (y  == 1)
+      i          i,j,k    j   k       0
+
+
+The tensor aotensor_def::aotensor is the tensor T that encodes the differential equations 
+is composed so that:
+
+* T[i][j][k] contains the contribution of dy[i]/dt proportional to y[j]*y[k].
+* Furthermore, y[0] is always equal to 1, so that T[i][0][0] is the constant
+contribution to var dy[i]/dt.
+* T[i][j][0] + T[i][0][j] is the contribution to  dy[i]/dt which is linear in
+y[j].
+
+Ideally, the tensor aotensor_def::aotensor is composed as an upper triangular matrix 
+(in the last two coordinates).
+
+The tensor for this model is composed in aotensor_def and uses the
+inner products defined in inprod_analytic .
+
 
 ------------------------------------------------------------------------
 

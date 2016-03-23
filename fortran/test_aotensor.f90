@@ -1,10 +1,14 @@
-  !---------------------------------------------------------------------------!
-  ! inprod_analytic_test.f90                                                  !
-  ! (C) 2013-2014 Lesley De Cruz & Jonathan Demaeyer                          !
-  ! See LICENSE.txt for license information.                                  !
-  !---------------------------------------------------------------------------!
-  !  Small progrem to print the aotensor.                                     !
-  !---------------------------------------------------------------------------!
+
+! test_aotensor.f90
+!
+!> Small program to print the inner products.   
+!     
+!> @copyright                                                               
+!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> See LICENSE.txt for license information.                                  
+!
+!---------------------------------------------------------------------------!
+
 
 PROGRAM test_aotensor
 
