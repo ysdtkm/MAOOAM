@@ -17,6 +17,8 @@ The authors would appreciate it if you could also send a reprint of your paper t
 
 Consult the M\-A\-O\-O\-A\-M code repository at \href{http://dx.doi.org/yy/yyy}{\tt doi\-:yy/yyy} for updates, and \href{http://climdyn.meteo.be}{\tt our website} for additional resources.
 
+A pdf version of this manual is available \href{../latex/Reference_manual.pdf}{\tt here}. 
+
 
 
 \subsection*{Installation}
@@ -62,8 +64,8 @@ The user first has to fill the params.\-nml and int\-\_\-params.\-nml namelist f
 
 The modeselection.\-nml namelist can then be filled \-:
 \begin{DoxyItemize}
-\item \hyperlink{classparams_a54123b5a947703d21d0c882dec6780ac}{params\-::nboc} and \hyperlink{classparams_aa5dc201b0a59d8bb25a5dc52d2ed3cac}{params\-::nbatm} specify the number of blocks that will be used in respectively the ocean and the atmosphere. Each block corresponds to a given x and y wavenumber.
-\item The \hyperlink{classparams_a5e25e072992d5908eea5308243b7ec63}{params\-::oms} and \hyperlink{classparams_aa95299f1a9c54693b85e049004369089}{params\-::ams} arrays are integer arrays which specify which wavenumbers of the spectral decomposition will be used in respectively the ocean and the atmosphere. Their shapes are oms(nboc,2) and ams(nbatm,2).
+\item N\-B\-O\-C and N\-B\-A\-T\-M specify the number of blocks that will be used in respectively the ocean and the atmosphere. Each block corresponds to a given x and y wavenumber.
+\item The O\-M\-S and A\-M\-S arrays are integer arrays which specify which wavenumbers of the spectral decomposition will be used in respectively the ocean and the atmosphere. Their shapes are O\-M\-S(\-N\-B\-O\-C,2) and A\-M\-S(\-N\-B\-A\-T\-M,2).
 \item The first dimension specifies the number attributed by the user to the block and the second dimension specifies the x and the y wavenumbers.
 \item The V\-D\-D\-G model, described in Vannitsem et al. (2015) is given as an example in the archive.
 \item Note that the variables of the model are numbered according to the chosen order of the blocks.
@@ -85,7 +87,7 @@ It will generate two files \-:
 \item mean\-\_\-field.\-dat \-: the mean field (the climatology)
 \end{DoxyItemize}
 
-The tangent linear and adjoint models of M\-A\-O\-O\-A\-M are provided in the \hyperlink{classmaooam__tl__ad}{maooam\-\_\-tl\-\_\-ad} and \hyperlink{classtl__ad__integrator}{tl\-\_\-ad\-\_\-integrator} module. It is documented \href{./md_README_TL_AD.html}{\tt here}. 
+The tangent linear and adjoint models of M\-A\-O\-O\-A\-M are provided in the \hyperlink{classmaooam__tl__ad}{maooam\-\_\-tl\-\_\-ad} and \hyperlink{classtl__ad__integrator}{tl\-\_\-ad\-\_\-integrator} module. It is documented \href{./md_tl_ad_doc.html}{\tt here}. 
 
 
 

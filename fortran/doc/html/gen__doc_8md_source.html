@@ -165,11 +165,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;The user first has to fill the <a class="code" href="classparams.html" title="The model parameters module.">params</a>.nml and int_params.nml namelist <a class="code" href="LICENSE_8txt.html#abdb4f4971cf029244bb81834ee9b393d">files</a> according to their needs.</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;The modeselection.nml namelist can then be filled : </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;* <a class="code" href="classparams.html#a54123b5a947703d21d0c882dec6780ac" title="Number of atmospheric blocks.">params::nboc</a> and <a class="code" href="classparams.html#aa5dc201b0a59d8bb25a5dc52d2ed3cac" title="Number of oceanic blocks.">params::nbatm</a> specify the number of blocks that will be used in respectively the ocean and</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;* NBOC and NBATM specify the number of blocks that will be used in respectively the ocean and</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  the atmosphere. Each block corresponds to a given x and y wavenumber.</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;* The <a class="code" href="classparams.html#a5e25e072992d5908eea5308243b7ec63" title="Ocean mode selection array.">params::oms</a> and <a class="code" href="classparams.html#aa95299f1a9c54693b85e049004369089" title="Atmospheric mode selection array.">params::ams</a> arrays are integer arrays which specify which wavenumbers of</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;* The OMS and AMS arrays are integer arrays which specify which wavenumbers of</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  the spectral decomposition will be used in respectively the ocean and the</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  atmosphere. Their shapes are oms(nboc,2) and ams(nbatm,2).</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;  atmosphere. Their shapes are OMS(NBOC,2) and AMS(NBATM,2).</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;* The first dimension specifies the number attributed by the user to the block and the second</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  dimension specifies the x and the y wavenumbers.</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;* The VDDG model, described in Vannitsem et al. (2015) is given as an example</div>
@@ -197,7 +197,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; * mean_field.dat : the mean field (the climatology)</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;The tangent linear and adjoint models of MAOOAM are provided in the</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="classmaooam__tl__ad.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Tensors definition module...">maooam_tl_ad</a> and <a class="code" href="classtl__ad__integrator.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Integrators module.">tl_ad_integrator</a> module. It is documented [here](./md_README_TL_AD.html).</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="classmaooam__tl__ad.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Tensors definition module...">maooam_tl_ad</a> and <a class="code" href="classtl__ad__integrator.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Integrators module.">tl_ad_integrator</a> module. It is documented [here](./md_tl_ad_doc.html).</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;------------------------------------------------------------------------</div>
@@ -239,7 +239,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 23 2016 14:24:16 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 24 2016 14:11:22 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

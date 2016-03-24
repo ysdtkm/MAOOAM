@@ -123,8 +123,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>The user first has to fill the params.nml and int_params.nml namelist files according to their needs.</p>
 <p>The modeselection.nml namelist can then be filled :</p>
 <ul>
-<li><a class="el" href="classparams.html#a54123b5a947703d21d0c882dec6780ac" title="Number of atmospheric blocks.">params::nboc</a> and <a class="el" href="classparams.html#aa5dc201b0a59d8bb25a5dc52d2ed3cac" title="Number of oceanic blocks.">params::nbatm</a> specify the number of blocks that will be used in respectively the ocean and the atmosphere. Each block corresponds to a given x and y wavenumber.</li>
-<li>The <a class="el" href="classparams.html#a5e25e072992d5908eea5308243b7ec63" title="Ocean mode selection array.">params::oms</a> and <a class="el" href="classparams.html#aa95299f1a9c54693b85e049004369089" title="Atmospheric mode selection array.">params::ams</a> arrays are integer arrays which specify which wavenumbers of the spectral decomposition will be used in respectively the ocean and the atmosphere. Their shapes are oms(nboc,2) and ams(nbatm,2).</li>
+<li>NBOC and NBATM specify the number of blocks that will be used in respectively the ocean and the atmosphere. Each block corresponds to a given x and y wavenumber.</li>
+<li>The OMS and AMS arrays are integer arrays which specify which wavenumbers of the spectral decomposition will be used in respectively the ocean and the atmosphere. Their shapes are OMS(NBOC,2) and AMS(NBATM,2).</li>
 <li>The first dimension specifies the number attributed by the user to the block and the second dimension specifies the x and the y wavenumbers.</li>
 <li>The VDDG model, described in Vannitsem et al. (2015) is given as an example in the archive.</li>
 <li>Note that the variables of the model are numbered according to the chosen order of the blocks.</li>
@@ -139,7 +139,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>evol_field.dat : the recorded time evolution of the variables.</li>
 <li>mean_field.dat : the mean field (the climatology)</li>
 </ul>
-<p>The tangent linear and adjoint models of MAOOAM are provided in the <a class="el" href="classmaooam__tl__ad.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Tensors definition module...">maooam_tl_ad</a> and <a class="el" href="classtl__ad__integrator.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Integrators module.">tl_ad_integrator</a> module. It is documented <a href="./md_README_TL_AD.html">here</a>. </p>
+<p>The tangent linear and adjoint models of MAOOAM are provided in the <a class="el" href="classmaooam__tl__ad.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Tensors definition module...">maooam_tl_ad</a> and <a class="el" href="classtl__ad__integrator.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Integrators module.">tl_ad_integrator</a> module. It is documented <a href="./md_tl_ad_doc.html">here</a>. </p>
 <hr/>
 <h2>Implementation notes</h2>
 <p>As the system of differential equations is at most bilinear in \(y_j\) ( \(j=1..n\)), \(\boldsymbol{y}\) being the array of variables, it can be expressed as a tensor contraction :</p>
@@ -162,7 +162,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 23 2016 14:24:17 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Mar 24 2016 14:11:23 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

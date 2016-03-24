@@ -74,11 +74,11 @@ A documentation is available [here](./doc/html/index.html) (html) and [here](./d
 The user first has to fill the params.nml and int_params.nml namelist files according to their needs.
 
 The modeselection.nml namelist can then be filled : 
-* params::nboc and params::nbatm specify the number of blocks that will be used in respectively the ocean and
+* NBOC and NBATM specify the number of blocks that will be used in respectively the ocean and
   the atmosphere. Each block corresponds to a given x and y wavenumber.
-* The params::oms and params::ams arrays are integer arrays which specify which wavenumbers of
+* The OMS and AMS arrays are integer arrays which specify which wavenumbers of
   the spectral decomposition will be used in respectively the ocean and the
-  atmosphere. Their shapes are oms(nboc,2) and ams(nbatm,2).
+  atmosphere. Their shapes are OMS(NBOC,2) and AMS(NBATM,2).
 * The first dimension specifies the number attributed by the user to the block and the second
   dimension specifies the x and the y wavenumbers.
 * The VDDG model, described in Vannitsem et al. (2015) is given as an example
@@ -106,7 +106,7 @@ It will generate two files :
  * mean_field.dat : the mean field (the climatology)
 
 The tangent linear and adjoint models of MAOOAM are provided in the
-maooam_tl_ad and tl_ad_integrator module. It is documented [here](./md_README_TL_AD.html).
+maooam_tl_ad and tl_ad_integrator modules. It is documented [here](./doc/md_tl_ad_doc.html).
 
 
 ------------------------------------------------------------------------
@@ -122,7 +122,7 @@ of an equation are summed over):
       i          i,j,k    j   k       0
 
 
-The tensor aotensor_def::aotensor is the tensor T that encodes the differential equations 
+The tensor T encodes the differential equations 
 is composed so that:
 
 * T[i][j][k] contains the contribution of dy[i]/dt proportional to y[j]*y[k].
@@ -131,11 +131,11 @@ contribution to var dy[i]/dt.
 * T[i][j][0] + T[i][0][j] is the contribution to  dy[i]/dt which is linear in
 y[j].
 
-Ideally, the tensor aotensor_def::aotensor is composed as an upper triangular matrix 
+Ideally, the tensor is composed as an upper triangular matrix 
 (in the last two coordinates).
 
-The tensor for this model is composed in aotensor_def and uses the
-inner products defined in inprod_analytic .
+The tensor for this model is composed in the aotensor_def module and uses the
+inner products defined in the inprod_analytic module.
 
 
 ------------------------------------------------------------------------
