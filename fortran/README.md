@@ -106,7 +106,7 @@ It will generate two files :
  * mean_field.dat : the mean field (the climatology)
 
 The tangent linear and adjoint models of MAOOAM are provided in the
-maooam_tl_ad and tl_ad_integrator modules. It is documented [here](./doc/md_tl_ad_doc.html).
+maooam_tl_ad and tl_ad_integrator modules. It is documented [here](./doc/html/md_tl_ad_doc.html).
 
 
 ------------------------------------------------------------------------
