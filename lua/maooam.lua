@@ -27,10 +27,7 @@ local n
 do
   local inprod = require("inprod_analytic")
   n = inprod.natm*2+inprod.noc*2 + 1
-  if require("write_IC")(inprod) then
-    print("Wrote template in IC.lua.\nWrote translation table in translation.txt.")
-    os.exit(1)
-  end
+  require("write_IC")(inprod)
 end
 
 -- Utilities
@@ -60,7 +57,10 @@ local function write(firstcol,y,f,fmt)
   f:write("\n")
 end
 
+local clock0, clockprev = os.clock(), os.clock()
+local walltime = check_number(params.i.walltime,"walltime")
 -- Take a full-precision snapshot of the current state (y) and statistics (stats)
+-- Return false when time's up.
 local function take_snapshot(t,y,f,stats)
   write(t,y,f," \t%13a")
   if stats then
@@ -69,6 +69,15 @@ local function take_snapshot(t,y,f,stats)
     fprintf(f,"%13a\n",stats.iter())
   end
   f:flush()
+  -- We still have time if walltime is still more than clockstep(+10%) away
+  if walltime then
+    local clock = os.clock()
+    local clockstep = clock - clockprev
+    clockprev = clock
+    return clock - clock0 + clockstep*1.5 < walltime
+  else
+    return true
+  end
 end
 
 local function close(f) if f and f~=io.stdout then f:close() end end
@@ -102,6 +111,9 @@ end
 -- Check some input values.
 local writeout = check_number(params.i.writeout,"writeout")
 local snapshot = check_number(params.i.snapshot,"snapshot")
+if walltime then
+  assert(snapshot,"If a walltime is defined, you must also specify the snapshot interval. Please edit your parameters.")
+end
 local statistics = check_number(params.i.statistics,"statistics")
 local st = statistics and require("stat")(n) -- statistics object
 
@@ -176,7 +188,13 @@ logf = logf or io.stdout
 -- Perform integration (and write out).
 for t=t_init,params.i.t_run,dt do
   if snapshot   and t%snapshot<dt then
-    take_snapshot(t+params.i.t_trans,y,snapf,st)
+    -- take_snapshot returns false if our walltime is up.
+    if not take_snapshot(t+params.i.t_trans,y,snapf,st) then
+      close(logf)
+      close(snapf)
+      io.write("- Clean exit due to walltime restrictions.\n")
+      os.exit(0)
+    end
   end
   if writeout   and t%writeout<dt then write(t,y,logf) end
   if statistics and t%statistics<dt then st.acc(y) end

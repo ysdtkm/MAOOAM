@@ -1,0 +1,188 @@
+\hypertarget{namespacerk2__integrator}{}\section{rk2\+\_\+integrator Module Reference}
+\label{namespacerk2__integrator}\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+
+
+Module with the integration routines.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__integrator_a82d35c2f4ef4a10f35b0293c8f846132}{init\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Routine to initialise the integration buffers. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__integrator_ab40d193bfee2f2187e1377b7656bd402}{tendencies} (t, y, res)
+\begin{DoxyCompactList}\small\item\em Routine computing the tendencies of the model. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__integrator_ac8a46245e033c195251cc4b8d75bb142}{step} (y, t, dt, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm). The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__integrator_a98d912c809a9e6c8026d24d5a45133cd}{buf\+\_\+y1}
+\begin{DoxyCompactList}\small\item\em Buffer to hold the intermediate position (Heun algorithm) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__integrator_a12b35624818b9bf5056c780ec5c26737}{buf\+\_\+f0}
+\begin{DoxyCompactList}\small\item\em Buffer to hold tendencies at the initial position. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__integrator_afdb406bf396c40211c9fd440183f0971}{buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Buffer to hold tendencies at the intermediate position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module with the integration routines. 
+
+\begin{DoxyCopyright}{Copyright}
+2015 Lesley De Cruz \& Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+This module actually contains the Heun algorithm routines. The user can modify it according to its preferred integration scheme. For higher-\/order schemes, additional buffers will probably have to be defined. 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!init\+\_\+integrator@{init\+\_\+integrator}}
+\index{init\+\_\+integrator@{init\+\_\+integrator}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{init\+\_\+integrator}{init_integrator}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+integrator\+::init\+\_\+integrator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__integrator_a82d35c2f4ef4a10f35b0293c8f846132}{}\label{namespacerk2__integrator_a82d35c2f4ef4a10f35b0293c8f846132}
+
+
+Routine to initialise the integration buffers. 
+
+
+
+Definition at line 37 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+37     \textcolor{keywordtype}{INTEGER} :: allocstat
+38     \textcolor{keyword}{ALLOCATE}(buf\_y1(0:ndim),buf\_f0(0:ndim),buf\_f1(0:ndim) ,\hyperlink{namespacestat}{stat}=allocstat)
+39     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+\end{DoxyCode}
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!step@{step}}
+\index{step@{step}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{step(y, t, dt, res)}{step(y, t, dt, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+integrator\+::step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), intent(inout)}]{t, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__integrator_ac8a46245e033c195251cc4b8d75bb142}{}\label{namespacerk2__integrator_ac8a46245e033c195251cc4b8d75bb142}
+
+
+Routine to perform an integration step (Heun algorithm). The incremented time is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Initial point. \\
+\hline
+{\em t} & Actual integration time \\
+\hline
+{\em dt} & Integration timestep. \\
+\hline
+{\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 61 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+61     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+62     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+63     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt
+64     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+65     
+66     \textcolor{keyword}{CALL }tendencies(t,y,buf\_f0)
+67     buf\_y1 = y+dt*buf\_f0
+68     \textcolor{keyword}{CALL }tendencies(t+dt,buf\_y1,buf\_f1)
+69     res=y+0.5*(buf\_f0+buf\_f1)*dt
+70     t=t+dt
+\end{DoxyCode}
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!tendencies@{tendencies}}
+\index{tendencies@{tendencies}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{tendencies(t, y, res)}{tendencies(t, y, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine rk2\+\_\+integrator\+::tendencies (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{t, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__integrator_ab40d193bfee2f2187e1377b7656bd402}{}\label{namespacerk2__integrator_ab40d193bfee2f2187e1377b7656bd402}
+
+
+Routine computing the tendencies of the model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & Time at which the tendencies have to be computed. Actually not needed for autonomous systems. \\
+\hline
+{\em y} & Point at which the tendencies have to be computed. \\
+\hline
+{\em res} & vector to store the result. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+Note that it is N\+OT safe to pass {\ttfamily y} as a result buffer, as this operation does multiple passes. 
+\end{DoxyRemark}
+
+
+Definition at line 49 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+49     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
+50     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+51     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+52     \textcolor{keyword}{CALL }sparse\_mul3(aotensor, y, y, res)
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!buf\+\_\+f0@{buf\+\_\+f0}}
+\index{buf\+\_\+f0@{buf\+\_\+f0}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f0}{buf_f0}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+integrator\+::buf\+\_\+f0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__integrator_a12b35624818b9bf5056c780ec5c26737}{}\label{namespacerk2__integrator_a12b35624818b9bf5056c780ec5c26737}
+
+
+Buffer to hold tendencies at the initial position. 
+
+
+
+Definition at line 28 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+28   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_f0\textcolor{comment}{ !< Buffer to hold tendencies at the initial position}
+\end{DoxyCode}
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!buf\+\_\+f1@{buf\+\_\+f1}}
+\index{buf\+\_\+f1@{buf\+\_\+f1}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f1}{buf_f1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+integrator\+::buf\+\_\+f1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__integrator_afdb406bf396c40211c9fd440183f0971}{}\label{namespacerk2__integrator_afdb406bf396c40211c9fd440183f0971}
+
+
+Buffer to hold tendencies at the intermediate position. 
+
+
+
+Definition at line 29 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+29   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_f1\textcolor{comment}{ !< Buffer to hold tendencies at the intermediate
+       position}
+\end{DoxyCode}
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!buf\+\_\+y1@{buf\+\_\+y1}}
+\index{buf\+\_\+y1@{buf\+\_\+y1}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+y1}{buf_y1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+integrator\+::buf\+\_\+y1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__integrator_a98d912c809a9e6c8026d24d5a45133cd}{}\label{namespacerk2__integrator_a98d912c809a9e6c8026d24d5a45133cd}
+
+
+Buffer to hold the intermediate position (Heun algorithm) 
+
+
+
+Definition at line 27 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+27   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_y1\textcolor{comment}{ !< Buffer to hold the intermediate position (Heun
+       algorithm)}
+\end{DoxyCode}

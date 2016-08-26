@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1><img style='margin:auto' alt='MAOOAM' src='https://raw.githubusercontent.com/Climdyn/MAOOAM/master/fortran/doc/MAOOAM_small.png' /></h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/maooam.html">maooam</a></li>
+  <li><a href="../modules/ao_mpi.html">ao_mpi</a></li>
+  <li><a href="../modules/tl_ad_tensor.html">tl_ad_tensor</a></li>
+  <li><a href="../modules/params.html">params</a></li>
+  <li><a href="../modules/modeselection.html">modeselection</a></li>
+  <li><a href="../modules/aotensor.html">aotensor</a></li>
+  <li><a href="../modules/inprod_analytic.html">inprod_analytic</a></li>
+  <li><a href="../modules/write_IC.html">write_IC</a></li>
+  <li><a href="../modules/restore.html">restore</a></li>
+  <li><a href="../modules/array.html">array</a></li>
+  <li><a href="../modules/tensor.html">tensor</a></li>
+  <li><a href="../modules/rk2.html">rk2</a></li>
+  <li><a href="../modules/rk4.html">rk4</a></li>
+  <li><strong>rk4_tl_ad</strong></li>
+  <li><a href="../modules/stat.html">stat</a></li>
+  <li><a href="../modules/rand.html">rand</a></li>
+  <li><a href="../modules/gz.html">gz</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+  <li><a href="../topics/TL_AD.md.html">TL_AD</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>rk4_tl_ad</code></h1>
+<p>A classical fourth order Runge-Kutta scheme for the TL/AD model.</p>
+<p>
+<p>
+ Butcher tableau:</p>
+
+
+<pre>
+<span class="number">0</span>   |
+<span class="number">1</span>/<span class="number">2</span> | <span class="number">1</span>/<span class="number">2</span>
+<span class="number">1</span>/<span class="number">2</span> | <span class="number">0</span>    <span class="number">1</span>/<span class="number">2</span>
+<span class="number">1</span>   | <span class="number">0</span>    <span class="number">0</span>    <span class="number">1</span>
+    +<span class="comment">-------------------
+</span>      <span class="number">1</span>/<span class="number">6</span>  <span class="number">1</span>/<span class="number">3</span>  <span class="number">1</span>/<span class="number">3</span>  <span class="number">1</span>/<span class="number">6</span>
+</pre>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#rk4_tl_ad">rk4_tl_ad (n)</a></td>
+	<td class="summary">Create a TL/AD integrator for n-arrays.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#integrator">integrator (y, deltay, f, f_tl, t, dt, ynew, deltaynew)</a></td>
+	<td class="summary">Integrator for n-arrays</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "rk4_tl_ad"></a>
+    <strong>rk4_tl_ad (n)</strong>
+    </dt>
+    <dd>
+    Create a TL/AD integrator for n-arrays.
+ y is also evolved to calculate the correct TL.
+ Note that the function <code>f_tl</code> has more arguments than a regular integrator.
+ You need to pass both has both the trajectory y (also ystar) and the
+ perturbation deltay:
+ <code>f_tl(t,y,deltay,buf)</code> instead of <code>f(t,y,buf)</code>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         number of variables (length of the array)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Integrator for n-arrays
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "integrator"></a>
+    <strong>integrator (y, deltay, f, f_tl, t, dt, ynew, deltaynew)</strong>
+    </dt>
+    <dd>
+    Integrator for n-arrays
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">y</span>
+         variables at time t
+        </li>
+        <li><span class="parameter">deltay</span>
+         perturbation at time t
+        </li>
+        <li><span class="parameter">f</span>
+         function to calculate the time derivatives of the variables
+        </li>
+        <li><span class="parameter">f_tl</span>
+         function to calculate the time derivatives of the tangent linear model
+        </li>
+        <li><span class="parameter">t</span>
+         time
+        </li>
+        <li><span class="parameter">dt</span>
+         time integration step
+        </li>
+        <li><span class="parameter">ynew</span>
+         n-array (buffer) to store the new y value
+        </li>
+        <li><span class="parameter">deltaynew</span>
+         n-array (buffer) to store the new perturbation value
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        t+dt (incremented time)</li>
+        <li>
+        ynew array with variables at time t+dt</li>
+        <li>
+        deltaynew array with perturbation at time t+dt</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2016-08-26 13:45:56 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

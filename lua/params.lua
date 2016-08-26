@@ -20,6 +20,8 @@ local i = {
   statistics = 10, -- accumulate statistics every 'statistics' time units
   compression = true, -- compress output of trajectory (if writeout == true)
   snapshot = 1e4, -- write out state every 'snapshot' time units (false = no writeout)
+  walltime = 3600*48, -- run a timer for 'walltime' seconds and exit cleanly when reached.
+  -- randomseed = 12345, -- seed for the random generator (integer)
   integrator = "rk2", -- numerical integration scheme, e.g. "rk2" or "rk4"
 }
 
@@ -77,6 +79,9 @@ m.sBpo = 4*m.sB*m.To0^3 / (m.Go*m.f0) -- long wave radiation lost by ocean to at
 m.sBpa = 8*m.epsa*m.sB*m.Ta0^3 / (m.Go*m.f0) -- long wave radiation from atmosphere absorbed by ocean
 m.SBpo = 2*m.epsa*m.sB*m.To0^3 / (m.Ga*m.f0) -- long wave radiation from ocean absorbed by atmosphere
 m.SBpa = 8*m.epsa*m.sB*m.Ta0^3 / (m.Ga*m.f0) -- long wave radiation lost by atmosphere to space & ocean
+
+-- set random seed
+require("rand").setrandomseed(i.randomseed, true) -- verbose
 
 --- Generator for output file name
 -- Adapt this function if you want to have a custom file name (e.g. if you want

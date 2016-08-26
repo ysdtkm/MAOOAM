@@ -1,0 +1,25 @@
+\hypertarget{rk4__tl__ad__integrator_8f90}{}\section{rk4\+\_\+tl\+\_\+ad\+\_\+integrator.\+f90 File Reference}
+\label{rk4__tl__ad__integrator_8f90}\index{rk4\+\_\+tl\+\_\+ad\+\_\+integrator.\+f90@{rk4\+\_\+tl\+\_\+ad\+\_\+integrator.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacerk4__tl__ad__integrator}{rk4\+\_\+tl\+\_\+ad\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Tangent Linear (TL) and Adjoint (AD) model versions of M\+A\+O\+O\+AM. Integrators module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk4__tl__ad__integrator_aa219595db79d201625e347d3db633a6f}{rk4\+\_\+tl\+\_\+ad\+\_\+integrator\+::init\+\_\+tl\+\_\+ad\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Routine to initialise the T\+L-\/\+AD integration bufers. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk4__tl__ad__integrator_a72dadb6500707116e5864c89343dcae0}{rk4\+\_\+tl\+\_\+ad\+\_\+integrator\+::ad\+\_\+step} (y, ystar, t, dt, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (R\+K4 algorithm) of the adjoint model. The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk4__tl__ad__integrator_a029c30f23bfe421a13788e75cc03b8d3}{rk4\+\_\+tl\+\_\+ad\+\_\+integrator\+::tl\+\_\+step} (y, ystar, t, dt, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (R\+K4 algorithm) of the tangent linear model. The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk4__tl__ad__integrator_a7a8fd6a2de598bb23bef4d88ddadbed2}{rk4\+\_\+tl\+\_\+ad\+\_\+integrator\+::buf\+\_\+y1}
+\begin{DoxyCompactList}\small\item\em Buffer to hold the intermediate position of the tangent linear model. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk4__tl__ad__integrator_a076c0ff20536d9911a40c81565a0ba25}{rk4\+\_\+tl\+\_\+ad\+\_\+integrator\+::buf\+\_\+ka}
+\begin{DoxyCompactList}\small\item\em Buffer to hold tendencies in the R\+K4 scheme for the tangent linear model. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk4__tl__ad__integrator_aed1e8c65a9882bdc18b4634fee0656f1}{rk4\+\_\+tl\+\_\+ad\+\_\+integrator\+::buf\+\_\+kb}
+\begin{DoxyCompactList}\small\item\em Buffer to hold tendencies in the R\+K4 scheme for the tangent linear model. \end{DoxyCompactList}\end{DoxyCompactItemize}
