@@ -1,6 +1,5 @@
 #  Modular arbitrary-order ocean-atmosphere model: The Tangent Linear and Adjoint model #
 
-
 ## Description : ##
 
  The Tangent Linear and Adjoint model model are implemented in the same way as the nonlinear model, with a tensor storing the different terms. The Tangent Linear (TL) tensor \f$\mathcal{T}_{i,j,k}^{TD}\f$ is defined as:
@@ -23,4 +22,4 @@ where \f$\boldsymbol{y}^{\ast}\f$ is the point where the Tangent model is define
 
 ## Implementation : ##
 
-The two tensors are implemented in the module maooam_tl_ad and must be initialized (after calling params::init_params and aotensor_def::aotensor) by calling maooam_tl_ad::init_tltensor() and maooam_tl_ad::init_adtensor(). The tendencies are then given by the routine tl(t,ystar,deltay,buf) and ad(t,ystar,deltay,buf). An integrator with the Heun method is available in the module tl_ad_maooam. An example on how to use it can be found in the test file test_tl_ad.f90
+The two tensors are implemented in the module tl_ad_tensor and must be initialized (after calling params::init_params and aotensor_def::aotensor) by calling tl_ad_tensor::init_tltensor() and tl_ad_tensor::init_adtensor(). The tendencies are then given by the routine tl(t,ystar,deltay,buf) and ad(t,ystar,deltay,buf). An integrator with the Heun method is available in the module rk2_tl_ad_integrator and a fourth-order Runge-Kutta integrator in rk4_tl_ad_integrator. An example on how to use it can be found in the test file test_tl_ad.f90

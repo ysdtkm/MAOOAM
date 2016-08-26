@@ -24,7 +24,7 @@
 
 <div id="navigation">
 <br/>
-<h1>MAOOAM</h1>
+<h1><img style='margin:auto' alt='MAOOAM' src='https://raw.githubusercontent.com/Climdyn/MAOOAM/master/fortran/doc/MAOOAM_small.png' /></h1>
 
 <ul>
   <li><a href="../index.html">Index</a></li>
@@ -32,31 +32,37 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#About">About </a></li>
-<li><a href="#Usage">Usage </a></li>
-<li><a href="#Implementation_notes">Implementation notes </a></li>
+<li><a href="#About">About</a></li>
+<li><a href="#Installation">Installation</a></li>
+<li><a href="#Description_of_the_files">Description of the files</a></li>
+<li><a href="#Usage">Usage</a></li>
+<li><a href="#Implementation_notes">Implementation notes</a></li>
 </ul>
 
 
 <h2>Topics</h2>
 <ul class="">
   <li><strong>README</strong></li>
+  <li><a href="../topics/TL_AD.md.html">TL_AD</a></li>
 </ul>
 <h2>Modules</h2>
 <ul class="nowrap">
   <li><a href="../modules/maooam.html">maooam</a></li>
-  <li><a href="../modules/maooam_tl_ad.html">maooam_tl_ad</a></li>
-  <li><a href="../modules/aotensor.html">aotensor</a></li>
-  <li><a href="../modules/array.html">array</a></li>
-  <li><a href="../modules/inprod_analytic.html">inprod_analytic</a></li>
-  <li><a href="../modules/restore.html">restore</a></li>
-  <li><a href="../modules/rk2.html">rk2</a></li>
-  <li><a href="../modules/stat.html">stat</a></li>
-  <li><a href="../modules/tensor.html">tensor</a></li>
-  <li><a href="../modules/gz.html">gz</a></li>
-  <li><a href="../modules/rk4.html">rk4</a></li>
+  <li><a href="../modules/tl_ad_tensor.html">tl_ad_tensor</a></li>
   <li><a href="../modules/params.html">params</a></li>
   <li><a href="../modules/modeselection.html">modeselection</a></li>
+  <li><a href="../modules/aotensor.html">aotensor</a></li>
+  <li><a href="../modules/inprod_analytic.html">inprod_analytic</a></li>
+  <li><a href="../modules/write_IC.html">write_IC</a></li>
+  <li><a href="../modules/restore.html">restore</a></li>
+  <li><a href="../modules/array.html">array</a></li>
+  <li><a href="../modules/tensor.html">tensor</a></li>
+  <li><a href="../modules/rk2.html">rk2</a></li>
+  <li><a href="../modules/rk4.html">rk4</a></li>
+  <li><a href="../modules/rk4_tl_ad.html">rk4_tl_ad</a></li>
+  <li><a href="../modules/stat.html">stat</a></li>
+  <li><a href="../modules/rand.html">rand</a></li>
+  <li><a href="../modules/gz.html">gz</a></li>
 </ul>
 
 </div>
@@ -78,9 +84,9 @@
 <p>This software is provided as supplementary material with:</p>
 
 <ul>
-    <li>De Cruz, L., Demaeyer, J. and Vannitsem, S.: A modular arbitrary-order
-    ocean-atmosphere model: MAOOAM, Geosci. Model Dev. Discuss.,
-    <a href="http://dx.doi.org/xx/xxx">doi:xx/xxx</a>, 2016.</li>
+    <li>De Cruz, L., Demaeyer, J. and Vannitsem, S.: The Modular Arbitrary-Order
+    Ocean-Atmosphere Model: MAOOAM v1.0, Geosci. Model Dev., 9, 2793-2808,
+    <a href="http://dx.doi.org/10.5194/gmd-9-2793-2016">doi:10.5194/gmd-9-2793-2016</a>, 2016.</li>
 </ul>
 
 <p><strong>Please cite this article if you use (a part of) this software for a
@@ -90,9 +96,59 @@ publication.</strong></p>
 your paper to <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;l&#101;&#x73;&#108;&#x65;&#121;&#x2e;&#100;&#x65;c&#114;&#x75;&#122;&#x40;&#109;&#x65;&#116;&#x65;&#111;&#x2e;b&#101;">&#x6c;&#101;&#x73;&#108;&#x65;&#121;&#x2e;d&#101;&#x63;&#114;&#x75;&#122;&#x40;&#109;&#x65;t&#101;&#x6f;&#46;&#x62;&#101;</a>, <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;j&#111;&#x6e;&#97;&#x74;&#104;&#x61;&#110;&#x2e;d&#101;&#x6d;&#97;&#x65;&#121;&#x65;&#114;&#x40;&#109;&#x65;t&#101;&#x6f;&#46;&#x62;&#101;">&#x6a;&#111;&#x6e;&#97;&#x74;&#104;&#x61;n&#46;&#x64;&#101;&#x6d;&#97;&#x65;&#121;&#x65;r&#64;&#x6d;&#101;&#x74;&#101;&#x6f;&#46;&#x62;&#101;</a> and
 <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;s&#118;&#x6e;&#64;&#x6d;&#101;&#x74;&#101;&#x6f;.&#98;&#x65;">&#x73;&#118;&#x6e;&#64;&#x6d;&#101;&#x74;e&#111;&#x2e;&#98;&#x65;</a>. </p>
 
-<p>Consult the MAOOAM code repository at <a href="http://dx.doi.org/yy/yyy">doi:yy/yyy</a>
+<p>Consult the MAOOAM <a href="http://www.github.com/Climdyn/MAOOAM">code repository</a>
 for updates, and <a href="http://climdyn.meteo.be">our website</a> for additional
 resources.</p>
+
+<hr/>
+
+<p><a name="Installation"></a></p>
+<h2>Installation</h2>
+
+<p>Unpack the archive in a folder. There is no compilation required to run the
+model once you have LuaJIT. </p>
+
+<p>Installation instructions for LuaJIT can be found on the <a href="http://luajit.org/install.html">LuaJIT
+website</a>. In short, you can install it with the
+following commands (on Linux):</p>
+
+<pre><code> git clone http://luajit.org/git/luajit-2.0.git
+ cd luajit-2.0
+ make &amp;&amp; sudo make install
+</code></pre>
+
+
+<hr/>
+
+<p><a name="Description_of_the_files"></a></p>
+<h2>Description of the files</h2>
+
+<p>The model tendencies are represented through a tensor called aotensor which
+includes all the coefficients. This tensor is computed once at the program
+initialization.</p>
+
+<ul>
+    <li><code>maooam.lua</code> : Main program.</li>
+    <li><code>aotensor.lua</code> : Tensor aotensor computation module.</li>
+    <li><code>inprod_analytic.lua</code> : Inner products computation module.</li>
+    <li><code>restore.lua</code> : Function to restore a previous model state.</li>
+    <li><code>write_IC.lua</code> : Function to write an initial condition template.</li>
+    <li><code>array.lua</code> : Module for arrays and their mathematical operations.</li>
+    <li><code>rk2.lua</code> : Module with the Heun (second order Runge-Kutta) ODE integrator.</li>
+    <li><code>rk4.lua</code> : Module with the fourth-order Runge-Kutta integrator.</li>
+    <li><code>tensor.lua</code> : Sparse tensor tools.</li>
+    <li><code>gz.lua</code> : Module with basic bindings to zlib.</li>
+    <li><code>stat.lua</code> : A module for statistic accumulation.</li>
+    <li><code>tl_ad_tensor.lua</code> : Module which defines the Tangent Linear and Adjoint models.</li>
+    <li><a href="../topics/README.md.html#">README.md</a> : The present file.</li>
+    <li><a href="../topics/TL_AD.md.html#">TL_AD.md</a> : Information on the tangent linear and adjoint models.</li>
+    <li><code>LICENSE.txt</code> : The license text of the program.</li>
+    <li><code>params.lua</code> : A configuration file to specify the integration and model parameters.</li>
+    <li><code>modeselection.lua</code> : A configuration file to specify which spectral decomposition will be used.</li>
+    <li><code>test_inprod_analytic.lua</code> : Program to write out the inner products. For testing purposes.</li>
+    <li><code>test_aotensor.lua</code> : Program to write out the inner products. For testing purposes.</li>
+    <li><code>test_tl_ad.lua</code> : Program which tests the Tangent Linear and Adjoint models.</li>
+</ul>
 
 <hr/>
 
@@ -106,7 +162,7 @@ included in the file <a href="../modules/modeselection.html#">modeselection.lua<
 
 <p>The initial conditions for each of the variables are defined in IC.lua.
 To obtain an example of this file corresponding to the model you have defined
-in {modeselection|modeselection.lua}, simply delete the current IC.lua file (if
+in <a href="../modules/modeselection.html#">modeselection.lua</a>, simply delete the current IC.lua file (if
 it exists) and run the program. It will generate a new one and exit. Just fill
 the newly generated one.</p>
 
@@ -127,7 +183,8 @@ luajit.exe maooam.lua
 <ul>
     <li><code>output_maooam_meanfields.txt</code> : the <a href="../modules/stat.html#">mean and variance</a> (climatology) of the variables</li>
     <li><code>output_maooam_snapshot.txt</code> : snapshots of the dynamical state of the model</li>
-    <li><code>output_maooam_trajectory.txt_NNNN.gz</code> : the recorded time evolution of the variables; gzipped.</li>
+    <li><code>output_maooam_trajectory.txt_NNNN.gz</code> : the recorded time evolution of the
+    variables (gzipped if compression is enabled).</li>
 </ul>
 
 <p>To continue a previous run, use the "continue" argument:</p>
@@ -137,7 +194,7 @@ luajit maooam.lua continue
 </pre>
 
 <p>The tangent linear and adjoint models of MAOOAM are provided in
-<a href="../modules/maooam_tl_ad.html#">maooam_tl_ad.lua</a>.</p>
+<a href="../modules/tl_ad_tensor.html#">tl_ad_tensor.lua</a>.</p>
 
 <p>The LuaJIT source code can be obtained <a href="http://luajit.org/download.html">here</a>.</p>
 
@@ -146,7 +203,7 @@ luajit maooam.lua continue
 <p><a name="Implementation_notes"></a></p>
 <h2>Implementation notes</h2>
 
-<p>As the system of differential equations is at most bilinear in y[j] (j=1..n), y
+<p>As the system of differential equations is at most bilinear in <code>y[j] (j=1..n)</code>, <code>y</code>
 being the <a href="../modules/array.html#">array</a> of variables, it can be expressed as a <a href="../modules/tensor.html#">tensor</a> contraction
 (written using Einstein convention, i.e. indices that occur twice on one side
 of an equation are summed over):</p>
@@ -160,11 +217,11 @@ dy  / dt =  T        y   y      (y  == <span class="number">1</span>)
 <p>The tensor T that encodes the differential equations is composed so that:</p>
 
 <ul>
-    <li>T[i][j][k] contains the contribution of dy[i]/dt proportional to y[j]*y[k].</li>
-    <li>Furthermore, y[0] is always equal to 1, so that T[i][0][0] is the constant
-    contribution to var dy[i]/dt.</li>
-    <li>T[i][j][0] + T[i][0][j] is the contribution to  dy[i]/dt which is linear in
-    y[j].</li>
+    <li><code>T[i][j][k]</code> contains the contribution of <code>dy[i]/dt</code> proportional to <code>y[j]*y[k]</code>.</li>
+    <li>Furthermore, <code>y[0]</code> is always equal to 1, so that <code>T[i][0][0]</code> is the constant
+    contribution to var <code>dy[i]/dt</code>.</li>
+    <li><code>T[i][j][0] + T[i][0][j]</code> is the contribution to <code>dy[i]/dt</code> which is linear in
+    <code>y[j]</code>.</li>
 </ul>
 
 <p>Ideally, the tensor is composed as an upper triangular matrix (in the last two
@@ -178,8 +235,8 @@ inner products defined in <a href="../modules/inprod_analytic.html#">inprod_anal
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-03-11 15:53:17 </i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.5</a></i>
+<i style="float:right;">Last updated 2016-08-26 11:43:04 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
