@@ -7,6 +7,6 @@ var searchData=
   ['ad_5fadd_5fcount_5fref',['ad_add_count_ref',['../namespacetl__ad__tensor.html#a3c0b4e0e1f18a0f85b874542b76cfa8a',1,'tl_ad_tensor']]],
   ['ad_5fcoeff',['ad_coeff',['../namespacetl__ad__tensor.html#a177e8f1ebac5de029f565ef7624926f2',1,'tl_ad_tensor']]],
   ['ad_5fcoeff_5fref',['ad_coeff_ref',['../namespacetl__ad__tensor.html#aef0157a16688323e3c855ef451d6948f',1,'tl_ad_tensor']]],
-  ['ad_5fstep',['ad_step',['../namespacerk2__tl__ad__integrator.html#a2f42368825b617949c823d8bac3cac81',1,'rk2_tl_ad_integrator::ad_step()'],['../namespacerk4__tl__ad__integrator.html#a72dadb6500707116e5864c89343dcae0',1,'rk4_tl_ad_integrator::ad_step()']]],
+  ['ad_5fstep',['ad_step',['../namespacetl__ad__integrator.html#a708ece5eac01486e65e889d19073fd19',1,'tl_ad_integrator']]],
   ['add_5fcount',['add_count',['../namespaceaotensor__def.html#ac8104c190904681c1fd27eec036114aa',1,'aotensor_def']]]
 ];

@@ -1,5 +1,5 @@
 
-! rk2_tl_ad_integrator.f90
+! tl_ad_integrator.f90
 !
 !> Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM.
 !> Integrators module.
@@ -19,7 +19,7 @@
 
 
 
-MODULE rk2_tl_ad_integrator
+MODULE tl_ad_integrator
 
   USE params, only: ndim
   USE tl_ad_tensor, only: ad,tl
@@ -96,4 +96,4 @@ CONTAINS
   END SUBROUTINE tl_step
 
   
-END MODULE rk2_tl_ad_integrator
+END MODULE tl_ad_integrator

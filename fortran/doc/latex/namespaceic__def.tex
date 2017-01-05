@@ -94,71 +94,72 @@ Definition at line 32 of file ic\+\_\+def.\+f90.
 78          \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'read'})
 79            \textcolor{keyword}{CALL }init\_random\_seed()
 80            \textcolor{keyword}{CALL }random\_seed(get=seed)
-81            \textcolor{comment}{!nothing has to be done IC has already the right values}
-82            \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** IC.nml namelist written. Starting with initial condition in IC.nml !***"}
-83 \textcolor{keywordflow}{       END SELECT}
-84     \textcolor{keywordflow}{ELSE}
-85        \textcolor{keyword}{CALL }init\_random\_seed()
-86        \textcolor{keyword}{CALL }random\_seed(get=seed)
-87        ic=0
-88        ic(0)=1.0d0
-89        init\_type=\textcolor{stringliteral}{"zero"}
-90        size\_of\_random\_noise=0.d0
-91        \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** IC.nml namelist written. Starting with 0 as initial condition !***"}
-92 \textcolor{keywordflow}{    END IF}
-93     \textcolor{keyword}{OPEN}(8, file=\textcolor{stringliteral}{"IC.nml"}, status=\textcolor{stringliteral}{'REPLACE'})
-94     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
-95     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Namelist file :                                                              !"}
-96     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Initial condition.                                                           !"}
-97     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
-98     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
-99     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&ICLIST"}
-100     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! psi variables"}
-101     \textcolor{keywordflow}{DO} i=1,natm
-102        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i))//\textcolor{stringliteral}{") = "},ic(i),\textcolor{stringliteral}{"   ! typ= "}&
-103             &//awavenum(i)%typ//\textcolor{stringliteral}{", Nx= "}//trim(rstr(awavenum(i)&
-104             &%Nx,fm))//\textcolor{stringliteral}{", Ny= "}//trim(rstr(awavenum(i)%Ny,fm))
-105 \textcolor{keywordflow}{    END DO}
-106     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! theta variables"}
-107     \textcolor{keywordflow}{DO} i=1,natm
-108        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+natm))//\textcolor{stringliteral}{") = "},ic(i+natm),\textcolor{stringliteral}{"   ! typ= "}&
-109             &//awavenum(i)%typ//\textcolor{stringliteral}{", Nx= "}//trim(rstr(awavenum(i)&
-110             &%Nx,fm))//\textcolor{stringliteral}{", Ny= "}//trim(rstr(awavenum(i)%Ny,fm))
-111 \textcolor{keywordflow}{    END DO}
-112 
-113     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! A variables"}
-114     \textcolor{keywordflow}{DO} i=1,noc
-115        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+2*natm))//\textcolor{stringliteral}{") = "},ic(i+2*natm),\textcolor{stringliteral}{"   ! Nx&}
-116 \textcolor{stringliteral}{}\textcolor{stringliteral}{            &= "}//trim(rstr(owavenum(i)%Nx,fm))//\textcolor{stringliteral}{", Ny= "}&
-117             &//trim(rstr(owavenum(i)%Ny,fm))
-118 \textcolor{keywordflow}{    END DO}
-119     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! T variables"}
-120     \textcolor{keywordflow}{DO} i=1,noc
-121        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+noc+2*natm))//\textcolor{stringliteral}{") = "},ic(i+2*natm+noc),\textcolor{stringliteral}{"   &}
-122 \textcolor{stringliteral}{}\textcolor{stringliteral}{            &! Nx= "}//trim(rstr(owavenum(i)%Nx,fm))//\textcolor{stringliteral}{", Ny= "}&
-123             &//trim(rstr(owavenum(i)%Ny,fm))
-124 \textcolor{keywordflow}{    END DO}
-125 
-126     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&END"}
-127     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
-128     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
-129     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Initialisation type.                                                         !"}
-130     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
-131     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! type = 'read': use IC above (will generate a new seed);"}
-132     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'rand': random state (will generate a new seed);"}
-133     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'zero': zero IC (will generate a new seed);"}
-134     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'seed': use the seed below (generate the same IC)"}
-135     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
-136     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&RAND"}
-137     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"  init\_type= '"}//init\_type//\textcolor{stringliteral}{"'"} 
-138     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a,d15.7)'}) \textcolor{stringliteral}{"  size\_of\_random\_noise = "},size\_of\_random\_noise
-139     \textcolor{keywordflow}{DO} i=1,j
-140        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" seed("}//trim(str(i))//\textcolor{stringliteral}{") = "},seed(i)
-141 \textcolor{keywordflow}{    END DO}
-142     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&END"}
-143     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
-144     \textcolor{keyword}{CLOSE}(8)
-145     
+81            ic(0)=1.0d0
+82            \textcolor{comment}{! except IC(0), nothing has to be done IC has already the right values}
+83            \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** IC.nml namelist written. Starting with initial condition in IC.nml !***"}
+84 \textcolor{keywordflow}{       END SELECT}
+85     \textcolor{keywordflow}{ELSE}
+86        \textcolor{keyword}{CALL }init\_random\_seed()
+87        \textcolor{keyword}{CALL }random\_seed(get=seed)
+88        ic=0
+89        ic(0)=1.0d0
+90        init\_type=\textcolor{stringliteral}{"zero"}
+91        size\_of\_random\_noise=0.d0
+92        \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** IC.nml namelist written. Starting with 0 as initial condition !***"}
+93 \textcolor{keywordflow}{    END IF}
+94     \textcolor{keyword}{OPEN}(8, file=\textcolor{stringliteral}{"IC.nml"}, status=\textcolor{stringliteral}{'REPLACE'})
+95     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+96     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Namelist file :                                                              !"}
+97     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Initial condition.                                                           !"}
+98     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+99     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+100     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&ICLIST"}
+101     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! psi variables"}
+102     \textcolor{keywordflow}{DO} i=1,natm
+103        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i))//\textcolor{stringliteral}{") = "},ic(i),\textcolor{stringliteral}{"   ! typ= "}&
+104             &//awavenum(i)%typ//\textcolor{stringliteral}{", Nx= "}//trim(rstr(awavenum(i)&
+105             &%Nx,fm))//\textcolor{stringliteral}{", Ny= "}//trim(rstr(awavenum(i)%Ny,fm))
+106 \textcolor{keywordflow}{    END DO}
+107     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! theta variables"}
+108     \textcolor{keywordflow}{DO} i=1,natm
+109        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+natm))//\textcolor{stringliteral}{") = "},ic(i+natm),\textcolor{stringliteral}{"   ! typ= "}&
+110             &//awavenum(i)%typ//\textcolor{stringliteral}{", Nx= "}//trim(rstr(awavenum(i)&
+111             &%Nx,fm))//\textcolor{stringliteral}{", Ny= "}//trim(rstr(awavenum(i)%Ny,fm))
+112 \textcolor{keywordflow}{    END DO}
+113 
+114     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! A variables"}
+115     \textcolor{keywordflow}{DO} i=1,noc
+116        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+2*natm))//\textcolor{stringliteral}{") = "},ic(i+2*natm),\textcolor{stringliteral}{"   ! Nx&}
+117 \textcolor{stringliteral}{}\textcolor{stringliteral}{            &= "}//trim(rstr(owavenum(i)%Nx,fm))//\textcolor{stringliteral}{", Ny= "}&
+118             &//trim(rstr(owavenum(i)%Ny,fm))
+119 \textcolor{keywordflow}{    END DO}
+120     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! T variables"}
+121     \textcolor{keywordflow}{DO} i=1,noc
+122        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+noc+2*natm))//\textcolor{stringliteral}{") = "},ic(i+2*natm+noc),\textcolor{stringliteral}{"   &}
+123 \textcolor{stringliteral}{}\textcolor{stringliteral}{            &! Nx= "}//trim(rstr(owavenum(i)%Nx,fm))//\textcolor{stringliteral}{", Ny= "}&
+124             &//trim(rstr(owavenum(i)%Ny,fm))
+125 \textcolor{keywordflow}{    END DO}
+126 
+127     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&END"}
+128     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+129     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+130     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Initialisation type.                                                         !"}
+131     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+132     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! type = 'read': use IC above (will generate a new seed);"}
+133     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'rand': random state (will generate a new seed);"}
+134     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'zero': zero IC (will generate a new seed);"}
+135     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'seed': use the seed below (generate the same IC)"}
+136     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+137     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&RAND"}
+138     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"  init\_type= '"}//init\_type//\textcolor{stringliteral}{"'"} 
+139     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a,d15.7)'}) \textcolor{stringliteral}{"  size\_of\_random\_noise = "},size\_of\_random\_noise
+140     \textcolor{keywordflow}{DO} i=1,j
+141        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" seed("}//trim(str(i))//\textcolor{stringliteral}{") = "},seed(i)
+142 \textcolor{keywordflow}{    END DO}
+143     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&END"}
+144     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+145     \textcolor{keyword}{CLOSE}(8)
+146     
 \end{DoxyCode}
 
 

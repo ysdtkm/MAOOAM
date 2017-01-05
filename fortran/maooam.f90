@@ -14,7 +14,7 @@ PROGRAM maooam
   USE params, only: ndim, dt, tw, t_trans, t_run, writeout
   USE aotensor_def, only: init_aotensor
   USE IC_def, only: load_IC, IC
-  USE rk2_integrator, only: init_integrator,step
+  USE integrator, only: init_integrator,step
   USE stat
   IMPLICIT NONE
 
@@ -23,7 +23,7 @@ PROGRAM maooam
   REAL(KIND=8) :: t=0.D0                             !< Time variable
   REAL(KIND=8) :: t_up
 
-  PRINT*, 'Model MAOOAM v1.0'
+  PRINT*, 'Model MAOOAM v1.2'
   PRINT*, 'Loading information...'
 
   CALL init_aotensor    ! Compute the tensor
@@ -53,6 +53,8 @@ PROGRAM maooam
   CALL init_stat
   
   t=0.D0
+
+  IF (writeout) WRITE(10,*) t,X(1:ndim)
 
   DO WHILE (t<t_run)
      CALL step(X,t,dt,Xnew)

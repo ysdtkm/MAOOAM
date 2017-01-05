@@ -111,9 +111,9 @@ Data Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a4a88ee8077278486c5128ad97617969e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a4a88ee8077278486c5128ad97617969e">copy_tensor</a> (src, dst)</td></tr>
-<tr class="memdesc:a4a88ee8077278486c5128ad97617969e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to copy a tensor.  <a href="#a4a88ee8077278486c5128ad97617969e">More...</a><br /></td></tr>
-<tr class="separator:a4a88ee8077278486c5128ad97617969e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14f95c256cdf137ca0767ddb3c87deea"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a14f95c256cdf137ca0767ddb3c87deea">copy_coo</a> (src, dst)</td></tr>
+<tr class="memdesc:a14f95c256cdf137ca0767ddb3c87deea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to copy a coolist.  <a href="#a14f95c256cdf137ca0767ddb3c87deea">More...</a><br /></td></tr>
+<tr class="separator:a14f95c256cdf137ca0767ddb3c87deea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a75d1a9ca8b39e9ad4b151a7b4b45c70f">mat_to_coo</a> (src, dst)</td></tr>
 <tr class="memdesc:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a matrix to a tensor.  <a href="#a75d1a9ca8b39e9ad4b151a7b4b45c70f">More...</a><br /></td></tr>
 <tr class="separator:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,7 +139,7 @@ Functions/Subroutines</h2></td></tr>
 <p> This version return a matrix.  <a href="#a4135cf70df5030070922ff199c79cc03">More...</a><br /></td></tr>
 <tr class="separator:a4135cf70df5030070922ff199c79cc03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70230d57c615d9548905bc023f5fc01d"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a70230d57c615d9548905bc023f5fc01d">sparse_mul2</a> (coolist_ij, arr_j, res)</td></tr>
-<tr class="memdesc:a70230d57c615d9548905bc023f5fc01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a 2d sparse tensor with a vectors: \({\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k\).  <a href="#a70230d57c615d9548905bc023f5fc01d">More...</a><br /></td></tr>
+<tr class="memdesc:a70230d57c615d9548905bc023f5fc01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a 2d sparse tensor with a vector: \({\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \).  <a href="#a70230d57c615d9548905bc023f5fc01d">More...</a><br /></td></tr>
 <tr class="separator:a70230d57c615d9548905bc023f5fc01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a364522b80ab0f4785c331eb74fa1ba04"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a364522b80ab0f4785c331eb74fa1ba04">simplify</a> (tensor)</td></tr>
 <tr class="memdesc:a364522b80ab0f4785c331eb74fa1ba04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to simplify a coolist (sparse tensor). For each index \(i\), it upper triangularize the matrix </p><p class="formulaDsp">
@@ -158,12 +158,12 @@ Variables</h2></td></tr>
 <div class="textblock"><p>Tensor utility module. </p>
 <dl class="section copyright"><dt>Copyright</dt><dd>2015 Lesley De Cruz &amp; Jonathan Demaeyer. See <a class="el" href="LICENSE_8txt.html">LICENSE.txt</a> for license information. </dd></dl>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a class="anchor" id="a4a88ee8077278486c5128ad97617969e"></a>
+<a class="anchor" id="a14f95c256cdf137ca0767ddb3c87deea"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">subroutine, public tensor::copy_tensor </td>
+          <td class="memname">subroutine, public tensor::copy_coo </td>
           <td>(</td>
           <td class="paramtype">type(<a class="el" href="structtensor_1_1coolist.html">coolist</a>), dimension(ndim), intent(in)&#160;</td>
           <td class="paramname"><em>src</em>, </td>
@@ -182,18 +182,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Routine to copy a tensor. </p>
+<p>Routine to copy a coolist. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">src</td><td>Source tensor </td></tr>
-    <tr><td class="paramname">dst</td><td>Destination tensor </td></tr>
+    <tr><td class="paramname">src</td><td>Source coolist </td></tr>
+    <tr><td class="paramname">dst</td><td>Destination coolist </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section remark"><dt>Remarks</dt><dd>The destination tensor have to be an empty tensor, i.e. with unallocated list of elements and nelems set to 0. </dd></dl>
 
 <p>Definition at line <a class="el" href="tensor_8f90_source.html#l00044">44</a> of file <a class="el" href="tensor_8f90_source.html">tensor.f90</a>.</p>
-<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">TYPE</span>(coolist), <span class="keywordtype">DIMENSION(ndim)</span>, <span class="keywordtype">INTENT(IN)</span> :: src</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">TYPE</span>(coolist), <span class="keywordtype">DIMENSION(ndim)</span>, <span class="keywordtype">INTENT(OUT)</span> :: dst</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">INTEGER</span> :: i,j,allocstat</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">DO</span> i=1,ndim</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;       <span class="keywordflow">IF</span> (dst(i)%nelems/=0) stop <span class="stringliteral">&quot;*** copy_tensor : Destination coolist not empty ! ***&quot;</span></div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;       <span class="keyword">ALLOCATE</span>(dst(i)%elems(src(i)%nelems), <a class="code" href="namespacestat.html">stat</a>=allocstat)</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;       <span class="keywordflow">IF</span> (allocstat /= 0) stop <span class="stringliteral">&quot;*** Not enough memory ! ***&quot;</span></div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;       <span class="keywordflow">DO</span> j=1,src(i)%nelems</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;          dst(i)%elems(j)%j=src(i)%elems(j)%j</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          dst(i)%elems(j)%k=src(i)%elems(j)%k</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;          dst(i)%elems(j)%v=src(i)%elems(j)%v</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordflow">       ENDDO</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;       dst(i)%nelems=src(i)%nelems</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordflow">    ENDDO</span></div><div class="ttc" id="namespacestat_html"><div class="ttname"><a href="namespacestat.html">stat</a></div><div class="ttdoc">Statistics accumulators. </div><div class="ttdef"><b>Definition:</b> <a href="stat_8f90_source.html#l00014">stat.f90:14</a></div></div>
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">TYPE</span>(coolist), <span class="keywordtype">DIMENSION(ndim)</span>, <span class="keywordtype">INTENT(IN)</span> :: src</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">TYPE</span>(coolist), <span class="keywordtype">DIMENSION(ndim)</span>, <span class="keywordtype">INTENT(OUT)</span> :: dst</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">INTEGER</span> :: i,j,allocstat</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    </div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">DO</span> i=1,ndim</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;       <span class="keywordflow">IF</span> (dst(i)%nelems/=0) stop <span class="stringliteral">&quot;*** copy_coo : Destination coolist not empty ! ***&quot;</span></div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;       <span class="keyword">ALLOCATE</span>(dst(i)%elems(src(i)%nelems), <a class="code" href="namespacestat.html">stat</a>=allocstat)</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;       <span class="keywordflow">IF</span> (allocstat /= 0) stop <span class="stringliteral">&quot;*** Not enough memory ! ***&quot;</span></div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;       <span class="keywordflow">DO</span> j=1,src(i)%nelems</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;          dst(i)%elems(j)%j=src(i)%elems(j)%j</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          dst(i)%elems(j)%k=src(i)%elems(j)%k</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;          dst(i)%elems(j)%v=src(i)%elems(j)%v</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordflow">       ENDDO</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;       dst(i)%nelems=src(i)%nelems</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordflow">    ENDDO</span></div><div class="ttc" id="namespacestat_html"><div class="ttname"><a href="namespacestat.html">stat</a></div><div class="ttdoc">Statistics accumulators. </div><div class="ttdef"><b>Definition:</b> <a href="stat_8f90_source.html#l00014">stat.f90:14</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -397,7 +397,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sparse multiplication of a 2d sparse tensor with a vectors: \({\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k\). </p>
+<p>Sparse multiplication of a 2d sparse tensor with a vector: \({\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">coolist_ij</td><td>a coordinate list (sparse tensor) of which index 2 will be contracted. </td></tr>
@@ -484,7 +484,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 26 2016 13:08:29 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 5 2017 15:58:40 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

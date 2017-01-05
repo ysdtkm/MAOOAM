@@ -17,5 +17,5 @@ var searchData=
   ['compute_5fadtensor_5fref',['compute_adtensor_ref',['../namespacetl__ad__tensor.html#a154e946ce2d6720a48a675ba92a7f350',1,'tl_ad_tensor']]],
   ['compute_5faotensor',['compute_aotensor',['../namespaceaotensor__def.html#a3dfccbce01ca1616c616f855c0cfa45a',1,'aotensor_def']]],
   ['compute_5ftltensor',['compute_tltensor',['../namespacetl__ad__tensor.html#a8b1027b49025fbeacd8fbd5d2127bebc',1,'tl_ad_tensor']]],
-  ['copy_5ftensor',['copy_tensor',['../namespacetensor.html#a4a88ee8077278486c5128ad97617969e',1,'tensor']]]
+  ['copy_5fcoo',['copy_coo',['../namespacetensor.html#a14f95c256cdf137ca0767ddb3c87deea',1,'tensor']]]
 ];

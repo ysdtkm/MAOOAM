@@ -64,7 +64,7 @@ MODULE params
   REAL(KIND=8) :: L         !< \f$L\f$ - Domain length scale
   REAL(KIND=8) :: sc        !< Ratio of surface to atmosphere temperature.
   REAL(KIND=8) :: sB        !< Stefan–Boltzmann constant
-  REAL(KIND=8) :: betp      ! \f$\beta'\f$ - Non-dimensional beta parameter
+  REAL(KIND=8) :: betp      !< \f$\beta'\f$ - Non-dimensional beta parameter
 
   REAL(KIND=8) :: t_trans   !< Transient time period
   REAL(KIND=8) :: t_run     !< Effective intergration time (length of the generated trajectory)
@@ -121,8 +121,6 @@ CONTAINS
 
     READ(8,nml=modeselection)
     CLOSE(8)
-
-    ! Must still sort modeselection here
 
     OPEN(8, file="int_params.nml", status='OLD', recl=80, delim='APOSTROPHE')
     READ(8,nml=int_params)

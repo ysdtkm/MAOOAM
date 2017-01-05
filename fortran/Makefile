@@ -1,6 +1,30 @@
 
-include ./gfortran.mk  # Rules for gfortran compiler
-#include ./ifort.mk  # Rules for ifort compiler
+ifndef COMPILER
+  COMPILER=gfortran
+endif
+ifdef INTMODE
+  # Define integrator module
+  INTEGRATOR = $(INTMODE)_integrator
+  TL_AD_INTEGRATOR = $(INTMODE)_tl_ad_integrator
+else
+  # Define integrator module
+  INTEGRATOR = rk2_integrator
+  TL_AD_INTEGRATOR = rk2_tl_ad_integrator
+endif
+
+
+# Define relevant compiler options for debug case and normal case for each compiler
+# Normal Case:
+IFORT_COMPILER_FLAGS = -assume byterecl -O2
+IFORT_LD_FLAGS = -mkl
+GCC_COMPILER_FLAGS = -O2 -Wall
+GCC_LD_FLAGS = -llapack -lblas
+# Debug Case:
+IFORT_COMPILER_FLAGS_DBG = -O0 -check all -traceback -fpe0 -check bounds -debug all -check uninit -ftrapuv -assume byterecl
+IFORT_LD_FLAGS_DBG = -llapack -lblas
+GCC_COMPILER_FLAGS_DBG = -g -O0 -fbounds-check -Wall -Wextra -Wconversion -pedantic -ffpe-trap=zero,overflow,underflow 
+GCC_LD_FLAGS_DBG = -llapack -lblas
+
 
 SHELL = /bin/sh
 DEBUG = false
@@ -12,21 +36,31 @@ else
 endif
 
 
-
-ifeq ($(FC),gfortran)
+ifeq ($(COMPILER),gfortran)
   #Derive gfortran version from gcc version and check if >=4.6.0.
   GVERSION := $(shell gcc -dumpversion)
   GE40600 := $(shell expr `gcc -dumpversion | sed -e 's/\.\([0-9][0-9]\)/\1/g' -e 's/\.\([0-9]\)/0\1/g' -e 's/^[0-9]\{3,4\}$$/&00/'` \>= 40600)
-  ifeq ($(GE40600), 0)
-    $(error GCC/gfortran version $(GVERSION) detected. This program uses features of gfortran >= 4.6.0. Please update your toolchain)
+  
+  ifeq ($(COMPILER),gfortran)
+    ifeq ($(GE40600), 0)
+      $(error GCC/gfortran version $(GVERSION) detected. This program uses features of gfortran >= 4.6.0. Please update your toolchain)
+    endif
+  else
+    $(warning This code was optimized for gfortran >= 4.6.0 and has not been tested with other compilers)
   endif
-  CHG = sed -i --follow-symlink 's/USE IFPORT/\!USE IFPORT/g' *.f90; sed -i --follow-symlink 's/!*USE IFPORT/\!USE IFPORT/g' *.f90
-else ifeq ($(FC),ifort)
+  COMPILER_FLAGS = $(GCC_COMPILER_FLAGS)
+  LD_FLAGS = $(GCC_LD_FLAGS)
+  COMPILER_FLAGS_DBG = $(GCC_COMPILER_FLAGS_DBG)
+  LD_FLAGS_DBG = $(GCC_LD_FLAGS_DBG)
+  IFPORT = ifport.mod
+else ifeq ($(COMPILER),ifort)
   $(warning This code was optimized for ifort >= 14.0.2 and has not been tested with other compilers)
-  CHG = sed -i --follow-symlink 's/\!*USE IFPORT/USE IFPORT/g' *.f90
+  COMPILER_FLAGS = $(IFORT_COMPILER_FLAGS)
+  LD_FLAGS = $(IFORT_LD_FLAGS)
+  COMPILER_FLAGS_DBG = $(IFORT_COMPILER_FLAGS_DBG)
+  LD_FLAGS_DBG = $(IFORT_LD_FLAGS_DBG)
 else
-  CHG = sed -i --follow-symlink 's/USE IFPORT/\!USE IFPORT/g' *.f90
-  $(warning This code was optimized for gfortran >= 4.6.0 and has not been tested with other compilers)
+  $(warning This code was optimized for gfortran >= 4.6.0 and ifort >= 14.0.2 and has not been tested with other compilers)
 endif
 
 .SUFFIXES:
@@ -34,21 +68,20 @@ endif
 
 PROGRAMS = maooam test_tl_ad
 
-MODULES = util.mod params.mod inprod_analytic.mod aotensor_def.mod ic_def.mod rk2_integrator.mod stat.mod tensor.mod tl_ad_tensor.mod rk2_tl_ad_integrator.mod rk4_integrator.mod rk4_tl_ad_integrator.mod 
+MODULES = util.mod params.mod inprod_analytic.mod aotensor_def.mod ic_def.mod $(INTEGRATOR).mod stat.mod tensor.mod tl_ad_tensor.mod $(TL_AD_INTEGRATOR).mod $(IFPORT)
 MODULE_OBJECTS = $(MODULES:.mod=.o)
 
 TEST_PROGRAMS = test_inprod_analytic test_aotensor
 TESTS = $(TEST_PROGRAMS:=.test)
 
-all: pre-build $(PROGRAMS) 
+all: $(PROGRAMS) 
 
-pre-build: 
-	$(CHG)
-
-debug: FCFLAGS = $(DEBUG_FCFLAGS)
+debug: COMPILER_FLAGS = $(COMPILER_FLAGS_DBG) 
+debug: LD_FLAGS = $(LD_FLAGS_DBG)
 debug: all
 
-test: FCFLAGS =$(DEBUG_FCFLAGS) 
+test: COMPILER_FLAGS = $(COMPILER_FLAGS_DBG) 
+test: LD_FLAGS = $(LD_FLAGS_DBG)
 test: $(TESTS)
 
 test_inprod_analytic.test: test_inprod_analytic
@@ -59,24 +92,23 @@ test_aotensor.test: test_aotensor
 	./$< |sort  > tests/$<.out
 	diff tests/$<.out tests/$<.ref && echo PASS: $@ || echo FAIL: $@
 
-%.mod: %.f90
-	$(FC) $(LDFLAGS) $(FCFLAGS) -c $<
+%.mod: %.f90  
+	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) -c $<
 
 %.o: %.f90 $(MODULES)
-	$(FC) $(LDFLAGS) $(FCFLAGS) -c $<
+	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) -c $<
 
 %: %.o $(MODULE_OBJECTS)
-	$(FC) $(LDFLAGS) $(FCFLAGS) $^ -o $@
+	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) $^ -o $@ 
 
 inprod_analytic.mod: params.mod
 aotensor_def.mod: tensor.mod inprod_analytic.mod
-rk2_integrator.mod: aotensor_def.mod
-rk4_integrator.mod: aotensor_def.mod
+$(INTEGRATOR).mod: aotensor_def.mod
 ic_def.mod: util.mod aotensor_def.mod
 stat.mod: params.mod
 tl_ad_tensor.mod: aotensor_def.mod
-rk2_tl_ad_integrator.mod: tl_ad_tensor.mod
-rk4_tl_ad_integrator.mod: tl_ad_tensor.mod
+$(TL_AD_INTEGRATOR).mod: tl_ad_tensor.mod
+util.mod: $(IFPORT)
 
 clean:
 	$(RM) *.o *.mod $(PROGRAMS) $(TEST_PROGRAMS) tests/*.out

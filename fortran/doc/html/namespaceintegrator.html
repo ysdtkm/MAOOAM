@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>rk2_integrator Module Reference</title>
+<title>integrator Module Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#func-members">Functions/Subroutines</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">rk2_integrator Module Reference</div>  </div>
+<div class="title">integrator Module Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -101,39 +101,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a82d35c2f4ef4a10f35b0293c8f846132"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerk2__integrator.html#a82d35c2f4ef4a10f35b0293c8f846132">init_integrator</a></td></tr>
-<tr class="memdesc:a82d35c2f4ef4a10f35b0293c8f846132"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to initialise the integration buffers.  <a href="#a82d35c2f4ef4a10f35b0293c8f846132">More...</a><br /></td></tr>
-<tr class="separator:a82d35c2f4ef4a10f35b0293c8f846132"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab40d193bfee2f2187e1377b7656bd402"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerk2__integrator.html#ab40d193bfee2f2187e1377b7656bd402">tendencies</a> (t, y, res)</td></tr>
-<tr class="memdesc:ab40d193bfee2f2187e1377b7656bd402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine computing the tendencies of the model.  <a href="#ab40d193bfee2f2187e1377b7656bd402">More...</a><br /></td></tr>
-<tr class="separator:ab40d193bfee2f2187e1377b7656bd402"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8a46245e033c195251cc4b8d75bb142"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerk2__integrator.html#ac8a46245e033c195251cc4b8d75bb142">step</a> (y, t, dt, res)</td></tr>
-<tr class="memdesc:ac8a46245e033c195251cc4b8d75bb142"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to perform an integration step (Heun algorithm). The incremented time is returned.  <a href="#ac8a46245e033c195251cc4b8d75bb142">More...</a><br /></td></tr>
-<tr class="separator:ac8a46245e033c195251cc4b8d75bb142"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab01b1930fc627150051ed5c5465ac533"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceintegrator.html#ab01b1930fc627150051ed5c5465ac533">init_integrator</a></td></tr>
+<tr class="memdesc:ab01b1930fc627150051ed5c5465ac533"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to initialise the integration buffers.  <a href="#ab01b1930fc627150051ed5c5465ac533">More...</a><br /></td></tr>
+<tr class="separator:ab01b1930fc627150051ed5c5465ac533"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8158ec5bb2be4dca1daadb1a906ba96"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceintegrator.html#ae8158ec5bb2be4dca1daadb1a906ba96">tendencies</a> (t, y, res)</td></tr>
+<tr class="memdesc:ae8158ec5bb2be4dca1daadb1a906ba96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine computing the tendencies of the model.  <a href="#ae8158ec5bb2be4dca1daadb1a906ba96">More...</a><br /></td></tr>
+<tr class="separator:ae8158ec5bb2be4dca1daadb1a906ba96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaf5baacd0ff1905f334ce824cdcd58e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceintegrator.html#adaf5baacd0ff1905f334ce824cdcd58e">step</a> (y, t, dt, res)</td></tr>
+<tr class="memdesc:adaf5baacd0ff1905f334ce824cdcd58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to perform an integration step (Heun algorithm). The incremented time is returned.  <a href="#adaf5baacd0ff1905f334ce824cdcd58e">More...</a><br /></td></tr>
+<tr class="separator:adaf5baacd0ff1905f334ce824cdcd58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a98d912c809a9e6c8026d24d5a45133cd"><td class="memItemLeft" align="right" valign="top">real(kind=8), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerk2__integrator.html#a98d912c809a9e6c8026d24d5a45133cd">buf_y1</a></td></tr>
-<tr class="memdesc:a98d912c809a9e6c8026d24d5a45133cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer to hold the intermediate position (Heun algorithm)  <a href="#a98d912c809a9e6c8026d24d5a45133cd">More...</a><br /></td></tr>
-<tr class="separator:a98d912c809a9e6c8026d24d5a45133cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12b35624818b9bf5056c780ec5c26737"><td class="memItemLeft" align="right" valign="top">real(kind=8), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerk2__integrator.html#a12b35624818b9bf5056c780ec5c26737">buf_f0</a></td></tr>
-<tr class="memdesc:a12b35624818b9bf5056c780ec5c26737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer to hold tendencies at the initial position.  <a href="#a12b35624818b9bf5056c780ec5c26737">More...</a><br /></td></tr>
-<tr class="separator:a12b35624818b9bf5056c780ec5c26737"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdb406bf396c40211c9fd440183f0971"><td class="memItemLeft" align="right" valign="top">real(kind=8), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacerk2__integrator.html#afdb406bf396c40211c9fd440183f0971">buf_f1</a></td></tr>
-<tr class="memdesc:afdb406bf396c40211c9fd440183f0971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer to hold tendencies at the intermediate position.  <a href="#afdb406bf396c40211c9fd440183f0971">More...</a><br /></td></tr>
-<tr class="separator:afdb406bf396c40211c9fd440183f0971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad82fcb5f12f76e9009ccd172f2ffa6b0"><td class="memItemLeft" align="right" valign="top">real(kind=8), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceintegrator.html#ad82fcb5f12f76e9009ccd172f2ffa6b0">buf_y1</a></td></tr>
+<tr class="memdesc:ad82fcb5f12f76e9009ccd172f2ffa6b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer to hold the intermediate position (Heun algorithm)  <a href="#ad82fcb5f12f76e9009ccd172f2ffa6b0">More...</a><br /></td></tr>
+<tr class="separator:ad82fcb5f12f76e9009ccd172f2ffa6b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefe58ac9a698ca7d0440dcaf6103feea"><td class="memItemLeft" align="right" valign="top">real(kind=8), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceintegrator.html#aefe58ac9a698ca7d0440dcaf6103feea">buf_f0</a></td></tr>
+<tr class="memdesc:aefe58ac9a698ca7d0440dcaf6103feea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer to hold tendencies at the initial position.  <a href="#aefe58ac9a698ca7d0440dcaf6103feea">More...</a><br /></td></tr>
+<tr class="separator:aefe58ac9a698ca7d0440dcaf6103feea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acabd8820aca8c50aac234c5d404493b4"><td class="memItemLeft" align="right" valign="top">real(kind=8), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceintegrator.html#acabd8820aca8c50aac234c5d404493b4">buf_f1</a></td></tr>
+<tr class="memdesc:acabd8820aca8c50aac234c5d404493b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer to hold tendencies at the intermediate position.  <a href="#acabd8820aca8c50aac234c5d404493b4">More...</a><br /></td></tr>
+<tr class="separator:acabd8820aca8c50aac234c5d404493b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2afa4ff98b4a081aab43a4fae62fc8b1"><td class="memItemLeft" align="right" valign="top">real(kind=8), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceintegrator.html#a2afa4ff98b4a081aab43a4fae62fc8b1">buf_ka</a></td></tr>
+<tr class="memdesc:a2afa4ff98b4a081aab43a4fae62fc8b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer A to hold tendencies.  <a href="#a2afa4ff98b4a081aab43a4fae62fc8b1">More...</a><br /></td></tr>
+<tr class="separator:a2afa4ff98b4a081aab43a4fae62fc8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d3aa6db72a39f4bc0999ef8056ffba2"><td class="memItemLeft" align="right" valign="top">real(kind=8), dimension(:), allocatable&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceintegrator.html#a6d3aa6db72a39f4bc0999ef8056ffba2">buf_kb</a></td></tr>
+<tr class="memdesc:a6d3aa6db72a39f4bc0999ef8056ffba2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffer B to hold tendencies.  <a href="#a6d3aa6db72a39f4bc0999ef8056ffba2">More...</a><br /></td></tr>
+<tr class="separator:a6d3aa6db72a39f4bc0999ef8056ffba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Module with the integration routines. </p>
+<p>Module with the RK4 integration routines.</p>
 <dl class="section copyright"><dt>Copyright</dt><dd>2015 Lesley De Cruz &amp; Jonathan Demaeyer. See <a class="el" href="LICENSE_8txt.html">LICENSE.txt</a> for license information. </dd></dl>
-<dl class="section remark"><dt>Remarks</dt><dd>This module actually contains the Heun algorithm routines. The user can modify it according to its preferred integration scheme. For higher-order schemes, additional buffers will probably have to be defined. </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>This module actually contains the Heun algorithm routines. The user can modify it according to its preferred integration scheme. For higher-order schemes, additional buffers will probably have to be defined.</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>2015 Lesley De Cruz &amp; Jonathan Demaeyer. See <a class="el" href="LICENSE_8txt.html">LICENSE.txt</a> for license information. </dd></dl>
+<dl class="section remark"><dt>Remarks</dt><dd>This module actually contains the RK4 algorithm routines. The user can modify it according to its preferred integration scheme. For higher-order schemes, additional buffers will probably have to be defined. </dd></dl>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a class="anchor" id="a82d35c2f4ef4a10f35b0293c8f846132"></a>
+<a class="anchor" id="ab01b1930fc627150051ed5c5465ac533"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">subroutine, public rk2_integrator::init_integrator </td>
+          <td class="memname">subroutine public integrator::init_integrator </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -148,12 +157,12 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="ac8a46245e033c195251cc4b8d75bb142"></a>
+<a class="anchor" id="adaf5baacd0ff1905f334ce824cdcd58e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">subroutine, public rk2_integrator::step </td>
+          <td class="memname">subroutine public integrator::step </td>
           <td>(</td>
           <td class="paramtype">real(kind=8), dimension(0:ndim), intent(in)&#160;</td>
           <td class="paramname"><em>y</em>, </td>
@@ -185,6 +194,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Routine to perform an integration step (Heun algorithm). The incremented time is returned. </p>
+<p>Routine to perform an integration step (RK4 algorithm). The incremented time is returned.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">y</td><td>Initial point. </td></tr>
@@ -199,7 +209,7 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(0:ndim)</span>, <span class="keywordtype">INTENT(IN)</span> :: y</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">INTENT(INOUT)</span> :: t</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">INTENT(IN)</span> :: dt</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(0:ndim)</span>, <span class="keywordtype">INTENT(OUT)</span> :: res</div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    </div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">CALL </span>tendencies(t,y,buf_f0)</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    buf_y1 = y+dt*buf_f0</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">CALL </span>tendencies(t+dt,buf_y1,buf_f1)</div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    res=y+0.5*(buf_f0+buf_f1)*dt</div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    t=t+dt</div></div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="ab40d193bfee2f2187e1377b7656bd402"></a>
+<a class="anchor" id="ae8158ec5bb2be4dca1daadb1a906ba96"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -207,7 +217,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">subroutine rk2_integrator::tendencies </td>
+          <td class="memname">subroutine integrator::tendencies </td>
           <td>(</td>
           <td class="paramtype">real(kind=8), intent(in)&#160;</td>
           <td class="paramname"><em>t</em>, </td>
@@ -253,7 +263,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="a12b35624818b9bf5056c780ec5c26737"></a>
+<a class="anchor" id="aefe58ac9a698ca7d0440dcaf6103feea"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -261,7 +271,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">real(kind=8), dimension(:), allocatable rk2_integrator::buf_f0</td>
+          <td class="memname">real(kind=8), dimension(:), allocatable integrator::buf_f0</td>
         </tr>
       </table>
   </td>
@@ -277,7 +287,7 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: buf_f0<span class="comment"> !&lt; Buffer to hold tendencies at the initial position</span></div></div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="afdb406bf396c40211c9fd440183f0971"></a>
+<a class="anchor" id="acabd8820aca8c50aac234c5d404493b4"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -285,7 +295,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">real(kind=8), dimension(:), allocatable rk2_integrator::buf_f1</td>
+          <td class="memname">real(kind=8), dimension(:), allocatable integrator::buf_f1</td>
         </tr>
       </table>
   </td>
@@ -301,7 +311,7 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: buf_f1<span class="comment"> !&lt; Buffer to hold tendencies at the intermediate position</span></div></div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="a98d912c809a9e6c8026d24d5a45133cd"></a>
+<a class="anchor" id="a2afa4ff98b4a081aab43a4fae62fc8b1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -309,7 +319,55 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">real(kind=8), dimension(:), allocatable rk2_integrator::buf_y1</td>
+          <td class="memname">real(kind=8), dimension(:), allocatable integrator::buf_ka</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Buffer A to hold tendencies. </p>
+
+<p>Definition at line <a class="el" href="rk4__integrator_8f90_source.html#l00028">28</a> of file <a class="el" href="rk4__integrator_8f90_source.html">rk4_integrator.f90</a>.</p>
+<div class="fragment"><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: buf_ka<span class="comment"> !&lt; Buffer A to hold tendencies</span></div></div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a6d3aa6db72a39f4bc0999ef8056ffba2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(kind=8), dimension(:), allocatable integrator::buf_kb</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Buffer B to hold tendencies. </p>
+
+<p>Definition at line <a class="el" href="rk4__integrator_8f90_source.html#l00029">29</a> of file <a class="el" href="rk4__integrator_8f90_source.html">rk4_integrator.f90</a>.</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(:)</span>, <span class="keywordtype">ALLOCATABLE</span> :: buf_kb<span class="comment"> !&lt; Buffer B to hold tendencies</span></div></div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="ad82fcb5f12f76e9009ccd172f2ffa6b0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">real(kind=8), dimension(:), allocatable integrator::buf_y1</td>
         </tr>
       </table>
   </td>
@@ -328,7 +386,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 26 2016 13:08:29 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 5 2017 15:58:40 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>
