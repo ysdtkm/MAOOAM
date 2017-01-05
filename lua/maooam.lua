@@ -23,11 +23,20 @@ local params = require("params")
 -- Tensor with the coefficients of the nonlinear (polynomial) system of
 -- diffeqs. N.B.: the model tensor is fixed, so changes to model parameters
 -- will only be effective up to this point!
-local n
+local n, rank, ao
 do
+  local mpi = require("mpi")
+  local comm = mpi.comm_world
+  rank = comm:rank()
+  local size = comm:size()
+
+  -- ao is the function that calculates the time derivative of the n variables.
+  -- Get a rank-dependent version of ao.
+  ao = require("ao_mpi")(rank,size,comm)
+
+  -- Determine n and write the initial conditions if this is the rank 0 worker.
   local inprod = require("inprod_analytic")
   n = inprod.natm*2+inprod.noc*2 + 1
-  require("write_IC")(inprod)
 end
 
 -- Utilities
@@ -86,26 +95,13 @@ local function close(f) if f and f~=io.stdout then f:close() end end
 -- Integrate coupled ocean-atmosphere model.
 ------------------------------------------------------------------------
 
--- ao is the function that calculates the time derivative of the n variables.
--- logf is the file in which the trajectory will be logged.
-local ao, rank
-do
-  local mpi = require("mpi")
-  local comm = mpi.comm_world
-  rank = comm:rank()
-  local size = comm:size()
-
-  -- Get a rank-dependent version of ao.
-  ao = require("ao_mpi")(rank,size,comm)
-
-  -- Determine output based on MPI rank.
-  if rank~=0 then
-    local noop = function() return end
-    fprintf, write, take_snapshot = noop, noop, function() return true end
-    io.write = noop
-    io.stderr = {write=noop}
-    io.stdout = {write=noop}
-  end
+-- Determine output based on MPI rank.
+if rank~=0 then
+  local noop = function() return end
+  fprintf, write, take_snapshot = noop, noop, function() return true end
+  io.write = noop
+  io.stderr = {write=noop}
+  io.stdout = {write=noop}
 end
 
 -- Check some input values.
@@ -128,8 +124,12 @@ do
   end
   -- No continuation or no snapshot file: read IC file.
   if not initialconditions then
-    local inprod = require("inprod_analytic")
-    require("write_IC")(inprod)
+    if rank==0 then 
+      local inprod = require("inprod_analytic")
+      require("write_IC")(inprod) 
+    end
+    local mpi = require("mpi")
+    mpi.barrier(mpi.comm_world)
     t_init = 0
     initialconditions = require("IC")
   end
@@ -167,6 +167,7 @@ for i=1,n do
 end
 
 -- Setup output files.
+-- logf is the file in which the trajectory will be logged.
 local logf
 if writeout and rank==0 then -- setup trajectory file
   local logfn_base = params.i.getoutfn("_trajectory")
