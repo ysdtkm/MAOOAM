@@ -10,7 +10,7 @@ Tangent Linear (TL) and Adjoint (AD) model versions of M\+A\+O\+O\+AM. Tensors d
 \item 
 type(\hyperlink{structtensor_1_1coolist}{coolist}) function, dimension(ndim) \hyperlink{namespacetl__ad__tensor_af4dbec99377125d7df10d89524ba91b2}{jacobian} (ystar)
 \begin{DoxyCompactList}\small\item\em Compute the Jacobian of M\+A\+O\+O\+AM in point ystar. \end{DoxyCompactList}\item 
-real(kind=8) function, dimension(ndim, ndim) \hyperlink{namespacetl__ad__tensor_a19ab832f709efc3719eb272313462971}{jacobian\+\_\+mat} (ystar)
+real(kind=8) function, dimension(ndim, ndim), public \hyperlink{namespacetl__ad__tensor_a2782a5116e8bb677b2d5e9637b509cf3}{jacobian\+\_\+mat} (ystar)
 \begin{DoxyCompactList}\small\item\em Compute the Jacobian of M\+A\+O\+O\+AM in point ystar. \end{DoxyCompactList}\item 
 subroutine, public \hyperlink{namespacetl__ad__tensor_a8a94fe84e907fc8835f798eddcff38e8}{init\+\_\+tltensor}
 \begin{DoxyCompactList}\small\item\em Routine to initialize the TL tensor. \end{DoxyCompactList}\item 
@@ -476,11 +476,11 @@ Definition at line 75 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 \end{DoxyCode}
 \index{tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}!jacobian\+\_\+mat@{jacobian\+\_\+mat}}
 \index{jacobian\+\_\+mat@{jacobian\+\_\+mat}!tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}}
-\subsubsection[{\texorpdfstring{jacobian\+\_\+mat(ystar)}{jacobian_mat(ystar)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, dimension(ndim,ndim) tl\+\_\+ad\+\_\+tensor\+::jacobian\+\_\+mat (
+\subsubsection[{\texorpdfstring{jacobian\+\_\+mat(ystar)}{jacobian_mat(ystar)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, dimension(ndim,ndim), public tl\+\_\+ad\+\_\+tensor\+::jacobian\+\_\+mat (
 \begin{DoxyParamCaption}
 \item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{ystar}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacetl__ad__tensor_a19ab832f709efc3719eb272313462971}{}\label{namespacetl__ad__tensor_a19ab832f709efc3719eb272313462971}
+)}\hypertarget{namespacetl__ad__tensor_a2782a5116e8bb677b2d5e9637b509cf3}{}\label{namespacetl__ad__tensor_a2782a5116e8bb677b2d5e9637b509cf3}
 
 
 Compute the Jacobian of M\+A\+O\+O\+AM in point ystar. 

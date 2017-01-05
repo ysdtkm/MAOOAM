@@ -7,6 +7,6 @@ var searchData=
   ['simplify',['simplify',['../namespacetensor.html#a364522b80ab0f4785c331eb74fa1ba04',1,'tensor']]],
   ['sparse_5fmul2',['sparse_mul2',['../namespacetensor.html#a70230d57c615d9548905bc023f5fc01d',1,'tensor']]],
   ['sparse_5fmul3',['sparse_mul3',['../namespacetensor.html#a11054027a386918658f8948231af53b1',1,'tensor']]],
-  ['step',['step',['../namespacerk2__integrator.html#ac8a46245e033c195251cc4b8d75bb142',1,'rk2_integrator::step()'],['../namespacerk4__integrator.html#a3599b8d3b64a4c1b04a859aa4454b32b',1,'rk4_integrator::step()']]],
+  ['step',['step',['../namespaceintegrator.html#adaf5baacd0ff1905f334ce824cdcd58e',1,'integrator']]],
   ['str',['str',['../namespaceutil.html#a1df36d0696c9183ceb6bb770f1d88111',1,'util']]]
 ];

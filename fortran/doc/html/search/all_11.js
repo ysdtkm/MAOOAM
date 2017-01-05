@@ -18,7 +18,7 @@ var searchData=
   ['sparse_5fmul3',['sparse_mul3',['../namespacetensor.html#a11054027a386918658f8948231af53b1',1,'tensor']]],
   ['stat',['stat',['../namespacestat.html',1,'']]],
   ['stat_2ef90',['stat.f90',['../stat_8f90.html',1,'']]],
-  ['step',['step',['../namespacerk2__integrator.html#ac8a46245e033c195251cc4b8d75bb142',1,'rk2_integrator::step()'],['../namespacerk4__integrator.html#a3599b8d3b64a4c1b04a859aa4454b32b',1,'rk4_integrator::step()']]],
+  ['step',['step',['../namespaceintegrator.html#adaf5baacd0ff1905f334ce824cdcd58e',1,'integrator']]],
   ['str',['str',['../namespaceutil.html#a1df36d0696c9183ceb6bb770f1d88111',1,'util']]],
   ['sublicense',['sublicense',['../LICENSE_8txt.html#af9fad5470a0b4e968d19b11b7c643fdb',1,'LICENSE.txt']]]
 ];

@@ -104,9 +104,9 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:af4dbec99377125d7df10d89524ba91b2"><td class="memItemLeft" align="right" valign="top">type(<a class="el" href="structtensor_1_1coolist.html">coolist</a>) function, dimension(ndim)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetl__ad__tensor.html#af4dbec99377125d7df10d89524ba91b2">jacobian</a> (ystar)</td></tr>
 <tr class="memdesc:af4dbec99377125d7df10d89524ba91b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian of MAOOAM in point ystar.  <a href="#af4dbec99377125d7df10d89524ba91b2">More...</a><br /></td></tr>
 <tr class="separator:af4dbec99377125d7df10d89524ba91b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19ab832f709efc3719eb272313462971"><td class="memItemLeft" align="right" valign="top">real(kind=8) function, dimension(ndim, ndim)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetl__ad__tensor.html#a19ab832f709efc3719eb272313462971">jacobian_mat</a> (ystar)</td></tr>
-<tr class="memdesc:a19ab832f709efc3719eb272313462971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian of MAOOAM in point ystar.  <a href="#a19ab832f709efc3719eb272313462971">More...</a><br /></td></tr>
-<tr class="separator:a19ab832f709efc3719eb272313462971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2782a5116e8bb677b2d5e9637b509cf3"><td class="memItemLeft" align="right" valign="top">real(kind=8) function, dimension(ndim, ndim), public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetl__ad__tensor.html#a2782a5116e8bb677b2d5e9637b509cf3">jacobian_mat</a> (ystar)</td></tr>
+<tr class="memdesc:a2782a5116e8bb677b2d5e9637b509cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the Jacobian of MAOOAM in point ystar.  <a href="#a2782a5116e8bb677b2d5e9637b509cf3">More...</a><br /></td></tr>
+<tr class="separator:a2782a5116e8bb677b2d5e9637b509cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a94fe84e907fc8835f798eddcff38e8"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetl__ad__tensor.html#a8a94fe84e907fc8835f798eddcff38e8">init_tltensor</a></td></tr>
 <tr class="memdesc:a8a94fe84e907fc8835f798eddcff38e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to initialize the TL tensor.  <a href="#a8a94fe84e907fc8835f798eddcff38e8">More...</a><br /></td></tr>
 <tr class="separator:a8a94fe84e907fc8835f798eddcff38e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -652,26 +652,18 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(0:ndim)</span>, <span class="keywordtype">INTENT(IN)</span> :: ystar</div><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">TYPE</span>(coolist), <span class="keywordtype">DIMENSION(ndim)</span> :: jacobian</div><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">CALL </span>jsparse_mul(aotensor,ystar,jacobian)</div></div><!-- fragment -->
 </div>
 </div>
-<a class="anchor" id="a19ab832f709efc3719eb272313462971"></a>
+<a class="anchor" id="a2782a5116e8bb677b2d5e9637b509cf3"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">real(kind=8) function, dimension(ndim,ndim) tl_ad_tensor::jacobian_mat </td>
+          <td class="memname">real(kind=8) function, dimension(ndim,ndim), public tl_ad_tensor::jacobian_mat </td>
           <td>(</td>
           <td class="paramtype">real(kind=8), dimension(0:ndim), intent(in)&#160;</td>
           <td class="paramname"><em>ystar</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Compute the Jacobian of MAOOAM in point ystar. </p>
@@ -940,7 +932,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 26 2016 13:08:29 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 5 2017 15:58:40 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

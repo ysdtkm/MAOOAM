@@ -27,7 +27,7 @@ var searchData=
   ['coolist',['coolist',['../structtensor_1_1coolist.html',1,'tensor']]],
   ['coolist_5felem',['coolist_elem',['../structtensor_1_1coolist__elem.html',1,'tensor']]],
   ['copy',['copy',['../LICENSE_8txt.html#aff1d4c6b756ebf691fa44a0904f68658',1,'LICENSE.txt']]],
-  ['copy_5ftensor',['copy_tensor',['../namespacetensor.html#a4a88ee8077278486c5128ad97617969e',1,'tensor']]],
+  ['copy_5fcoo',['copy_coo',['../namespacetensor.html#a14f95c256cdf137ca0767ddb3c87deea',1,'tensor']]],
   ['count_5felems',['count_elems',['../namespaceaotensor__def.html#aa9e30c84efc5a81409ba9c0286c87eac',1,'aotensor_def::count_elems()'],['../namespacetl__ad__tensor.html#a8836f34c3a96c44c487c7910ab8c7507',1,'tl_ad_tensor::count_elems()']]],
   ['cpa',['cpa',['../namespaceparams.html#a5194d820b8962ee2b99a455a2892a2e2',1,'params']]],
   ['cpo',['cpo',['../namespaceparams.html#a89b8bfb0d5a9275b0301c8ebe1a92da7',1,'params']]]

@@ -128,6 +128,8 @@ do
   end
   -- No continuation or no snapshot file: read IC file.
   if not initialconditions then
+    local inprod = require("inprod_analytic")
+    require("write_IC")(inprod)
     t_init = 0
     initialconditions = require("IC")
   end

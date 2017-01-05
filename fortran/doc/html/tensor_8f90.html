@@ -117,9 +117,9 @@ Modules</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a4a88ee8077278486c5128ad97617969e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a4a88ee8077278486c5128ad97617969e">tensor::copy_tensor</a> (src, dst)</td></tr>
-<tr class="memdesc:a4a88ee8077278486c5128ad97617969e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to copy a tensor.  <a href="namespacetensor.html#a4a88ee8077278486c5128ad97617969e">More...</a><br /></td></tr>
-<tr class="separator:a4a88ee8077278486c5128ad97617969e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14f95c256cdf137ca0767ddb3c87deea"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a14f95c256cdf137ca0767ddb3c87deea">tensor::copy_coo</a> (src, dst)</td></tr>
+<tr class="memdesc:a14f95c256cdf137ca0767ddb3c87deea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to copy a coolist.  <a href="namespacetensor.html#a14f95c256cdf137ca0767ddb3c87deea">More...</a><br /></td></tr>
+<tr class="separator:a14f95c256cdf137ca0767ddb3c87deea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a75d1a9ca8b39e9ad4b151a7b4b45c70f">tensor::mat_to_coo</a> (src, dst)</td></tr>
 <tr class="memdesc:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a matrix to a tensor.  <a href="namespacetensor.html#a75d1a9ca8b39e9ad4b151a7b4b45c70f">More...</a><br /></td></tr>
 <tr class="separator:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,7 +145,7 @@ Functions/Subroutines</h2></td></tr>
 <p> This version return a matrix.  <a href="namespacetensor.html#a4135cf70df5030070922ff199c79cc03">More...</a><br /></td></tr>
 <tr class="separator:a4135cf70df5030070922ff199c79cc03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70230d57c615d9548905bc023f5fc01d"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a70230d57c615d9548905bc023f5fc01d">tensor::sparse_mul2</a> (coolist_ij, arr_j, res)</td></tr>
-<tr class="memdesc:a70230d57c615d9548905bc023f5fc01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a 2d sparse tensor with a vectors: \({\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k\).  <a href="namespacetensor.html#a70230d57c615d9548905bc023f5fc01d">More...</a><br /></td></tr>
+<tr class="memdesc:a70230d57c615d9548905bc023f5fc01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a 2d sparse tensor with a vector: \({\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \).  <a href="namespacetensor.html#a70230d57c615d9548905bc023f5fc01d">More...</a><br /></td></tr>
 <tr class="separator:a70230d57c615d9548905bc023f5fc01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a364522b80ab0f4785c331eb74fa1ba04"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a364522b80ab0f4785c331eb74fa1ba04">tensor::simplify</a> (tensor)</td></tr>
 <tr class="memdesc:a364522b80ab0f4785c331eb74fa1ba04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to simplify a coolist (sparse tensor). For each index \(i\), it upper triangularize the matrix </p><p class="formulaDsp">
@@ -163,7 +163,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 26 2016 13:08:29 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jan 5 2017 15:58:39 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

@@ -32,21 +32,21 @@ MODULE tensor
   !> Parameter to test the equality with zero.
   REAL(KIND=8), PARAMETER :: real_eps = 2.2204460492503131e-16
 
-  PUBLIC :: sparse_mul3,sparse_mul2,copy_tensor,mat_to_coo,jsparse_mul,jsparse_mul_mat,simplify
+  PUBLIC :: sparse_mul3,sparse_mul2,copy_coo,mat_to_coo,jsparse_mul,jsparse_mul_mat,simplify
 
 CONTAINS
     
-  !> Routine to copy a tensor.
-  !> @param src Source tensor
-  !> @param dst Destination tensor
+  !> Routine to copy a coolist.
+  !> @param src Source coolist
+  !> @param dst Destination coolist
   !> @remark The destination tensor have to be an empty tensor, i.e. with unallocated list of elements and nelems set to 0.
-  SUBROUTINE copy_tensor(src,dst)
+  SUBROUTINE copy_coo(src,dst)
     TYPE(coolist), DIMENSION(ndim), INTENT(IN) :: src
     TYPE(coolist), DIMENSION(ndim), INTENT(OUT) :: dst
     INTEGER :: i,j,AllocStat
     
     DO i=1,ndim
-       IF (dst(i)%nelems/=0) STOP "*** copy_tensor : Destination coolist not empty ! ***"
+       IF (dst(i)%nelems/=0) STOP "*** copy_coo : Destination coolist not empty ! ***"
        ALLOCATE(dst(i)%elems(src(i)%nelems), STAT=AllocStat)
        IF (AllocStat /= 0) STOP "*** Not enough memory ! ***"
        DO j=1,src(i)%nelems
@@ -56,7 +56,7 @@ CONTAINS
        ENDDO
        dst(i)%nelems=src(i)%nelems
     ENDDO
-  END SUBROUTINE copy_tensor
+  END SUBROUTINE copy_coo
 
   !> Routine to convert a matrix to a tensor.
   !> @param src Source matrix
@@ -180,7 +180,7 @@ CONTAINS
     END DO
   END SUBROUTINE jsparse_mul_mat
 
-  !> Sparse multiplication of a 2d sparse tensor with a vectors:  \f${\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k\f$.
+  !> Sparse multiplication of a 2d sparse tensor with a vector:  \f${\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \f$.
   !> @param coolist_ij a coordinate list (sparse tensor) of which index
   !> 2 will be contracted.
   !> @param arr_j the vector to be contracted with index 2 of coolist_ijk

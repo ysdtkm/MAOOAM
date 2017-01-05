@@ -14,9 +14,9 @@
 PROGRAM test_tl_ad
   USE params, only:ndim,dt,t_trans
   USE aotensor_def, only: init_aotensor
-  USE rk2_integrator, only: init_integrator,step
+  USE integrator, only: init_integrator,step
   USE tl_ad_tensor, only: init_tltensor, init_adtensor
-  USE rk2_tl_ad_integrator, only: init_tl_ad_integrator,tl_step,ad_step
+  USE tl_ad_integrator, only: init_tl_ad_integrator,tl_step,ad_step
   IMPLICIT NONE
 
   REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: y0_IC,y0,y0prime,dy0,dy0_bis
