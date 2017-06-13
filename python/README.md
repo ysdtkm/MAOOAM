@@ -61,7 +61,7 @@ initialization.
 * integrator.py : A module that compute one step of the model and RK2 integration.
 * sparse_mult.f90 and sparse_mult.pyf : fortran and f2py files to call fortran module in python.
 
-A documentation is available [here](./doc/build/html/index.html) (html) and [here](./doc/build/latex/Reference_manual.pdf) (pdf).
+A documentation is available [here](./doc/build/html/index.html) (html) and [here](./doc/build/latex/MAOOAM.pdf) (pdf).
  
 ------------------------------------------------------------------------
 
