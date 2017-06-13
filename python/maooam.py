@@ -32,6 +32,7 @@
     >>> import time
     >>> import ic_def
     >>> import ic
+    >>> import sys
 """
 
 import numpy as np
@@ -43,13 +44,9 @@ import ic_def
 import ic
 import sys
 
-if sys.version_info.major==2:
-    def print_progress(p):
-        print('Progress '+str(p)+' % \r'),
-elif sys.version_info.major==3:
-    def print_progress(p):
-        print('Progress '+str(p)+' % \r',end='')
-
+def print_progress(p):
+    sys.stdout.write('Progress {:.2%} \r'.format(p))
+    sys.stdout.flush()
 
 class bcolors:
     """to color the instructions in the console"""
@@ -63,7 +60,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-print (bcolors.OKBLUE + "MODEL MAOOAM v1.2" + bcolors.ENDC)
+print (bcolors.OKBLUE + "Model MAOOAM v1.2" + bcolors.ENDC)
 print (bcolors.OKBLUE + "Initialization ..." + bcolors.ENDC)
 
 ic_def.load_IC()
@@ -77,7 +74,7 @@ while t < t_trans:
     X = integrator.step(X, t, dt)
     t += dt
     if t/t_trans*100 % 0.1 < t_up:
-        print_progress(t/t_trans*100)
+        print_progress(t/t_trans)
 
 print (bcolors.OKBLUE + "Starting the time evolution ..." + bcolors.ENDC)
 fichier = open("evol_field.dat", "w")
@@ -93,7 +90,7 @@ while t < t_run:
             fichier.write(str(X[i])+" ")
         fichier.write("\n")
     if t/t_run*100 % 0.1 < t_up:
-        print_progress(t/t_run*100)
+        print_progress(t/t_run)
 fichier.close()
 print (bcolors.OKBLUE + "Evolution finished " + bcolors.ENDC)
 

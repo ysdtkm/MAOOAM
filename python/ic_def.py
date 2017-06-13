@@ -48,7 +48,7 @@ def load_IC():
         exit('Number of dimensions is 0!')
     if os.path.exists('ic.py'):
         # no need to create one
-        print ("ic already defined")
+        print ("Initial conditions already defined")
     else:
         # init_inprod()
         fichier = open("ic.py", "w")
