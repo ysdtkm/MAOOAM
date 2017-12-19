@@ -1,0 +1,55 @@
+\hypertarget{stoch__params_8f90}{}\section{stoch\+\_\+params.\+f90 File Reference}
+\label{stoch__params_8f90}\index{stoch\+\_\+params.\+f90@{stoch\+\_\+params.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacestoch__params}{stoch\+\_\+params}
+\begin{DoxyCompactList}\small\item\em The stochastic models parameters module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacestoch__params_ae4aee571fa90316e794b67d1d404c0aa}{stoch\+\_\+params\+::init\+\_\+stoch\+\_\+params}
+\begin{DoxyCompactList}\small\item\em Stochastic parameters initialization routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8) \hyperlink{namespacestoch__params_ab0b8df90daf320dc4f5810eacd7d93e7}{stoch\+\_\+params\+::mnuti}
+\begin{DoxyCompactList}\small\item\em Multiplicative noise update time interval. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a11aa6b888c2b4005aca690fb78e2c785}{stoch\+\_\+params\+::t\+\_\+trans\+\_\+stoch}
+\begin{DoxyCompactList}\small\item\em Transient time period of the stochastic model evolution. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a56cee7780f23cbd0cc619c5b5bb30b6c}{stoch\+\_\+params\+::q\+\_\+ar}
+\begin{DoxyCompactList}\small\item\em Atmospheric resolved component noise amplitude. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a437fce848ee222fc34893831a54e32e9}{stoch\+\_\+params\+::q\+\_\+au}
+\begin{DoxyCompactList}\small\item\em Atmospheric unresolved component noise amplitude. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_adc17ebaeabac74e33023f9e7bb8583ec}{stoch\+\_\+params\+::q\+\_\+or}
+\begin{DoxyCompactList}\small\item\em Oceanic resolved component noise amplitude. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a6b3308ad01c8ba1945332b05df447865}{stoch\+\_\+params\+::q\+\_\+ou}
+\begin{DoxyCompactList}\small\item\em Oceanic unresolved component noise amplitude. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_aae1255323ba779a9cefd5a979762b778}{stoch\+\_\+params\+::dtn}
+\begin{DoxyCompactList}\small\item\em Square root of the timestep. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_aa0504e89179fe42b3f3206811f1592dc}{stoch\+\_\+params\+::eps\+\_\+pert}
+\begin{DoxyCompactList}\small\item\em Perturbation parameter for the coupling. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a3995bce17d12b533df6b86ab0072b7c3}{stoch\+\_\+params\+::tdelta}
+\begin{DoxyCompactList}\small\item\em Time separation parameter. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a6cfc7910476036f19018641599841686}{stoch\+\_\+params\+::muti}
+\begin{DoxyCompactList}\small\item\em Memory update time interval. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a6de8fcb6d516d431ddc0285e0c296eb7}{stoch\+\_\+params\+::meml}
+\begin{DoxyCompactList}\small\item\em Time over which the memory kernel is integrated. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_aad7f7a2481dfb730a051ae2e0de9494c}{stoch\+\_\+params\+::t\+\_\+trans\+\_\+mem}
+\begin{DoxyCompactList}\small\item\em Transient time period to initialize the memory term. \end{DoxyCompactList}\item 
+character(len=4) \hyperlink{namespacestoch__params_ac3dca68023a442b69df79caaaea78894}{stoch\+\_\+params\+::x\+\_\+int\+\_\+mode}
+\begin{DoxyCompactList}\small\item\em Integration mode for the resolved component. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a760f666f9c629b98214821c8186f6ffc}{stoch\+\_\+params\+::dts}
+\begin{DoxyCompactList}\small\item\em Intrisic resolved dynamics time step. \end{DoxyCompactList}\item 
+integer \hyperlink{namespacestoch__params_a1e5a5dc39327df54fe21be20d06cea47}{stoch\+\_\+params\+::mems}
+\begin{DoxyCompactList}\small\item\em Number of steps in the memory kernel integral. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a53aa511c9ceefb077d913bf728b3f516}{stoch\+\_\+params\+::dtsn}
+\begin{DoxyCompactList}\small\item\em Square root of the intrisic resolved dynamics time step. \end{DoxyCompactList}\item 
+real(kind=8) \hyperlink{namespacestoch__params_a50976593e79387f25e08fef6ce56b30b}{stoch\+\_\+params\+::maxint}
+\begin{DoxyCompactList}\small\item\em Upper integration limit of the correlations. \end{DoxyCompactList}\item 
+character(len=4) \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode}
+\begin{DoxyCompactList}\small\item\em Loading mode for the correlations. \end{DoxyCompactList}\item 
+character(len=4) \hyperlink{namespacestoch__params_ab901db3992a4df88db5a67fdd7be6ac6}{stoch\+\_\+params\+::int\+\_\+corr\+\_\+mode}
+\begin{DoxyCompactList}\small\item\em Correlation integration mode. \end{DoxyCompactList}\item 
+character(len=4) \hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{stoch\+\_\+params\+::mode}
+\begin{DoxyCompactList}\small\item\em Stochastic mode parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}

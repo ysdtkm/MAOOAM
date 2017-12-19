@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Modular arbitrary-order ocean-atmosphere model: MAOOAM -- Fortran implementation</title>
+<title>Modular arbitrary-order ocean-atmosphere model: MAOOAM -- Stochastic Fortran implementation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="MAOOAM_small.png"/></td>
     <td style="padding-left: 0.5em;">
-    <div id="projectbrief">A Modular Arbitrary-Order Ocean-Atmosphere Model</div>
+    <div id="projectbrief">A Modular Arbitrary-Order Ocean-Atmosphere Model -- Stochastic implementation</div>
     </td>
  </tr>
  </tbody>
@@ -83,17 +83,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Modular arbitrary-order ocean-atmosphere model: MAOOAM -- Fortran implementation </div>  </div>
+<div class="title">Modular arbitrary-order ocean-atmosphere model: MAOOAM -- Stochastic Fortran implementation </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h2>About</h2>
-<p>(c) 2013-2016 Lesley De Cruz and Jonathan Demaeyer</p>
-<p>See <a href="../LICENSE.txt">LICENSE.txt</a> for license information.</p>
+<p>(c) 2013-2017 Lesley De Cruz and Jonathan Demaeyer</p>
+<p>See <a href="../../LICENSE.txt">LICENSE.txt</a> for license information.</p>
 <p>This software is provided as supplementary material with:</p>
 <ul>
 <li>De Cruz, L., Demaeyer, J. and Vannitsem, S.: The Modular Arbitrary-Order Ocean-Atmosphere Model: MAOOAM v1.0, Geosci. Model Dev., 9, 2793-2808, <a href="http://dx.doi.org/10.5194/gmd-9-2793-2016">doi:10.5194/gmd-9-2793-2016</a>, 2016.</li>
 </ul>
-<p><b>Please cite this article if you use (a part of) this software for a publication.</b></p>
+<p>for the MAOOAM original code, and with</p>
+<ul>
+<li>for the stochastic part.</li>
+</ul>
+<p><b>Please cite both articles if you use (a part of) this software for a publication.</b></p>
 <p>The authors would appreciate it if you could also send a reprint of your paper to <a href="#" onclick="location.href='mai'+'lto:'+'les'+'le'+'y.d'+'ec'+'ruz'+'@m'+'ete'+'o.'+'be'; return false;">lesle<span style="display: none;">.nosp@m.</span>y.de<span style="display: none;">.nosp@m.</span>cruz@<span style="display: none;">.nosp@m.</span>mete<span style="display: none;">.nosp@m.</span>o.be</a>, <a href="#" onclick="location.href='mai'+'lto:'+'jon'+'at'+'han'+'.d'+'ema'+'ey'+'er@'+'me'+'teo'+'.b'+'e'; return false;">jonat<span style="display: none;">.nosp@m.</span>han.<span style="display: none;">.nosp@m.</span>demae<span style="display: none;">.nosp@m.</span>yer@<span style="display: none;">.nosp@m.</span>meteo<span style="display: none;">.nosp@m.</span>.be</a> and <a href="#" onclick="location.href='mai'+'lto:'+'svn'+'@m'+'ete'+'o.'+'be'; return false;">svn@m<span style="display: none;">.nosp@m.</span>eteo<span style="display: none;">.nosp@m.</span>.be</a>.</p>
 <p>Consult the MAOOAM <a href="http://www.github.com/Climdyn/MAOOAM">code repository</a> for updates, and <a href="http://climdyn.meteo.be">our website</a> for additional resources.</p>
 <p>A pdf version of this manual is available <a href="../latex/Reference_manual.pdf">here</a>. </p><hr/>
@@ -101,10 +105,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>The program can be installed with Makefile. We provide configuration files for two compilers : gfortran and ifort.</p>
 <p>By default, gfortran is selected. To select one or the other, simply modify the Makefile accordingly. If gfortran is selected, the code should be compiled with gfortran 4.7+ (allows for allocatable arrays in namelists). If ifort is selected, the code has been tested with the version 14.0.2 and we do not guarantee compatibility with older compiler version.</p>
 <p>To install, unpack the archive in a folder, and run: make</p>
-<p>Remark: The command "make clean" removes the compiled files.</p>
-<p>For Windows users, a minimalistic GNU development environment (including gfortran and make) is available at <a href="http://www.mingw.org">www.mingw.org</a> . </p><hr/>
+<p>Remark: The command "make clean" removes the compiled files. </p><hr/>
 <h2>Description of the files</h2>
 <p>The model tendencies are represented through a tensor called aotensor which includes all the coefficients. This tensor is computed once at the program initialization.</p>
+<p>The following files are part of the MAOOAM model alone:</p>
 <ul>
 <li><a class="el" href="maooam_8f90.html">maooam.f90</a> : Main program.</li>
 <li><a class="el" href="aotensor__def_8f90.html">aotensor_def.f90</a> : Tensor aotensor computation module.</li>
@@ -129,8 +133,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>int_params.nml : A namelist to specify the integration parameters.</li>
 <li>modeselection.nml : A namelist to specify which spectral decomposition will be used.</li>
 </ul>
+<p>with the addition of the files:</p>
+<ul>
+<li><a class="el" href="maooam__stoch_8f90.html">maooam_stoch.f90</a> : Stochastic implementation of MAOOAM.</li>
+<li><a class="el" href="maooam__MTV_8f90.html">maooam_MTV.f90</a> : Main program - MTV implementation for MAOOAM.</li>
+<li><a class="el" href="maooam__WL_8f90.html">maooam_WL.f90</a> : Main program - WL implementation for MAOOAM.</li>
+<li><a class="el" href="corrmod_8f90.html">corrmod.f90</a> : Unresolved variables correlation matrix initialization module.</li>
+<li><a class="el" href="corr__tensor_8f90.html">corr_tensor.f90</a> : Correlations and derivatives for the memory term of the WL parameterization.</li>
+<li><a class="el" href="dec__tensor_8f90.html">dec_tensor.f90</a> : Tensor resolved-unresolved components decomposition module.</li>
+<li><a class="el" href="int__comp_8f90.html">int_comp.f90</a> : Utility module containing the routines to perform the integration of functions.</li>
+<li><a class="el" href="int__corr_8f90.html">int_corr.f90</a> : Module to compute or load the integrals of the correlation matrices.</li>
+<li><a class="el" href="MAR_8f90.html">MAR.f90</a> : Multidimensional AutoRegressive (MAR) module to generate the correlation for the WL parameterization.</li>
+<li><a class="el" href="memory_8f90.html">memory.f90</a> : WL parameterization memory term \(M_3\) computation module.</li>
+<li><a class="el" href="MTV__int__tensor_8f90.html">MTV_int_tensor.f90</a> : MTV tensors computation module.</li>
+<li><a class="el" href="MTV__sigma__tensor_8f90.html">MTV_sigma_tensor.f90</a> : MTV noise sigma matrices computation module.</li>
+<li><a class="el" href="WL__tensor_8f90.html">WL_tensor.f90</a> : WL tensors computation module.</li>
+<li><a class="el" href="rk2__stoch__integrator_8f90.html">rk2_stoch_integrator.f90</a> : Stochastic RK2 integration routines module.</li>
+<li><a class="el" href="rk2__ss__integrator_8f90.html">rk2_ss_integrator.f90</a> : Stochastic uncoupled resolved nonlinear and tangent linear RK2 dynamics integration module.</li>
+<li><a class="el" href="rk2__MTV__integrator_8f90.html">rk2_MTV_integrator.f90</a> : MTV RK2 integration routines module.</li>
+<li><a class="el" href="rk2__WL__integrator_8f90.html">rk2_WL_integrator.f90</a> : WL RK2 integration routines module.</li>
+<li><a class="el" href="sf__def_8f90.html">sf_def.f90</a> : Module to select the resolved-unresolved components.</li>
+<li>SF.nml : A namelist to select the resolved-unresolved components.</li>
+<li><a class="el" href="sqrt__mod_8f90.html">sqrt_mod.f90</a> : Utility module with various routine to compute matrix square root.</li>
+<li><a class="el" href="stoch__mod_8f90.html">stoch_mod.f90</a> : Utility module containing the stochastic related routines.</li>
+<li><a class="el" href="stoch__params_8f90.html">stoch_params.f90</a> : Stochastic models parameters module.</li>
+<li>stoch_params.nml : A namelist to specify the stochastic models parameters.</li>
+</ul>
+<p>which belong specifically to the stochastic implementation.</p>
 <hr/>
-<h2>Usage</h2>
+<h2>MAOOAM Usage</h2>
 <p>The user first has to fill the params.nml and int_params.nml namelist files according to their needs. Indeed, model and integration parameters can be specified respectively in the params.nml and int_params.nml namelist files. Some examples related to already published article are available in the params folder.</p>
 <p>The modeselection.nml namelist can then be filled :</p><ul>
 <li>NBOC and NBATM specify the number of blocks that will be used in respectively the ocean and the atmosphere. Each block corresponds to a given x and y wavenumber.</li>
@@ -145,22 +176,63 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>evol_field.dat : the recorded time evolution of the variables.</li>
 <li>mean_field.dat : the mean field (the climatology)</li>
 </ul>
-<p>The tangent linear and adjoint models of MAOOAM are provided in the <a class="el" href="namespacetl__ad__tensor.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Tensors definition module...">tl_ad_tensor</a>, rk2_tl_ad_integrator and rk4_tl_ad_integrator modules. It is documented <a href="./md_tl_ad_doc.html">here</a>.</p>
-<hr/>
-<h2>Implementation notes</h2>
-<p>As the system of differential equations is at most bilinear in \(y_j\) ( \(j=1..n\)), \(\boldsymbol{y}\) being the array of variables, it can be expressed as a tensor contraction :</p>
+<p>The tangent linear and adjoint models of MAOOAM are provided in the <a class="el" href="namespacetl__ad__tensor.html" title="Tangent Linear (TL) and Adjoint (AD) model versions of MAOOAM. Tensors definition module...">tl_ad_tensor</a>, rk2_tl_ad_integrator and rk4_tl_ad_integrator modules. It is documented <a href="./md_tl_ad_doc.html">here</a>. </p><hr/>
+<h2>Stochastic code usage</h2>
+<p>The user first has to fill the MAOOAM model namelist files according to their needs (see the previous section). Additional namelist files for the fine tuning of the parameterization must then be filled, and some "definition" files (with the extension .def) must be provided. An example is provided with the code.</p>
+<p>Full details over the parameterization options and definition files are available <a href="md_sto_doc.html">here</a>.</p>
+<p>The program "maooam_stoch" will generate the evolution of the full stochastic dynamics with the command: </p><pre class="fragment">./maooam_stoch
+</pre><p>or any other dynamics if specified as an argument (see the header of <a href="./maooam_stoch.f90">maooam_stoch.f90</a>). It will generate two files :</p><ul>
+<li>evol_field.dat : the recorded time evolution of the variables.</li>
+<li>mean_field.dat : the mean field (the climatology)</li>
+</ul>
+<p>The program "maooam_MTV" will generate the evolution of the MTV parameterization evolution, with the command: </p><pre class="fragment">./maooam_MTV
+</pre><p>It will generate three files :</p><ul>
+<li>evol_MTV.dat : the recorded time evolution of the variables.</li>
+<li>ptend_MTV.dat : the recorded time evolution of the tendencies (used for debugging).</li>
+<li>mean_field_MTV.dat : the mean field (the climatology)</li>
+</ul>
+<p>The program "maooam_WL" will generate the evolution of the MTV parameterization evolution, with the command: </p><pre class="fragment">./maooam_WL
+</pre><p>It will generate three files :</p><ul>
+<li>evol_WL.dat : the recorded time evolution of the variables.</li>
+<li>ptend_WL.dat : the recorded time evolution of the tendencies (used for debugging).</li>
+<li>mean_field_WL.dat : the mean field (the climatology) <hr/>
+</li>
+</ul>
+<h2>MAOOAM Implementation notes</h2>
+<p>As the system of differential equations is at most bilinear in \(z_j\) ( \(j=1..n\)), \(\boldsymbol{z}\) being the array of variables, it can be expressed as a tensor contraction :</p>
 <p class="formulaDsp">
-\[ \frac{d y_i}{dt} = \sum_{j,k=0}^{ndim} \, \mathcal{T}_{i,j,k} \, y_k \; y_j \]
+\[ \frac{d z_i}{dt} = \sum_{j,k=0}^{ndim} \, \mathcal{T}_{i,j,k} \, z_k \; z_j \]
 </p>
-<p>with \(y_0 = 1\).</p>
+<p>with \(z_0 = 1\).</p>
 <p>The tensor <a class="el" href="namespaceaotensor__def.html#a0dc43bc9294a18f2fe57b67489f1702f" title=" - Tensor representation of the tendencies. ">aotensor_def::aotensor</a> is the tensor \(\mathcal{T}\) that encodes the differential equations is composed so that:</p>
 <ul>
-<li>\(\mathcal{T}_{i,j,k}\) contains the contribution of \(dy_i/dt\) proportional to \( y_j \, y_k\).</li>
-<li>Furthermore, \(y_0\) is always equal to 1, so that \(\mathcal{T}_{i,0,0}\) is the constant contribution to \(dy_i/dt\)</li>
-<li>\(\mathcal{T}_{i,j,0} + \mathcal{T}_{i,0,j}\) is the contribution to \(dy_i/dt\) which is linear in \(y_j\).</li>
+<li>\(\mathcal{T}_{i,j,k}\) contains the contribution of \(dz_i/dt\) proportional to \( z_j \, z_k\).</li>
+<li>Furthermore, \(z_0\) is always equal to 1, so that \(\mathcal{T}_{i,0,0}\) is the constant contribution to \(dz_i/dt\)</li>
+<li>\(\mathcal{T}_{i,j,0} + \mathcal{T}_{i,0,j}\) is the contribution to \(dz_i/dt\) which is linear in \(z_j\).</li>
 </ul>
 <p>Ideally, the tensor <a class="el" href="namespaceaotensor__def.html#a0dc43bc9294a18f2fe57b67489f1702f" title=" - Tensor representation of the tendencies. ">aotensor_def::aotensor</a> is composed as an upper triangular matrix (in the last two coordinates).</p>
-<p>The tensor for this model is composed in the <a class="el" href="namespaceaotensor__def.html" title="The equation tensor for the coupled ocean-atmosphere model with temperature which allows for an exten...">aotensor_def</a> module and uses the inner products defined in the <a class="el" href="namespaceinprod__analytic.html" title="Inner products between the truncated set of basis functions for the ocean and atmosphere streamfuncti...">inprod_analytic</a> module.</p>
+<p>The tensor for this model is composed in the <a class="el" href="namespaceaotensor__def.html" title="The equation tensor for the coupled ocean-atmosphere model with temperature which allows for an exten...">aotensor_def</a> module and uses the inner products defined in the <a class="el" href="namespaceinprod__analytic.html" title="Inner products between the truncated set of basis functions for the ocean and atmosphere streamfuncti...">inprod_analytic</a> module. </p><hr/>
+<h2>Stochastic code implementation notes</h2>
+<p>A stochastic version of MAOOAM and two stochastic parameterization methods (MTV and WL) are provided with this code.</p>
+<p>The stochastic version of MAOOAM is given by</p>
+<p class="formulaDsp">
+\[ \frac{d \boldsymbol{z}}{dt} = f(\boldsymbol{z})+ \boldsymbol{q} \cdot \boldsymbol{dW} (t)\]
+</p>
+<p>where \(\boldsymbol{dW}\) is a vector of standard Gaussian White noise and where several choice for \(f(\boldsymbol{z})\) are available. For instance, the default choice is to use the full dynamics: </p><p class="formulaDsp">
+\[ f(\boldsymbol{z}) = \sum_{j,k=0}^{ndim} \, \mathcal{T}_{i,j,k} \, z_k \; z_j . \]
+</p>
+<p> The implementation uses the tensorial framework described above and add some noise to it. This stochastic version is further detailed <a href="md_sto_doc.html">here</a>.</p>
+<p>The MTV parameterization for MAOOAM is given by</p>
+<p class="formulaDsp">
+\[ \frac{d\boldsymbol{x}}{dt} = F_x(\boldsymbol{x}) + \frac{1}{\delta} R(\boldsymbol{x}) + G(\boldsymbol{x}) + \sqrt{2} \,\, \boldsymbol{\sigma}(\boldsymbol{x}) \cdot \boldsymbol{dW} \]
+</p>
+<p>where \(\boldsymbol{x}\) is the set of resolved variables and \(\boldsymbol{dW}\) is a vector of standard Gaussian White noise. \(F_x\) is the set of tendencies of resolved system alone and \(\delta\) is the timescale separation parameter.</p>
+<p>The WL parameterizations for MAOOAM is given by</p>
+<p class="formulaDsp">
+\[\frac{d\boldsymbol{x}}{dt} = F_x(\boldsymbol{x}) + \varepsilon \, M_1(\boldsymbol{x}) + \varepsilon^2 \, M_2(\boldsymbol{x},t) + \varepsilon^2 \, M_3 (\boldsymbol{x},t)\]
+</p>
+<p>where \(\varepsilon\) is the resolved-unresolved components coupling strenght and where the different terms \(M_i\) account for different effect.</p>
+<p>The implementation for these two approaches uses the tensorial framework described above, with the addition of new tensors to account for the terms \(R,G,\sigma,M_1,M_2,M_3\). They are detailed more completely <a href="md_sto_doc.html">here</a>.</p>
 <hr/>
 <h2>Final Remarks</h2>
 <p>The authors would like to thank Kris for help with the lua2fortran project. It has greatly reduced the amount of (error-prone) work.</p>
@@ -168,7 +240,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 5 2017 15:58:40 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 19 2017 15:41:20 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

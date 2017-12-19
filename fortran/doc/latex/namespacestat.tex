@@ -89,7 +89,8 @@ Definition at line 35 of file stat.\+f90.
 \begin{DoxyCode}
 35       \textcolor{keywordtype}{INTEGER} :: allocstat
 36       
-37       \textcolor{keyword}{ALLOCATE}(m(0:ndim),mprev(0:ndim),v(0:ndim),mtmp(0:ndim), \hyperlink{namespacestat}{stat}=allocstat\textcolor{comment}{)}
+37       \textcolor{keyword}{ALLOCATE}(m(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),mprev(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),v(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),mtmp(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), 
+      \hyperlink{namespacestat}{stat}=allocstat\textcolor{comment}{)}
 38 \textcolor{comment}{      }\textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{'*** Not enough memory ***'}
 39       m=0.d0
 40       mprev=0.d0

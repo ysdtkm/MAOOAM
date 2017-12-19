@@ -1,0 +1,57 @@
+!------------------------------------------------------------------------------!
+! Namelist file :                                                              !
+! Parameters for the stochastic models.                                        !
+!------------------------------------------------------------------------------!
+
+! Parameters of the MTV parameterization
+&MTVPARAMS
+  MNUTI = 0.01D0        ! Multiplicative noise update time interval 
+&END
+
+! Parameters of the WL parameterization
+&WLPARAMS
+  MUTI = 0.5D0          ! Memory update time interval
+  MEML = 400.D0        ! Time over which the memory kernel is integrated
+  ! Integration mode for the resolved component	    
+  ! 'reso': resolved intrinsic full dynamics
+  ! 'tang': resolved tangent linear dynamics
+  X_INT_MODE = 'reso'  
+  T_TRANS_MEM = 5.D4   ! Transient period of the stochastic model to initialize the memory term (e.g. 2.D5)
+  DTS = 0.25D0         ! Intrisic resolved dynamics time step
+&END
+
+! Parameter of the stochastic tendencies
+&STPARAMS
+  Q_AR = 0.5D-4        ! Atmospheric resolved component noise amplitude
+  Q_AU = 0.5D-4        ! Atmospheric unresolved component noise amplitude
+  Q_OR = 0.0D0         ! Oceanic resolved component noise amplitude
+  Q_OU = 0.0D0         ! Oceanic unresolved component noise amplitude
+  EPS_PERT = 1.0       ! Perturbation parameter for the coupling between res and unres.
+  TDELTA = 1.0         ! Time separation parameter
+  T_TRANS_STOCH = 5.D4 ! Transient period of the stochastic model (e.g. 2.D6)
+&END
+
+! Stochastic parameterization mode parameter
+&STOCH_INT_PARAMS
+! Parameterization mode :
+!    'full':  use the full dynamics
+!    'ures': use the intrinsic unresolved dynamics 
+!    'qfst':  use the quadratic terms of the unresolved tendencies
+  MODE='ures'
+&END
+
+! Initialisation parameters for the correlations.                              !
+&CORR_INIT_MODE
+! Loading mode = 'defi': from an analytical definition encoded in the corrmod module
+!                'spli': from a spline definition file 'corrspline.def'
+!		 'expo': from a fit with exponentials definition file 'correxpo.def'
+  LOAD_MODE = 'expo'   
+
+! Correlation integration mode = 'file': Integration results provided by files 'corrint.def'
+!				 and 'corr2int.def'
+!                		 'prog' computed directly by the program with the loaded correlation
+  INT_CORR_MODE = 'file'
+
+  MAXINT = 4.D3          ! Upper integration limit of the correlations
+&END
+

@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="MAOOAM_small.png"/></td>
     <td style="padding-left: 0.5em;">
-    <div id="projectbrief">A Modular Arbitrary-Order Ocean-Atmosphere Model</div>
+    <div id="projectbrief">A Modular Arbitrary-Order Ocean-Atmosphere Model -- Stochastic implementation</div>
     </td>
  </tr>
  </tbody>
@@ -153,7 +153,8 @@ Variables</h2></td></tr>
 <p>Routine to initialise the integration buffers. </p>
 
 <p>Definition at line <a class="el" href="rk2__integrator_8f90_source.html#l00037">37</a> of file <a class="el" href="rk2__integrator_8f90_source.html">rk2_integrator.f90</a>.</p>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">INTEGER</span> :: allocstat</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">ALLOCATE</span>(buf_y1(0:ndim),buf_f0(0:ndim),buf_f1(0:ndim) ,<a class="code" href="namespacestat.html">stat</a>=allocstat)</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">IF</span> (allocstat /= 0) stop <span class="stringliteral">&quot;*** Not enough memory ! ***&quot;</span></div><div class="ttc" id="namespacestat_html"><div class="ttname"><a href="namespacestat.html">stat</a></div><div class="ttdoc">Statistics accumulators. </div><div class="ttdef"><b>Definition:</b> <a href="stat_8f90_source.html#l00014">stat.f90:14</a></div></div>
+<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">INTEGER</span> :: allocstat</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">ALLOCATE</span>(buf_y1(0:<a class="code" href="namespaceparams.html#a2323fe1773f086e20c14f266351c482b">ndim</a>),buf_f0(0:<a class="code" href="namespaceparams.html#a2323fe1773f086e20c14f266351c482b">ndim</a>),buf_f1(0:<a class="code" href="namespaceparams.html#a2323fe1773f086e20c14f266351c482b">ndim</a>) ,<a class="code" href="namespacestat.html">stat</a>=allocstat)</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">IF</span> (allocstat /= 0) stop <span class="stringliteral">&quot;*** Not enough memory ! ***&quot;</span></div><div class="ttc" id="namespaceparams_html_a2323fe1773f086e20c14f266351c482b"><div class="ttname"><a href="namespaceparams.html#a2323fe1773f086e20c14f266351c482b">params::ndim</a></div><div class="ttdeci">integer ndim</div><div class="ttdoc">Number of variables (dimension of the model) </div><div class="ttdef"><b>Definition:</b> <a href="params_8f90_source.html#l00079">params.f90:79</a></div></div>
+<div class="ttc" id="namespacestat_html"><div class="ttname"><a href="namespacestat.html">stat</a></div><div class="ttdoc">Statistics accumulators. </div><div class="ttdef"><b>Definition:</b> <a href="stat_8f90_source.html#l00014">stat.f90:14</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -259,7 +260,8 @@ Variables</h2></td></tr>
 <dl class="section remark"><dt>Remarks</dt><dd>Note that it is NOT safe to pass <code>y</code> as a result buffer, as this operation does multiple passes. </dd></dl>
 
 <p>Definition at line <a class="el" href="rk2__integrator_8f90_source.html#l00049">49</a> of file <a class="el" href="rk2__integrator_8f90_source.html">rk2_integrator.f90</a>.</p>
-<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">INTENT(IN)</span> :: t</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(0:ndim)</span>, <span class="keywordtype">INTENT(IN)</span> :: y</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(0:ndim)</span>, <span class="keywordtype">INTENT(OUT)</span> :: res</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">CALL </span>sparse_mul3(aotensor, y, y, res)</div></div><!-- fragment -->
+<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">INTENT(IN)</span> :: t</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(0:ndim)</span>, <span class="keywordtype">INTENT(IN)</span> :: y</div><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">REAL(KIND=8)</span>, <span class="keywordtype">DIMENSION(0:ndim)</span>, <span class="keywordtype">INTENT(OUT)</span> :: res</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">CALL </span>sparse_mul3(<a class="code" href="namespaceaotensor__def.html#a0dc43bc9294a18f2fe57b67489f1702f">aotensor</a>, y, y, res)</div><div class="ttc" id="namespaceaotensor__def_html_a0dc43bc9294a18f2fe57b67489f1702f"><div class="ttname"><a href="namespaceaotensor__def.html#a0dc43bc9294a18f2fe57b67489f1702f">aotensor_def::aotensor</a></div><div class="ttdeci">type(coolist), dimension(:), allocatable, public aotensor</div><div class="ttdoc"> - Tensor representation of the tendencies. </div><div class="ttdef"><b>Definition:</b> <a href="aotensor__def_8f90_source.html#l00045">aotensor_def.f90:45</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -386,7 +388,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 5 2017 15:58:40 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 19 2017 15:41:19 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

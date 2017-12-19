@@ -1,0 +1,365 @@
+\hypertarget{namespacememory}{}\section{memory Module Reference}
+\label{namespacememory}\index{memory@{memory}}
+
+
+Module that compute the memory term $M_3$ of the WL parameterization.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacememory_ab130f53c70f8b6e46e81ce851a1cdce1}{init\+\_\+memory}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the memory. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacememory_a76521fb2ecada5d623e947547314a5d6}{compute\+\_\+m3} (y, dt, dtn, savey, save\+\_\+ev, evolve, inter, h\+\_\+int)
+\begin{DoxyCompactList}\small\item\em Compute the integrand of $M_3$ at each time in the past and integrate to get the memory term. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacememory_a47338910873d83feb93ce970b45f8ed7}{test\+\_\+m3} (y, dt, dtn, h\+\_\+int)
+\begin{DoxyCompactList}\small\item\em Routine to test the \#compute\+\_\+\+M3 routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacememory_aa7e328e0fcaf0f4fdf9dc450ccfdfd5b}{x}
+\begin{DoxyCompactList}\small\item\em Array storing the previous state of the system. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacememory_ab57f9b5df41de423255f146f2cf3220a}{xs}
+\begin{DoxyCompactList}\small\item\em Array storing the resolved time evolution of the previous state of the system. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacememory_a7ea83fadf351bfaa6c8ec2540cb80a87}{zs}
+\begin{DoxyCompactList}\small\item\em Dummy array to replace Xs in case where the evolution is not stored. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacememory_a533d8a2daef9b9feb5ee1cad8b2ae0c7}{buf\+\_\+m}
+\begin{DoxyCompactList}\small\item\em Dummy vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacememory_a69ca63c73a29fb91cce2a4c640c94403}{buf\+\_\+m3}
+\begin{DoxyCompactList}\small\item\em Dummy vector to store the $M_3$ integrand. \end{DoxyCompactList}\item 
+integer \hyperlink{namespacememory_a44d4dddcb5f5cbcbab4164c85448193d}{t\+\_\+index}
+\begin{DoxyCompactList}\small\item\em Integer storing the time index (current position in the arrays) \end{DoxyCompactList}\item 
+procedure(ss\+\_\+step), pointer \hyperlink{namespacememory_ab1b54ce36a854642cb662080f609a897}{step}
+\begin{DoxyCompactList}\small\item\em Procedural pointer pointing on the resolved dynamics step routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module that compute the memory term $M_3$ of the WL parameterization. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{memory@{memory}!compute\+\_\+m3@{compute\+\_\+m3}}
+\index{compute\+\_\+m3@{compute\+\_\+m3}!memory@{memory}}
+\subsubsection[{\texorpdfstring{compute\+\_\+m3(y, dt, dtn, savey, save\+\_\+ev, evolve, inter, h\+\_\+int)}{compute_m3(y, dt, dtn, savey, save_ev, evolve, inter, h_int)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public memory\+::compute\+\_\+m3 (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{logical, intent(in)}]{savey, }
+\item[{logical, intent(in)}]{save\+\_\+ev, }
+\item[{logical, intent(in)}]{evolve, }
+\item[{real(kind=8), intent(in)}]{inter, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{h\+\_\+int}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacememory_a76521fb2ecada5d623e947547314a5d6}{}\label{namespacememory_a76521fb2ecada5d623e947547314a5d6}
+
+
+Compute the integrand of $M_3$ at each time in the past and integrate to get the memory term. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & current state \\
+\hline
+{\em dt} & timestep \\
+\hline
+{\em dtn} & stochastic timestep \\
+\hline
+{\em savey} & set if the state is stored in X at the end \\
+\hline
+{\em save\+\_\+ev} & set if the result of the resolved time evolution is stored in Xs at the end \\
+\hline
+{\em evolve} & set if the resolved time evolution is performed \\
+\hline
+{\em inter} & set over which time interval the resolved time evolution must be computed \\
+\hline
+{\em h\+\_\+int} & result of the integration -\/ give the memory term \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 86 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+86     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+87     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+88     \textcolor{keywordtype}{LOGICAL}, \textcolor{keywordtype}{INTENT(IN)} :: savey,save\_ev,evolve
+89     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: inter 
+90     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: h\_int
+91     \textcolor{keywordtype}{REAL(KIND=8)} :: t
+92     \textcolor{keywordtype}{INTEGER} :: i,j
+93     
+94     x(:,t\_index)=y
+95     \textcolor{keywordflow}{IF} (b23def) \textcolor{keywordflow}{THEN}
+96        xs(:,t\_index)=y
+97        zs(:,t\_index)=y
+98        \textcolor{keywordflow}{DO} i=1,mems-1
+99           j=modulo(t\_index+i-1,mems)+1
+100           zs(:,j)=xs(:,j)
+101           \textcolor{keywordflow}{IF} (evolve) \textcolor{keywordflow}{THEN}
+102              \textcolor{keywordflow}{IF} (dt.lt.inter) \textcolor{keywordflow}{THEN}
+103                 t=0.d0
+104                 \textcolor{keywordflow}{DO} \textcolor{keywordflow}{WHILE} (t+dt<inter)
+105                    \textcolor{keyword}{CALL }step(zs(:,j),y,t,dt,dtn,zs(:,j))
+106 \textcolor{keywordflow}{                ENDDO}
+107                 \textcolor{keyword}{CALL }step(zs(:,j),y,t,inter-t,sqrt(inter-t),zs(:,j))
+108              \textcolor{keywordflow}{ELSE}
+109                 \textcolor{keyword}{CALL }step(zs(:,j),y,t,inter,sqrt(inter),zs(:,j))
+110 \textcolor{keywordflow}{             ENDIF}
+111 \textcolor{keywordflow}{          ENDIF}
+112           \textcolor{keywordflow}{IF} (save\_ev) xs(:,j)=zs(:,j)
+113 \textcolor{keywordflow}{       ENDDO}
+114 \textcolor{keywordflow}{    ENDIF}
+115     
+116 
+117     \textcolor{comment}{! Computing the integral}
+118     h\_int=0.d0
+119 
+120     \textcolor{keywordflow}{DO} i=1,mems
+121        j=modulo(t\_index+i-2,mems)+1
+122        buf\_m3=0.d0
+123        \textcolor{keywordflow}{IF} (ldef) \textcolor{keywordflow}{THEN}
+124           \textcolor{keyword}{CALL }sparse\_mul3(ltot(:,i),y,x(:,j),buf\_m)
+125           buf\_m3=buf\_m3+buf\_m
+126 \textcolor{keywordflow}{       ENDIF}
+127        \textcolor{keywordflow}{IF} (b14def) \textcolor{keywordflow}{THEN}
+128           \textcolor{keyword}{CALL }sparse\_mul3(b14(:,i),x(:,j),x(:,j),buf\_m)
+129           buf\_m3=buf\_m3+buf\_m
+130 \textcolor{keywordflow}{       ENDIF}
+131        \textcolor{keywordflow}{IF} (b23def) \textcolor{keywordflow}{THEN}
+132           \textcolor{keyword}{CALL }sparse\_mul3(b23(:,i),x(:,j),zs(:,j),buf\_m)
+133           buf\_m3=buf\_m3+buf\_m
+134 \textcolor{keywordflow}{       ENDIF}
+135        \textcolor{keywordflow}{IF} (mdef) \textcolor{keywordflow}{THEN}
+136           \textcolor{keyword}{CALL }sparse\_mul4(mtot(:,i),x(:,j),x(:,j),zs(:,j),buf\_m)
+137           buf\_m3=buf\_m3+buf\_m
+138 \textcolor{keywordflow}{       ENDIF}
+139        \textcolor{keywordflow}{IF} ((i.eq.1).or.(i.eq.mems)) \textcolor{keywordflow}{THEN}
+140           h\_int=h\_int+0.5*buf\_m3
+141        \textcolor{keywordflow}{ELSE}
+142           h\_int=h\_int+buf\_m3
+143 \textcolor{keywordflow}{       ENDIF}
+144 \textcolor{keywordflow}{    ENDDO}
+145 
+146     h\_int=muti*h\_int
+147     \textcolor{keywordflow}{IF} (savey) \textcolor{keywordflow}{THEN}
+148        t\_index=t\_index-1
+149        \textcolor{keywordflow}{IF} (t\_index.eq.0) t\_index=mems
+150 \textcolor{keywordflow}{    ENDIF}
+\end{DoxyCode}
+\index{memory@{memory}!init\+\_\+memory@{init\+\_\+memory}}
+\index{init\+\_\+memory@{init\+\_\+memory}!memory@{memory}}
+\subsubsection[{\texorpdfstring{init\+\_\+memory}{init_memory}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public memory\+::init\+\_\+memory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacememory_ab130f53c70f8b6e46e81ce851a1cdce1}{}\label{namespacememory_ab130f53c70f8b6e46e81ce851a1cdce1}
+
+
+Subroutine to initialise the memory. 
+
+
+
+Definition at line 45 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+45     \textcolor{keywordtype}{INTEGER} :: allocstat
+46 
+47     t\_index=mems
+48 
+49     \textcolor{keyword}{ALLOCATE}(x(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},mems), \hyperlink{namespacestat}{stat}=allocstat)
+50     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+51 
+52     x=0.d0
+53     
+54     \textcolor{keywordflow}{IF} (b23def) \textcolor{keywordflow}{THEN}
+55        \textcolor{keyword}{ALLOCATE}(xs(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},mems), zs(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},mems), \hyperlink{namespacestat}{stat}=allocstat)
+56        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+57 
+58        xs=0.d0
+59 \textcolor{keywordflow}{    ENDIF}
+60 
+61     \textcolor{keyword}{ALLOCATE}(buf\_m3(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), buf\_m(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+62     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+63     
+64     \textcolor{keywordflow}{SELECT CASE} (x\_int\_mode)
+65     \textcolor{keywordflow}{CASE}(\textcolor{stringliteral}{'reso'})
+66        step => ss\_step
+67     \textcolor{keywordflow}{CASE}(\textcolor{stringliteral}{'tang'})
+68        step => ss\_tl\_step
+69 \textcolor{keywordflow}{    CASE DEFAULT}
+70        stop \textcolor{stringliteral}{'*** X\_INT\_MODE variable not properly defined in stoch\_params.nml ***'}
+71 \textcolor{keywordflow}{    END SELECT}
+72     
+\end{DoxyCode}
+\index{memory@{memory}!test\+\_\+m3@{test\+\_\+m3}}
+\index{test\+\_\+m3@{test\+\_\+m3}!memory@{memory}}
+\subsubsection[{\texorpdfstring{test\+\_\+m3(y, dt, dtn, h\+\_\+int)}{test_m3(y, dt, dtn, h_int)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public memory\+::test\+\_\+m3 (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{h\+\_\+int}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacememory_a47338910873d83feb93ce970b45f8ed7}{}\label{namespacememory_a47338910873d83feb93ce970b45f8ed7}
+
+
+Routine to test the \#compute\+\_\+\+M3 routine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & current state \\
+\hline
+{\em dt} & timestep \\
+\hline
+{\em dtn} & stochastic timestep \\
+\hline
+{\em h\+\_\+int} & result of the integration -\/ give the memory term \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 159 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+159     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+160     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+161     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: h\_int
+162     \textcolor{keywordtype}{INTEGER} :: i,j
+163     
+164     \textcolor{keyword}{CALL }compute\_m3(y,dt,dtn,.true.,.true.,.true.,muti,h\_int)
+165     print*, t\_index
+166     print*, \textcolor{stringliteral}{'X'}
+167     \textcolor{keywordflow}{DO} i=1,mems
+168        j=modulo(t\_index+i-1,mems)+1
+169        print*, i,j,x(1,j)
+170 \textcolor{keywordflow}{    ENDDO}
+171     
+172     \textcolor{keywordflow}{IF} (b23def) \textcolor{keywordflow}{THEN}
+173        print*, \textcolor{stringliteral}{'Xs'}
+174        \textcolor{keywordflow}{DO} i=1,mems
+175           j=modulo(t\_index+i-1,mems)+1
+176           print*, i,j,xs(1,j)
+177 \textcolor{keywordflow}{       ENDDO}
+178 \textcolor{keywordflow}{    ENDIF}
+179     print*, \textcolor{stringliteral}{'h\_int'},h\_int
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{memory@{memory}!buf\+\_\+m@{buf\+\_\+m}}
+\index{buf\+\_\+m@{buf\+\_\+m}!memory@{memory}}
+\subsubsection[{\texorpdfstring{buf\+\_\+m}{buf_m}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable memory\+::buf\+\_\+m\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacememory_a533d8a2daef9b9feb5ee1cad8b2ae0c7}{}\label{namespacememory_a533d8a2daef9b9feb5ee1cad8b2ae0c7}
+
+
+Dummy vector. 
+
+
+
+Definition at line 31 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+31   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_m\textcolor{comment}{ !< Dummy vector}
+\end{DoxyCode}
+\index{memory@{memory}!buf\+\_\+m3@{buf\+\_\+m3}}
+\index{buf\+\_\+m3@{buf\+\_\+m3}!memory@{memory}}
+\subsubsection[{\texorpdfstring{buf\+\_\+m3}{buf_m3}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable memory\+::buf\+\_\+m3\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacememory_a69ca63c73a29fb91cce2a4c640c94403}{}\label{namespacememory_a69ca63c73a29fb91cce2a4c640c94403}
+
+
+Dummy vector to store the $M_3$ integrand. 
+
+
+
+Definition at line 32 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_m3\textcolor{comment}{ !< Dummy vector to store the \(\backslash\)f$M\_3\(\backslash\)f$ integrand}
+\end{DoxyCode}
+\index{memory@{memory}!step@{step}}
+\index{step@{step}!memory@{memory}}
+\subsubsection[{\texorpdfstring{step}{step}}]{\setlength{\rightskip}{0pt plus 5cm}procedure(ss\+\_\+step), pointer memory\+::step\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacememory_ab1b54ce36a854642cb662080f609a897}{}\label{namespacememory_ab1b54ce36a854642cb662080f609a897}
+
+
+Procedural pointer pointing on the resolved dynamics step routine. 
+
+
+
+Definition at line 36 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+36   \textcolor{keywordtype}{PROCEDURE}(ss\_step), \textcolor{keywordtype}{POINTER} :: step\textcolor{comment}{ !< Procedural pointer pointing on the resolved dynamics step routine}
+\end{DoxyCode}
+\index{memory@{memory}!t\+\_\+index@{t\+\_\+index}}
+\index{t\+\_\+index@{t\+\_\+index}!memory@{memory}}
+\subsubsection[{\texorpdfstring{t\+\_\+index}{t_index}}]{\setlength{\rightskip}{0pt plus 5cm}integer memory\+::t\+\_\+index\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacememory_a44d4dddcb5f5cbcbab4164c85448193d}{}\label{namespacememory_a44d4dddcb5f5cbcbab4164c85448193d}
+
+
+Integer storing the time index (current position in the arrays) 
+
+
+
+Definition at line 34 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+34   \textcolor{keywordtype}{INTEGER} :: t\_index\textcolor{comment}{ !< Integer storing the time index (current position in the arrays)}
+\end{DoxyCode}
+\index{memory@{memory}!x@{x}}
+\index{x@{x}!memory@{memory}}
+\subsubsection[{\texorpdfstring{x}{x}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable memory\+::x\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacememory_aa7e328e0fcaf0f4fdf9dc450ccfdfd5b}{}\label{namespacememory_aa7e328e0fcaf0f4fdf9dc450ccfdfd5b}
+
+
+Array storing the previous state of the system. 
+
+
+
+Definition at line 28 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+28   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: x\textcolor{comment}{ !< Array storing the previous state of the system}
+\end{DoxyCode}
+\index{memory@{memory}!xs@{xs}}
+\index{xs@{xs}!memory@{memory}}
+\subsubsection[{\texorpdfstring{xs}{xs}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable memory\+::xs\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacememory_ab57f9b5df41de423255f146f2cf3220a}{}\label{namespacememory_ab57f9b5df41de423255f146f2cf3220a}
+
+
+Array storing the resolved time evolution of the previous state of the system. 
+
+
+
+Definition at line 29 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+29   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: xs\textcolor{comment}{ !< Array storing the resolved time evolution of the
+       previous state of the system}
+\end{DoxyCode}
+\index{memory@{memory}!zs@{zs}}
+\index{zs@{zs}!memory@{memory}}
+\subsubsection[{\texorpdfstring{zs}{zs}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable memory\+::zs\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacememory_a7ea83fadf351bfaa6c8ec2540cb80a87}{}\label{namespacememory_a7ea83fadf351bfaa6c8ec2540cb80a87}
+
+
+Dummy array to replace Xs in case where the evolution is not stored. 
+
+
+
+Definition at line 30 of file memory.\+f90.
+
+
+\begin{DoxyCode}
+30   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: zs\textcolor{comment}{ !< Dummy array to replace Xs in case where the evolution
+       is not stored}
+\end{DoxyCode}

@@ -12,11 +12,11 @@ where $ \mathcal{T}_{i,j,k}$ is the tensor of the nonlinear model.
 
 These two tensors are used to compute the trajectories of the models, with the equations
 
-\[ \frac{d\delta y_i}{dt} = \sum_{j=1}^{ndim}\sum_{k=0}^{ndim} \, \mathcal{T}_{i,j,k}^{TL} \, y^{\ast}_k \; \delta y_j . \]
+\[ \frac{d\delta z_i}{dt} = \sum_{j=1}^{ndim}\sum_{k=0}^{ndim} \, \mathcal{T}_{i,j,k}^{TL} \, y^{\ast}_k \; \delta z_j . \]
 
-\[ -\frac{d\delta y_i}{dt} = \sum_{j=1}^{ndim} \sum_{k=0}^{ndim} \, \mathcal{T}_{i,j,k}^{AD} \, y^{\ast}_k \; \delta y_j . \]
+\[ -\frac{d\delta z_i}{dt} = \sum_{j=1}^{ndim} \sum_{k=0}^{ndim} \, \mathcal{T}_{i,j,k}^{AD} \, y^{\ast}_k \; \delta z_j . \]
 
-where $\boldsymbol{y}^{\ast}$ is the point where the Tangent model is defined (with $y_0^{\ast}=1$).
+where $\boldsymbol{y}^{\ast}$ is the point where the Tangent model is defined (with $z_0^{\ast}=1$).
 
 \subsection*{Implementation \+:}
 

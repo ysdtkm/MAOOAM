@@ -6,6 +6,10 @@ var searchData=
   ['phi0',['phi0',['../namespaceparams.html#a7e58166ca3fb2153f781aa623c5c31e6',1,'params']]],
   ['phi0_5fnpi',['phi0_npi',['../namespaceparams.html#a516e6c305e938087cfe780629c76ef64',1,'params']]],
   ['pi',['pi',['../namespaceparams.html#aaed8cf35d6e94ec5a9aeab80125e470f',1,'params']]],
+  ['polint',['polint',['../namespaceint__comp.html#a0124c395371f5bfddb47dd0bd6cd7546',1,'int_comp']]],
+  ['print_5ftensor',['print_tensor',['../namespacetensor.html#a5747516cd8a6fc9079fbb82d1b18dd98',1,'tensor']]],
+  ['print_5ftensor4',['print_tensor4',['../namespacetensor.html#acb57d076f51b89419e4e8254ce13dd62',1,'tensor']]],
+  ['printmat',['printmat',['../namespaceutil.html#a71eb7216e62e0978ad1424bd4dbd727a',1,'util']]],
   ['psi',['psi',['../namespaceaotensor__def.html#afa05aa849a8cb9e08b36dee6560986b8',1,'aotensor_def']]],
   ['publish',['publish',['../LICENSE_8txt.html#ae6b6c4d3ae1a4140d31294e27bb0ebd8',1,'LICENSE.txt']]]
 ];

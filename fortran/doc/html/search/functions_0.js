@@ -8,5 +8,12 @@ var searchData=
   ['ad_5fcoeff',['ad_coeff',['../namespacetl__ad__tensor.html#a177e8f1ebac5de029f565ef7624926f2',1,'tl_ad_tensor']]],
   ['ad_5fcoeff_5fref',['ad_coeff_ref',['../namespacetl__ad__tensor.html#aef0157a16688323e3c855ef451d6948f',1,'tl_ad_tensor']]],
   ['ad_5fstep',['ad_step',['../namespacetl__ad__integrator.html#a708ece5eac01486e65e889d19073fd19',1,'tl_ad_integrator']]],
-  ['add_5fcount',['add_count',['../namespaceaotensor__def.html#ac8104c190904681c1fd27eec036114aa',1,'aotensor_def']]]
+  ['add_5fcount',['add_count',['../namespaceaotensor__def.html#ac8104c190904681c1fd27eec036114aa',1,'aotensor_def']]],
+  ['add_5fmatc_5fto_5ftensor',['add_matc_to_tensor',['../namespacetensor.html#a4c63a1dd16bf751220f016b41bdaa78c',1,'tensor']]],
+  ['add_5fmatc_5fto_5ftensor4',['add_matc_to_tensor4',['../namespacetensor.html#ab32e3f9d0aab15d2fa34dc3e509ee8bf',1,'tensor']]],
+  ['add_5fto_5ftensor',['add_to_tensor',['../namespacetensor.html#aad7cd55f3a4cec4676cc7ca34b05f1a8',1,'tensor']]],
+  ['add_5fvec_5fijk_5fto_5ftensor4',['add_vec_ijk_to_tensor4',['../namespacetensor.html#adfadc0660ec0e87b9d0dd3c383919d6b',1,'tensor']]],
+  ['add_5fvec_5fikl_5fto_5ftensor4',['add_vec_ikl_to_tensor4',['../namespacetensor.html#a4dd51ee85d6dffa3350880defc9823e8',1,'tensor']]],
+  ['add_5fvec_5fikl_5fto_5ftensor4_5fperm',['add_vec_ikl_to_tensor4_perm',['../namespacetensor.html#a9e443c5b0f095efdbb0df2e876b760be',1,'tensor']]],
+  ['add_5fvec_5fjk_5fto_5ftensor',['add_vec_jk_to_tensor',['../namespacetensor.html#aaa98410f224bc3dfb96cd7031f56e916',1,'tensor']]]
 ];

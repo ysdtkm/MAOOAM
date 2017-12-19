@@ -15,7 +15,33 @@ character(len=40) function, public \hyperlink{namespaceutil_ac1630658a46867b1f72
 subroutine, public \hyperlink{namespaceutil_a3c2dcf05b068a55f0066d2b393e75dc7}{init\+\_\+random\+\_\+seed} ()
 \begin{DoxyCompactList}\small\item\em Random generator initialization routine. \end{DoxyCompactList}\item 
 subroutine, public \hyperlink{namespaceutil_aca7f2465fedb87fef954d8f0c30668c7}{init\+\_\+one} (A)
-\begin{DoxyCompactList}\small\item\em Initialize a square matrix A as a unit matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Initialize a square matrix A as a unit matrix. \end{DoxyCompactList}\item 
+real(kind=8) function, public \hyperlink{namespaceutil_a9771c95546d8658e72aa24f76612e4d8}{mat\+\_\+trace} (A)
+\item 
+real(kind=8) function, public \hyperlink{namespaceutil_a8a0e15c77e8cd4cb03b608e4d6bfba67}{mat\+\_\+contract} (A, B)
+\item 
+subroutine, public \hyperlink{namespaceutil_ab832eeb8a78ffacc12e3ceac27f95ee7}{choldc} (a, p)
+\item 
+subroutine, public \hyperlink{namespaceutil_a71eb7216e62e0978ad1424bd4dbd727a}{printmat} (A)
+\item 
+subroutine, public \hyperlink{namespaceutil_ac600300c2251c6c6b555fe7255605aa5}{cprintmat} (A)
+\item 
+real(kind=8) function, dimension(size(a, 1), size(a, 2)), public \hyperlink{namespaceutil_a52a5fbd944196d1cf077be77aefa34a2}{invmat} (A)
+\item 
+subroutine, public \hyperlink{namespaceutil_a85f87eae65cbe6d073cf10511fafdd3e}{triu} (A, T)
+\item 
+subroutine, public \hyperlink{namespaceutil_ac3ee7743cab41502961891d342823d35}{diag} (A, d)
+\item 
+subroutine, public \hyperlink{namespaceutil_a9e8cf4396837bb186d59791ca594a98e}{cdiag} (A, d)
+\item 
+integer function, public \hyperlink{namespaceutil_ae789c59b87d1c0607478b1718d26cd1d}{floordiv} (i, j)
+\item 
+subroutine, public \hyperlink{namespaceutil_a14b782ae34e59c2dcb260a5a69aae213}{reduce} (A, Ared, n, ind, rind)
+\item 
+subroutine, public \hyperlink{namespaceutil_a92433c6b81993d62682f54ff5c8834a0}{ireduce} (A, Ared, n, ind, rind)
+\item 
+subroutine, public \hyperlink{namespaceutil_aac7cb677d9eaa896447a48be3f9a973f}{vector\+\_\+outer} (u, v, A)
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -27,6 +53,124 @@ Utility module.
 
 
 \subsection{Function/\+Subroutine Documentation}
+\index{util@{util}!cdiag@{cdiag}}
+\index{cdiag@{cdiag}!util@{util}}
+\subsubsection[{\texorpdfstring{cdiag(\+A, d)}{cdiag(A, d)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::cdiag (
+\begin{DoxyParamCaption}
+\item[{complex(kind=16), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{complex(kind=16), dimension(\+:), intent(out)}]{d}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_a9e8cf4396837bb186d59791ca594a98e}{}\label{namespaceutil_a9e8cf4396837bb186d59791ca594a98e}
+
+
+Definition at line 230 of file util.\+f90.
+
+
+\begin{DoxyCode}
+230     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+231     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{INTENT(OUT)} :: d
+232     \textcolor{keywordtype}{INTEGER} :: i
+233     
+234     \textcolor{keywordflow}{DO} i=1,\textcolor{keyword}{SIZE}(a,1)
+235        d(i)=a(i,i)
+236 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{util@{util}!choldc@{choldc}}
+\index{choldc@{choldc}!util@{util}}
+\subsubsection[{\texorpdfstring{choldc(a, p)}{choldc(a, p)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::choldc (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:)}]{a, }
+\item[{real(kind=8), dimension(\+:)}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_ab832eeb8a78ffacc12e3ceac27f95ee7}{}\label{namespaceutil_ab832eeb8a78ffacc12e3ceac27f95ee7}
+
+
+Definition at line 137 of file util.\+f90.
+
+
+\begin{DoxyCode}
+137     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)} :: a
+138     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)} :: p
+139     \textcolor{keywordtype}{INTEGER} :: n
+140     \textcolor{keywordtype}{INTEGER} :: i,j,k
+141     \textcolor{keywordtype}{REAL(KIND=8)} :: sum
+142     n=\textcolor{keyword}{size}(a,1)
+143     \textcolor{keywordflow}{DO} i=1,n
+144        \textcolor{keywordflow}{DO} j=i,n
+145           sum=a(i,j)
+146           \textcolor{keywordflow}{DO} k=i-1,1,-1
+147              sum=sum-a(i,k)*a(j,k)
+148 \textcolor{keywordflow}{          END DO}
+149           \textcolor{keywordflow}{IF} (i.eq.j) \textcolor{keywordflow}{THEN}
+150              \textcolor{keywordflow}{IF} (sum.le.0.) stop \textcolor{stringliteral}{'choldc failed'}
+151              p(i)=sqrt(sum)
+152           \textcolor{keywordflow}{ELSE}
+153              a(j,i)=sum/p(i)
+154 \textcolor{keywordflow}{          ENDIF}
+155 \textcolor{keywordflow}{       END DO}
+156 \textcolor{keywordflow}{    END DO}
+157     \textcolor{keywordflow}{RETURN}
+\end{DoxyCode}
+\index{util@{util}!cprintmat@{cprintmat}}
+\index{cprintmat@{cprintmat}!util@{util}}
+\subsubsection[{\texorpdfstring{cprintmat(\+A)}{cprintmat(A)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::cprintmat (
+\begin{DoxyParamCaption}
+\item[{complex(kind=16), dimension(\+:,\+:), intent(in)}]{A}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_ac600300c2251c6c6b555fe7255605aa5}{}\label{namespaceutil_ac600300c2251c6c6b555fe7255605aa5}
+
+
+Definition at line 170 of file util.\+f90.
+
+
+\begin{DoxyCode}
+170     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+171     \textcolor{keywordtype}{INTEGER} :: i
+172     
+173     \textcolor{keywordflow}{DO} i=1,\textcolor{keyword}{SIZE}(a,1)
+174        print*, a(i,:)
+175 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{util@{util}!diag@{diag}}
+\index{diag@{diag}!util@{util}}
+\subsubsection[{\texorpdfstring{diag(\+A, d)}{diag(A, d)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::diag (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{real(kind=8), dimension(\+:), intent(out)}]{d}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_ac3ee7743cab41502961891d342823d35}{}\label{namespaceutil_ac3ee7743cab41502961891d342823d35}
+
+
+Definition at line 220 of file util.\+f90.
+
+
+\begin{DoxyCode}
+220     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+221     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{INTENT(OUT)} :: d
+222     \textcolor{keywordtype}{INTEGER} :: i
+223     
+224     \textcolor{keywordflow}{DO} i=1,\textcolor{keyword}{SIZE}(a,1)
+225        d(i)=a(i,i)
+226 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{util@{util}!floordiv@{floordiv}}
+\index{floordiv@{floordiv}!util@{util}}
+\subsubsection[{\texorpdfstring{floordiv(i, j)}{floordiv(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}integer function, public util\+::floordiv (
+\begin{DoxyParamCaption}
+\item[{integer}]{i, }
+\item[{integer}]{j}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_ae789c59b87d1c0607478b1718d26cd1d}{}\label{namespaceutil_ae789c59b87d1c0607478b1718d26cd1d}
+
+
+Definition at line 241 of file util.\+f90.
+
+
+\begin{DoxyCode}
+241     \textcolor{keywordtype}{INTEGER} :: i,j,floordiv
+242     floordiv=int(floor(\textcolor{keywordtype}{real}(i)/\textcolor{keywordtype}{real}(j)))
+243     \textcolor{keywordflow}{RETURN}
+\end{DoxyCode}
 \index{util@{util}!init\+\_\+one@{init\+\_\+one}}
 \index{init\+\_\+one@{init\+\_\+one}!util@{util}}
 \subsubsection[{\texorpdfstring{init\+\_\+one(\+A)}{init_one(A)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::init\+\_\+one (
@@ -40,18 +184,18 @@ Initialize a square matrix A as a unit matrix.
 
 
 
-Definition at line 99 of file util.\+f90.
+Definition at line 100 of file util.\+f90.
 
 
 \begin{DoxyCode}
-99      \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)},\textcolor{keywordtype}{INTENT(INOUT)} :: a
-100      \textcolor{keywordtype}{INTEGER} :: i,n
-101      n=\textcolor{keyword}{size}(a,1)
-102      a=0.0d0
-103      \textcolor{keywordflow}{DO} i=1,n
-104        a(i,i)=1.0d0
-105 \textcolor{keywordflow}{     END DO}
-106 
+100      \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)},\textcolor{keywordtype}{INTENT(INOUT)} :: a
+101      \textcolor{keywordtype}{INTEGER} :: i,n
+102      n=\textcolor{keyword}{size}(a,1)
+103      a=0.0d0
+104      \textcolor{keywordflow}{DO} i=1,n
+105        a(i,i)=1.0d0
+106 \textcolor{keywordflow}{     END DO}
+107 
 \end{DoxyCode}
 \index{util@{util}!init\+\_\+random\+\_\+seed@{init\+\_\+random\+\_\+seed}}
 \index{init\+\_\+random\+\_\+seed@{init\+\_\+random\+\_\+seed}!util@{util}}
@@ -66,8 +210,189 @@ Random generator initialization routine.
 
 
 
-Definition at line 44 of file util.\+f90.
+Definition at line 45 of file util.\+f90.
 
+\index{util@{util}!invmat@{invmat}}
+\index{invmat@{invmat}!util@{util}}
+\subsubsection[{\texorpdfstring{invmat(\+A)}{invmat(A)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, dimension(size(a,1),size(a,2)), public util\+::invmat (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_a52a5fbd944196d1cf077be77aefa34a2}{}\label{namespaceutil_a52a5fbd944196d1cf077be77aefa34a2}
+
+
+Definition at line 179 of file util.\+f90.
+
+
+\begin{DoxyCode}
+179     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+180     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1),SIZE(A,2))} :: ainv
+181 
+182     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1))} :: work  \textcolor{comment}{! work array for LAPACK}
+183     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1))} :: ipiv   \textcolor{comment}{! pivot indices}
+184     \textcolor{keywordtype}{INTEGER} :: n, info
+185 
+186     \textcolor{comment}{! Store A in Ainv to prevent it from being overwritten by LAPACK}
+187     ainv = a
+188     n = \textcolor{keyword}{size}(a,1)
+189 
+190     \textcolor{comment}{! DGETRF computes an LU factorization of a general M-by-N matrix A}
+191     \textcolor{comment}{! using partial pivoting with row interchanges.}
+192     \textcolor{keyword}{CALL }dgetrf(n, n, ainv, n, ipiv, info)
+193 
+194     \textcolor{keywordflow}{IF} (info /= 0) \textcolor{keywordflow}{THEN}
+195        stop \textcolor{stringliteral}{'Matrix is numerically singular!'}
+196 \textcolor{keywordflow}{    ENDIF}
+197 
+198     \textcolor{comment}{! DGETRI computes the inverse of a matrix using the LU factorization}
+199     \textcolor{comment}{! computed by DGETRF.}
+200     \textcolor{keyword}{CALL }dgetri(n, ainv, n, ipiv, work, n, info)
+201 
+202     \textcolor{keywordflow}{IF} (info /= 0) \textcolor{keywordflow}{THEN}
+203        stop \textcolor{stringliteral}{'Matrix inversion failed!'}
+204 \textcolor{keywordflow}{    ENDIF}
+\end{DoxyCode}
+\index{util@{util}!ireduce@{ireduce}}
+\index{ireduce@{ireduce}!util@{util}}
+\subsubsection[{\texorpdfstring{ireduce(\+A, Ared, n, ind, rind)}{ireduce(A, Ared, n, ind, rind)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::ireduce (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(out)}]{A, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{Ared, }
+\item[{integer, intent(in)}]{n, }
+\item[{integer, dimension(\+:), intent(in)}]{ind, }
+\item[{integer, dimension(\+:), intent(in)}]{rind}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_a92433c6b81993d62682f54ff5c8834a0}{}\label{namespaceutil_a92433c6b81993d62682f54ff5c8834a0}
+
+
+Definition at line 275 of file util.\+f90.
+
+
+\begin{DoxyCode}
+275     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: a
+276     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: ared
+277     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: n
+278     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{INTENT(IN)} :: ind,rind
+279     \textcolor{keywordtype}{INTEGER} :: i,j
+280     a=0.d0
+281     \textcolor{keywordflow}{DO} i=1,n
+282        \textcolor{keywordflow}{DO} j=1,n
+283           a(ind(i),ind(j))=ared(i,j)
+284 \textcolor{keywordflow}{       END DO}
+285 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{util@{util}!mat\+\_\+contract@{mat\+\_\+contract}}
+\index{mat\+\_\+contract@{mat\+\_\+contract}!util@{util}}
+\subsubsection[{\texorpdfstring{mat\+\_\+contract(\+A, B)}{mat_contract(A, B)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, public util\+::mat\+\_\+contract (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:)}]{A, }
+\item[{real(kind=8), dimension(\+:,\+:)}]{B}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_a8a0e15c77e8cd4cb03b608e4d6bfba67}{}\label{namespaceutil_a8a0e15c77e8cd4cb03b608e4d6bfba67}
+
+
+Definition at line 123 of file util.\+f90.
+
+
+\begin{DoxyCode}
+123     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)} :: a,b
+124     \textcolor{keywordtype}{REAL(KIND=8)} :: mat\_contract
+125     \textcolor{keywordtype}{INTEGER} :: i,j,n
+126     n=\textcolor{keyword}{size}(a,1)
+127     mat\_contract=0.d0
+128     \textcolor{keywordflow}{DO} i=1,n
+129        \textcolor{keywordflow}{DO} j=1,n
+130           mat\_contract=mat\_contract+a(i,j)*b(i,j)
+131 \textcolor{keywordflow}{       END DO}
+132 \textcolor{keywordflow}{    ENDDO}
+133     \textcolor{keywordflow}{RETURN}
+\end{DoxyCode}
+\index{util@{util}!mat\+\_\+trace@{mat\+\_\+trace}}
+\index{mat\+\_\+trace@{mat\+\_\+trace}!util@{util}}
+\subsubsection[{\texorpdfstring{mat\+\_\+trace(\+A)}{mat_trace(A)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, public util\+::mat\+\_\+trace (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:)}]{A}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_a9771c95546d8658e72aa24f76612e4d8}{}\label{namespaceutil_a9771c95546d8658e72aa24f76612e4d8}
+
+
+Definition at line 111 of file util.\+f90.
+
+
+\begin{DoxyCode}
+111     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)} :: a
+112     \textcolor{keywordtype}{REAL(KIND=8)} :: mat\_trace
+113     \textcolor{keywordtype}{INTEGER} :: i,n
+114     n=\textcolor{keyword}{size}(a,1)
+115     mat\_trace=0.d0
+116     \textcolor{keywordflow}{DO} i=1,n
+117        mat\_trace=mat\_trace+a(i,i)
+118 \textcolor{keywordflow}{    END DO}
+119     \textcolor{keywordflow}{RETURN}
+\end{DoxyCode}
+\index{util@{util}!printmat@{printmat}}
+\index{printmat@{printmat}!util@{util}}
+\subsubsection[{\texorpdfstring{printmat(\+A)}{printmat(A)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::printmat (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_a71eb7216e62e0978ad1424bd4dbd727a}{}\label{namespaceutil_a71eb7216e62e0978ad1424bd4dbd727a}
+
+
+Definition at line 161 of file util.\+f90.
+
+
+\begin{DoxyCode}
+161     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+162     \textcolor{keywordtype}{INTEGER} :: i
+163     
+164     \textcolor{keywordflow}{DO} i=1,\textcolor{keyword}{SIZE}(a,1)
+165        print*, a(i,:)
+166 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{util@{util}!reduce@{reduce}}
+\index{reduce@{reduce}!util@{util}}
+\subsubsection[{\texorpdfstring{reduce(\+A, Ared, n, ind, rind)}{reduce(A, Ared, n, ind, rind)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::reduce (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(out)}]{Ared, }
+\item[{integer, intent(out)}]{n, }
+\item[{integer, dimension(\+:), intent(out)}]{ind, }
+\item[{integer, dimension(\+:), intent(out)}]{rind}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_a14b782ae34e59c2dcb260a5a69aae213}{}\label{namespaceutil_a14b782ae34e59c2dcb260a5a69aae213}
+
+
+Definition at line 247 of file util.\+f90.
+
+
+\begin{DoxyCode}
+247     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+248     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: ared
+249     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(OUT)} :: n
+250     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{INTENT(OUT)} :: ind,rind
+251     \textcolor{keywordtype}{LOGICAL}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1))} :: sel
+252     \textcolor{keywordtype}{INTEGER} :: i,j
+253 
+254     ind=0
+255     rind=0
+256     sel=.false.
+257     n=0
+258     \textcolor{keywordflow}{DO} i=1,\textcolor{keyword}{SIZE}(a,1)
+259        \textcolor{keywordflow}{IF} (any(a(i,:)/=0)) \textcolor{keywordflow}{THEN}
+260           n=n+1
+261           sel(i)=.true.
+262           ind(n)=i
+263           rind(i)=n
+264 \textcolor{keywordflow}{       ENDIF}
+265 \textcolor{keywordflow}{    END DO}
+266     ared=0.d0
+267     \textcolor{keywordflow}{DO} i=1,\textcolor{keyword}{SIZE}(a,1)
+268        \textcolor{keywordflow}{DO} j=1,\textcolor{keyword}{SIZE}(a,1)
+269           \textcolor{keywordflow}{IF} (sel(i).and.sel(j)) ared(rind(i),rind(j))=a(i,j)
+270 \textcolor{keywordflow}{       ENDDO}
+271 \textcolor{keywordflow}{    ENDDO}
+\end{DoxyCode}
 \index{util@{util}!rstr@{rstr}}
 \index{rstr@{rstr}!util@{util}}
 \subsubsection[{\texorpdfstring{rstr(x, fm)}{rstr(x, fm)}}]{\setlength{\rightskip}{0pt plus 5cm}character(len=40) function, public util\+::rstr (
@@ -82,14 +407,14 @@ Convert a real to string with a given format.
 
 
 
-Definition at line 36 of file util.\+f90.
+Definition at line 37 of file util.\+f90.
 
 
 \begin{DoxyCode}
-36     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: x
-37     \textcolor{keywordtype}{CHARACTER(len=20)}, \textcolor{keywordtype}{INTENT(IN)} :: fm
-38     \textcolor{keyword}{WRITE} (rstr, trim(adjustl(fm))) x
-39     rstr = adjustl(rstr)
+37     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: x
+38     \textcolor{keywordtype}{CHARACTER(len=20)}, \textcolor{keywordtype}{INTENT(IN)} :: fm
+39     \textcolor{keyword}{WRITE} (rstr, trim(adjustl(fm))) x
+40     rstr = adjustl(rstr)
 \end{DoxyCode}
 \index{util@{util}!str@{str}}
 \index{str@{str}!util@{util}}
@@ -104,11 +429,61 @@ Convert an integer to string.
 
 
 
-Definition at line 29 of file util.\+f90.
+Definition at line 30 of file util.\+f90.
 
 
 \begin{DoxyCode}
-29     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: k
-30     \textcolor{keyword}{WRITE} (str, *) k
-31     str = adjustl(str)
+30     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: k
+31     \textcolor{keyword}{WRITE} (\hyperlink{namespaceutil_a1df36d0696c9183ceb6bb770f1d88111}{str}, *) k
+32     \hyperlink{namespaceutil_a1df36d0696c9183ceb6bb770f1d88111}{str} = adjustl(\hyperlink{namespaceutil_a1df36d0696c9183ceb6bb770f1d88111}{str})
+\end{DoxyCode}
+\index{util@{util}!triu@{triu}}
+\index{triu@{triu}!util@{util}}
+\subsubsection[{\texorpdfstring{triu(\+A, T)}{triu(A, T)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::triu (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(out)}]{T}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_a85f87eae65cbe6d073cf10511fafdd3e}{}\label{namespaceutil_a85f87eae65cbe6d073cf10511fafdd3e}
+
+
+Definition at line 208 of file util.\+f90.
+
+
+\begin{DoxyCode}
+208     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+209     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: t
+210     \textcolor{keywordtype}{INTEGER} i,j
+211     t=0.d0
+212     \textcolor{keywordflow}{DO} i=1,\textcolor{keyword}{SIZE}(a,1)
+213        \textcolor{keywordflow}{DO} j=i,\textcolor{keyword}{SIZE}(a,1)
+214           t(i,j)=a(i,j)
+215 \textcolor{keywordflow}{       END DO}
+216 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{util@{util}!vector\+\_\+outer@{vector\+\_\+outer}}
+\index{vector\+\_\+outer@{vector\+\_\+outer}!util@{util}}
+\subsubsection[{\texorpdfstring{vector\+\_\+outer(u, v, A)}{vector_outer(u, v, A)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public util\+::vector\+\_\+outer (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:), intent(in)}]{u, }
+\item[{real(kind=8), dimension(\+:), intent(in)}]{v, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(out)}]{A}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceutil_aac7cb677d9eaa896447a48be3f9a973f}{}\label{namespaceutil_aac7cb677d9eaa896447a48be3f9a973f}
+
+
+Definition at line 289 of file util.\+f90.
+
+
+\begin{DoxyCode}
+289     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{INTENT(IN)} :: u,v
+290     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: a
+291     \textcolor{keywordtype}{INTEGER} :: i,j
+292 
+293     a=0.d0
+294     \textcolor{keywordflow}{DO} i=1,\textcolor{keyword}{SIZE}(u)
+295        \textcolor{keywordflow}{DO} j=1,\textcolor{keyword}{SIZE}(v)
+296           a(i,j)=u(i)*v(j)
+297 \textcolor{keywordflow}{       ENDDO}
+298 \textcolor{keywordflow}{    ENDDO}
 \end{DoxyCode}

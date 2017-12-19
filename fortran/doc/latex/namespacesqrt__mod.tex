@@ -1,0 +1,604 @@
+\hypertarget{namespacesqrt__mod}{}\section{sqrt\+\_\+mod Module Reference}
+\label{namespacesqrt__mod}\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+
+
+Utility module with various routine to compute matrix square root.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacesqrt__mod_ab0108c0f48903dcc961e731c0ccb55d8}{init\+\_\+sqrt}
+\item 
+subroutine, public \hyperlink{namespacesqrt__mod_a6da01b705b42190ac5b629e9267b0506}{sqrtm} (A, sqA, info, info\+\_\+triu, bs)
+\begin{DoxyCompactList}\small\item\em Routine to compute a real square-\/root of a matrix. \end{DoxyCompactList}\item 
+logical function \hyperlink{namespacesqrt__mod_a8789d2f86087703a058918101999894f}{selectev} (a, b)
+\item 
+subroutine \hyperlink{namespacesqrt__mod_a0bce77dc166341fedad843599efd43c7}{sqrtm\+\_\+triu} (A, sqA, info, bs)
+\item 
+subroutine \hyperlink{namespacesqrt__mod_a7ed927e15fad09a188abebe860651125}{csqrtm\+\_\+triu} (A, sqA, info, bs)
+\item 
+subroutine \hyperlink{namespacesqrt__mod_a322dc68a48c31785fb167134331e21e3}{rsf2csf} (T, Z, Tz, Zz)
+\item 
+subroutine, public \hyperlink{namespacesqrt__mod_a6dd33ec6afedb4b752026bba20204f2c}{chol} (A, sqA, info)
+\begin{DoxyCompactList}\small\item\em Routine to perform a Cholesky decomposition. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacesqrt__mod_a99d44e5fd3e8203544db6a8331e38828}{sqrtm\+\_\+svd} (A, sqA, info, info\+\_\+triu, bs)
+\begin{DoxyCompactList}\small\item\em Routine to compute a real square-\/root of a matrix via a S\+VD decomposition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacesqrt__mod_aa2d42644fd62e62db048520605cd3de8}{work}
+\item 
+integer \hyperlink{namespacesqrt__mod_a1e8a5c8ae6e96f5f02221379e30c0115}{lwork}
+\item 
+real(kind=8), parameter \hyperlink{namespacesqrt__mod_a3e5758c92ccdba50c78201262be093c7}{real\+\_\+eps} = 2.\+2204460492503131e-\/16
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Utility module with various routine to compute matrix square root. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+Mainly based on the numerical recipes and from\+: Edvin Deadman, Nicholas J. Higham, Rui Ralha (2013) \char`\"{}\+Blocked Schur Algorithms for Computing the Matrix Square Root\char`\"{}, Lecture Notes in Computer Science, 7782. pp. 171-\/182. 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!chol@{chol}}
+\index{chol@{chol}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{chol(\+A, sq\+A, info)}{chol(A, sqA, info)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public sqrt\+\_\+mod\+::chol (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(out)}]{sqA, }
+\item[{integer, intent(out)}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesqrt__mod_a6dd33ec6afedb4b752026bba20204f2c}{}\label{namespacesqrt__mod_a6dd33ec6afedb4b752026bba20204f2c}
+
+
+Routine to perform a Cholesky decomposition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & Matrix whose decomposition is evaluated. \\
+\hline
+{\em sqA} & Cholesky decomposition of {\ttfamily A}. \\
+\hline
+{\em info} & Information code returned by the Lapack routines. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 386 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+386     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+387     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: sqa
+388     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(OUT)} :: info
+389 
+390     sqa=a
+391     \textcolor{keyword}{CALL }dpotrf(\textcolor{stringliteral}{'L'},\textcolor{keyword}{SIZE}(sqa,1),sqa,\textcolor{keyword}{SIZE}(sqa,1),info)
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!csqrtm\+\_\+triu@{csqrtm\+\_\+triu}}
+\index{csqrtm\+\_\+triu@{csqrtm\+\_\+triu}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{csqrtm\+\_\+triu(\+A, sq\+A, info, bs)}{csqrtm_triu(A, sqA, info, bs)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine sqrt\+\_\+mod\+::csqrtm\+\_\+triu (
+\begin{DoxyParamCaption}
+\item[{complex(kind=16), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{complex(kind=16), dimension(\+:,\+:), intent(out)}]{sqA, }
+\item[{integer, intent(out)}]{info, }
+\item[{integer, intent(in), optional}]{bs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacesqrt__mod_a7ed927e15fad09a188abebe860651125}{}\label{namespacesqrt__mod_a7ed927e15fad09a188abebe860651125}
+
+
+Definition at line 235 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+235     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+236     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: bs
+237     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: sqa
+238     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(OUT)} :: info
+239     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1))} :: a\_diag
+240     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1),SIZE(A,1))} :: r,sm,rii,rjj
+241     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(2*SIZE(A,1),2)} :: start\_stop\_pairs
+242     \textcolor{keywordtype}{COMPLEX(KIND=16)} :: s,denom,scale
+243     \textcolor{keywordtype}{INTEGER} :: i,j,k,start,n,sstop,m
+244     \textcolor{keywordtype}{INTEGER} :: istart,istop,jstart,jstop
+245     \textcolor{keywordtype}{INTEGER} :: nblocks,blocksize
+246     \textcolor{keywordtype}{INTEGER} :: bsmall,blarge,nlarge,nsmall
+247 
+248     blocksize=64
+249     \textcolor{keywordflow}{IF} (\textcolor{keyword}{PRESENT}(bs)) blocksize=bs
+250     n=\textcolor{keyword}{SIZE}(a,1)
+251     \textcolor{comment}{! print*,  blocksize}
+252 
+253     \textcolor{keyword}{CALL }cdiag(a,a\_diag)
+254     r=0.d0
+255     \textcolor{keywordflow}{DO} i=1,n
+256        r(i,i)=sqrt(a\_diag(i))
+257 \textcolor{keywordflow}{    ENDDO}
+258     
+259 
+260     nblocks=max(floordiv(n,blocksize),1)
+261     bsmall=floordiv(n,nblocks)
+262     nlarge=mod(n,nblocks)
+263     blarge=bsmall+1
+264     nsmall=nblocks-nlarge
+265     \textcolor{keywordflow}{IF} (nsmall*bsmall + nlarge*blarge /= n) stop \textcolor{stringliteral}{'Sqrtm: Internal inconsistency'}
+266 
+267     \textcolor{comment}{! print*, nblocks,bsmall,nsmall,blarge,nlarge}
+268 
+269     start=1
+270     \textcolor{keywordflow}{DO} i=1,nsmall
+271        start\_stop\_pairs(i,1)=start
+272        start\_stop\_pairs(i,2)=start+bsmall-1
+273        start=start+bsmall
+274 \textcolor{keywordflow}{    ENDDO}
+275     \textcolor{keywordflow}{DO} i=nsmall+1,nsmall+nlarge
+276        start\_stop\_pairs(i,1)=start
+277        start\_stop\_pairs(i,2)=start+blarge-1
+278        start=start+blarge
+279 \textcolor{keywordflow}{    ENDDO}
+280     
+281     \textcolor{comment}{! DO i=1,SIZE(start\_stop\_pairs,1)}
+282     \textcolor{comment}{!    print*, i}
+283     \textcolor{comment}{!    print*, start\_stop\_pairs(i,1),start\_stop\_pairs(i,2)}
+284     \textcolor{comment}{! END DO}
+285     
+286     \textcolor{keywordflow}{DO} k=1,nsmall+nlarge
+287        start=start\_stop\_pairs(k,1)
+288        sstop=start\_stop\_pairs(k,2)
+289        \textcolor{keywordflow}{DO} j=start,sstop
+290           \textcolor{keywordflow}{DO} i=j-1,start,-1
+291              s=0.d0
+292              \textcolor{keywordflow}{IF} (j-i>1) s= dot\_product(r(i,i+1:j-1),r(i+1:j-1,j))
+293              denom= r(i,i)+r(j,j)
+294              \textcolor{keywordflow}{IF} (denom==0.d0) stop \textcolor{stringliteral}{'Sqrtm: Failed to find the matrix square root'}
+295              r(i,j)=(a(i,j)-s)/denom
+296 \textcolor{keywordflow}{          END DO}
+297 \textcolor{keywordflow}{       END DO}
+298 \textcolor{keywordflow}{    END DO}
+299 
+300     \textcolor{comment}{! print*, 'R'}
+301     \textcolor{comment}{! CALL printmat(R)}
+302     
+303     \textcolor{keywordflow}{DO} j=1,nblocks
+304        jstart=start\_stop\_pairs(j,1)
+305        jstop=start\_stop\_pairs(j,2)
+306        \textcolor{keywordflow}{DO} i=j-1,1,-1
+307           istart=start\_stop\_pairs(i,1)
+308           istop=start\_stop\_pairs(i,2)
+309           sm=0.d0
+310           sm(istart:istop,jstart:jstop)=a(istart:istop,jstart:jstop)
+311           \textcolor{keywordflow}{IF} (j-i>1) sm(istart:istop,jstart:jstop) = sm(istart:istop&
+312                &,jstart:jstop) - matmul(r(istart:istop,istop:jstart)&
+313                &,r(istop:jstart,jstart:jstop))
+314           rii=0.d0
+315           rii = r(istart:istop, istart:istop)
+316           rjj=0.d0
+317           rjj = r(jstart:jstop, jstart:jstop)
+318           m=istop-istart+1
+319           n=jstop-jstart+1
+320           k=1
+321           \textcolor{comment}{! print*, m,n}
+322           \textcolor{comment}{! print*, istart,istop}
+323           \textcolor{comment}{! print*, jstart,jstop}
+324 
+325           \textcolor{comment}{! print*, 'Rii',Rii(istart:istop, istart:istop)}
+326           \textcolor{comment}{! print*, 'Rjj',Rjj(jstart:jstop,jstart:jstop)}
+327           \textcolor{comment}{! print*, 'Sm',Sm(istart:istop,jstart:jstop)}
+328 
+329           \textcolor{keyword}{CALL }ztrsyl(\textcolor{stringliteral}{'N'},\textcolor{stringliteral}{'N'},k,m,n,rii(istart:istop, istart:istop),m&
+330                &,rjj(jstart:jstop,jstart:jstop),n,sm(istart:istop&
+331                &,jstart:jstop),m,scale,info)
+332           r(istart:istop,jstart:jstop)=sm(istart:istop,jstart:jstop)*scale
+333 \textcolor{keywordflow}{       ENDDO}
+334 \textcolor{keywordflow}{    ENDDO}
+335     sqa=r
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!init\+\_\+sqrt@{init\+\_\+sqrt}}
+\index{init\+\_\+sqrt@{init\+\_\+sqrt}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{init\+\_\+sqrt}{init_sqrt}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public sqrt\+\_\+mod\+::init\+\_\+sqrt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesqrt__mod_ab0108c0f48903dcc961e731c0ccb55d8}{}\label{namespacesqrt__mod_ab0108c0f48903dcc961e731c0ccb55d8}
+
+
+Definition at line 39 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+39     \textcolor{keywordtype}{INTEGER} :: allocstat
+40     lwork=10
+41     lwork=\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}*lwork
+42 
+43     \textcolor{comment}{! print*, lwork}
+44     
+45     \textcolor{keywordflow}{IF} (\textcolor{keyword}{ALLOCATED}(work)) \textcolor{keywordflow}{THEN}
+46        \textcolor{keyword}{DEALLOCATE}(work, \hyperlink{namespacestat}{stat}=allocstat)
+47        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Deallocation problem ! ***"}
+48 \textcolor{keywordflow}{    ENDIF}
+49     \textcolor{keyword}{ALLOCATE}(work(lwork), \hyperlink{namespacestat}{stat}=allocstat)
+50     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+51 
+52     \textcolor{comment}{! ALLOCATE(zwork(lwork), STAT=AllocStat)}
+53     \textcolor{comment}{! IF (AllocStat /= 0) STOP "*** Not enough memory ! ***"}
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!rsf2csf@{rsf2csf}}
+\index{rsf2csf@{rsf2csf}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{rsf2csf(\+T, Z, Tz, Zz)}{rsf2csf(T, Z, Tz, Zz)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine sqrt\+\_\+mod\+::rsf2csf (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{T, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{Z, }
+\item[{complex(kind=16), dimension(\+:,\+:), intent(out)}]{Tz, }
+\item[{complex(kind=16), dimension(\+:,\+:), intent(out)}]{Zz}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacesqrt__mod_a322dc68a48c31785fb167134331e21e3}{}\label{namespacesqrt__mod_a322dc68a48c31785fb167134331e21e3}
+
+
+Definition at line 339 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+339     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: t,z
+340     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: tz,zz
+341     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{PARAMETER} :: nb=2
+342     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(nb)} :: w
+343     \textcolor{comment}{!COMPLEX(KIND=16), DIMENSION(nb,nb) :: vl,vr}
+344     \textcolor{keywordtype}{COMPLEX(KIND=16)} :: r,c,s,mu
+345     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(nb,nb)} :: g,gc
+346     \textcolor{keywordtype}{INTEGER} :: n,m\textcolor{comment}{!,info}
+347     \textcolor{comment}{!REAL(KIND=8), DIMENSION(2*nb) :: rwork}
+348     \textcolor{comment}{!REAL(KIND=8), DIMENSION(2*nb) :: ztwork}
+349 
+350     \textcolor{comment}{! print*, lwork}
+351     tz=cmplx(t,kind=16)
+352     zz=cmplx(z,kind=16)
+353     n=\textcolor{keyword}{SIZE}(t,1)
+354     \textcolor{keywordflow}{DO} m=n,2,-1
+355        \textcolor{keywordflow}{IF} (abs(tz(m,m-1)) > real\_eps*(abs(tz(m-1,m-1)) + abs(tz(m,m)))) \textcolor{keywordflow}{THEN}
+356           g=tz(m-1:m,m-1:m)
+357           \textcolor{comment}{! CALL printmat(dble(G))}
+358           \textcolor{comment}{! CALL zgeev('N','N',nb,G,nb,w,vl,nb,vr,nb,ztwork,2*nb,rwork,info)}
+359           \textcolor{comment}{! CALL cprintmat(G)}
+360           \textcolor{comment}{! print*, m,w,info}
+361           s=g(1,1)+g(2,2)
+362           c=g(1,1)*g(2,2)-g(1,2)*g(2,1)
+363           w(1)=s/2+sqrt(s**2/4-c)
+364           mu=w(1)-tz(m,m)
+365           r=sqrt(mu*conjg(mu)+tz(m,m-1)*conjg(tz(m,m-1)))
+366           c=mu/r
+367           s=tz(m,m-1)/r
+368           g(1,1)=conjg(c)
+369           g(1,2)=s
+370           g(2,1)=-s
+371           g(2,2)=c
+372           gc=conjg(transpose(g))
+373           tz(m-1:m,m-1:n)=matmul(g,tz(m-1:m,m-1:n))
+374           tz(1:m,m-1:m)=matmul(tz(1:m,m-1:m),gc)
+375           zz(:,m-1:m)=matmul(zz(:,m-1:m),gc)
+376 \textcolor{keywordflow}{       END IF}
+377        tz(m,m-1)=cmplx(0.d0,kind=16)
+378 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!selectev@{selectev}}
+\index{selectev@{selectev}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{selectev(a, b)}{selectev(a, b)}}]{\setlength{\rightskip}{0pt plus 5cm}logical function sqrt\+\_\+mod\+::selectev (
+\begin{DoxyParamCaption}
+\item[{real(kind=8)}]{a, }
+\item[{real(kind=8)}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacesqrt__mod_a8789d2f86087703a058918101999894f}{}\label{namespacesqrt__mod_a8789d2f86087703a058918101999894f}
+
+
+Definition at line 122 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+122     \textcolor{keywordtype}{REAL(KIND=8)} :: a,b
+123     \textcolor{keywordtype}{LOGICAL} selectev
+124     selectev=.false.
+125     \textcolor{comment}{! IF (a>b) selectev=.true.}
+126     \textcolor{keywordflow}{RETURN}
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!sqrtm@{sqrtm}}
+\index{sqrtm@{sqrtm}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{sqrtm(\+A, sq\+A, info, info\+\_\+triu, bs)}{sqrtm(A, sqA, info, info_triu, bs)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public sqrt\+\_\+mod\+::sqrtm (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(out)}]{sqA, }
+\item[{integer, intent(out)}]{info, }
+\item[{integer, intent(out)}]{info\+\_\+triu, }
+\item[{integer, intent(in), optional}]{bs}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesqrt__mod_a6da01b705b42190ac5b629e9267b0506}{}\label{namespacesqrt__mod_a6da01b705b42190ac5b629e9267b0506}
+
+
+Routine to compute a real square-\/root of a matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & Matrix whose square root to evaluate. \\
+\hline
+{\em sqA} & Square root of {\ttfamily A}. \\
+\hline
+{\em info} & Information code returned by the Lapack routines. \\
+\hline
+{\em info\+\_\+triu} & Information code returned by the triangular matrix Lapack routines. \\
+\hline
+{\em bs} & Optional blocksize specification variable. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+63     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+64     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: sqa
+65     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: bs
+66     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(OUT)} :: info,info\_triu
+67     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1),SIZE(A,1))} :: t,z,r
+68     \textcolor{keywordtype}{COMPLEX(KIND=16)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1),SIZE(A,1))} :: tz,zz,rz
+69     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1))} :: wr,wi
+70     \textcolor{keywordtype}{LOGICAL}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1))} :: bwork
+71     \textcolor{keywordtype}{LOGICAL} :: selectev
+72     \textcolor{keywordtype}{INTEGER} :: n
+73     \textcolor{keywordtype}{INTEGER} :: sdim=0
+74     n=\textcolor{keyword}{SIZE}(a,1)
+75     t=a
+76     \textcolor{comment}{! print*, n,size(work,1)}
+77     \textcolor{keyword}{CALL }dgees(\textcolor{stringliteral}{'v'},\textcolor{stringliteral}{'n'},selectev,n,t,n,sdim,wr,wi,z,n,work,lwork,bwork,info)
+78     \textcolor{comment}{! print*, 'Z'}
+79     \textcolor{comment}{! CALL printmat(Z)}
+80     \textcolor{comment}{! print*, 'T'}
+81     \textcolor{comment}{! CALL printmat(T)}
+82     \textcolor{comment}{! CALL DGEES('V','N',SIZE(T,1),T,SIZE(T,1),0,wr,wi,Z,SIZE(Z,1),work,lwork,info)}
+83     \textcolor{comment}{! print*, info}
+84     \textcolor{keyword}{CALL }triu(t,r)
+85     \textcolor{keywordflow}{IF} (any(t /= r)) \textcolor{keywordflow}{THEN}
+86        \textcolor{comment}{! print*, 'T'}
+87        \textcolor{comment}{! CALL printmat(T)}
+88        \textcolor{comment}{! print*, 'Z'}
+89        \textcolor{comment}{! CALL printmat(Z)}
+90        \textcolor{keyword}{CALL }rsf2csf(t,z,tz,zz)
+91        \textcolor{comment}{! print*, 'Tz'}
+92        \textcolor{comment}{! CALL printmat(dble(Tz))}
+93        \textcolor{comment}{! print*, 'iTz'}
+94        \textcolor{comment}{! CALL printmat(dble(aimag(Tz)))}
+95        \textcolor{comment}{! print*, 'Zz'}
+96        \textcolor{comment}{! CALL printmat(dble(Zz))}
+97        \textcolor{comment}{! print*, 'iZz'}
+98        \textcolor{comment}{! CALL printmat(dble(aimag(Zz)))}
+99        \textcolor{keywordflow}{IF} (\textcolor{keyword}{PRESENT}(bs)) \textcolor{keywordflow}{THEN}
+100           \textcolor{keyword}{CALL }csqrtm\_triu(tz,rz,info\_triu,bs)
+101        \textcolor{keywordflow}{ELSE}
+102           \textcolor{keyword}{CALL }csqrtm\_triu(tz,rz,info\_triu)
+103 \textcolor{keywordflow}{       END IF}
+104        rz=matmul(zz,matmul(rz,conjg(transpose(zz))))
+105        \textcolor{comment}{! print*, 'sqAz'}
+106        \textcolor{comment}{! CALL printmat(dble(Rz))}
+107        \textcolor{comment}{! print*, 'isqAz'}
+108        \textcolor{comment}{! CALL printmat(dble(aimag(Rz)))}
+109        sqa=dble(rz)
+110     \textcolor{keywordflow}{ELSE}
+111        \textcolor{keywordflow}{IF} (\textcolor{keyword}{PRESENT}(bs)) \textcolor{keywordflow}{THEN}
+112           \textcolor{keyword}{CALL }sqrtm\_triu(t,r,info\_triu,bs)
+113        \textcolor{keywordflow}{ELSE}
+114           \textcolor{keyword}{CALL }sqrtm\_triu(t,r,info\_triu)
+115 \textcolor{keywordflow}{       END IF}
+116        sqa=matmul(z,matmul(r,transpose(z)))
+117 \textcolor{keywordflow}{    ENDIF}
+118 
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!sqrtm\+\_\+svd@{sqrtm\+\_\+svd}}
+\index{sqrtm\+\_\+svd@{sqrtm\+\_\+svd}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{sqrtm\+\_\+svd(\+A, sq\+A, info, info\+\_\+triu, bs)}{sqrtm_svd(A, sqA, info, info_triu, bs)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public sqrt\+\_\+mod\+::sqrtm\+\_\+svd (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(out)}]{sqA, }
+\item[{integer, intent(out)}]{info, }
+\item[{integer, intent(out)}]{info\+\_\+triu, }
+\item[{integer, intent(in), optional}]{bs}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesqrt__mod_a99d44e5fd3e8203544db6a8331e38828}{}\label{namespacesqrt__mod_a99d44e5fd3e8203544db6a8331e38828}
+
+
+Routine to compute a real square-\/root of a matrix via a S\+VD decomposition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & Matrix whose square root to evaluate. \\
+\hline
+{\em sqA} & Square root of {\ttfamily A}. \\
+\hline
+{\em info} & Information code returned by the Lapack routines. \\
+\hline
+{\em info\+\_\+triu} & Not used (present for compatibility). \\
+\hline
+{\em bs} & Not used (present for compatibility). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 401 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+401     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+402     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: sqa
+403     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: bs
+404     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(OUT)} :: info,info\_triu
+405     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1))} :: s
+406     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1),SIZE(A,1))} :: sq,u,vt
+407     \textcolor{keywordtype}{INTEGER} :: i,n
+408     
+409     sqa=a
+410     n=\textcolor{keyword}{SIZE}(sqa,1)
+411     \textcolor{keyword}{CALL }dgesvd(\textcolor{stringliteral}{'A'},\textcolor{stringliteral}{'A'},n,n,sqa,n,s,u,n,vt,n,work,lwork,info)
+412     sq=0.d0
+413     \textcolor{keywordflow}{DO} i=1,n
+414        sq(i,i)=sqrt(s(i))
+415 \textcolor{keywordflow}{    ENDDO}
+416     sqa=matmul(u,matmul(sq,vt))
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!sqrtm\+\_\+triu@{sqrtm\+\_\+triu}}
+\index{sqrtm\+\_\+triu@{sqrtm\+\_\+triu}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{sqrtm\+\_\+triu(\+A, sq\+A, info, bs)}{sqrtm_triu(A, sqA, info, bs)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine sqrt\+\_\+mod\+::sqrtm\+\_\+triu (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{A, }
+\item[{real(kind=8), dimension(\+:,\+:), intent(out)}]{sqA, }
+\item[{integer, intent(out)}]{info, }
+\item[{integer, intent(in), optional}]{bs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacesqrt__mod_a0bce77dc166341fedad843599efd43c7}{}\label{namespacesqrt__mod_a0bce77dc166341fedad843599efd43c7}
+
+
+Definition at line 131 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+131     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: a
+132     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: bs
+133     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(OUT)} :: sqa
+134     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(OUT)} :: info
+135     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1))} :: a\_diag
+136     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(SIZE(A,1),SIZE(A,1))} :: r,sm,rii,rjj
+137     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(2*SIZE(A,1),2)} :: start\_stop\_pairs
+138     \textcolor{keywordtype}{REAL(KIND=8)} :: s,denom,scale
+139     \textcolor{keywordtype}{INTEGER} :: i,j,k,start,n,sstop,m
+140     \textcolor{keywordtype}{INTEGER} :: istart,istop,jstart,jstop
+141     \textcolor{keywordtype}{INTEGER} :: nblocks,blocksize
+142     \textcolor{keywordtype}{INTEGER} :: bsmall,blarge,nlarge,nsmall
+143 
+144     blocksize=64
+145     \textcolor{keywordflow}{IF} (\textcolor{keyword}{PRESENT}(bs)) blocksize=bs
+146     n=\textcolor{keyword}{SIZE}(a,1)
+147     \textcolor{comment}{! print*,  blocksize}
+148 
+149     \textcolor{keyword}{CALL }diag(a,a\_diag)
+150     r=0.d0
+151     \textcolor{keywordflow}{DO} i=1,n
+152        r(i,i)=sqrt(a\_diag(i))
+153 \textcolor{keywordflow}{    ENDDO}
+154     
+155 
+156     nblocks=max(floordiv(n,blocksize),1)
+157     bsmall=floordiv(n,nblocks)
+158     nlarge=mod(n,nblocks)
+159     blarge=bsmall+1
+160     nsmall=nblocks-nlarge
+161     \textcolor{keywordflow}{IF} (nsmall*bsmall + nlarge*blarge /= n) stop \textcolor{stringliteral}{'Sqrtm: Internal inconsistency'}
+162 
+163     \textcolor{comment}{! print*, nblocks,bsmall,nsmall,blarge,nlarge}
+164 
+165     start=1
+166     \textcolor{keywordflow}{DO} i=1,nsmall
+167        start\_stop\_pairs(i,1)=start
+168        start\_stop\_pairs(i,2)=start+bsmall-1
+169        start=start+bsmall
+170 \textcolor{keywordflow}{    ENDDO}
+171     \textcolor{keywordflow}{DO} i=nsmall+1,nsmall+nlarge
+172        start\_stop\_pairs(i,1)=start
+173        start\_stop\_pairs(i,2)=start+blarge-1
+174        start=start+blarge
+175 \textcolor{keywordflow}{    ENDDO}
+176     
+177     \textcolor{comment}{! DO i=1,SIZE(start\_stop\_pairs,1)}
+178     \textcolor{comment}{!    print*, i}
+179     \textcolor{comment}{!    print*, start\_stop\_pairs(i,1),start\_stop\_pairs(i,2)}
+180     \textcolor{comment}{! END DO}
+181     
+182     \textcolor{keywordflow}{DO} k=1,nsmall+nlarge
+183        start=start\_stop\_pairs(k,1)
+184        sstop=start\_stop\_pairs(k,2)
+185        \textcolor{keywordflow}{DO} j=start,sstop
+186           \textcolor{keywordflow}{DO} i=j-1,start,-1
+187              s=0.d0
+188              \textcolor{keywordflow}{IF} (j-i>1) s= dot\_product(r(i,i+1:j-1),r(i+1:j-1,j))
+189              denom= r(i,i)+r(j,j)
+190              \textcolor{keywordflow}{IF} (denom==0.d0) stop \textcolor{stringliteral}{'Sqrtm: Failed to find the matrix square root'}
+191              r(i,j)=(a(i,j)-s)/denom
+192 \textcolor{keywordflow}{          END DO}
+193 \textcolor{keywordflow}{       END DO}
+194 \textcolor{keywordflow}{    END DO}
+195 
+196     \textcolor{comment}{! print*, 'R'}
+197     \textcolor{comment}{! CALL printmat(R)}
+198     
+199     \textcolor{keywordflow}{DO} j=1,nblocks
+200        jstart=start\_stop\_pairs(j,1)
+201        jstop=start\_stop\_pairs(j,2)
+202        \textcolor{keywordflow}{DO} i=j-1,1,-1
+203           istart=start\_stop\_pairs(i,1)
+204           istop=start\_stop\_pairs(i,2)
+205           sm=0.d0
+206           sm(istart:istop,jstart:jstop)=a(istart:istop,jstart:jstop)
+207           \textcolor{keywordflow}{IF} (j-i>1) sm(istart:istop,jstart:jstop) = sm(istart:istop&
+208                &,jstart:jstop) - matmul(r(istart:istop,istop:jstart)&
+209                &,r(istop:jstart,jstart:jstop))
+210           rii=0.d0
+211           rii = r(istart:istop, istart:istop)
+212           rjj=0.d0
+213           rjj = r(jstart:jstop, jstart:jstop)
+214           m=istop-istart+1
+215           n=jstop-jstart+1
+216           k=1
+217           \textcolor{comment}{! print*, m,n}
+218           \textcolor{comment}{! print*, istart,istop}
+219           \textcolor{comment}{! print*, jstart,jstop}
+220 
+221           \textcolor{comment}{! print*, 'Rii',Rii(istart:istop, istart:istop)}
+222           \textcolor{comment}{! print*, 'Rjj',Rjj(jstart:jstop,jstart:jstop)}
+223           \textcolor{comment}{! print*, 'Sm',Sm(istart:istop,jstart:jstop)}
+224 
+225           \textcolor{keyword}{CALL }dtrsyl(\textcolor{stringliteral}{'N'},\textcolor{stringliteral}{'N'},k,m,n,rii(istart:istop, istart:istop),m&
+226                &,rjj(jstart:jstop,jstart:jstop),n,sm(istart:istop&
+227                &,jstart:jstop),m,scale,info)
+228           r(istart:istop,jstart:jstop)=sm(istart:istop,jstart:jstop)*scale
+229 \textcolor{keywordflow}{       ENDDO}
+230 \textcolor{keywordflow}{    ENDDO}
+231     sqa=r
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!lwork@{lwork}}
+\index{lwork@{lwork}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{lwork}{lwork}}]{\setlength{\rightskip}{0pt plus 5cm}integer sqrt\+\_\+mod\+::lwork\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacesqrt__mod_a1e8a5c8ae6e96f5f02221379e30c0115}{}\label{namespacesqrt__mod_a1e8a5c8ae6e96f5f02221379e30c0115}
+
+
+Definition at line 30 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+30   \textcolor{keywordtype}{INTEGER} :: lwork
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!real\+\_\+eps@{real\+\_\+eps}}
+\index{real\+\_\+eps@{real\+\_\+eps}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{real\+\_\+eps}{real_eps}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), parameter sqrt\+\_\+mod\+::real\+\_\+eps = 2.\+2204460492503131e-\/16\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacesqrt__mod_a3e5758c92ccdba50c78201262be093c7}{}\label{namespacesqrt__mod_a3e5758c92ccdba50c78201262be093c7}
+
+
+Definition at line 32 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{PARAMETER} :: real\_eps = 2.2204460492503131e-16
+\end{DoxyCode}
+\index{sqrt\+\_\+mod@{sqrt\+\_\+mod}!work@{work}}
+\index{work@{work}!sqrt\+\_\+mod@{sqrt\+\_\+mod}}
+\subsubsection[{\texorpdfstring{work}{work}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable sqrt\+\_\+mod\+::work\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacesqrt__mod_aa2d42644fd62e62db048520605cd3de8}{}\label{namespacesqrt__mod_aa2d42644fd62e62db048520605cd3de8}
+
+
+Definition at line 27 of file sqrt\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+27   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: work
+\end{DoxyCode}

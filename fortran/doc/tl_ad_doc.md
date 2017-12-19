@@ -14,11 +14,11 @@ where \f$ \mathcal{T}_{i,j,k}\f$ is the tensor of the nonlinear model.
 
 These two tensors are used to compute the trajectories of the models, with the equations
 
-\f[  \frac{d\delta y_i}{dt} = \sum_{j=1}^{ndim}\sum_{k=0}^{ndim} \, \mathcal{T}_{i,j,k}^{TL} \, y^{\ast}_k \; \delta y_j . \f]
+\f[  \frac{d\delta z_i}{dt} = \sum_{j=1}^{ndim}\sum_{k=0}^{ndim} \, \mathcal{T}_{i,j,k}^{TL} \, y^{\ast}_k \; \delta z_j . \f]
 
-\f[   -\frac{d\delta y_i}{dt} = \sum_{j=1}^{ndim} \sum_{k=0}^{ndim} \, \mathcal{T}_{i,j,k}^{AD} \, y^{\ast}_k \; \delta y_j . \f]
+\f[   -\frac{d\delta z_i}{dt} = \sum_{j=1}^{ndim} \sum_{k=0}^{ndim} \, \mathcal{T}_{i,j,k}^{AD} \, y^{\ast}_k \; \delta z_j . \f]
 
-where \f$\boldsymbol{y}^{\ast}\f$ is the point where the Tangent model is defined (with \f$y_0^{\ast}=1\f$).
+where \f$\boldsymbol{y}^{\ast}\f$ is the point where the Tangent model is defined (with \f$z_0^{\ast}=1\f$).
 
 ## Implementation : ##
 

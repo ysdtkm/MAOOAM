@@ -1,5 +1,4 @@
 
-
 ! util.f90
 !
 !>  Utility module
@@ -15,7 +14,9 @@ MODULE util
 
   PRIVATE
 
-  PUBLIC :: str,rstr,init_random_seed,init_one
+  PUBLIC :: str,rstr,init_random_seed,init_one,mat_trace, mat_contract, choldc
+  PUBLIC :: printmat,cprintmat,invmat,ireduce,reduce,floordiv,triu,diag,cdiag
+  PUBLIC :: vector_outer
 
 CONTAINS
     
@@ -105,5 +106,196 @@ CONTAINS
      END DO
 
   END SUBROUTINE init_one
+
+  FUNCTION mat_trace(A)
+    REAL(KIND=8), DIMENSION(:,:) :: A
+    REAL(KIND=8) :: mat_trace
+    INTEGER :: i,n
+    n=size(A,1)
+    mat_trace=0.D0
+    DO i=1,n
+       mat_trace=mat_trace+A(i,i)
+    END DO
+    RETURN
+  END FUNCTION mat_trace
+
+  FUNCTION mat_contract(A,B)
+    REAL(KIND=8), DIMENSION(:,:) :: A,B
+    REAL(KIND=8) :: mat_contract
+    INTEGER :: i,j,n
+    n=size(A,1)
+    mat_contract=0.D0
+    DO i=1,n
+       DO j=1,n
+          mat_contract=mat_contract+A(i,j)*B(i,j)
+       END DO
+    ENDDO
+    RETURN
+  END FUNCTION mat_contract
+
+  SUBROUTINE choldc(a,p)
+    REAL(KIND=8), DIMENSION(:,:) :: a
+    REAL(KIND=8), DIMENSION(:) :: p
+    INTEGER :: n
+    INTEGER :: i,j,k
+    REAL(KIND=8) :: sum
+    n=size(a,1)
+    DO i=1,n
+       DO j=i,n
+          sum=a(i,j)
+          DO k=i-1,1,-1
+             sum=sum-a(i,k)*a(j,k)
+          END DO
+          IF (i.eq.j) THEN
+             IF (sum.le.0.) stop 'choldc failed'
+             p(i)=sqrt(sum)
+          ELSE
+             a(j,i)=sum/p(i)
+          ENDIF
+       END DO
+    END DO
+    RETURN
+  END SUBROUTINE choldc
+
+  SUBROUTINE printmat(A) ! to be moved to util
+    REAL(KIND=8), DIMENSION(:,:), INTENT(IN) :: A
+    INTEGER :: i
+    
+    DO i=1,SIZE(A,1)
+       print*, A(i,:)
+    END DO
+  END SUBROUTINE printmat
+
+  SUBROUTINE cprintmat(A) ! to be moved to util
+    COMPLEX(KIND=16), DIMENSION(:,:), INTENT(IN) :: A
+    INTEGER :: i
+    
+    DO i=1,SIZE(A,1)
+       print*, A(i,:)
+    END DO
+  END SUBROUTINE cprintmat
+
+  FUNCTION invmat(A) RESULT(Ainv)
+    REAL(KIND=8), DIMENSION(:,:), INTENT(IN) :: A
+    REAL(KIND=8), DIMENSION(SIZE(A,1),SIZE(A,2)) :: Ainv
+
+    REAL(KIND=8), DIMENSION(SIZE(A,1)) :: work  ! work array for LAPACK
+    INTEGER, DIMENSION(SIZE(A,1)) :: ipiv   ! pivot indices
+    INTEGER :: n, info
+
+    ! Store A in Ainv to prevent it from being overwritten by LAPACK
+    Ainv = A
+    n = size(A,1)
+
+    ! DGETRF computes an LU factorization of a general M-by-N matrix A
+    ! using partial pivoting with row interchanges.
+    CALL DGETRF(n, n, Ainv, n, ipiv, info)
+
+    IF (info /= 0) THEN
+       STOP 'Matrix is numerically singular!'
+    ENDIF
+
+    ! DGETRI computes the inverse of a matrix using the LU factorization
+    ! computed by DGETRF.
+    CALL DGETRI(n, Ainv, n, ipiv, work, n, info)
+
+    IF (info /= 0) THEN
+       STOP 'Matrix inversion failed!'
+    ENDIF
+    END FUNCTION invmat 
+
+    SUBROUTINE triu(A,T)
+    REAL(KIND=8), DIMENSION(:,:), INTENT(IN) :: A
+    REAL(KIND=8), DIMENSION(:,:), INTENT(OUT) :: T
+    INTEGER i,j
+    T=0.D0
+    DO i=1,SIZE(A,1)
+       DO j=i,SIZE(A,1)
+          T(i,j)=A(i,j)
+       END DO
+    END DO
+  END SUBROUTINE triu
+    
+  SUBROUTINE diag(A,d)
+    REAL(KIND=8), DIMENSION(:,:), INTENT(IN) :: A
+    REAL(KIND=8), DIMENSION(:), INTENT(OUT) :: d
+    INTEGER :: i
+    
+    DO i=1,SIZE(A,1)
+       d(i)=A(i,i)
+    END DO
+  END SUBROUTINE diag
+
+  SUBROUTINE cdiag(A,d)
+    COMPLEX(KIND=16), DIMENSION(:,:), INTENT(IN) :: A
+    COMPLEX(KIND=16), DIMENSION(:), INTENT(OUT) :: d
+    INTEGER :: i
+    
+    DO i=1,SIZE(A,1)
+       d(i)=A(i,i)
+    END DO
+  END SUBROUTINE cdiag
+
+       
+  FUNCTION floordiv(i,j)
+    INTEGER :: i,j,floordiv
+    floordiv=int(floor(real(i)/real(j)))
+    RETURN
+  END FUNCTION floordiv
+
+  SUBROUTINE reduce(A,Ared,n,ind,rind)
+    REAL(KIND=8), DIMENSION(:,:), INTENT(IN) :: A
+    REAL(KIND=8), DIMENSION(:,:), INTENT(OUT) :: Ared
+    INTEGER, INTENT(OUT) :: n
+    INTEGER, DIMENSION(:), INTENT(OUT) :: ind,rind
+    LOGICAL, DIMENSION(SIZE(A,1)) :: sel
+    INTEGER :: i,j
+
+    ind=0
+    rind=0
+    sel=.FALSE.
+    n=0
+    DO i=1,SIZE(A,1)
+       IF (ANY(A(i,:)/=0)) THEN
+          n=n+1
+          sel(i)=.TRUE.
+          ind(n)=i
+          rind(i)=n
+       ENDIF
+    END DO
+    Ared=0.D0
+    DO i=1,SIZE(A,1)
+       DO j=1,SIZE(A,1)
+          IF (sel(i).and.sel(j)) Ared(rind(i),rind(j))=A(i,j)
+       ENDDO
+    ENDDO
+  END SUBROUTINE reduce
+
+  SUBROUTINE ireduce(A,Ared,n,ind,rind)
+    REAL(KIND=8), DIMENSION(:,:), INTENT(OUT) :: A
+    REAL(KIND=8), DIMENSION(:,:), INTENT(IN) :: Ared
+    INTEGER, INTENT(IN) :: n
+    INTEGER, DIMENSION(:), INTENT(IN) :: ind,rind
+    INTEGER :: i,j
+    A=0.D0
+    DO i=1,n
+       DO j=1,n
+          A(ind(i),ind(j))=Ared(i,j)
+       END DO
+    END DO
+  END SUBROUTINE ireduce
+
+  SUBROUTINE vector_outer(u,v,A)
+    REAL(KIND=8), DIMENSION(:), INTENT(IN) :: u,v
+    REAL(KIND=8), DIMENSION(:,:), INTENT(OUT) :: A
+    INTEGER :: i,j
+
+    A=0.D0
+    DO i=1,SIZE(u)
+       DO j=1,SIZE(v)
+          A(i,j)=u(i)*v(j)
+       ENDDO
+    ENDDO
+  END SUBROUTINE vector_outer
 
 END MODULE util

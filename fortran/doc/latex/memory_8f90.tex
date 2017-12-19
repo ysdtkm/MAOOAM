@@ -1,0 +1,33 @@
+\hypertarget{memory_8f90}{}\section{memory.\+f90 File Reference}
+\label{memory_8f90}\index{memory.\+f90@{memory.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacememory}{memory}
+\begin{DoxyCompactList}\small\item\em Module that compute the memory term $M_3$ of the WL parameterization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacememory_ab130f53c70f8b6e46e81ce851a1cdce1}{memory\+::init\+\_\+memory}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the memory. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacememory_a76521fb2ecada5d623e947547314a5d6}{memory\+::compute\+\_\+m3} (y, dt, dtn, savey, save\+\_\+ev, evolve, inter, h\+\_\+int)
+\begin{DoxyCompactList}\small\item\em Compute the integrand of $M_3$ at each time in the past and integrate to get the memory term. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacememory_a47338910873d83feb93ce970b45f8ed7}{memory\+::test\+\_\+m3} (y, dt, dtn, h\+\_\+int)
+\begin{DoxyCompactList}\small\item\em Routine to test the \#compute\+\_\+\+M3 routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacememory_aa7e328e0fcaf0f4fdf9dc450ccfdfd5b}{memory\+::x}
+\begin{DoxyCompactList}\small\item\em Array storing the previous state of the system. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacememory_ab57f9b5df41de423255f146f2cf3220a}{memory\+::xs}
+\begin{DoxyCompactList}\small\item\em Array storing the resolved time evolution of the previous state of the system. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacememory_a7ea83fadf351bfaa6c8ec2540cb80a87}{memory\+::zs}
+\begin{DoxyCompactList}\small\item\em Dummy array to replace Xs in case where the evolution is not stored. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacememory_a533d8a2daef9b9feb5ee1cad8b2ae0c7}{memory\+::buf\+\_\+m}
+\begin{DoxyCompactList}\small\item\em Dummy vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacememory_a69ca63c73a29fb91cce2a4c640c94403}{memory\+::buf\+\_\+m3}
+\begin{DoxyCompactList}\small\item\em Dummy vector to store the $M_3$ integrand. \end{DoxyCompactList}\item 
+integer \hyperlink{namespacememory_a44d4dddcb5f5cbcbab4164c85448193d}{memory\+::t\+\_\+index}
+\begin{DoxyCompactList}\small\item\em Integer storing the time index (current position in the arrays) \end{DoxyCompactList}\item 
+procedure(ss\+\_\+step), pointer \hyperlink{namespacememory_ab1b54ce36a854642cb662080f609a897}{memory\+::step}
+\begin{DoxyCompactList}\small\item\em Procedural pointer pointing on the resolved dynamics step routine. \end{DoxyCompactList}\end{DoxyCompactItemize}

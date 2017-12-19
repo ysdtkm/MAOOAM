@@ -1,10 +1,10 @@
-# Modular arbitrary-order ocean-atmosphere model: MAOOAM -- Fortran implementation #
+# Modular arbitrary-order ocean-atmosphere model: MAOOAM -- Stochastic Fortran implementation #
 
 ## About ##
 
-(c) 2013-2016 Lesley De Cruz and Jonathan Demaeyer
+(c) 2013-2017 Lesley De Cruz and Jonathan Demaeyer
 
-See [LICENSE.txt](../LICENSE.txt) for license information.
+See [LICENSE.txt](LICENSE.txt) for license information.
 
 This software is provided as supplementary material with:
 
@@ -12,7 +12,13 @@ This software is provided as supplementary material with:
 Ocean-Atmosphere Model: MAOOAM v1.0, Geosci. Model Dev., 9, 2793-2808,
 [doi:10.5194/gmd-9-2793-2016](http://dx.doi.org/10.5194/gmd-9-2793-2016), 2016.
 
-**Please cite this article if you use (a part of) this software for a
+for the MAOOAM original code, and with
+
+*
+
+for the stochastic part.
+
+**Please cite both articles if you use (a part of) this software for a
 publication.**
 
 The authors would appreciate it if you could also send a reprint of
@@ -22,6 +28,30 @@ your paper to <lesley.decruz@meteo.be>, <jonathan.demaeyer@meteo.be> and
 Consult the MAOOAM [code repository](http://www.github.com/Climdyn/MAOOAM)
 for updates, and [our website](http://climdyn.meteo.be) for additional
 resources.
+
+------------------------------------------------------------------------
+
+## Branch description ##
+
+This branch is a version of the MAOOAM model focused on stochastic methods
+and more particularly stochastic parameterizations. 
+
+------------------------------------------------------------------------
+
+## Parameterizations description ##
+
+For the moment, this code provide the implementation of two different
+stochastic parameterizations for the MAOOAM ocean-atmosphere coupled
+model.
+
+The first one is based on homogenization and follow closely the 
+approach proposed in Franzke et al. 2005. It is called hereafter "MTV", from the
+names of the authors of the paper that first proposed to apply the method 
+to climate systems (Majda et al., 2001).
+
+The second one is based on the Ruelle response theory, and is called
+hereafter "WL", from the names of the authors of the paper that proposed
+to apply response theory to parameterization problems (Wouters and Lucarini, 2012).
 
 ------------------------------------------------------------------------
 
@@ -41,9 +71,6 @@ To install, unpack the archive in a folder, and run:
  
  Remark: The command "make clean" removes the compiled files.
 
-For Windows users, a minimalistic GNU development environment
- (including gfortran and make) is available at [www.mingw.org](http://www.mingw.org) .
-
 ------------------------------------------------------------------------
 
 ##  Description of the files ##
@@ -51,6 +78,8 @@ For Windows users, a minimalistic GNU development environment
 The model tendencies are represented through a tensor called aotensor which
 includes all the coefficients. This tensor is computed once at the program
 initialization.
+
+The following files are part of the MAOOAM model alone:
 
 * maooam.f90 : Main program.
 * aotensor_def.f90 : Tensor aotensor computation module.
@@ -75,11 +104,39 @@ initialization.
 * int_params.nml : A namelist to specify the integration parameters.
 * modeselection.nml : A namelist to specify which spectral decomposition will be used.
 
+with the addition of the files:
+
+* maooam_stoch.f90 : Stochastic implementation of MAOOAM.
+* maooam_MTV.f90 : Main program - MTV implementation for MAOOAM. 
+* maooam_WL.f90 : Main program - WL implementation for MAOOAM. 
+* corrmod.f90 : Unresolved variables correlation matrix initialization module.
+* corr_tensor.f90 : Correlations and derivatives for the memory term of the WL parameterization.
+* dec_tensor.f90 : Tensor resolved-unresolved components decomposition module.
+* int_comp.f90 : Utility module containing the routines to perform the integration of functions.
+* int_corr.f90 : Module to compute or load the integrals of the correlation matrices.
+* MAR.f90 : Multidimensional AutoRegressive (MAR) module to generate the correlation for the WL parameterization.
+* memory.f90 : WL parameterization memory term \f$M_3\f$ computation module. 
+* MTV_int_tensor.f90 : MTV tensors computation module.
+* MTV_sigma_tensor.f90 : MTV noise sigma matrices computation module.
+* WL_tensor.f90 : WL tensors computation module.
+* rk2_stoch_integrator.f90 : Stochastic RK2 integration routines module.
+* rk2_ss_integrator.f90 : Stochastic uncoupled resolved nonlinear and tangent linear RK2 dynamics integration module.
+* rk2_MTV_integrator.f90 :  MTV RK2 integration routines module.
+* rk2_WL_integrator.f90 :  WL RK2 integration routines module.
+* sf_def.f90 : Module to select the resolved-unresolved components.
+* SF.nml : A namelist to select the resolved-unresolved components.
+* sqrt_mod.f90 : Utility module with various routine to compute matrix square root.
+* stoch_mod.f90 : Utility module containing the stochastic related routines.
+* stoch_params.f90 : Stochastic models parameters module.
+* stoch_params.nml : A namelist to specify the stochastic models parameters.
+
+which belong specifically to the stoch branch.
+
 A documentation is available [here](./doc/html/index.html) (html) and [here](./doc/latex/Reference_manual.pdf) (pdf).
  
 ------------------------------------------------------------------------
 
-## Usage ##
+## MAOOAM Usage ##
 
 The user first has to fill the params.nml and int_params.nml namelist files according to their needs.
 Indeed, model and integration parameters can be specified respectively in the params.nml and int_params.nml namelist files. Some examples related to already published article are available in the params folder.
@@ -114,43 +171,55 @@ It will generate two files :
  * evol_field.dat : the recorded time evolution of the variables.
  * mean_field.dat : the mean field (the climatology)
 
-The tangent linear and adjoint models of MAOOAM are provided in the
-tl_ad_tensor, rk2_tl_ad_integrator and rk4_tl_ad_integrator modules. It is
-documented [here](./doc/html/md_tl_ad_doc.html).
+------------------------------------------------------------------------
 
+## Stochastic code usage ##
+
+The user first has to fill the MAOOAM model namelist files according to the previous section. 
+Additional namelist files for the fine tuning of the parameterization must then be filled,
+and some "definition" files (with the extension .def) must be provided. An example is provided with the code.
+
+Full details over the parameterization options and definition files can be found in the documentation: ([html](./dec/html/index.html))
+ and ([pdf](./doc/latex/Reference_manual.pdf)).
+
+The program "maooam_stoch" will generate the evolution of the full stochastic dynamics with the command:
+
+    ./maooam_stoch
+
+or any other dynamics if specified as an argument (see the header of [maooam_stoch.f90](./maooam_stoch.f90)).
+It will generate two files :
+ * evol_field.dat : the recorded time evolution of the variables.
+ * mean_field.dat : the mean field (the climatology)
+
+The program "maooam_MTV" will generate the evolution of the MTV parameterization evolution, with the command:
+
+    ./maooam_MTV
+
+It will generate three files :
+ * evol_MTV.dat : the recorded time evolution of the variables.
+ * ptend_MTV.dat : the recorded time evolution of the tendencies (used for debugging).
+ * mean_field_MTV.dat : the mean field (the climatology)
+
+The program "maooam_WL" will generate the evolution of the MTV parameterization evolution, with the command:
+
+    ./maooam_WL
+
+It will generate three files :
+ * evol_WL.dat : the recorded time evolution of the variables.
+ * ptend_WL.dat : the recorded time evolution of the tendencies (used for debugging).
+ * mean_field_WL.dat : the mean field (the climatology)
 
 ------------------------------------------------------------------------
 
 ## Implementation notes ##
 
-As the system of differential equations is at most bilinear in y[j] (j=1..n), y
-being the array of variables, it can be expressed as a tensor contraction
-(written using Einstein convention, i.e. indices that occur twice on one side
-of an equation are summed over):
+A stochastic version of MAOOAM and two stochastic parameterization methods
+(MTV and WL) are provided with this code.
 
-    dy  / dt =  T        y   y      (y  == 1)
-      i          i,j,k    j   k       0
-
-The tensor T that encodes the differential equations is composed so that:
-
-* T[i][j][k] contains the contribution of dy[i]/dt proportional to y[j]*y[k].
-* Furthermore, y[0] is always equal to 1, so that T[i][0][0] is the constant
-contribution to var dy[i]/dt.
-* T[i][j][0] + T[i][0][j] is the contribution to  dy[i]/dt which is linear in
-y[j].
-
-Ideally, the tensor is composed as an upper triangular matrix 
-(in the last two coordinates).
-
-The tensor for this model is composed in the aotensor_def module and uses the
-inner products defined in the inprod_analytic module.
-
+They are detailed [here](./doc/html/md_para_doc.html).
 
 ------------------------------------------------------------------------
 
 ## Final Remarks ##
-
-The authors would like to thank Kris for help with the lua2fortran project. It
-has greatly reduced the amount of (error-prone) work.
 
   No animals were harmed during the coding process.

@@ -1,0 +1,306 @@
+\hypertarget{namespacestoch__mod}{}\section{stoch\+\_\+mod Module Reference}
+\label{namespacestoch__mod}\index{stoch\+\_\+mod@{stoch\+\_\+mod}}
+
+
+Utility module containing the stochastic related routines.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8) function, public \hyperlink{namespacestoch__mod_a4ca5e456ee7b7980dcb7d2b239f0677c}{gasdev} ()
+\item 
+subroutine, public \hyperlink{namespacestoch__mod_ae9e26b4cf710198506d37e7d77685b47}{stoch\+\_\+vec} (dW)
+\begin{DoxyCompactList}\small\item\em Routine to fill a vector with standard Gaussian noise process values. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacestoch__mod_aae1ccd6f37307d02916cb911fbdd605c}{stoch\+\_\+atm\+\_\+vec} (dW)
+\begin{DoxyCompactList}\small\item\em routine to fill the atmospheric component of a vector with standard gaussian noise process values \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacestoch__mod_a437bd49e6b3afcc2cddfc79badb94d09}{stoch\+\_\+atm\+\_\+res\+\_\+vec} (dW)
+\begin{DoxyCompactList}\small\item\em routine to fill the resolved atmospheric component of a vector with standard gaussian noise process values \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacestoch__mod_a03532f8f17991b20472aae0cf62e371b}{stoch\+\_\+atm\+\_\+unres\+\_\+vec} (dW)
+\begin{DoxyCompactList}\small\item\em routine to fill the unresolved atmospheric component of a vector with standard gaussian noise process values \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacestoch__mod_a16dca233d3cc2bae3d2dd878ffa09573}{stoch\+\_\+oc\+\_\+vec} (dW)
+\begin{DoxyCompactList}\small\item\em routine to fill the oceanic component of a vector with standard gaussian noise process values \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacestoch__mod_a5755bfeff5833b9a8bda92ec2d940f0b}{stoch\+\_\+oc\+\_\+res\+\_\+vec} (dW)
+\begin{DoxyCompactList}\small\item\em routine to fill the resolved oceanic component of a vector with standard gaussian noise process values \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacestoch__mod_a54d51f19303ab07c03b861022a4f149e}{stoch\+\_\+oc\+\_\+unres\+\_\+vec} (dW)
+\begin{DoxyCompactList}\small\item\em routine to fill the unresolved oceanic component of a vector with standard gaussian noise process values \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+integer \hyperlink{namespacestoch__mod_a266187af9a49e162926a5ef2d67e141a}{iset} =0
+\item 
+real(kind=8) \hyperlink{namespacestoch__mod_a15f89f8abf449fad0aea548852af1e60}{gset}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Utility module containing the stochastic related routines. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!gasdev@{gasdev}}
+\index{gasdev@{gasdev}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{gasdev()}{gasdev()}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, public stoch\+\_\+mod\+::gasdev (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestoch__mod_a4ca5e456ee7b7980dcb7d2b239f0677c}{}\label{namespacestoch__mod_a4ca5e456ee7b7980dcb7d2b239f0677c}
+
+
+Definition at line 32 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+32     \textcolor{keywordtype}{REAL(KIND=8)} :: gasdev
+33     \textcolor{keywordtype}{REAL(KIND=8)} :: fac,rsq,v1,v2,r
+34     \textcolor{keywordflow}{IF} (iset.eq.0) \textcolor{keywordflow}{THEN}
+35        \textcolor{keywordflow}{DO}
+36           \textcolor{keyword}{CALL }random\_number(r)
+37           v1=2.d0*r-1.
+38           \textcolor{keyword}{CALL }random\_number(r)
+39           v2=2.d0*r-1.
+40           rsq=v1**2+v2**2
+41           \textcolor{keywordflow}{IF} (rsq.lt.1.d0.and.rsq.ne.0.d0) \textcolor{keywordflow}{EXIT}
+42 \textcolor{keywordflow}{       ENDDO}
+43        fac=sqrt(-2.*log(rsq)/rsq)
+44        gset=v1*fac
+45        gasdev=v2*fac
+46        iset=1
+47     \textcolor{keywordflow}{ELSE}
+48        gasdev=gset
+49        iset=0
+50 \textcolor{keywordflow}{    ENDIF}
+51     \textcolor{keywordflow}{RETURN}
+\end{DoxyCode}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!stoch\+\_\+atm\+\_\+res\+\_\+vec@{stoch\+\_\+atm\+\_\+res\+\_\+vec}}
+\index{stoch\+\_\+atm\+\_\+res\+\_\+vec@{stoch\+\_\+atm\+\_\+res\+\_\+vec}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{stoch\+\_\+atm\+\_\+res\+\_\+vec(d\+W)}{stoch_atm_res_vec(dW)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stoch\+\_\+mod\+::stoch\+\_\+atm\+\_\+res\+\_\+vec (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(inout)}]{dW}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestoch__mod_a437bd49e6b3afcc2cddfc79badb94d09}{}\label{namespacestoch__mod_a437bd49e6b3afcc2cddfc79badb94d09}
+
+
+routine to fill the resolved atmospheric component of a vector with standard gaussian noise process values 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dW} & vector to fill \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 77 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+77     \textcolor{keywordtype}{real(kind=8)}, \textcolor{keywordtype}{dimension(0:ndim)}, \textcolor{keywordtype}{intent(inout)} :: dw
+78     \textcolor{keywordtype}{integer} :: i
+79     dw=0.d0
+80     \textcolor{keywordflow}{do} i=1,2*natm
+81        \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==0) dw(i)=gasdev()
+82 \textcolor{keywordflow}{    enddo}
+\end{DoxyCode}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!stoch\+\_\+atm\+\_\+unres\+\_\+vec@{stoch\+\_\+atm\+\_\+unres\+\_\+vec}}
+\index{stoch\+\_\+atm\+\_\+unres\+\_\+vec@{stoch\+\_\+atm\+\_\+unres\+\_\+vec}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{stoch\+\_\+atm\+\_\+unres\+\_\+vec(d\+W)}{stoch_atm_unres_vec(dW)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stoch\+\_\+mod\+::stoch\+\_\+atm\+\_\+unres\+\_\+vec (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(inout)}]{dW}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestoch__mod_a03532f8f17991b20472aae0cf62e371b}{}\label{namespacestoch__mod_a03532f8f17991b20472aae0cf62e371b}
+
+
+routine to fill the unresolved atmospheric component of a vector with standard gaussian noise process values 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dW} & vector to fill \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 88 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+88     \textcolor{keywordtype}{real(kind=8)}, \textcolor{keywordtype}{dimension(0:ndim)}, \textcolor{keywordtype}{intent(inout)} :: dw
+89     \textcolor{keywordtype}{integer} :: i
+90     dw=0.d0
+91     \textcolor{keywordflow}{do} i=1,2*natm
+92        \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==1) dw(i)=gasdev()
+93 \textcolor{keywordflow}{    enddo}
+\end{DoxyCode}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!stoch\+\_\+atm\+\_\+vec@{stoch\+\_\+atm\+\_\+vec}}
+\index{stoch\+\_\+atm\+\_\+vec@{stoch\+\_\+atm\+\_\+vec}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{stoch\+\_\+atm\+\_\+vec(d\+W)}{stoch_atm_vec(dW)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stoch\+\_\+mod\+::stoch\+\_\+atm\+\_\+vec (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(inout)}]{dW}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestoch__mod_aae1ccd6f37307d02916cb911fbdd605c}{}\label{namespacestoch__mod_aae1ccd6f37307d02916cb911fbdd605c}
+
+
+routine to fill the atmospheric component of a vector with standard gaussian noise process values 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dW} & vector to fill \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+67     \textcolor{keywordtype}{real(kind=8)}, \textcolor{keywordtype}{dimension(0:ndim)}, \textcolor{keywordtype}{intent(inout)} :: dw
+68     \textcolor{keywordtype}{integer} :: i
+69     \textcolor{keywordflow}{do} i=1,2*natm
+70        dw(i)=gasdev()
+71 \textcolor{keywordflow}{    enddo}
+\end{DoxyCode}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!stoch\+\_\+oc\+\_\+res\+\_\+vec@{stoch\+\_\+oc\+\_\+res\+\_\+vec}}
+\index{stoch\+\_\+oc\+\_\+res\+\_\+vec@{stoch\+\_\+oc\+\_\+res\+\_\+vec}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{stoch\+\_\+oc\+\_\+res\+\_\+vec(d\+W)}{stoch_oc_res_vec(dW)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stoch\+\_\+mod\+::stoch\+\_\+oc\+\_\+res\+\_\+vec (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(inout)}]{dW}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestoch__mod_a5755bfeff5833b9a8bda92ec2d940f0b}{}\label{namespacestoch__mod_a5755bfeff5833b9a8bda92ec2d940f0b}
+
+
+routine to fill the resolved oceanic component of a vector with standard gaussian noise process values 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dW} & vector to fill \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 109 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+109     \textcolor{keywordtype}{real(kind=8)}, \textcolor{keywordtype}{dimension(0:ndim)}, \textcolor{keywordtype}{intent(inout)} :: dw
+110     \textcolor{keywordtype}{integer} :: i
+111     dw=0.d0
+112     \textcolor{keywordflow}{do} i=2*natm+1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+113        \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==0) dw(i)=gasdev()
+114 \textcolor{keywordflow}{    enddo}
+\end{DoxyCode}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!stoch\+\_\+oc\+\_\+unres\+\_\+vec@{stoch\+\_\+oc\+\_\+unres\+\_\+vec}}
+\index{stoch\+\_\+oc\+\_\+unres\+\_\+vec@{stoch\+\_\+oc\+\_\+unres\+\_\+vec}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{stoch\+\_\+oc\+\_\+unres\+\_\+vec(d\+W)}{stoch_oc_unres_vec(dW)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stoch\+\_\+mod\+::stoch\+\_\+oc\+\_\+unres\+\_\+vec (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(inout)}]{dW}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestoch__mod_a54d51f19303ab07c03b861022a4f149e}{}\label{namespacestoch__mod_a54d51f19303ab07c03b861022a4f149e}
+
+
+routine to fill the unresolved oceanic component of a vector with standard gaussian noise process values 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dW} & vector to fill \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 120 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+120     \textcolor{keywordtype}{real(kind=8)}, \textcolor{keywordtype}{dimension(0:ndim)}, \textcolor{keywordtype}{intent(inout)} :: dw
+121     \textcolor{keywordtype}{integer} :: i
+122     dw=0.d0
+123     \textcolor{keywordflow}{do} i=2*natm+1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+124        \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==1) dw(i)=gasdev()
+125 \textcolor{keywordflow}{    enddo}
+\end{DoxyCode}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!stoch\+\_\+oc\+\_\+vec@{stoch\+\_\+oc\+\_\+vec}}
+\index{stoch\+\_\+oc\+\_\+vec@{stoch\+\_\+oc\+\_\+vec}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{stoch\+\_\+oc\+\_\+vec(d\+W)}{stoch_oc_vec(dW)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stoch\+\_\+mod\+::stoch\+\_\+oc\+\_\+vec (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(inout)}]{dW}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestoch__mod_a16dca233d3cc2bae3d2dd878ffa09573}{}\label{namespacestoch__mod_a16dca233d3cc2bae3d2dd878ffa09573}
+
+
+routine to fill the oceanic component of a vector with standard gaussian noise process values 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dW} & vector to fill \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 99 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+99     \textcolor{keywordtype}{real(kind=8)}, \textcolor{keywordtype}{dimension(0:ndim)}, \textcolor{keywordtype}{intent(inout)} :: dw
+100     \textcolor{keywordtype}{integer} :: i
+101     \textcolor{keywordflow}{do} i=2*natm+1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+102        dw(i)=gasdev()
+103 \textcolor{keywordflow}{    enddo}
+\end{DoxyCode}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!stoch\+\_\+vec@{stoch\+\_\+vec}}
+\index{stoch\+\_\+vec@{stoch\+\_\+vec}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{stoch\+\_\+vec(d\+W)}{stoch_vec(dW)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stoch\+\_\+mod\+::stoch\+\_\+vec (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(inout)}]{dW}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacestoch__mod_ae9e26b4cf710198506d37e7d77685b47}{}\label{namespacestoch__mod_ae9e26b4cf710198506d37e7d77685b47}
+
+
+Routine to fill a vector with standard Gaussian noise process values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dW} & Vector to fill \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 57 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+57     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(INOUT)} :: dw
+58     \textcolor{keywordtype}{INTEGER} :: i
+59     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+60        dw(i)=gasdev()
+61 \textcolor{keywordflow}{    ENDDO}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!gset@{gset}}
+\index{gset@{gset}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{gset}{gset}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) stoch\+\_\+mod\+::gset\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacestoch__mod_a15f89f8abf449fad0aea548852af1e60}{}\label{namespacestoch__mod_a15f89f8abf449fad0aea548852af1e60}
+
+
+Definition at line 24 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+24   \textcolor{keywordtype}{REAL(KIND=8)} :: gset
+\end{DoxyCode}
+\index{stoch\+\_\+mod@{stoch\+\_\+mod}!iset@{iset}}
+\index{iset@{iset}!stoch\+\_\+mod@{stoch\+\_\+mod}}
+\subsubsection[{\texorpdfstring{iset}{iset}}]{\setlength{\rightskip}{0pt plus 5cm}integer stoch\+\_\+mod\+::iset =0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacestoch__mod_a266187af9a49e162926a5ef2d67e141a}{}\label{namespacestoch__mod_a266187af9a49e162926a5ef2d67e141a}
+
+
+Definition at line 23 of file stoch\+\_\+mod.\+f90.
+
+
+\begin{DoxyCode}
+23   \textcolor{keywordtype}{INTEGER} :: iset=0
+\end{DoxyCode}

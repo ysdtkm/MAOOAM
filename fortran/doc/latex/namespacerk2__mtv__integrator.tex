@@ -1,0 +1,548 @@
+\hypertarget{namespacerk2__mtv__integrator}{}\section{rk2\+\_\+mtv\+\_\+integrator Module Reference}
+\label{namespacerk2__mtv__integrator}\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+
+
+Module with the M\+TV rk2 integration routines.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__mtv__integrator_ac898de547481bd9af9cf76abf7972b3a}{init\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the M\+TV rk2 integrator. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__mtv__integrator_a2e6d01c401a4baf9ae1a5046793ca4f9}{init\+\_\+noise}
+\begin{DoxyCompactList}\small\item\em Routine to initialize the noise vectors and buffers. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__mtv__integrator_a6f4eeef9bfd2b9097251da6c7e17cc24}{init\+\_\+g}
+\begin{DoxyCompactList}\small\item\em Routine to initialize the G term. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__mtv__integrator_aad1f3a82362ff6e64d0e5587d285bbde}{compg} (y)
+\begin{DoxyCompactList}\small\item\em Routine to actualize the G term based on the state y of the M\+TV system. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__mtv__integrator_ad2806f20979d8c2cda13367addb63b3b}{step} (y, t, dt, dtn, res, tend)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the M\+TV system. The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__mtv__integrator_a6f7d6995f02f84e6967e1ae169c38014}{full\+\_\+step} (y, t, dt, dtn, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the full stochastic system. The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_aa33cc6702537576ce9327c8c1bacc0e0}{buf\+\_\+y1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a8a81a8ea6d873549ea3fab2c25ab8f56}{buf\+\_\+f0}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a082b2bb51352639e114015017d7e8a8c}{buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Integration buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_acfc8cafd615b189ed69fe547c21a523d}{dw}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a00366eb109bd6df9f42317a1103b42d7}{dwmult}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a943f1c40aae9be23e299c05b361c7ce5}{dwar}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a00726f064d00787a9f02d960defbcf71}{dwau}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a1d35c3699f7164073c6c616117541e1c}{dwor}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_af1862c97e660a0a557657dccbdc02fa8}{dwou}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_ad88a9e896280f9afe3d00bf76fe0aa20}{anoise}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a3171418fde58eb68937425899ecdc7af}{noise}
+\begin{DoxyCompactList}\small\item\em Additive noise term. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a950fc0519ed9785d8126a54cfe3ecce9}{noisemult}
+\begin{DoxyCompactList}\small\item\em Multiplicative noise term. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a011fd16734ea127ef794053331a8294e}{g}
+\begin{DoxyCompactList}\small\item\em G term of the M\+TV tendencies. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a9db4772c6d66fba1a175dc7c493c8c6d}{buf\+\_\+g}
+\begin{DoxyCompactList}\small\item\em Buffer for the G term computation. \end{DoxyCompactList}\item 
+logical \hyperlink{namespacerk2__mtv__integrator_a08097c59dbd88f4ac0624dffb29fd6b1}{mult}
+\begin{DoxyCompactList}\small\item\em Logical indicating if the sigma1 matrix must be computed for every state change. \end{DoxyCompactList}\item 
+logical \hyperlink{namespacerk2__mtv__integrator_a9fbcf5a43f09dfa39f6ebcacf1b5504c}{q1fill}
+\begin{DoxyCompactList}\small\item\em Logical indicating if the matrix Q1 is non-\/zero. \end{DoxyCompactList}\item 
+logical \hyperlink{namespacerk2__mtv__integrator_ad56fffe540caff2644799cc5510e93c9}{compute\+\_\+mult}
+\begin{DoxyCompactList}\small\item\em Logical indicating if the Gaussian noise for the multiplicative noise must be computed. \end{DoxyCompactList}\item 
+real(kind=8), parameter \hyperlink{namespacerk2__mtv__integrator_afebf6d33084a6677b313e21740aa6b8b}{sq2} = sqrt(2.D0)
+\begin{DoxyCompactList}\small\item\em Hard coded square root of 2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module with the M\+TV rk2 integration routines. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+This module actually contains the Heun algorithm routines. 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!compg@{compg}}
+\index{compg@{compg}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{compg(y)}{compg(y)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine rk2\+\_\+mtv\+\_\+integrator\+::compg (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_aad1f3a82362ff6e64d0e5587d285bbde}{}\label{namespacerk2__mtv__integrator_aad1f3a82362ff6e64d0e5587d285bbde}
+
+
+Routine to actualize the G term based on the state y of the M\+TV system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & State of the M\+TV system \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 105 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+105     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+106 
+107     g=htot
+108     \textcolor{keyword}{CALL }sparse\_mul2\_k(ltot,y,buf\_g)
+109     g=g+buf\_g
+110     \textcolor{keyword}{CALL }sparse\_mul3(btot,y,y,buf\_g)
+111     g=g+buf\_g
+112     \textcolor{keyword}{CALL }sparse\_mul4(mtot,y,y,y,buf\_g)
+113     g=g+buf\_g
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!full\+\_\+step@{full\+\_\+step}}
+\index{full\+\_\+step@{full\+\_\+step}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{full\+\_\+step(y, t, dt, dtn, res)}{full_step(y, t, dt, dtn, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+mtv\+\_\+integrator\+::full\+\_\+step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), intent(inout)}]{t, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__mtv__integrator_a6f7d6995f02f84e6967e1ae169c38014}{}\label{namespacerk2__mtv__integrator_a6f7d6995f02f84e6967e1ae169c38014}
+
+
+Routine to perform an integration step (Heun algorithm) of the full stochastic system. The incremented time is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Initial point. \\
+\hline
+{\em t} & Actual integration time \\
+\hline
+{\em dt} & Integration timestep. \\
+\hline
+{\em dtn} & Stochastoc integration timestep (normally square-\/root of dt). \\
+\hline
+{\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 170 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+170     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+171     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+172     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+173     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+174     \textcolor{keyword}{CALL }stoch\_atm\_res\_vec(dwar)
+175     \textcolor{keyword}{CALL }stoch\_atm\_unres\_vec(dwau)
+176     \textcolor{keyword}{CALL }stoch\_oc\_res\_vec(dwor)
+177     \textcolor{keyword}{CALL }stoch\_oc\_unres\_vec(dwou)
+178     anoise=(q\_ar*dwar+q\_au*dwau+q\_or*dwor+q\_ou*dwou)*dtn
+179     \textcolor{keyword}{CALL }sparse\_mul3(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},y,y,buf\_f0)
+180     buf\_y1 = y+dt*buf\_f0+anoise
+181     \textcolor{keyword}{CALL }sparse\_mul3(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},buf\_y1,buf\_y1,buf\_f1)
+182     res=y+0.5*(buf\_f0+buf\_f1)*dt+anoise
+183     t=t+dt
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!init\+\_\+g@{init\+\_\+g}}
+\index{init\+\_\+g@{init\+\_\+g}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{init\+\_\+g}{init_g}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine rk2\+\_\+mtv\+\_\+integrator\+::init\+\_\+g (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a6f4eeef9bfd2b9097251da6c7e17cc24}{}\label{namespacerk2__mtv__integrator_a6f4eeef9bfd2b9097251da6c7e17cc24}
+
+
+Routine to initialize the G term. 
+
+
+
+Definition at line 97 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+97     \textcolor{keywordtype}{INTEGER} :: allocstat
+98     \textcolor{keyword}{ALLOCATE}(g(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), buf\_g(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+99     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!init\+\_\+integrator@{init\+\_\+integrator}}
+\index{init\+\_\+integrator@{init\+\_\+integrator}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{init\+\_\+integrator}{init_integrator}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+mtv\+\_\+integrator\+::init\+\_\+integrator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__mtv__integrator_ac898de547481bd9af9cf76abf7972b3a}{}\label{namespacerk2__mtv__integrator_ac898de547481bd9af9cf76abf7972b3a}
+
+
+Subroutine to initialize the M\+TV rk2 integrator. 
+
+
+
+Definition at line 50 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+50     \textcolor{keywordtype}{INTEGER} :: allocstat
+51 
+52     \textcolor{keyword}{CALL }init\_ss\_integrator \textcolor{comment}{! Initialize the uncoupled resolved dynamics}
+53 
+54     \textcolor{keyword}{ALLOCATE}(buf\_y1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f0(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),\hyperlink{namespacestat}{stat}=allocstat)
+55     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+56 
+57     buf\_y1=0.d0
+58     buf\_f1=0.d0
+59     buf\_f0=0.d0
+60     
+61     print*, \textcolor{stringliteral}{'Initializing the integrator ...'}
+62     \textcolor{keyword}{CALL }init\_sigma(mult,q1fill)
+63     \textcolor{keyword}{CALL }init\_noise
+64     \textcolor{keyword}{CALL }init\_g
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!init\+\_\+noise@{init\+\_\+noise}}
+\index{init\+\_\+noise@{init\+\_\+noise}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{init\+\_\+noise}{init_noise}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine rk2\+\_\+mtv\+\_\+integrator\+::init\+\_\+noise (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a2e6d01c401a4baf9ae1a5046793ca4f9}{}\label{namespacerk2__mtv__integrator_a2e6d01c401a4baf9ae1a5046793ca4f9}
+
+
+Routine to initialize the noise vectors and buffers. 
+
+
+
+Definition at line 69 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+69     \textcolor{keywordtype}{INTEGER} :: allocstat
+70     \textcolor{keyword}{ALLOCATE}(dw(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), dwmult(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+71     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+72 
+73     \textcolor{keyword}{ALLOCATE}(dwar(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwau(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwor(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwou(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),
+      \hyperlink{namespacestat}{stat}=allocstat)
+74     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+75 
+76     \textcolor{keyword}{ALLOCATE}(anoise(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), noise(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), noisemult(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+77     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+78 
+79     dw=0.d0
+80     dwmult=0.d0
+81 
+82     dwar=0.d0
+83     dwor=0.d0
+84     dwau=0.d0
+85     dwou=0.d0
+86 
+87     anoise=0.d0
+88     noise=0.d0
+89     noisemult=0.d0
+90 
+91     compute\_mult=((q1fill).OR.(mult))
+92     
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!step@{step}}
+\index{step@{step}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{step(y, t, dt, dtn, res, tend)}{step(y, t, dt, dtn, res, tend)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+mtv\+\_\+integrator\+::step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), intent(inout)}]{t, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{tend}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__mtv__integrator_ad2806f20979d8c2cda13367addb63b3b}{}\label{namespacerk2__mtv__integrator_ad2806f20979d8c2cda13367addb63b3b}
+
+
+Routine to perform an integration step (Heun algorithm) of the M\+TV system. The incremented time is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Initial point. \\
+\hline
+{\em t} & Actual integration time \\
+\hline
+{\em dt} & Integration timestep. \\
+\hline
+{\em dtn} & Stochastic integration timestep (normally square-\/root of dt). \\
+\hline
+{\em res} & Final point after the step. \\
+\hline
+{\em tend} & Partial or full tendencies used to perform the step (used for debugging). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 124 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+124     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+125     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+126     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+127     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res,tend
+128 
+129     \textcolor{keyword}{CALL }compg(y)
+130     
+131     \textcolor{keyword}{CALL }stoch\_atm\_res\_vec(dwar)
+132     \textcolor{keyword}{CALL }stoch\_oc\_res\_vec(dwor)
+133     anoise=q\_ar*dwar+q\_or*dwor
+134     \textcolor{keyword}{CALL }stoch\_vec(dw)
+135     \textcolor{keywordflow}{IF} (compute\_mult) \textcolor{keyword}{CALL }stoch\_vec(dwmult)
+136     noise(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim})=matmul(sig2,dw(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}))
+137     \textcolor{keywordflow}{IF} ((mult).and.(mod(t,mnuti)<dt)) \textcolor{keyword}{CALL }compute\_mult\_sigma(y)
+138     \textcolor{keywordflow}{IF} (compute\_mult) noisemult(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim})=matmul(sig1,dwmult(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}))
+139 
+140     \textcolor{keyword}{CALL }tendencies(t,y,buf\_f0)
+141     buf\_y1 = y+dt*(buf\_f0+g)+(anoise+sq2*(noise+noisemult))*dtn
+142 
+143     buf\_f1=g
+144     \textcolor{keyword}{CALL }compg(buf\_y1)
+145     g=0.5*(g+buf\_f1)
+146     
+147     \textcolor{keywordflow}{IF} ((mult).and.(mod(t,mnuti)<dt)) \textcolor{keyword}{CALL }compute\_mult\_sigma(buf\_y1)
+148     \textcolor{keywordflow}{IF} (compute\_mult) \textcolor{keywordflow}{THEN}
+149        buf\_f1(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim})=matmul(sig1,dwmult(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}))
+150        noisemult(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim})=0.5*(noisemult(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim})+buf\_f1(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}))
+151 \textcolor{keywordflow}{    ENDIF}
+152 
+153 
+154     \textcolor{keyword}{CALL }tendencies(t,buf\_y1,buf\_f1)
+155     buf\_f0=0.5*(buf\_f0+buf\_f1)
+156     res=y+dt*(buf\_f0+g)+(anoise+sq2*(noise+noisemult))*dtn
+157     \textcolor{comment}{! tend=G+sq2*(noise+noisemult)/dtn}
+158     tend=sq2*noisemult/dtn
+159     t=t+dt
+160 
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!anoise@{anoise}}
+\index{anoise@{anoise}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{anoise}{anoise}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::anoise\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_ad88a9e896280f9afe3d00bf76fe0aa20}{}\label{namespacerk2__mtv__integrator_ad88a9e896280f9afe3d00bf76fe0aa20}
+
+
+Definition at line 33 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+33   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: anoise,noise\textcolor{comment}{         !< Additive noise term}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!buf\+\_\+f0@{buf\+\_\+f0}}
+\index{buf\+\_\+f0@{buf\+\_\+f0}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f0}{buf_f0}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::buf\+\_\+f0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a8a81a8ea6d873549ea3fab2c25ab8f56}{}\label{namespacerk2__mtv__integrator_a8a81a8ea6d873549ea3fab2c25ab8f56}
+
+
+Definition at line 30 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!buf\+\_\+f1@{buf\+\_\+f1}}
+\index{buf\+\_\+f1@{buf\+\_\+f1}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f1}{buf_f1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::buf\+\_\+f1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a082b2bb51352639e114015017d7e8a8c}{}\label{namespacerk2__mtv__integrator_a082b2bb51352639e114015017d7e8a8c}
+
+
+Integration buffers. 
+
+
+
+Definition at line 30 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!buf\+\_\+g@{buf\+\_\+g}}
+\index{buf\+\_\+g@{buf\+\_\+g}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+g}{buf_g}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::buf\+\_\+g\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a9db4772c6d66fba1a175dc7c493c8c6d}{}\label{namespacerk2__mtv__integrator_a9db4772c6d66fba1a175dc7c493c8c6d}
+
+
+Buffer for the G term computation. 
+
+
+
+Definition at line 36 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+36   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_g\textcolor{comment}{                !< Buffer for the G term computation}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!buf\+\_\+y1@{buf\+\_\+y1}}
+\index{buf\+\_\+y1@{buf\+\_\+y1}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+y1}{buf_y1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::buf\+\_\+y1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_aa33cc6702537576ce9327c8c1bacc0e0}{}\label{namespacerk2__mtv__integrator_aa33cc6702537576ce9327c8c1bacc0e0}
+
+
+Definition at line 30 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+30   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_y1,buf\_f0,buf\_f1\textcolor{comment}{ !< Integration buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!compute\+\_\+mult@{compute\+\_\+mult}}
+\index{compute\+\_\+mult@{compute\+\_\+mult}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{compute\+\_\+mult}{compute_mult}}]{\setlength{\rightskip}{0pt plus 5cm}logical rk2\+\_\+mtv\+\_\+integrator\+::compute\+\_\+mult\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_ad56fffe540caff2644799cc5510e93c9}{}\label{namespacerk2__mtv__integrator_ad56fffe540caff2644799cc5510e93c9}
+
+
+Logical indicating if the Gaussian noise for the multiplicative noise must be computed. 
+
+
+
+Definition at line 40 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+40   \textcolor{keywordtype}{LOGICAL} :: compute\_mult\textcolor{comment}{                                         !< Logical indicating if the Gaussian
+       noise for the multiplicative noise must be computed}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!dw@{dw}}
+\index{dw@{dw}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dw}{dw}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::dw\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_acfc8cafd615b189ed69fe547c21a523d}{}\label{namespacerk2__mtv__integrator_acfc8cafd615b189ed69fe547c21a523d}
+
+
+Definition at line 31 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+31   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dw, dwmult\textcolor{comment}{           !< Standard gaussian noise buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!dwar@{dwar}}
+\index{dwar@{dwar}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwar}{dwar}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::dwar\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a943f1c40aae9be23e299c05b361c7ce5}{}\label{namespacerk2__mtv__integrator_a943f1c40aae9be23e299c05b361c7ce5}
+
+
+Definition at line 32 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dwar,dwau,dwor,dwou\textcolor{comment}{  !< Standard gaussian noise buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!dwau@{dwau}}
+\index{dwau@{dwau}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwau}{dwau}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::dwau\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a00726f064d00787a9f02d960defbcf71}{}\label{namespacerk2__mtv__integrator_a00726f064d00787a9f02d960defbcf71}
+
+
+Definition at line 32 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!dwmult@{dwmult}}
+\index{dwmult@{dwmult}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwmult}{dwmult}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::dwmult\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a00366eb109bd6df9f42317a1103b42d7}{}\label{namespacerk2__mtv__integrator_a00366eb109bd6df9f42317a1103b42d7}
+
+
+Standard gaussian noise buffers. 
+
+
+
+Definition at line 31 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!dwor@{dwor}}
+\index{dwor@{dwor}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwor}{dwor}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::dwor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a1d35c3699f7164073c6c616117541e1c}{}\label{namespacerk2__mtv__integrator_a1d35c3699f7164073c6c616117541e1c}
+
+
+Definition at line 32 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!dwou@{dwou}}
+\index{dwou@{dwou}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwou}{dwou}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::dwou\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_af1862c97e660a0a557657dccbdc02fa8}{}\label{namespacerk2__mtv__integrator_af1862c97e660a0a557657dccbdc02fa8}
+
+
+Standard gaussian noise buffers. 
+
+
+
+Definition at line 32 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!g@{g}}
+\index{g@{g}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{g}{g}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::g\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a011fd16734ea127ef794053331a8294e}{}\label{namespacerk2__mtv__integrator_a011fd16734ea127ef794053331a8294e}
+
+
+G term of the M\+TV tendencies. 
+
+
+
+Definition at line 35 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+35   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: g\textcolor{comment}{                    !< G term of the MTV tendencies}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!mult@{mult}}
+\index{mult@{mult}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{mult}{mult}}]{\setlength{\rightskip}{0pt plus 5cm}logical rk2\+\_\+mtv\+\_\+integrator\+::mult\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a08097c59dbd88f4ac0624dffb29fd6b1}{}\label{namespacerk2__mtv__integrator_a08097c59dbd88f4ac0624dffb29fd6b1}
+
+
+Logical indicating if the sigma1 matrix must be computed for every state change. 
+
+
+
+Definition at line 38 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+38   \textcolor{keywordtype}{LOGICAL} :: mult\textcolor{comment}{                                                 !< Logical indicating if the sigma1
+       matrix must be computed for every state change}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!noise@{noise}}
+\index{noise@{noise}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{noise}{noise}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::noise\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a3171418fde58eb68937425899ecdc7af}{}\label{namespacerk2__mtv__integrator_a3171418fde58eb68937425899ecdc7af}
+
+
+Additive noise term. 
+
+
+
+Definition at line 33 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!noisemult@{noisemult}}
+\index{noisemult@{noisemult}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{noisemult}{noisemult}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+mtv\+\_\+integrator\+::noisemult\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a950fc0519ed9785d8126a54cfe3ecce9}{}\label{namespacerk2__mtv__integrator_a950fc0519ed9785d8126a54cfe3ecce9}
+
+
+Multiplicative noise term. 
+
+
+
+Definition at line 34 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+34   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: noisemult\textcolor{comment}{            !< Multiplicative noise term}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!q1fill@{q1fill}}
+\index{q1fill@{q1fill}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{q1fill}{q1fill}}]{\setlength{\rightskip}{0pt plus 5cm}logical rk2\+\_\+mtv\+\_\+integrator\+::q1fill\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_a9fbcf5a43f09dfa39f6ebcacf1b5504c}{}\label{namespacerk2__mtv__integrator_a9fbcf5a43f09dfa39f6ebcacf1b5504c}
+
+
+Logical indicating if the matrix Q1 is non-\/zero. 
+
+
+
+Definition at line 39 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+39   \textcolor{keywordtype}{LOGICAL} :: q1fill\textcolor{comment}{                                               !< Logical indicating if the matrix Q1 is
+       non-zero}
+\end{DoxyCode}
+\index{rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}!sq2@{sq2}}
+\index{sq2@{sq2}!rk2\+\_\+mtv\+\_\+integrator@{rk2\+\_\+mtv\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{sq2}{sq2}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), parameter rk2\+\_\+mtv\+\_\+integrator\+::sq2 = sqrt(2.D0)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__mtv__integrator_afebf6d33084a6677b313e21740aa6b8b}{}\label{namespacerk2__mtv__integrator_afebf6d33084a6677b313e21740aa6b8b}
+
+
+Hard coded square root of 2. 
+
+
+
+Definition at line 42 of file rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+42   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{PARAMETER} :: sq2 = sqrt(2.d0)                     \textcolor{comment}{!< Hard coded square root of 2}
+\end{DoxyCode}

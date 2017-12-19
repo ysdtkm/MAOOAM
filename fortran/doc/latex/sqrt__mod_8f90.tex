@@ -1,0 +1,35 @@
+\hypertarget{sqrt__mod_8f90}{}\section{sqrt\+\_\+mod.\+f90 File Reference}
+\label{sqrt__mod_8f90}\index{sqrt\+\_\+mod.\+f90@{sqrt\+\_\+mod.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacesqrt__mod}{sqrt\+\_\+mod}
+\begin{DoxyCompactList}\small\item\em Utility module with various routine to compute matrix square root. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacesqrt__mod_ab0108c0f48903dcc961e731c0ccb55d8}{sqrt\+\_\+mod\+::init\+\_\+sqrt}
+\item 
+subroutine, public \hyperlink{namespacesqrt__mod_a6da01b705b42190ac5b629e9267b0506}{sqrt\+\_\+mod\+::sqrtm} (A, sqA, info, info\+\_\+triu, bs)
+\begin{DoxyCompactList}\small\item\em Routine to compute a real square-\/root of a matrix. \end{DoxyCompactList}\item 
+logical function \hyperlink{namespacesqrt__mod_a8789d2f86087703a058918101999894f}{sqrt\+\_\+mod\+::selectev} (a, b)
+\item 
+subroutine \hyperlink{namespacesqrt__mod_a0bce77dc166341fedad843599efd43c7}{sqrt\+\_\+mod\+::sqrtm\+\_\+triu} (A, sqA, info, bs)
+\item 
+subroutine \hyperlink{namespacesqrt__mod_a7ed927e15fad09a188abebe860651125}{sqrt\+\_\+mod\+::csqrtm\+\_\+triu} (A, sqA, info, bs)
+\item 
+subroutine \hyperlink{namespacesqrt__mod_a322dc68a48c31785fb167134331e21e3}{sqrt\+\_\+mod\+::rsf2csf} (T, Z, Tz, Zz)
+\item 
+subroutine, public \hyperlink{namespacesqrt__mod_a6dd33ec6afedb4b752026bba20204f2c}{sqrt\+\_\+mod\+::chol} (A, sqA, info)
+\begin{DoxyCompactList}\small\item\em Routine to perform a Cholesky decomposition. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacesqrt__mod_a99d44e5fd3e8203544db6a8331e38828}{sqrt\+\_\+mod\+::sqrtm\+\_\+svd} (A, sqA, info, info\+\_\+triu, bs)
+\begin{DoxyCompactList}\small\item\em Routine to compute a real square-\/root of a matrix via a S\+VD decomposition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacesqrt__mod_aa2d42644fd62e62db048520605cd3de8}{sqrt\+\_\+mod\+::work}
+\item 
+integer \hyperlink{namespacesqrt__mod_a1e8a5c8ae6e96f5f02221379e30c0115}{sqrt\+\_\+mod\+::lwork}
+\item 
+real(kind=8), parameter \hyperlink{namespacesqrt__mod_a3e5758c92ccdba50c78201262be093c7}{sqrt\+\_\+mod\+::real\+\_\+eps} = 2.\+2204460492503131e-\/16
+\end{DoxyCompactItemize}

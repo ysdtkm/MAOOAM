@@ -1,0 +1,313 @@
+\hypertarget{namespacemar}{}\section{mar Module Reference}
+\label{namespacemar}\index{mar@{mar}}
+
+
+Multidimensional Autoregressive module to generate the correlation for the WL parameterization.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacemar_a1cf5740699e284f3284e25421a56fe71}{init\+\_\+mar}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the M\+AR. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacemar_a1b839ac2dc12dde9fb271ec07c946cec}{mar\+\_\+step} (x)
+\begin{DoxyCompactList}\small\item\em Routine to generate one step of the M\+AR. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacemar_a8b8f9249138336ac43c7b72c32f4933b}{mar\+\_\+step\+\_\+red} (xred)
+\begin{DoxyCompactList}\small\item\em Routine to generate one step of the reduce M\+AR. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemar_a3697eade9c0f250fbea1375687644267}{stoch\+\_\+vec} (dW)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemar_a92dfc55f0e9c6d1fc05f03f30df2e526}{q}
+\begin{DoxyCompactList}\small\item\em Square root of the noise covariance matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemar_a0fa33035c3ff86abcb91dfaf29dd90d4}{qred}
+\begin{DoxyCompactList}\small\item\em Reduce version of Q. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemar_a315f9c1483809c1c037c88242c5d85e7}{rred}
+\begin{DoxyCompactList}\small\item\em Covariance matrix of the noise. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:,\+:), allocatable, public \hyperlink{namespacemar_aed76f863f30ab18ba428596d2157163d}{w}
+\begin{DoxyCompactList}\small\item\em W\+\_\+i matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:,\+:), allocatable, public \hyperlink{namespacemar_af8cb3185ff947cb6540a6b33838e23d7}{wred}
+\begin{DoxyCompactList}\small\item\em Reduce W\+\_\+i matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacemar_a91d79995717316d4fcea39b2e476324c}{buf\+\_\+y}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacemar_a5fbf8b9142fbfce9bdd17cb573a448c3}{dw}
+\item 
+integer, public \hyperlink{namespacemar_a12c0dbfaa748dffd1cd2f96b19b53102}{ms}
+\begin{DoxyCompactList}\small\item\em order of the M\+AR \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Multidimensional Autoregressive module to generate the correlation for the WL parameterization. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+Based on the equation $y_n = \sum_{i=1}^m y_{n-i} \cdot W_i + Q \cdot \xi_n for an order $ 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{mar@{mar}!init\+\_\+mar@{init\+\_\+mar}}
+\index{init\+\_\+mar@{init\+\_\+mar}!mar@{mar}}
+\subsubsection[{\texorpdfstring{init\+\_\+mar}{init_mar}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public mar\+::init\+\_\+mar (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemar_a1cf5740699e284f3284e25421a56fe71}{}\label{namespacemar_a1cf5740699e284f3284e25421a56fe71}
+
+
+Subroutine to initialise the M\+AR. 
+
+
+
+Definition at line 45 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+45     \textcolor{keywordtype}{INTEGER} :: allocstat,nf,i,info,info2
+46     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(3)} :: s
+47 
+48     print*, \textcolor{stringliteral}{'Initializing the MAR integrator...'}
+49 
+50     print*, \textcolor{stringliteral}{'Loading the MAR config from files...'}
+51 
+52     \textcolor{keyword}{OPEN}(20,file=\textcolor{stringliteral}{'MAR\_R\_params.def'},status=\textcolor{stringliteral}{'old'})
+53     \textcolor{keyword}{READ}(20,*) nf,ms
+54     \textcolor{keywordflow}{IF} (nf /= n\_unres) stop \textcolor{stringliteral}{"*** Dimension in files MAR\_R\_params.def and sf.nml do not correspond ! ***"}
+55     \textcolor{keyword}{ALLOCATE}(qred(n\_unres,n\_unres),rred(n\_unres,n\_unres),wred(ms,n\_unres,n\_unres), 
+      \hyperlink{namespacestat}{stat}=allocstat)
+56     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+57     \textcolor{keyword}{ALLOCATE}(q(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),w(ms,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+58     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+59     \textcolor{keyword}{ALLOCATE}(buf\_y(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), dw(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+60     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+61     \textcolor{keyword}{READ}(20,*) rred
+62     \textcolor{keyword}{CLOSE}(20)
+63     
+64     \textcolor{keyword}{OPEN}(20,file=\textcolor{stringliteral}{'MAR\_W\_params.def'},status=\textcolor{stringliteral}{'old'})
+65     \textcolor{keyword}{READ}(20,*) nf,ms
+66     s=shape(wred)
+67     \textcolor{keywordflow}{IF} (nf /= n\_unres) stop \textcolor{stringliteral}{"*** Dimension in files MAR\_W\_params.def and sf.nml do not correspond ! ***"}
+68     \textcolor{keywordflow}{IF} (s(1) /= ms) stop \textcolor{stringliteral}{"*** MAR order in files MAR\_R\_params.def and MAR\_W\_params.def do not correspond !
+       ***"}
+69     \textcolor{keywordflow}{DO} i=1,ms
+70        \textcolor{keyword}{READ}(20,*) wred(i,:,:)
+71 \textcolor{keywordflow}{    ENDDO}
+72     \textcolor{keyword}{CLOSE}(20)
+73 
+74     \textcolor{keyword}{CALL }init\_sqrt
+75     \textcolor{keyword}{CALL }sqrtm(rred,qred,info,info2)
+76     \textcolor{keyword}{CALL }ireduce(q,qred,n\_unres,ind,rind)
+77     
+78     \textcolor{keywordflow}{DO} i=1,ms
+79        \textcolor{keyword}{CALL }ireduce(w(i,:,:),wred(i,:,:),n\_unres,ind,rind)
+80 \textcolor{keywordflow}{    ENDDO}
+81     
+82     \textcolor{comment}{! Kept for internal testing - Uncomment if not needed}
+83     \textcolor{comment}{! DEALLOCATE(Wred,Rred,Qred, STAT=AllocStat)}
+84     \textcolor{comment}{! IF (AllocStat /= 0) STOP "*** Deallocation problem ! ***"}
+85 
+86     print*, \textcolor{stringliteral}{'MAR of order'},ms,\textcolor{stringliteral}{'found!'}
+87     
+\end{DoxyCode}
+\index{mar@{mar}!mar\+\_\+step@{mar\+\_\+step}}
+\index{mar\+\_\+step@{mar\+\_\+step}!mar@{mar}}
+\subsubsection[{\texorpdfstring{mar\+\_\+step(x)}{mar_step(x)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public mar\+::mar\+\_\+step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim,{\bf ms}), intent(inout)}]{x}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemar_a1b839ac2dc12dde9fb271ec07c946cec}{}\label{namespacemar_a1b839ac2dc12dde9fb271ec07c946cec}
+
+
+Routine to generate one step of the M\+AR. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & State vector of the M\+AR (store the $y_i$) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 93 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+93     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim,ms)}, \textcolor{keywordtype}{INTENT(INOUT)} :: x
+94     \textcolor{keywordtype}{INTEGER} :: j
+95     
+96     \textcolor{keyword}{CALL }stoch\_vec(dw)
+97     buf\_y=0.d0
+98     buf\_y(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim})=matmul(q,dw)
+99     \textcolor{keywordflow}{DO} j=1,ms
+100        buf\_y(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim})=buf\_y(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim})+matmul(x(1:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},j),w(j,:,:))
+101 \textcolor{keywordflow}{    ENDDO}
+102     x=eoshift(x,shift=-1,boundary=buf\_y,dim=2)
+\end{DoxyCode}
+\index{mar@{mar}!mar\+\_\+step\+\_\+red@{mar\+\_\+step\+\_\+red}}
+\index{mar\+\_\+step\+\_\+red@{mar\+\_\+step\+\_\+red}!mar@{mar}}
+\subsubsection[{\texorpdfstring{mar\+\_\+step\+\_\+red(xred)}{mar_step_red(xred)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public mar\+::mar\+\_\+step\+\_\+red (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim,{\bf ms}), intent(inout)}]{xred}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemar_a8b8f9249138336ac43c7b72c32f4933b}{}\label{namespacemar_a8b8f9249138336ac43c7b72c32f4933b}
+
+
+Routine to generate one step of the reduce M\+AR. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xred} & State vector of the M\+AR (store the $y_i$) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+For debugging purpose only 
+\end{DoxyRemark}
+
+
+Definition at line 110 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+110     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim,ms)}, \textcolor{keywordtype}{INTENT(INOUT)} :: xred
+111     \textcolor{keywordtype}{INTEGER} :: j
+112     
+113     \textcolor{keyword}{CALL }stoch\_vec(dw)
+114     buf\_y=0.d0
+115     buf\_y(1:n\_unres)=matmul(qred,dw(1:n\_unres))
+116     \textcolor{keywordflow}{DO} j=1,ms
+117        buf\_y(1:n\_unres)=buf\_y(1:n\_unres)+matmul(xred(1:n\_unres,j),wred(j,:,:))
+118 \textcolor{keywordflow}{    ENDDO}
+119     xred=eoshift(xred,shift=-1,boundary=buf\_y,dim=2)
+\end{DoxyCode}
+\index{mar@{mar}!stoch\+\_\+vec@{stoch\+\_\+vec}}
+\index{stoch\+\_\+vec@{stoch\+\_\+vec}!mar@{mar}}
+\subsubsection[{\texorpdfstring{stoch\+\_\+vec(d\+W)}{stoch_vec(dW)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine mar\+::stoch\+\_\+vec (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(ndim), intent(inout)}]{dW}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacemar_a3697eade9c0f250fbea1375687644267}{}\label{namespacemar_a3697eade9c0f250fbea1375687644267}
+
+
+Definition at line 125 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+125     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(ndim)}, \textcolor{keywordtype}{INTENT(INOUT)} :: dw
+126     \textcolor{keywordtype}{INTEGER} :: i
+127     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+128        dw(i)=gasdev()
+129 \textcolor{keywordflow}{    ENDDO}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{mar@{mar}!buf\+\_\+y@{buf\+\_\+y}}
+\index{buf\+\_\+y@{buf\+\_\+y}!mar@{mar}}
+\subsubsection[{\texorpdfstring{buf\+\_\+y}{buf_y}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable mar\+::buf\+\_\+y\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacemar_a91d79995717316d4fcea39b2e476324c}{}\label{namespacemar_a91d79995717316d4fcea39b2e476324c}
+
+
+Definition at line 34 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+34   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_y,dw
+\end{DoxyCode}
+\index{mar@{mar}!dw@{dw}}
+\index{dw@{dw}!mar@{mar}}
+\subsubsection[{\texorpdfstring{dw}{dw}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable mar\+::dw\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacemar_a5fbf8b9142fbfce9bdd17cb573a448c3}{}\label{namespacemar_a5fbf8b9142fbfce9bdd17cb573a448c3}
+
+
+Definition at line 34 of file M\+A\+R.\+f90.
+
+\index{mar@{mar}!ms@{ms}}
+\index{ms@{ms}!mar@{mar}}
+\subsubsection[{\texorpdfstring{ms}{ms}}]{\setlength{\rightskip}{0pt plus 5cm}integer, public mar\+::ms}\hypertarget{namespacemar_a12c0dbfaa748dffd1cd2f96b19b53102}{}\label{namespacemar_a12c0dbfaa748dffd1cd2f96b19b53102}
+
+
+order of the M\+AR 
+
+
+
+Definition at line 36 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+36   \textcolor{keywordtype}{INTEGER} :: ms\textcolor{comment}{ !< order of the MAR}
+\end{DoxyCode}
+\index{mar@{mar}!q@{q}}
+\index{q@{q}!mar@{mar}}
+\subsubsection[{\texorpdfstring{q}{q}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public mar\+::q}\hypertarget{namespacemar_a92dfc55f0e9c6d1fc05f03f30df2e526}{}\label{namespacemar_a92dfc55f0e9c6d1fc05f03f30df2e526}
+
+
+Square root of the noise covariance matrix. 
+
+
+
+Definition at line 29 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+29   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: q\textcolor{comment}{ !< Square root of the noise covariance matrix}
+\end{DoxyCode}
+\index{mar@{mar}!qred@{qred}}
+\index{qred@{qred}!mar@{mar}}
+\subsubsection[{\texorpdfstring{qred}{qred}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public mar\+::qred}\hypertarget{namespacemar_a0fa33035c3ff86abcb91dfaf29dd90d4}{}\label{namespacemar_a0fa33035c3ff86abcb91dfaf29dd90d4}
+
+
+Reduce version of Q. 
+
+
+
+Definition at line 30 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+30   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: qred\textcolor{comment}{ !< Reduce version of Q}
+\end{DoxyCode}
+\index{mar@{mar}!rred@{rred}}
+\index{rred@{rred}!mar@{mar}}
+\subsubsection[{\texorpdfstring{rred}{rred}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public mar\+::rred}\hypertarget{namespacemar_a315f9c1483809c1c037c88242c5d85e7}{}\label{namespacemar_a315f9c1483809c1c037c88242c5d85e7}
+
+
+Covariance matrix of the noise. 
+
+
+
+Definition at line 31 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+31   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: rred\textcolor{comment}{ !< Covariance matrix of the noise}
+\end{DoxyCode}
+\index{mar@{mar}!w@{w}}
+\index{w@{w}!mar@{mar}}
+\subsubsection[{\texorpdfstring{w}{w}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:,\+:), allocatable, public mar\+::w}\hypertarget{namespacemar_aed76f863f30ab18ba428596d2157163d}{}\label{namespacemar_aed76f863f30ab18ba428596d2157163d}
+
+
+W\+\_\+i matrix. 
+
+
+
+Definition at line 32 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: w\textcolor{comment}{ !< W\_i matrix}
+\end{DoxyCode}
+\index{mar@{mar}!wred@{wred}}
+\index{wred@{wred}!mar@{mar}}
+\subsubsection[{\texorpdfstring{wred}{wred}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:,\+:), allocatable, public mar\+::wred}\hypertarget{namespacemar_af8cb3185ff947cb6540a6b33838e23d7}{}\label{namespacemar_af8cb3185ff947cb6540a6b33838e23d7}
+
+
+Reduce W\+\_\+i matrix. 
+
+
+
+Definition at line 33 of file M\+A\+R.\+f90.
+
+
+\begin{DoxyCode}
+33   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: wred\textcolor{comment}{ !< Reduce W\_i matrix}
+\end{DoxyCode}

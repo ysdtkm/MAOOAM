@@ -1,0 +1,312 @@
+\hypertarget{namespacesf__def}{}\section{sf\+\_\+def Module Reference}
+\label{namespacesf__def}\index{sf\+\_\+def@{sf\+\_\+def}}
+
+
+Module to select the resolved-\/unresolved components.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacesf__def_aefac3d4682ec35c401bb888b10dc4f47}{load\+\_\+sf}
+\begin{DoxyCompactList}\small\item\em Subroutine to load the unresolved variable defintion vector {\ttfamily SF} from S\+F.\+nml if it exists. If it does not, then write S\+F.\+nml with no unresolved variables specified (null vector). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+logical \hyperlink{namespacesf__def_a4461dcde80d3a5a5d53bb45e55839b5d}{exists}
+\begin{DoxyCompactList}\small\item\em Boolean to test for file existence. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}
+\begin{DoxyCompactList}\small\item\em Unresolved variable definition vector. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_a5e294b6f015b0b0499c9cee47da37627}{ind}
+\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_a2befe00671a3add2d8049605682bcd52}{rind}
+\begin{DoxyCompactList}\small\item\em Unresolved reduction indices. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_a6b226546e7059222fad5500946c1c550}{sl\+\_\+ind}
+\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_aab6ba7881cef9b469ab9d9323f3fcbea}{sl\+\_\+rind}
+\begin{DoxyCompactList}\small\item\em Resolved reduction indices. \end{DoxyCompactList}\item 
+integer, public \hyperlink{namespacesf__def_a1e03f6f31a13f2bfa8e84dd69874b8aa}{n\+\_\+unres}
+\begin{DoxyCompactList}\small\item\em Number of unresolved variables. \end{DoxyCompactList}\item 
+integer, public \hyperlink{namespacesf__def_af05cacb04c0c2d10c9405e71db633a43}{n\+\_\+res}
+\begin{DoxyCompactList}\small\item\em Number of resolved variables. \end{DoxyCompactList}\item 
+integer, dimension(\+:,\+:), allocatable, public \hyperlink{namespacesf__def_ac5f61e46d21a461afc857f50b9c24899}{bar}
+\item 
+integer, dimension(\+:,\+:), allocatable, public \hyperlink{namespacesf__def_a3095931864a7ebf98dce2d5642031e58}{bau}
+\item 
+integer, dimension(\+:,\+:), allocatable, public \hyperlink{namespacesf__def_aa44fe776297bd93ef2a0c8a1457dbf41}{bor}
+\item 
+integer, dimension(\+:,\+:), allocatable, public \hyperlink{namespacesf__def_a349d2708598e0e0782cc21e8566208b5}{bou}
+\begin{DoxyCompactList}\small\item\em Filter matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module to select the resolved-\/unresolved components. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{sf\+\_\+def@{sf\+\_\+def}!load\+\_\+sf@{load\+\_\+sf}}
+\index{load\+\_\+sf@{load\+\_\+sf}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{load\+\_\+sf}{load_sf}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public sf\+\_\+def\+::load\+\_\+sf (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacesf__def_aefac3d4682ec35c401bb888b10dc4f47}{}\label{namespacesf__def_aefac3d4682ec35c401bb888b10dc4f47}
+
+
+Subroutine to load the unresolved variable defintion vector {\ttfamily SF} from S\+F.\+nml if it exists. If it does not, then write S\+F.\+nml with no unresolved variables specified (null vector). 
+
+
+
+Definition at line 37 of file sf\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+37     \textcolor{keywordtype}{INTEGER} :: i,allocstat,n,ns
+38     \textcolor{keywordtype}{CHARACTER(len=20)} :: fm
+39 
+40     namelist /sflist/ \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}
+41 
+42     fm(1:6)=\textcolor{stringliteral}{'(F3.1)'}
+43    
+44     \textcolor{keywordflow}{IF} (\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim} == 0) stop \textcolor{stringliteral}{"*** Number of dimensions is 0! ***"}
+45     \textcolor{keyword}{ALLOCATE}(\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+46     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+47 
+48     \textcolor{keyword}{INQUIRE}(file=\textcolor{stringliteral}{'./SF.nml'},exist=exists)
+49 
+50     \textcolor{keywordflow}{IF} (exists) \textcolor{keywordflow}{THEN}
+51        \textcolor{keyword}{OPEN}(8, file=\textcolor{stringliteral}{"SF.nml"}, status=\textcolor{stringliteral}{'OLD'}, recl=80, delim=\textcolor{stringliteral}{'APOSTROPHE'})
+52        \textcolor{keyword}{READ}(8,nml=sflist)
+53        \textcolor{keyword}{CLOSE}(8)
+54        n\_unres=0
+55        \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim} \textcolor{comment}{! Computing the number of unresolved variables}
+56           \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==1) n\_unres=n\_unres+1
+57 \textcolor{keywordflow}{       ENDDO}
+58        \textcolor{keywordflow}{IF} (n\_unres==0) stop \textcolor{stringliteral}{"*** No unresolved variable specified! ***"}
+59        n\_res=\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}-n\_unres
+60        \textcolor{keyword}{ALLOCATE}(ind(n\_unres), rind(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), sl\_ind(n\_res), sl\_rind(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), 
+      \hyperlink{namespacestat}{stat}=allocstat)
+61        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+62        \textcolor{keyword}{ALLOCATE}(bar(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), bau(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), bor(0:
+      \hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), bou(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+63        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+64        rind=0
+65        n=1
+66        ns=1
+67        \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+68           \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==1) \textcolor{keywordflow}{THEN}
+69              ind(n)=i
+70              rind(i)=n
+71              n=n+1
+72           \textcolor{keywordflow}{ELSE}
+73              sl\_ind(ns)=i
+74              sl\_rind(i)=ns
+75              ns=ns+1
+76 \textcolor{keywordflow}{          ENDIF}
+77 \textcolor{keywordflow}{       ENDDO}
+78        bar=0
+79        bau=0
+80        bor=0
+81        bou=0
+82        \textcolor{keywordflow}{DO} i=1,2*natm
+83           \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==1) \textcolor{keywordflow}{THEN}
+84              bau(i,i)=1
+85           \textcolor{keywordflow}{ELSE}
+86              bar(i,i)=1
+87 \textcolor{keywordflow}{          ENDIF}
+88 \textcolor{keywordflow}{       ENDDO}
+89        \textcolor{keywordflow}{DO} i=2*natm+1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+90           \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==1) \textcolor{keywordflow}{THEN}
+91              bou(i,i)=1
+92           \textcolor{keywordflow}{ELSE}
+93              bor(i,i)=1
+94 \textcolor{keywordflow}{          ENDIF}
+95 \textcolor{keywordflow}{       ENDDO}
+96     \textcolor{keywordflow}{ELSE}
+97        \textcolor{keyword}{OPEN}(8, file=\textcolor{stringliteral}{"SF.nml"}, status=\textcolor{stringliteral}{'NEW'})
+98        \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+99        \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Namelist file :                                                              !"}
+100        \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Unresolved variables specification (1 -> unresolved, 0 -> resolved)               
+                 !"}
+101        \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+102        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+103        \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&SFLIST"}
+104        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! psi variables"}
+105        \textcolor{keywordflow}{DO} i=1,natm
+106           \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" SF("}//trim(str(i))//\textcolor{stringliteral}{") = 0"}//\textcolor{stringliteral}{"   ! typ= "}&
+107                &//awavenum(i)%typ//\textcolor{stringliteral}{", Nx= "}//trim(rstr(awavenum(i)&
+108                &%Nx,fm))//\textcolor{stringliteral}{", Ny= "}//trim(rstr(awavenum(i)%Ny,fm))
+109 \textcolor{keywordflow}{       END DO}
+110        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! theta variables"}
+111        \textcolor{keywordflow}{DO} i=1,natm
+112           \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" SF("}//trim(str(i+natm))//\textcolor{stringliteral}{") = 0"}//\textcolor{stringliteral}{"   ! typ= "}&
+113                &//awavenum(i)%typ//\textcolor{stringliteral}{", Nx= "}//trim(rstr(awavenum(i)&
+114                &%Nx,fm))//\textcolor{stringliteral}{", Ny= "}//trim(rstr(awavenum(i)%Ny,fm))
+115 \textcolor{keywordflow}{       END DO}
+116 
+117        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! A variables"}
+118        \textcolor{keywordflow}{DO} i=1,noc
+119           \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" SF("}//trim(str(i+2*natm))//\textcolor{stringliteral}{") = 0"}//\textcolor{stringliteral}{"   ! Nx&}
+120 \textcolor{stringliteral}{}\textcolor{stringliteral}{               &= "}//trim(rstr(owavenum(i)%Nx,fm))//\textcolor{stringliteral}{", Ny= "}&
+121                &//trim(rstr(owavenum(i)%Ny,fm))
+122 \textcolor{keywordflow}{       END DO}
+123        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! T variables"}
+124        \textcolor{keywordflow}{DO} i=1,noc
+125           \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" SF("}//trim(str(i+noc+2*natm))//\textcolor{stringliteral}{") = 0"}//\textcolor{stringliteral}{"   &}
+126 \textcolor{stringliteral}{}\textcolor{stringliteral}{               &! Nx= "}//trim(rstr(owavenum(i)%Nx,fm))//\textcolor{stringliteral}{", Ny= "}&
+127                &//trim(rstr(owavenum(i)%Ny,fm))
+128 \textcolor{keywordflow}{       END DO}
+129 
+130        \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&END"}
+131        \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+132        \textcolor{keyword}{CLOSE}(8)
+133        stop \textcolor{stringliteral}{"*** SF.nml namelist written. Fill in the file and rerun !***"}
+134 \textcolor{keywordflow}{    ENDIF}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{sf\+\_\+def@{sf\+\_\+def}!bar@{bar}}
+\index{bar@{bar}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{bar}{bar}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:,\+:), allocatable, public sf\+\_\+def\+::bar}\hypertarget{namespacesf__def_ac5f61e46d21a461afc857f50b9c24899}{}\label{namespacesf__def_ac5f61e46d21a461afc857f50b9c24899}
+
+
+Definition at line 28 of file sf\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+28   \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: bar,bau,bor,bou\textcolor{comment}{  !< Filter matrices }
+\end{DoxyCode}
+\index{sf\+\_\+def@{sf\+\_\+def}!bau@{bau}}
+\index{bau@{bau}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{bau}{bau}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:,\+:), allocatable, public sf\+\_\+def\+::bau}\hypertarget{namespacesf__def_a3095931864a7ebf98dce2d5642031e58}{}\label{namespacesf__def_a3095931864a7ebf98dce2d5642031e58}
+
+
+Definition at line 28 of file sf\+\_\+def.\+f90.
+
+\index{sf\+\_\+def@{sf\+\_\+def}!bor@{bor}}
+\index{bor@{bor}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{bor}{bor}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:,\+:), allocatable, public sf\+\_\+def\+::bor}\hypertarget{namespacesf__def_aa44fe776297bd93ef2a0c8a1457dbf41}{}\label{namespacesf__def_aa44fe776297bd93ef2a0c8a1457dbf41}
+
+
+Definition at line 28 of file sf\+\_\+def.\+f90.
+
+\index{sf\+\_\+def@{sf\+\_\+def}!bou@{bou}}
+\index{bou@{bou}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{bou}{bou}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:,\+:), allocatable, public sf\+\_\+def\+::bou}\hypertarget{namespacesf__def_a349d2708598e0e0782cc21e8566208b5}{}\label{namespacesf__def_a349d2708598e0e0782cc21e8566208b5}
+
+
+Filter matrices. 
+
+
+
+Definition at line 28 of file sf\+\_\+def.\+f90.
+
+\index{sf\+\_\+def@{sf\+\_\+def}!exists@{exists}}
+\index{exists@{exists}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{exists}{exists}}]{\setlength{\rightskip}{0pt plus 5cm}logical sf\+\_\+def\+::exists\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacesf__def_a4461dcde80d3a5a5d53bb45e55839b5d}{}\label{namespacesf__def_a4461dcde80d3a5a5d53bb45e55839b5d}
+
+
+Boolean to test for file existence. 
+
+
+
+Definition at line 21 of file sf\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+21   \textcolor{keywordtype}{LOGICAL} :: exists\textcolor{comment}{ !< Boolean to test for file existence.}
+\end{DoxyCode}
+\index{sf\+\_\+def@{sf\+\_\+def}!ind@{ind}}
+\index{ind@{ind}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{ind}{ind}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:), allocatable, public sf\+\_\+def\+::ind}\hypertarget{namespacesf__def_a5e294b6f015b0b0499c9cee47da37627}{}\label{namespacesf__def_a5e294b6f015b0b0499c9cee47da37627}
+
+
+Definition at line 24 of file sf\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+24   \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: ind,rind\textcolor{comment}{        !< Unresolved reduction indices }
+\end{DoxyCode}
+\index{sf\+\_\+def@{sf\+\_\+def}!n\+\_\+res@{n\+\_\+res}}
+\index{n\+\_\+res@{n\+\_\+res}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{n\+\_\+res}{n_res}}]{\setlength{\rightskip}{0pt plus 5cm}integer, public sf\+\_\+def\+::n\+\_\+res}\hypertarget{namespacesf__def_af05cacb04c0c2d10c9405e71db633a43}{}\label{namespacesf__def_af05cacb04c0c2d10c9405e71db633a43}
+
+
+Number of resolved variables. 
+
+
+
+Definition at line 27 of file sf\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+27   \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{PUBLIC} :: n\_res\textcolor{comment}{ !< Number of resolved variables}
+\end{DoxyCode}
+\index{sf\+\_\+def@{sf\+\_\+def}!n\+\_\+unres@{n\+\_\+unres}}
+\index{n\+\_\+unres@{n\+\_\+unres}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{n\+\_\+unres}{n_unres}}]{\setlength{\rightskip}{0pt plus 5cm}integer, public sf\+\_\+def\+::n\+\_\+unres}\hypertarget{namespacesf__def_a1e03f6f31a13f2bfa8e84dd69874b8aa}{}\label{namespacesf__def_a1e03f6f31a13f2bfa8e84dd69874b8aa}
+
+
+Number of unresolved variables. 
+
+
+
+Definition at line 26 of file sf\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+26   \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{PUBLIC} :: n\_unres\textcolor{comment}{ !< Number of unresolved variables}
+\end{DoxyCode}
+\index{sf\+\_\+def@{sf\+\_\+def}!rind@{rind}}
+\index{rind@{rind}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{rind}{rind}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:), allocatable, public sf\+\_\+def\+::rind}\hypertarget{namespacesf__def_a2befe00671a3add2d8049605682bcd52}{}\label{namespacesf__def_a2befe00671a3add2d8049605682bcd52}
+
+
+Unresolved reduction indices. 
+
+
+
+Definition at line 24 of file sf\+\_\+def.\+f90.
+
+\index{sf\+\_\+def@{sf\+\_\+def}!sf@{sf}}
+\index{sf@{sf}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{sf}{sf}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:), allocatable, public sf\+\_\+def\+::sf}\hypertarget{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{}\label{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}
+
+
+Unresolved variable definition vector. 
+
+
+
+Definition at line 23 of file sf\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+23   \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}\textcolor{comment}{              !< Unresolved variable definition vector}
+\end{DoxyCode}
+\index{sf\+\_\+def@{sf\+\_\+def}!sl\+\_\+ind@{sl\+\_\+ind}}
+\index{sl\+\_\+ind@{sl\+\_\+ind}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{sl\+\_\+ind}{sl_ind}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:), allocatable, public sf\+\_\+def\+::sl\+\_\+ind}\hypertarget{namespacesf__def_a6b226546e7059222fad5500946c1c550}{}\label{namespacesf__def_a6b226546e7059222fad5500946c1c550}
+
+
+Definition at line 25 of file sf\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+25   \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: sl\_ind,sl\_rind\textcolor{comment}{  !< Resolved reduction indices }
+\end{DoxyCode}
+\index{sf\+\_\+def@{sf\+\_\+def}!sl\+\_\+rind@{sl\+\_\+rind}}
+\index{sl\+\_\+rind@{sl\+\_\+rind}!sf\+\_\+def@{sf\+\_\+def}}
+\subsubsection[{\texorpdfstring{sl\+\_\+rind}{sl_rind}}]{\setlength{\rightskip}{0pt plus 5cm}integer, dimension(\+:), allocatable, public sf\+\_\+def\+::sl\+\_\+rind}\hypertarget{namespacesf__def_aab6ba7881cef9b469ab9d9323f3fcbea}{}\label{namespacesf__def_aab6ba7881cef9b469ab9d9323f3fcbea}
+
+
+Resolved reduction indices. 
+
+
+
+Definition at line 25 of file sf\+\_\+def.\+f90.
+

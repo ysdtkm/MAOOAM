@@ -1,0 +1,488 @@
+\hypertarget{namespacerk2__wl__integrator}{}\section{rk2\+\_\+wl\+\_\+integrator Module Reference}
+\label{namespacerk2__wl__integrator}\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+
+
+Module with the WL rk2 integration routines.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__wl__integrator_a1ae65ef720c7776933024a7f884876b4}{init\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Subroutine that initialize the M\+A\+Rs, the memory unit and the integration buffers. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__wl__integrator_a9dc90edbd67b31409dcf3b35de448c8b}{compute\+\_\+m1} (y)
+\begin{DoxyCompactList}\small\item\em Routine to compute the $M_1$ term. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__wl__integrator_ac4818fb05d425a8dc74295ec56d16cb4}{compute\+\_\+m2} (y)
+\begin{DoxyCompactList}\small\item\em Routine to compute the $M_2$ term. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__wl__integrator_a87232dd593964f76b9cc7f36eeba25a3}{step} (y, t, dt, dtn, res, tend)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the WL system. The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__wl__integrator_ac5c14d277e5def9b5dfcaa41fbd0b7ab}{full\+\_\+step} (y, t, dt, dtn, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the full stochastic system. The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_aa99c24f0aa8ae7eacd3d5123ea70db7b}{buf\+\_\+y1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a1bd3729b5251a62db77c2821d8570527}{buf\+\_\+f0}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a995936e8fb15609c95896f08b5e70a44}{buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Integration buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a86ad58f3281d4e047c2db27060d98d2f}{buf\+\_\+m2}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a4be840fb90a95206b2740f5a0b31b83f}{buf\+\_\+m1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a73553426581c0b8705341b6faf38cff1}{buf\+\_\+m3}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a744d43e9a769cad7dde659df50975e35}{buf\+\_\+m}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_ac3e8a32ab8553b8c00d467a792bbf051}{buf\+\_\+m3s}
+\begin{DoxyCompactList}\small\item\em Dummy buffers holding the terms /f\$\+M\+\_\+i. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_ab0045343086f8e55d6dd0579105aad6d}{anoise}
+\begin{DoxyCompactList}\small\item\em Additive noise term. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a44cee4402f05ef3465bf87baf91951e8}{dwar}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_afa336c0cb10e6befa1ccc44522e2f517}{dwau}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a94b90cb88115b2d39977de8b89909833}{dwor}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a1e05e6efc7acdce81954944c134ac83b}{dwou}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a5fd86898081b24e076b0830a5d1e9e51}{x1}
+\begin{DoxyCompactList}\small\item\em Buffer holding the subsequent states of the first M\+AR. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a7fad5dbd04a9b5dc47bdb9b8c33e44e0}{x2}
+\begin{DoxyCompactList}\small\item\em Buffer holding the subsequent states of the second M\+AR. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module with the WL rk2 integration routines. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+This module actually contains the Heun algorithm routines. 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!compute\+\_\+m1@{compute\+\_\+m1}}
+\index{compute\+\_\+m1@{compute\+\_\+m1}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{compute\+\_\+m1(y)}{compute_m1(y)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine rk2\+\_\+wl\+\_\+integrator\+::compute\+\_\+m1 (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a9dc90edbd67b31409dcf3b35de448c8b}{}\label{namespacerk2__wl__integrator_a9dc90edbd67b31409dcf3b35de448c8b}
+
+
+Routine to compute the $M_1$ term. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Present state of the WL system \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 106 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+106     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+107     buf\_m1=0.d0
+108     \textcolor{keywordflow}{IF} (m12def) \textcolor{keyword}{CALL }sparse\_mul2\_k(m12, y, buf\_m1)
+109     buf\_m1=buf\_m1+m1tot
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!compute\+\_\+m2@{compute\+\_\+m2}}
+\index{compute\+\_\+m2@{compute\+\_\+m2}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{compute\+\_\+m2(y)}{compute_m2(y)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine rk2\+\_\+wl\+\_\+integrator\+::compute\+\_\+m2 (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_ac4818fb05d425a8dc74295ec56d16cb4}{}\label{namespacerk2__wl__integrator_ac4818fb05d425a8dc74295ec56d16cb4}
+
+
+Routine to compute the $M_2$ term. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Present state of the WL system \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 115 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+115     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+116     buf\_m=0.d0
+117     buf\_m2=0.d0
+118     \textcolor{keywordflow}{IF} (m21def) \textcolor{keyword}{CALL }sparse\_mul3(m21, y, x1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},1), buf\_m)
+119     \textcolor{keywordflow}{IF} (m22def) \textcolor{keyword}{CALL }sparse\_mul3(m22, x2(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},1), x2(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},1), buf\_m2)
+120     buf\_m2=buf\_m2+buf\_m
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!full\+\_\+step@{full\+\_\+step}}
+\index{full\+\_\+step@{full\+\_\+step}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{full\+\_\+step(y, t, dt, dtn, res)}{full_step(y, t, dt, dtn, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+wl\+\_\+integrator\+::full\+\_\+step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), intent(inout)}]{t, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__wl__integrator_ac5c14d277e5def9b5dfcaa41fbd0b7ab}{}\label{namespacerk2__wl__integrator_ac5c14d277e5def9b5dfcaa41fbd0b7ab}
+
+
+Routine to perform an integration step (Heun algorithm) of the full stochastic system. The incremented time is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Initial point. \\
+\hline
+{\em t} & Actual integration time \\
+\hline
+{\em dt} & Integration timestep. \\
+\hline
+{\em dtn} & Stochastoc integration timestep (normally square-\/root of dt). \\
+\hline
+{\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 185 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+185     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+186     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+187     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+188     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+189     \textcolor{keyword}{CALL }stoch\_atm\_res\_vec(dwar)
+190     \textcolor{keyword}{CALL }stoch\_atm\_unres\_vec(dwau)
+191     \textcolor{keyword}{CALL }stoch\_oc\_res\_vec(dwor)
+192     \textcolor{keyword}{CALL }stoch\_oc\_unres\_vec(dwou)
+193     anoise=(q\_ar*dwar+q\_au*dwau+q\_or*dwor+q\_ou*dwou)*dtn
+194     \textcolor{keyword}{CALL }sparse\_mul3(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},y,y,buf\_f0)
+195     buf\_y1 = y+dt*buf\_f0+anoise
+196     \textcolor{keyword}{CALL }sparse\_mul3(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},buf\_y1,buf\_y1,buf\_f1)
+197     res=y+0.5*(buf\_f0+buf\_f1)*dt+anoise
+198     t=t+dt
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!init\+\_\+integrator@{init\+\_\+integrator}}
+\index{init\+\_\+integrator@{init\+\_\+integrator}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{init\+\_\+integrator}{init_integrator}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+wl\+\_\+integrator\+::init\+\_\+integrator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__wl__integrator_a1ae65ef720c7776933024a7f884876b4}{}\label{namespacerk2__wl__integrator_a1ae65ef720c7776933024a7f884876b4}
+
+
+Subroutine that initialize the M\+A\+Rs, the memory unit and the integration buffers. 
+
+
+
+Definition at line 44 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+44     \textcolor{keywordtype}{INTEGER} :: allocstat,i
+45 
+46     \textcolor{keyword}{CALL }init\_ss\_integrator
+47     
+48     print*, \textcolor{stringliteral}{'Initializing the integrator ...'}
+49 
+50     \textcolor{keywordflow}{IF} (\hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{mode}.ne.\textcolor{stringliteral}{'ures'}) \textcolor{keywordflow}{THEN}
+51        print*, \textcolor{stringliteral}{'*** Mode set to '},\hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{mode},\textcolor{stringliteral}{' in stoch\_params.nml ***'}
+52        print*, \textcolor{stringliteral}{'*** WL configuration only support unresolved mode ***'}
+53        stop \textcolor{stringliteral}{"*** Please change to 'ures' and perform the configuration again ! ***"}
+54 \textcolor{keywordflow}{    ENDIF}
+55     
+56     \textcolor{keyword}{ALLOCATE}(buf\_y1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f0(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),\hyperlink{namespacestat}{stat}=allocstat)
+57     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+58 
+59     \textcolor{keyword}{ALLOCATE}(buf\_m1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), buf\_m2(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), buf\_m3(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), buf\_m(0:
+      \hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), buf\_m3s(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+60     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+61 
+62     \textcolor{keyword}{ALLOCATE}(dwar(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwau(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwor(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwou(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),
+      \hyperlink{namespacestat}{stat}=allocstat)
+63     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+64 
+65     \textcolor{keyword}{ALLOCATE}(anoise(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+66     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+67 
+68     buf\_y1=0.d0
+69     buf\_f1=0.d0
+70     buf\_f0=0.d0
+71 
+72     dwar=0.d0
+73     dwor=0.d0
+74     dwau=0.d0
+75     dwou=0.d0
+76 
+77     buf\_m1=0.d0
+78     buf\_m2=0.d0
+79     buf\_m3=0.d0
+80     buf\_m3s=0.d0
+81     buf\_m=0.d0
+82 
+83     print*, \textcolor{stringliteral}{'Initializing the MARs ...'}
+84 
+85     \textcolor{keyword}{CALL }init\_mar
+86 
+87     \textcolor{keyword}{ALLOCATE}(x1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},ms), x2(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},ms), \hyperlink{namespacestat}{stat}=allocstat)
+88 
+89     x1=0.d0
+90     \textcolor{keywordflow}{DO} i=1,50000
+91        \textcolor{keyword}{CALL }mar\_step(x1)
+92 \textcolor{keywordflow}{    ENDDO}
+93     
+94     x2=0.d0
+95     \textcolor{keywordflow}{DO} i=1,50000
+96        \textcolor{keyword}{CALL }mar\_step(x2)
+97 \textcolor{keywordflow}{    ENDDO}
+98 
+99     \textcolor{keyword}{CALL }init\_memory
+100 
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!step@{step}}
+\index{step@{step}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{step(y, t, dt, dtn, res, tend)}{step(y, t, dt, dtn, res, tend)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+wl\+\_\+integrator\+::step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), intent(inout)}]{t, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{tend}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__wl__integrator_a87232dd593964f76b9cc7f36eeba25a3}{}\label{namespacerk2__wl__integrator_a87232dd593964f76b9cc7f36eeba25a3}
+
+
+Routine to perform an integration step (Heun algorithm) of the WL system. The incremented time is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Initial point. \\
+\hline
+{\em t} & Actual integration time \\
+\hline
+{\em dt} & Integration timestep. \\
+\hline
+{\em dtn} & Stochastic integration timestep (normally square-\/root of dt). \\
+\hline
+{\em res} & Final point after the step. \\
+\hline
+{\em tend} & Partial or full tendencies used to perform the step (used for debugging). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 132 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+132     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+133     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+134     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+135     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res,tend
+136     \textcolor{keywordtype}{INTEGER} :: i
+137 
+138     \textcolor{keywordflow}{IF} (mod(t,muti)<dt) \textcolor{keywordflow}{THEN} 
+139        \textcolor{keyword}{CALL }compute\_m3(y,dts,dtsn,.true.,.true.,.true.,muti/2,buf\_m3s)
+140        buf\_m3=buf\_m3s
+141        \textcolor{keywordflow}{DO} i=1,1
+142           \textcolor{keyword}{CALL }compute\_m3(y,dts,dtsn,.false.,.true.,.true.,muti/2,buf\_m3s)
+143           buf\_m3=buf\_m3+buf\_m3s
+144 \textcolor{keywordflow}{       ENDDO}
+145        \textcolor{comment}{!DO i=1,2}
+146        \textcolor{comment}{!   CALL compute\_M3(y,dts,dtsn,.false.,.true.,.true.,muti/2,buf\_M3s)}
+147        \textcolor{comment}{!   buf\_M3=buf\_M3+buf\_M3s}
+148        \textcolor{comment}{!ENDDO}
+149        buf\_m3=buf\_m3/2
+150 \textcolor{keywordflow}{    ENDIF}
+151 
+152 
+153     \textcolor{keyword}{CALL }stoch\_atm\_res\_vec(dwar)
+154     \textcolor{keyword}{CALL }stoch\_oc\_res\_vec(dwor)
+155     anoise=(q\_ar*dwar+q\_or*dwor)*dtn
+156 
+157     \textcolor{keyword}{CALL }tendencies(t,y,buf\_f0)
+158     \textcolor{keyword}{CALL }mar\_step(x1)
+159     \textcolor{keyword}{CALL }mar\_step(x2)
+160     \textcolor{keyword}{CALL }compute\_m1(y)
+161     \textcolor{keyword}{CALL }compute\_m2(y)
+162     buf\_f0= buf\_f0+buf\_m1+buf\_m2+buf\_m3
+163     buf\_y1 = y+dt*buf\_f0+anoise
+164 
+165     \textcolor{keyword}{CALL }tendencies(t+dt,buf\_y1,buf\_f1)
+166     \textcolor{keyword}{CALL }compute\_m1(buf\_y1)
+167     \textcolor{keyword}{CALL }compute\_m2(buf\_y1)
+168     \textcolor{comment}{!IF (mod(t,muti)<dt) CALL compute\_M3(buf\_y1,dts,dtsn,.false.,.true.,buf\_M3)}
+169 
+170     buf\_f0=0.5*(buf\_f0+buf\_f1+buf\_m1+buf\_m2+buf\_m3)
+171     res=y+dt*buf\_f0+anoise
+172 
+173     tend=buf\_m3
+174     t=t+dt
+175 
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!anoise@{anoise}}
+\index{anoise@{anoise}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{anoise}{anoise}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::anoise\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_ab0045343086f8e55d6dd0579105aad6d}{}\label{namespacerk2__wl__integrator_ab0045343086f8e55d6dd0579105aad6d}
+
+
+Additive noise term. 
+
+
+
+Definition at line 33 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+33   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: anoise\textcolor{comment}{          !< Additive noise term}
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!buf\+\_\+f0@{buf\+\_\+f0}}
+\index{buf\+\_\+f0@{buf\+\_\+f0}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f0}{buf_f0}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+f0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a1bd3729b5251a62db77c2821d8570527}{}\label{namespacerk2__wl__integrator_a1bd3729b5251a62db77c2821d8570527}
+
+
+Definition at line 31 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!buf\+\_\+f1@{buf\+\_\+f1}}
+\index{buf\+\_\+f1@{buf\+\_\+f1}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f1}{buf_f1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+f1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a995936e8fb15609c95896f08b5e70a44}{}\label{namespacerk2__wl__integrator_a995936e8fb15609c95896f08b5e70a44}
+
+
+Integration buffers. 
+
+
+
+Definition at line 31 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!buf\+\_\+m@{buf\+\_\+m}}
+\index{buf\+\_\+m@{buf\+\_\+m}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+m}{buf_m}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a744d43e9a769cad7dde659df50975e35}{}\label{namespacerk2__wl__integrator_a744d43e9a769cad7dde659df50975e35}
+
+
+Definition at line 32 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!buf\+\_\+m1@{buf\+\_\+m1}}
+\index{buf\+\_\+m1@{buf\+\_\+m1}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+m1}{buf_m1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a4be840fb90a95206b2740f5a0b31b83f}{}\label{namespacerk2__wl__integrator_a4be840fb90a95206b2740f5a0b31b83f}
+
+
+Definition at line 32 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!buf\+\_\+m2@{buf\+\_\+m2}}
+\index{buf\+\_\+m2@{buf\+\_\+m2}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+m2}{buf_m2}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m2\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a86ad58f3281d4e047c2db27060d98d2f}{}\label{namespacerk2__wl__integrator_a86ad58f3281d4e047c2db27060d98d2f}
+
+
+Definition at line 32 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_m2,buf\_m1,buf\_m3,buf\_m,buf\_m3s\textcolor{comment}{ !< Dummy buffers holding
+       the terms /f$M\_i\(\backslash\)f$ of the parameterization}
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!buf\+\_\+m3@{buf\+\_\+m3}}
+\index{buf\+\_\+m3@{buf\+\_\+m3}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+m3}{buf_m3}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m3\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a73553426581c0b8705341b6faf38cff1}{}\label{namespacerk2__wl__integrator_a73553426581c0b8705341b6faf38cff1}
+
+
+Definition at line 32 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!buf\+\_\+m3s@{buf\+\_\+m3s}}
+\index{buf\+\_\+m3s@{buf\+\_\+m3s}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+m3s}{buf_m3s}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m3s\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_ac3e8a32ab8553b8c00d467a792bbf051}{}\label{namespacerk2__wl__integrator_ac3e8a32ab8553b8c00d467a792bbf051}
+
+
+Dummy buffers holding the terms /f\$\+M\+\_\+i. 
+
+
+
+Definition at line 32 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!buf\+\_\+y1@{buf\+\_\+y1}}
+\index{buf\+\_\+y1@{buf\+\_\+y1}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+y1}{buf_y1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+y1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_aa99c24f0aa8ae7eacd3d5123ea70db7b}{}\label{namespacerk2__wl__integrator_aa99c24f0aa8ae7eacd3d5123ea70db7b}
+
+
+Definition at line 31 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+31   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_y1,buf\_f0,buf\_f1\textcolor{comment}{ !< Integration buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!dwar@{dwar}}
+\index{dwar@{dwar}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwar}{dwar}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::dwar\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a44cee4402f05ef3465bf87baf91951e8}{}\label{namespacerk2__wl__integrator_a44cee4402f05ef3465bf87baf91951e8}
+
+
+Definition at line 34 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+34   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dwar,dwau,dwor,dwou\textcolor{comment}{  !< Standard gaussian noise buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!dwau@{dwau}}
+\index{dwau@{dwau}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwau}{dwau}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::dwau\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_afa336c0cb10e6befa1ccc44522e2f517}{}\label{namespacerk2__wl__integrator_afa336c0cb10e6befa1ccc44522e2f517}
+
+
+Definition at line 34 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!dwor@{dwor}}
+\index{dwor@{dwor}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwor}{dwor}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::dwor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a94b90cb88115b2d39977de8b89909833}{}\label{namespacerk2__wl__integrator_a94b90cb88115b2d39977de8b89909833}
+
+
+Definition at line 34 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!dwou@{dwou}}
+\index{dwou@{dwou}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwou}{dwou}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::dwou\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a1e05e6efc7acdce81954944c134ac83b}{}\label{namespacerk2__wl__integrator_a1e05e6efc7acdce81954944c134ac83b}
+
+
+Standard gaussian noise buffers. 
+
+
+
+Definition at line 34 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!x1@{x1}}
+\index{x1@{x1}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{x1}{x1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::x1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a5fd86898081b24e076b0830a5d1e9e51}{}\label{namespacerk2__wl__integrator_a5fd86898081b24e076b0830a5d1e9e51}
+
+
+Buffer holding the subsequent states of the first M\+AR. 
+
+
+
+Definition at line 36 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+36   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: x1\textcolor{comment}{ !< Buffer holding the subsequent states of the first MAR}
+\end{DoxyCode}
+\index{rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}!x2@{x2}}
+\index{x2@{x2}!rk2\+\_\+wl\+\_\+integrator@{rk2\+\_\+wl\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{x2}{x2}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable rk2\+\_\+wl\+\_\+integrator\+::x2\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__wl__integrator_a7fad5dbd04a9b5dc47bdb9b8c33e44e0}{}\label{namespacerk2__wl__integrator_a7fad5dbd04a9b5dc47bdb9b8c33e44e0}
+
+
+Buffer holding the subsequent states of the second M\+AR. 
+
+
+
+Definition at line 37 of file rk2\+\_\+\+W\+L\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+37   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: x2\textcolor{comment}{ !< Buffer holding the subsequent states of the second MAR}
+\end{DoxyCode}

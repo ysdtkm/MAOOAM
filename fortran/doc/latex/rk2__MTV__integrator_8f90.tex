@@ -1,0 +1,61 @@
+\hypertarget{rk2__MTV__integrator_8f90}{}\section{rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90 File Reference}
+\label{rk2__MTV__integrator_8f90}\index{rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90@{rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacerk2__mtv__integrator}{rk2\+\_\+mtv\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Module with the M\+TV rk2 integration routines. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__mtv__integrator_ac898de547481bd9af9cf76abf7972b3a}{rk2\+\_\+mtv\+\_\+integrator\+::init\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the M\+TV rk2 integrator. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__mtv__integrator_a2e6d01c401a4baf9ae1a5046793ca4f9}{rk2\+\_\+mtv\+\_\+integrator\+::init\+\_\+noise}
+\begin{DoxyCompactList}\small\item\em Routine to initialize the noise vectors and buffers. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__mtv__integrator_a6f4eeef9bfd2b9097251da6c7e17cc24}{rk2\+\_\+mtv\+\_\+integrator\+::init\+\_\+g}
+\begin{DoxyCompactList}\small\item\em Routine to initialize the G term. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__mtv__integrator_aad1f3a82362ff6e64d0e5587d285bbde}{rk2\+\_\+mtv\+\_\+integrator\+::compg} (y)
+\begin{DoxyCompactList}\small\item\em Routine to actualize the G term based on the state y of the M\+TV system. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__mtv__integrator_ad2806f20979d8c2cda13367addb63b3b}{rk2\+\_\+mtv\+\_\+integrator\+::step} (y, t, dt, dtn, res, tend)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the M\+TV system. The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__mtv__integrator_a6f7d6995f02f84e6967e1ae169c38014}{rk2\+\_\+mtv\+\_\+integrator\+::full\+\_\+step} (y, t, dt, dtn, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the full stochastic system. The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_aa33cc6702537576ce9327c8c1bacc0e0}{rk2\+\_\+mtv\+\_\+integrator\+::buf\+\_\+y1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a8a81a8ea6d873549ea3fab2c25ab8f56}{rk2\+\_\+mtv\+\_\+integrator\+::buf\+\_\+f0}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a082b2bb51352639e114015017d7e8a8c}{rk2\+\_\+mtv\+\_\+integrator\+::buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Integration buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_acfc8cafd615b189ed69fe547c21a523d}{rk2\+\_\+mtv\+\_\+integrator\+::dw}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a00366eb109bd6df9f42317a1103b42d7}{rk2\+\_\+mtv\+\_\+integrator\+::dwmult}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a943f1c40aae9be23e299c05b361c7ce5}{rk2\+\_\+mtv\+\_\+integrator\+::dwar}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a00726f064d00787a9f02d960defbcf71}{rk2\+\_\+mtv\+\_\+integrator\+::dwau}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a1d35c3699f7164073c6c616117541e1c}{rk2\+\_\+mtv\+\_\+integrator\+::dwor}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_af1862c97e660a0a557657dccbdc02fa8}{rk2\+\_\+mtv\+\_\+integrator\+::dwou}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_ad88a9e896280f9afe3d00bf76fe0aa20}{rk2\+\_\+mtv\+\_\+integrator\+::anoise}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a3171418fde58eb68937425899ecdc7af}{rk2\+\_\+mtv\+\_\+integrator\+::noise}
+\begin{DoxyCompactList}\small\item\em Additive noise term. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a950fc0519ed9785d8126a54cfe3ecce9}{rk2\+\_\+mtv\+\_\+integrator\+::noisemult}
+\begin{DoxyCompactList}\small\item\em Multiplicative noise term. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a011fd16734ea127ef794053331a8294e}{rk2\+\_\+mtv\+\_\+integrator\+::g}
+\begin{DoxyCompactList}\small\item\em G term of the M\+TV tendencies. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__mtv__integrator_a9db4772c6d66fba1a175dc7c493c8c6d}{rk2\+\_\+mtv\+\_\+integrator\+::buf\+\_\+g}
+\begin{DoxyCompactList}\small\item\em Buffer for the G term computation. \end{DoxyCompactList}\item 
+logical \hyperlink{namespacerk2__mtv__integrator_a08097c59dbd88f4ac0624dffb29fd6b1}{rk2\+\_\+mtv\+\_\+integrator\+::mult}
+\begin{DoxyCompactList}\small\item\em Logical indicating if the sigma1 matrix must be computed for every state change. \end{DoxyCompactList}\item 
+logical \hyperlink{namespacerk2__mtv__integrator_a9fbcf5a43f09dfa39f6ebcacf1b5504c}{rk2\+\_\+mtv\+\_\+integrator\+::q1fill}
+\begin{DoxyCompactList}\small\item\em Logical indicating if the matrix Q1 is non-\/zero. \end{DoxyCompactList}\item 
+logical \hyperlink{namespacerk2__mtv__integrator_ad56fffe540caff2644799cc5510e93c9}{rk2\+\_\+mtv\+\_\+integrator\+::compute\+\_\+mult}
+\begin{DoxyCompactList}\small\item\em Logical indicating if the Gaussian noise for the multiplicative noise must be computed. \end{DoxyCompactList}\item 
+real(kind=8), parameter \hyperlink{namespacerk2__mtv__integrator_afebf6d33084a6677b313e21740aa6b8b}{rk2\+\_\+mtv\+\_\+integrator\+::sq2} = sqrt(2.D0)
+\begin{DoxyCompactList}\small\item\em Hard coded square root of 2. \end{DoxyCompactList}\end{DoxyCompactItemize}

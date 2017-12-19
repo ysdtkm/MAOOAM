@@ -350,12 +350,12 @@ Definition at line 193 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 \begin{DoxyCode}
 193     \textcolor{keywordtype}{INTEGER} :: i
 194     \textcolor{keywordtype}{INTEGER} :: allocstat 
-195     \textcolor{keyword}{ALLOCATE}(adtensor(ndim),count\_elems(ndim), \hyperlink{namespacestat}{stat}=allocstat)
+195     \textcolor{keyword}{ALLOCATE}(adtensor(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),count\_elems(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
 196     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
 197     count\_elems=0
 198     \textcolor{keyword}{CALL }compute\_adtensor(ad\_add\_count)
 199 
-200     \textcolor{keywordflow}{DO} i=1,ndim
+200     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
 201        \textcolor{keyword}{ALLOCATE}(adtensor(i)%elems(count\_elems(i)), \hyperlink{namespacestat}{stat}=allocstat)
 202        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
 203 \textcolor{keywordflow}{    END DO}
@@ -390,12 +390,12 @@ Definition at line 294 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 \begin{DoxyCode}
 294     \textcolor{keywordtype}{INTEGER} :: i
 295     \textcolor{keywordtype}{INTEGER} :: allocstat 
-296     \textcolor{keyword}{ALLOCATE}(adtensor(ndim),count\_elems(ndim), \hyperlink{namespacestat}{stat}=allocstat)
+296     \textcolor{keyword}{ALLOCATE}(adtensor(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),count\_elems(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
 297     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
 298     count\_elems=0
 299     \textcolor{keyword}{CALL }compute\_adtensor\_ref(ad\_add\_count\_ref)
 300 
-301     \textcolor{keywordflow}{DO} i=1,ndim
+301     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
 302        \textcolor{keyword}{ALLOCATE}(adtensor(i)%elems(count\_elems(i)), \hyperlink{namespacestat}{stat}=allocstat)
 303        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
 304 \textcolor{keywordflow}{    END DO}
@@ -427,13 +427,13 @@ Definition at line 97 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 \begin{DoxyCode}
 97     \textcolor{keywordtype}{INTEGER} :: i
 98     \textcolor{keywordtype}{INTEGER} :: allocstat 
-99     \textcolor{keyword}{ALLOCATE}(tltensor(ndim),count\_elems(ndim), \hyperlink{namespacestat}{stat}=allocstat)
+99     \textcolor{keyword}{ALLOCATE}(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),count\_elems(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
 100     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
 101     count\_elems=0
 102     \textcolor{keyword}{CALL }compute\_tltensor(tl\_add\_count)
 103 
-104     \textcolor{keywordflow}{DO} i=1,ndim
-105        \textcolor{keyword}{ALLOCATE}(tltensor(i)%elems(count\_elems(i)), \hyperlink{namespacestat}{stat}=allocstat)
+104     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+105        \textcolor{keyword}{ALLOCATE}(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%elems(count\_elems(i)), \hyperlink{namespacestat}{stat}=allocstat)
 106        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
 107 \textcolor{keywordflow}{    END DO}
 108 
@@ -442,7 +442,7 @@ Definition at line 97 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 111     
 112     \textcolor{keyword}{CALL }compute\_tltensor(tl\_coeff)
 113 
-114     \textcolor{keyword}{CALL }simplify(tltensor)
+114     \textcolor{keyword}{CALL }simplify(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor})
 115 
 \end{DoxyCode}
 \index{tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}!jacobian@{jacobian}}
@@ -471,8 +471,8 @@ Definition at line 75 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 
 \begin{DoxyCode}
 75     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: ystar
-76     \textcolor{keywordtype}{TYPE}(coolist), \textcolor{keywordtype}{DIMENSION(ndim)} :: jacobian
-77     \textcolor{keyword}{CALL }jsparse\_mul(aotensor,ystar,jacobian)
+76     \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(ndim)} :: jacobian
+77     \textcolor{keyword}{CALL }jsparse\_mul(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},ystar,jacobian)
 \end{DoxyCode}
 \index{tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}!jacobian\+\_\+mat@{jacobian\+\_\+mat}}
 \index{jacobian\+\_\+mat@{jacobian\+\_\+mat}!tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}}
@@ -501,7 +501,7 @@ Definition at line 84 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 \begin{DoxyCode}
 84     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: ystar
 85     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(ndim,ndim)} :: jacobian\_mat
-86     \textcolor{keyword}{CALL }jsparse\_mul\_mat(aotensor,ystar,jacobian\_mat)
+86     \textcolor{keyword}{CALL }jsparse\_mul\_mat(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},ystar,jacobian\_mat)
 \end{DoxyCode}
 \index{tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}!tl@{tl}}
 \index{tl@{tl}!tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}}
@@ -537,7 +537,7 @@ Definition at line 396 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 396     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
 397     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: ystar,deltay
 398     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: buf
-399     \textcolor{keyword}{CALL }sparse\_mul3(tltensor,deltay,ystar,buf)
+399     \textcolor{keyword}{CALL }sparse\_mul3(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor},deltay,ystar,buf)
 \end{DoxyCode}
 \index{tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}!tl\+\_\+add\+\_\+count@{tl\+\_\+add\+\_\+count}}
 \index{tl\+\_\+add\+\_\+count@{tl\+\_\+add\+\_\+count}!tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}}
@@ -611,22 +611,23 @@ Definition at line 161 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 161     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
 162     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: v
 163     \textcolor{keywordtype}{INTEGER} :: n
-164     \textcolor{keywordflow}{IF} (.NOT. \textcolor{keyword}{ALLOCATED}(tltensor)) stop \textcolor{stringliteral}{"*** tl\_coeff routine : tensor not yet allocated ***"}
-165     \textcolor{keywordflow}{IF} (.NOT. \textcolor{keyword}{ALLOCATED}(tltensor(i)%elems)) stop \textcolor{stringliteral}{"*** tl\_coeff routine : tensor not yet allocated ***"}
+164     \textcolor{keywordflow}{IF} (.NOT. \textcolor{keyword}{ALLOCATED}(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor})) stop \textcolor{stringliteral}{"*** tl\_coeff routine : tensor not yet allocated ***"}
+165     \textcolor{keywordflow}{IF} (.NOT. \textcolor{keyword}{ALLOCATED}(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%elems)) stop \textcolor{stringliteral}{"*** tl\_coeff routine : tensor not yet allocated
+       ***"}
 166     \textcolor{keywordflow}{IF} (abs(v) .ge. real\_eps) \textcolor{keywordflow}{THEN}
 167        \textcolor{keywordflow}{IF} (j /=0) \textcolor{keywordflow}{THEN}
-168           n=(tltensor(i)%nelems)+1
-169           tltensor(i)%elems(n)%j=j
-170           tltensor(i)%elems(n)%k=k
-171           tltensor(i)%elems(n)%v=v
-172           tltensor(i)%nelems=n
+168           n=(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%nelems)+1
+169           \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%elems(n)%j=j
+170           \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%elems(n)%k=k
+171           \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%elems(n)%v=v
+172           \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%nelems=n
 173 \textcolor{keywordflow}{       END IF}
 174        \textcolor{keywordflow}{IF} (k /=0) \textcolor{keywordflow}{THEN}
-175           n=(tltensor(i)%nelems)+1
-176           tltensor(i)%elems(n)%j=k
-177           tltensor(i)%elems(n)%k=j
-178           tltensor(i)%elems(n)%v=v
-179           tltensor(i)%nelems=n
+175           n=(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%nelems)+1
+176           \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%elems(n)%j=k
+177           \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%elems(n)%k=j
+178           \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%elems(n)%v=v
+179           \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}(i)%nelems=n
 180 \textcolor{keywordflow}{       END IF}
 181 \textcolor{keywordflow}{    END IF}
 \end{DoxyCode}
@@ -646,7 +647,7 @@ Definition at line 44 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 
 
 \begin{DoxyCode}
-44   \textcolor{keywordtype}{TYPE}(coolist), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: adtensor
+44   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: adtensor
 \end{DoxyCode}
 \index{tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}!count\+\_\+elems@{count\+\_\+elems}}
 \index{count\+\_\+elems@{count\+\_\+elems}!tl\+\_\+ad\+\_\+tensor@{tl\+\_\+ad\+\_\+tensor}}
@@ -691,5 +692,5 @@ Definition at line 41 of file tl\+\_\+ad\+\_\+tensor.\+f90.
 
 
 \begin{DoxyCode}
-41   \textcolor{keywordtype}{TYPE}(coolist), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: tltensor
+41   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: \hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}
 \end{DoxyCode}

@@ -1,0 +1,53 @@
+\hypertarget{rk2__WL__integrator_8f90}{}\section{rk2\+\_\+\+W\+L\+\_\+integrator.\+f90 File Reference}
+\label{rk2__WL__integrator_8f90}\index{rk2\+\_\+\+W\+L\+\_\+integrator.\+f90@{rk2\+\_\+\+W\+L\+\_\+integrator.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacerk2__wl__integrator}{rk2\+\_\+wl\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Module with the WL rk2 integration routines. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__wl__integrator_a1ae65ef720c7776933024a7f884876b4}{rk2\+\_\+wl\+\_\+integrator\+::init\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Subroutine that initialize the M\+A\+Rs, the memory unit and the integration buffers. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__wl__integrator_a9dc90edbd67b31409dcf3b35de448c8b}{rk2\+\_\+wl\+\_\+integrator\+::compute\+\_\+m1} (y)
+\begin{DoxyCompactList}\small\item\em Routine to compute the $M_1$ term. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__wl__integrator_ac4818fb05d425a8dc74295ec56d16cb4}{rk2\+\_\+wl\+\_\+integrator\+::compute\+\_\+m2} (y)
+\begin{DoxyCompactList}\small\item\em Routine to compute the $M_2$ term. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__wl__integrator_a87232dd593964f76b9cc7f36eeba25a3}{rk2\+\_\+wl\+\_\+integrator\+::step} (y, t, dt, dtn, res, tend)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the WL system. The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__wl__integrator_ac5c14d277e5def9b5dfcaa41fbd0b7ab}{rk2\+\_\+wl\+\_\+integrator\+::full\+\_\+step} (y, t, dt, dtn, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the full stochastic system. The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_aa99c24f0aa8ae7eacd3d5123ea70db7b}{rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+y1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a1bd3729b5251a62db77c2821d8570527}{rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+f0}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a995936e8fb15609c95896f08b5e70a44}{rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Integration buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a86ad58f3281d4e047c2db27060d98d2f}{rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m2}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a4be840fb90a95206b2740f5a0b31b83f}{rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a73553426581c0b8705341b6faf38cff1}{rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m3}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a744d43e9a769cad7dde659df50975e35}{rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_ac3e8a32ab8553b8c00d467a792bbf051}{rk2\+\_\+wl\+\_\+integrator\+::buf\+\_\+m3s}
+\begin{DoxyCompactList}\small\item\em Dummy buffers holding the terms /f\$\+M\+\_\+i. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_ab0045343086f8e55d6dd0579105aad6d}{rk2\+\_\+wl\+\_\+integrator\+::anoise}
+\begin{DoxyCompactList}\small\item\em Additive noise term. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a44cee4402f05ef3465bf87baf91951e8}{rk2\+\_\+wl\+\_\+integrator\+::dwar}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_afa336c0cb10e6befa1ccc44522e2f517}{rk2\+\_\+wl\+\_\+integrator\+::dwau}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a94b90cb88115b2d39977de8b89909833}{rk2\+\_\+wl\+\_\+integrator\+::dwor}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a1e05e6efc7acdce81954944c134ac83b}{rk2\+\_\+wl\+\_\+integrator\+::dwou}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a5fd86898081b24e076b0830a5d1e9e51}{rk2\+\_\+wl\+\_\+integrator\+::x1}
+\begin{DoxyCompactList}\small\item\em Buffer holding the subsequent states of the first M\+AR. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacerk2__wl__integrator_a7fad5dbd04a9b5dc47bdb9b8c33e44e0}{rk2\+\_\+wl\+\_\+integrator\+::x2}
+\begin{DoxyCompactList}\small\item\em Buffer holding the subsequent states of the second M\+AR. \end{DoxyCompactList}\end{DoxyCompactItemize}

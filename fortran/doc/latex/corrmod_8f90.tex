@@ -1,0 +1,53 @@
+\hypertarget{corrmod_8f90}{}\section{corrmod.\+f90 File Reference}
+\label{corrmod_8f90}\index{corrmod.\+f90@{corrmod.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacecorrmod}{corrmod}
+\begin{DoxyCompactList}\small\item\em Module to initialize the correlation matrix of the unresolved variables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacecorrmod_ac2e966d475b93a6f75961bc7b7cceb7d}{corrmod\+::init\+\_\+corr}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the computation of the correlation. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacecorrmod_a52bbdab69c73b4313857d71c07cb3164}{corrmod\+::corrcomp\+\_\+from\+\_\+def} (s)
+\begin{DoxyCompactList}\small\item\em Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the definition given inside the module. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacecorrmod_a4afc40b6c94d00fc18ccc378ad309a7f}{corrmod\+::corrcomp\+\_\+from\+\_\+spline} (s)
+\begin{DoxyCompactList}\small\item\em Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the spline representation. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacecorrmod_a870374ab1a440e562713b6cdc23e18e1}{corrmod\+::splint} (xa, ya, y2a, n, x, y)
+\begin{DoxyCompactList}\small\item\em Routine to compute the spline representation parameters. \end{DoxyCompactList}\item 
+real(kind=8) function \hyperlink{namespacecorrmod_a46265e98098a79d33314d5e1f142a91d}{corrmod\+::fs} (s, p)
+\begin{DoxyCompactList}\small\item\em Exponential fit function. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacecorrmod_aaffa69da4d652347a8bb9f6030dd76c2}{corrmod\+::corrcomp\+\_\+from\+\_\+fit} (s)
+\begin{DoxyCompactList}\small\item\em Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the exponential representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacecorrmod_a1f1f0cbe5283ace955c2d27c4b34f2c0}{corrmod\+::mean}
+\begin{DoxyCompactList}\small\item\em Vector holding the mean of the unresolved dynamics (reduced version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacecorrmod_a9c59d06165027aa6b1751e219726564a}{corrmod\+::mean\+\_\+full}
+\begin{DoxyCompactList}\small\item\em Vector holding the mean of the unresolved dynamics (full version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_a978b78f1d6906afe06e63768535b44f7}{corrmod\+::corr\+\_\+i\+\_\+full}
+\begin{DoxyCompactList}\small\item\em Covariance matrix of the unresolved variables (full version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_af2ab9712d246a94ae1a801a011aee3d8}{corrmod\+::inv\+\_\+corr\+\_\+i\+\_\+full}
+\begin{DoxyCompactList}\small\item\em Inverse of the covariance matrix of the unresolved variables (full version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_a859a67113b5271db0df70e60cbf0687b}{corrmod\+::corr\+\_\+i}
+\begin{DoxyCompactList}\small\item\em Covariance matrix of the unresolved variables (reduced version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_a5a938587078064124588605255e93a19}{corrmod\+::inv\+\_\+corr\+\_\+i}
+\begin{DoxyCompactList}\small\item\em Inverse of the covariance matrix of the unresolved variables (reduced version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_ad9983e0594dec7351fe398f0f2225c6f}{corrmod\+::corr\+\_\+ij}
+\begin{DoxyCompactList}\small\item\em Matrix holding the correlation matrix at a given time. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:,\+:), allocatable \hyperlink{namespacecorrmod_abd47fec6688f9997847712f6f44c7f08}{corrmod\+::y2}
+\begin{DoxyCompactList}\small\item\em Vector holding coefficient of the spline and exponential correlation representation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:,\+:), allocatable \hyperlink{namespacecorrmod_aae7d37a1064807c18f234f1c74d46afc}{corrmod\+::ya}
+\begin{DoxyCompactList}\small\item\em Vector holding coefficient of the spline and exponential correlation representation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacecorrmod_a4af3bd2a2042f69a0fc89df8eba38de7}{corrmod\+::xa}
+\begin{DoxyCompactList}\small\item\em Vector holding coefficient of the spline and exponential correlation representation. \end{DoxyCompactList}\item 
+integer \hyperlink{namespacecorrmod_afec60f4bfbbc2a787462f2475348c4c2}{corrmod\+::nspl}
+\begin{DoxyCompactList}\small\item\em Integers needed by the spline representation of the correlation. \end{DoxyCompactList}\item 
+integer \hyperlink{namespacecorrmod_a25e22cc2633ad68b74ebc21589957554}{corrmod\+::klo}
+\item 
+integer \hyperlink{namespacecorrmod_ac3bac71aa78c9e05401de3680f0c4ffc}{corrmod\+::khi}
+\item 
+procedure(corrcomp\+\_\+from\+\_\+spline), pointer, public \hyperlink{namespacecorrmod_ad42bfc9c0ec2cf55958a45b46839d856}{corrmod\+::corrcomp}
+\begin{DoxyCompactList}\small\item\em Pointer to the correlation computation routine. \end{DoxyCompactList}\end{DoxyCompactItemize}

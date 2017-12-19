@@ -1,0 +1,324 @@
+\hypertarget{namespacerk2__ss__integrator}{}\section{rk2\+\_\+ss\+\_\+integrator Module Reference}
+\label{namespacerk2__ss__integrator}\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+
+
+Module with the stochastic uncoupled resolved nonlinear and tangent linear rk2 dynamics integration routines.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_a6e5a498fbe46f8d573aa3af2cb3dd39c}{init\+\_\+ss\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the uncoupled resolved rk2 integrator. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_aebdbf0093b784435a35ecb8ef7e8bcaa}{tendencies} (t, y, res)
+\begin{DoxyCompactList}\small\item\em Routine computing the tendencies of the uncoupled resolved model. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_aa89ab291aa152abdbf23c3d6820c2156}{tl\+\_\+tendencies} (t, y, ys, res)
+\begin{DoxyCompactList}\small\item\em Tendencies for the tangent linear model of the uncoupled resolved dynamics in point ystar for perturbation deltay. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_a54ac83fe046cde7379bd09f7415f5708}{ss\+\_\+step} (y, ys, t, dt, dtn, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform a stochastic integration step of the unresolved uncoupled dynamics (Heun algorithm). The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_af5eb1776d98c24b82be878c59b978b22}{ss\+\_\+tl\+\_\+step} (y, ys, t, dt, dtn, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform a stochastic integration step of the unresolved uncoupled tangent linear dynamics (Heun algorithm). The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_aa9dc56a3ff3887caced809dcb0257a1b}{dwar}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_aeae3507fa2e319b59923f21622b58fc7}{dwor}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_a26f660bf2b4b250a831c9fe4dc6c7726}{anoise}
+\begin{DoxyCompactList}\small\item\em Additive noise term. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_a8b6b195712dd95f7eafe269379aa9dcc}{buf\+\_\+y1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_aebce0ce5ca95ff293f219a8f85d44851}{buf\+\_\+f0}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_a1ffae309b7f72f07c598ab1882634ab3}{buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Integration buffers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module with the stochastic uncoupled resolved nonlinear and tangent linear rk2 dynamics integration routines. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+This module actually contains the Heun algorithm routines. 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!init\+\_\+ss\+\_\+integrator@{init\+\_\+ss\+\_\+integrator}}
+\index{init\+\_\+ss\+\_\+integrator@{init\+\_\+ss\+\_\+integrator}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{init\+\_\+ss\+\_\+integrator}{init_ss_integrator}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+ss\+\_\+integrator\+::init\+\_\+ss\+\_\+integrator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__ss__integrator_a6e5a498fbe46f8d573aa3af2cb3dd39c}{}\label{namespacerk2__ss__integrator_a6e5a498fbe46f8d573aa3af2cb3dd39c}
+
+
+Subroutine to initialize the uncoupled resolved rk2 integrator. 
+
+
+
+Definition at line 40 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+40     \textcolor{keywordtype}{INTEGER} :: allocstat
+41 
+42     \textcolor{keyword}{ALLOCATE}(buf\_y1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f0(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),\hyperlink{namespacestat}{stat}=allocstat)
+43     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+44 
+45     \textcolor{keyword}{ALLOCATE}(anoise(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),\hyperlink{namespacestat}{stat}=allocstat)
+46     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+47 
+48     \textcolor{keyword}{ALLOCATE}(dwar(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwor(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),\hyperlink{namespacestat}{stat}=allocstat)
+49     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+50 
+51     dwar=0.d0
+52     dwor=0.d0
+53 
+\end{DoxyCode}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!ss\+\_\+step@{ss\+\_\+step}}
+\index{ss\+\_\+step@{ss\+\_\+step}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{ss\+\_\+step(y, ys, t, dt, dtn, res)}{ss_step(y, ys, t, dt, dtn, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+ss\+\_\+integrator\+::ss\+\_\+step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{ys, }
+\item[{real(kind=8), intent(inout)}]{t, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__ss__integrator_a54ac83fe046cde7379bd09f7415f5708}{}\label{namespacerk2__ss__integrator_a54ac83fe046cde7379bd09f7415f5708}
+
+
+Routine to perform a stochastic integration step of the unresolved uncoupled dynamics (Heun algorithm). The incremented time is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Initial point. \\
+\hline
+{\em ys} & Dummy argument for compatibility. \\
+\hline
+{\em t} & Actual integration time \\
+\hline
+{\em dt} & Integration timestep. \\
+\hline
+{\em dtn} & Stochastic integration timestep (normally square-\/root of dt). \\
+\hline
+{\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+92     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y,ys
+93     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+94     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+95     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+96 
+97     \textcolor{keyword}{CALL }stoch\_atm\_res\_vec(dwar)
+98     \textcolor{keyword}{CALL }stoch\_oc\_res\_vec(dwor)
+99     anoise=(q\_ar*dwar+q\_or*dwor)*dtn
+100     \textcolor{keyword}{CALL }tendencies(t,y,buf\_f0)
+101     buf\_y1 = y+dt*buf\_f0+anoise
+102     \textcolor{keyword}{CALL }tendencies(t,buf\_y1,buf\_f1)
+103     res=y+0.5*(buf\_f0+buf\_f1)*dt+anoise
+104     t=t+dt
+\end{DoxyCode}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!ss\+\_\+tl\+\_\+step@{ss\+\_\+tl\+\_\+step}}
+\index{ss\+\_\+tl\+\_\+step@{ss\+\_\+tl\+\_\+step}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{ss\+\_\+tl\+\_\+step(y, ys, t, dt, dtn, res)}{ss_tl_step(y, ys, t, dt, dtn, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+ss\+\_\+integrator\+::ss\+\_\+tl\+\_\+step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{ys, }
+\item[{real(kind=8), intent(inout)}]{t, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__ss__integrator_af5eb1776d98c24b82be878c59b978b22}{}\label{namespacerk2__ss__integrator_af5eb1776d98c24b82be878c59b978b22}
+
+
+Routine to perform a stochastic integration step of the unresolved uncoupled tangent linear dynamics (Heun algorithm). The incremented time is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Initial point. \\
+\hline
+{\em ys} & point in trajectory to which the tangent space belongs. \\
+\hline
+{\em t} & Actual integration time \\
+\hline
+{\em dt} & Integration timestep. \\
+\hline
+{\em dtn} & Stochastic integration timestep (normally square-\/root of dt). \\
+\hline
+{\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 117 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+117     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y,ys
+118     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+119     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+120     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+121 
+122     \textcolor{keyword}{CALL }stoch\_atm\_res\_vec(dwar)
+123     \textcolor{keyword}{CALL }stoch\_oc\_res\_vec(dwor)
+124     anoise=(q\_ar*dwar+q\_or*dwor)*dtn
+125     \textcolor{keyword}{CALL }tl\_tendencies(t,y,ys,buf\_f0)
+126     buf\_y1 = y+dt*buf\_f0+anoise
+127     \textcolor{keyword}{CALL }tl\_tendencies(t,buf\_y1,ys,buf\_f1)
+128     res=y+0.5*(buf\_f0+buf\_f1)*dt+anoise
+129     t=t+dt
+\end{DoxyCode}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!tendencies@{tendencies}}
+\index{tendencies@{tendencies}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{tendencies(t, y, res)}{tendencies(t, y, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+ss\+\_\+integrator\+::tendencies (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{t, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__ss__integrator_aebdbf0093b784435a35ecb8ef7e8bcaa}{}\label{namespacerk2__ss__integrator_aebdbf0093b784435a35ecb8ef7e8bcaa}
+
+
+Routine computing the tendencies of the uncoupled resolved model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & Time at which the tendencies have to be computed. Actually not needed for autonomous systems. \\
+\hline
+{\em y} & Point at which the tendencies have to be computed. \\
+\hline
+{\em res} & vector to store the result. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+Note that it is N\+OT safe to pass {\ttfamily y} as a result buffer, as this operation does multiple passes. 
+\end{DoxyRemark}
+
+
+Definition at line 63 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+63     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
+64     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+65     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+66     \textcolor{keyword}{CALL }sparse\_mul3(ss\_tensor, y, y, res)
+\end{DoxyCode}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!tl\+\_\+tendencies@{tl\+\_\+tendencies}}
+\index{tl\+\_\+tendencies@{tl\+\_\+tendencies}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{tl\+\_\+tendencies(t, y, ys, res)}{tl_tendencies(t, y, ys, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+ss\+\_\+integrator\+::tl\+\_\+tendencies (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{t, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{ys, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__ss__integrator_aa89ab291aa152abdbf23c3d6820c2156}{}\label{namespacerk2__ss__integrator_aa89ab291aa152abdbf23c3d6820c2156}
+
+
+Tendencies for the tangent linear model of the uncoupled resolved dynamics in point ystar for perturbation deltay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & time \\
+\hline
+{\em y} & point of the tangent space at which the tendencies have to be computed. \\
+\hline
+{\em ys} & point in trajectory to which the tangent space belongs. \\
+\hline
+{\em res} & vector to store the result. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 76 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+76     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
+77     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y,ys
+78     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+79     \textcolor{keyword}{CALL }sparse\_mul3(ss\_tl\_tensor, y, ys, res)
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!anoise@{anoise}}
+\index{anoise@{anoise}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{anoise}{anoise}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+ss\+\_\+integrator\+::anoise\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__ss__integrator_a26f660bf2b4b250a831c9fe4dc6c7726}{}\label{namespacerk2__ss__integrator_a26f660bf2b4b250a831c9fe4dc6c7726}
+
+
+Additive noise term. 
+
+
+
+Definition at line 30 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+30   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: anoise\textcolor{comment}{ !< Additive noise term}
+\end{DoxyCode}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!buf\+\_\+f0@{buf\+\_\+f0}}
+\index{buf\+\_\+f0@{buf\+\_\+f0}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f0}{buf_f0}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+ss\+\_\+integrator\+::buf\+\_\+f0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__ss__integrator_aebce0ce5ca95ff293f219a8f85d44851}{}\label{namespacerk2__ss__integrator_aebce0ce5ca95ff293f219a8f85d44851}
+
+
+Definition at line 32 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!buf\+\_\+f1@{buf\+\_\+f1}}
+\index{buf\+\_\+f1@{buf\+\_\+f1}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f1}{buf_f1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+ss\+\_\+integrator\+::buf\+\_\+f1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__ss__integrator_a1ffae309b7f72f07c598ab1882634ab3}{}\label{namespacerk2__ss__integrator_a1ffae309b7f72f07c598ab1882634ab3}
+
+
+Integration buffers. 
+
+
+
+Definition at line 32 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!buf\+\_\+y1@{buf\+\_\+y1}}
+\index{buf\+\_\+y1@{buf\+\_\+y1}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+y1}{buf_y1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+ss\+\_\+integrator\+::buf\+\_\+y1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__ss__integrator_a8b6b195712dd95f7eafe269379aa9dcc}{}\label{namespacerk2__ss__integrator_a8b6b195712dd95f7eafe269379aa9dcc}
+
+
+Definition at line 32 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_y1,buf\_f0,buf\_f1\textcolor{comment}{ !< Integration buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!dwar@{dwar}}
+\index{dwar@{dwar}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwar}{dwar}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+ss\+\_\+integrator\+::dwar\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__ss__integrator_aa9dc56a3ff3887caced809dcb0257a1b}{}\label{namespacerk2__ss__integrator_aa9dc56a3ff3887caced809dcb0257a1b}
+
+
+Definition at line 28 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+28   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dwar,dwor\textcolor{comment}{ !< Standard gaussian noise buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}!dwor@{dwor}}
+\index{dwor@{dwor}!rk2\+\_\+ss\+\_\+integrator@{rk2\+\_\+ss\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwor}{dwor}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+ss\+\_\+integrator\+::dwor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__ss__integrator_aeae3507fa2e319b59923f21622b58fc7}{}\label{namespacerk2__ss__integrator_aeae3507fa2e319b59923f21622b58fc7}
+
+
+Standard gaussian noise buffers. 
+
+
+
+Definition at line 28 of file rk2\+\_\+ss\+\_\+integrator.\+f90.
+

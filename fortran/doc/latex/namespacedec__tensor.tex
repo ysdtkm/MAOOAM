@@ -1,0 +1,950 @@
+\hypertarget{namespacedec__tensor}{}\section{dec\+\_\+tensor Module Reference}
+\label{namespacedec__tensor}\index{dec\+\_\+tensor@{dec\+\_\+tensor}}
+
+
+The resolved-\/unresolved components decomposition of the tensor.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacedec__tensor_ab08c915c2a920d5cc6c0e47b21f696dc}{suppress\+\_\+and} (t, cst, v1, v2)
+\begin{DoxyCompactList}\small\item\em Subroutine to suppress from the tensor $t_{ijk}$ components satisfying S\+F(j)=v1 and S\+F(k)=v2. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacedec__tensor_a03a1804765394ccacbb505b3604904a7}{suppress\+\_\+or} (t, cst, v1, v2)
+\begin{DoxyCompactList}\small\item\em Subroutine to suppress from the tensor $t_{ijk}$ components satisfying S\+F(j)=v1 or S\+F(k)=v2. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacedec__tensor_ae780336fa841c576c2e4933365a59be7}{reorder} (t, cst, v)
+\begin{DoxyCompactList}\small\item\em Subroutine to reorder the tensor $t_{ijk}$ components \+: if S\+F(j)=v then it return $t_{ikj}$. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacedec__tensor_a2379bf5216a994cb1811e57f5957d477}{init\+\_\+sub\+\_\+tensor} (t, cst, v)
+\begin{DoxyCompactList}\small\item\em Subroutine that suppress all the components of a tensor $t_{ijk}$ where if S\+F(i)=v. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacedec__tensor_ad5519f1ab9898c840a182152efe30240}{init\+\_\+dec\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Subroutine that initialize and compute the decomposed tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ac70c58053d278b0c95194704a1e48787}{ff\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor holding the part of the unresolved tensor involving only unresolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a3f0627e15eba5158920d63deec399669}{sf\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor holding the part of the resolved tensor involving unresolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a1e5a6c8bbb0cfa7d44245e0567b4ffca}{ss\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor holding the part of the resolved tensor involving only resolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ac3f4574fab9acab6741a1660a49442b9}{fs\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor holding the part of the unresolved tensor involving resolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ac7de63dc4f2ca5ef353c9ee4442e6f78}{hx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the constant part of the resolved tendencies. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a9a9feb72e769222453930a8e4a5fdea3}{lxx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the linear part of the resolved tendencies involving the resolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a994871cb59cfc0743f3d2a22aa81abc4}{lxy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the linear part of the resolved tendencies involving the unresolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ad4649ed646f1d4cdb0997880e4f39969}{bxxx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the resolved tendencies involving resolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ad451ae880f34cc385482e33b45070dcd}{bxxy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the resolved tendencies involving both resolved and unresolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_aa11fd10e3419deddd481098f4a2d2949}{bxyy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the resolved tendencies involving unresolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a9c51afb9b52f76670bcb3496d32fabf3}{hy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the constant part of the unresolved tendencies. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_aed1ce57179fc836a3c439d8c3da85049}{lyx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the linear part of the unresolved tendencies involving the resolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a0b44998c712bdb9adad15a6bc4df8022}{lyy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the linear part of the unresolved tendencies involving the unresolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_adb81ce421da8f2b1c972c63ccdce6214}{byxx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the unresolved tendencies involving resolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a7c84cc16c29566626a9b6a47dde529f2}{byxy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the unresolved tendencies involving both resolved and unresolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ae146ffac640fe6d4dc52fb31f2c78956}{byyy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the unresolved tendencies involving unresolved variables. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a5e65ad7fdc3a92172a2e45341284fc6b}{ss\+\_\+tl\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor of the tangent linear model tendencies of the resolved component alone. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable \hyperlink{namespacedec__tensor_a63c533216b73ee87a50205bfa5adecea}{dumb}
+\begin{DoxyCompactList}\small\item\em Dumb coolist to make the computations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The resolved-\/unresolved components decomposition of the tensor. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!init\+\_\+dec\+\_\+tensor@{init\+\_\+dec\+\_\+tensor}}
+\index{init\+\_\+dec\+\_\+tensor@{init\+\_\+dec\+\_\+tensor}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{init\+\_\+dec\+\_\+tensor}{init_dec_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public dec\+\_\+tensor\+::init\+\_\+dec\+\_\+tensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacedec__tensor_ad5519f1ab9898c840a182152efe30240}{}\label{namespacedec__tensor_ad5519f1ab9898c840a182152efe30240}
+
+
+Subroutine that initialize and compute the decomposed tensors. 
+
+
+
+Definition at line 195 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+195     \textcolor{keywordtype}{USE }\hyperlink{namespaceparams}{params}\textcolor{keywordtype}{, only}:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+196     \textcolor{keywordtype}{USE }\hyperlink{namespaceaotensor__def}{aotensor\_def}\textcolor{keywordtype}{, only}:\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor}
+197     \textcolor{keywordtype}{USE }\hyperlink{namespacesf__def}{sf\_def}\textcolor{keywordtype}{, only}: \hyperlink{namespacesf__def_aefac3d4682ec35c401bb888b10dc4f47}{load\_sf}
+198     \textcolor{keywordtype}{USE }\hyperlink{namespacetensor}{tensor}\textcolor{keywordtype}{, only}:\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor},\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor},
+      \hyperlink{namespacetensor_af105ec6083969c52f5e7422d75a5cda5}{scal\_mul\_coo}
+199     \textcolor{keywordtype}{USE }\hyperlink{namespacetl__ad__tensor}{tl\_ad\_tensor}\textcolor{keywordtype}{, only}: \hyperlink{namespacetl__ad__tensor_a8a94fe84e907fc8835f798eddcff38e8}{init\_tltensor},\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor}
+200     \textcolor{keywordtype}{USE }\hyperlink{namespacestoch__params}{stoch\_params}\textcolor{keywordtype}{, only}: \hyperlink{namespacestoch__params_ae4aee571fa90316e794b67d1d404c0aa}{init\_stoch\_params},\hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{mode},
+      \hyperlink{namespacestoch__params_a3995bce17d12b533df6b86ab0072b7c3}{tdelta},\hyperlink{namespacestoch__params_aa0504e89179fe42b3f3206811f1592dc}{eps\_pert}
+201     \textcolor{keywordtype}{INTEGER} :: allocstat 
+202 
+203     \textcolor{keyword}{CALL }\hyperlink{namespacestoch__params_ae4aee571fa90316e794b67d1d404c0aa}{init\_stoch\_params}
+204 
+205     \textcolor{keyword}{CALL }\hyperlink{namespacetl__ad__tensor_a8a94fe84e907fc8835f798eddcff38e8}{init\_tltensor}  \textcolor{comment}{! and tl tensor}
+206     
+207     \textcolor{keyword}{CALL }\hyperlink{namespacesf__def_aefac3d4682ec35c401bb888b10dc4f47}{load\_sf}  \textcolor{comment}{! Load the resolved-unresolved decomposition}
+208 
+209     \textcolor{comment}{! Allocating the returned arrays}
+210 
+211     \textcolor{keyword}{ALLOCATE}(ff\_tensor(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),fs\_tensor(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),sf\_tensor(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),ss\_tensor(
+      \hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+212     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+213 
+214     \textcolor{keyword}{ALLOCATE}(ss\_tl\_tensor(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+215     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+216 
+217     \textcolor{keyword}{ALLOCATE}(hx(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),lxx(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),lxy(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),bxxx(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),bxxy(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),bxyy(
+      \hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+218     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+219 
+220     \textcolor{keyword}{ALLOCATE}(hy(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),lyx(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),lyy(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),byxx(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),byxy(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),byyy(
+      \hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+221     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+222 
+223     \textcolor{comment}{! General decomposition}
+224     \textcolor{comment}{! ff tensor}
+225     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+226     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+227 
+228     \textcolor{keywordflow}{IF} (\hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{mode}.ne.\textcolor{stringliteral}{'qfst'}) \textcolor{keywordflow}{THEN}
+229         \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+230         \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+231         \textcolor{keyword}{CALL }suppress\_or(dumb,1,0,0) \textcolor{comment}{! Clear entries with resolved variables}
+232         \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,ff\_tensor)
+233     \textcolor{keywordflow}{ELSE}
+234         \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+235         \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+236         \textcolor{keyword}{CALL }suppress\_or(dumb,0,0,0) \textcolor{comment}{! Clear entries with resolved variables and linear and constant terms}
+237         \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,ff\_tensor)
+238 \textcolor{keywordflow}{    ENDIF}
+239 
+240     allocstat=0
+241     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+242     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+243 
+244     \textcolor{comment}{! fs tensor}
+245     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+246     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+247 
+248     \textcolor{keywordflow}{IF} (\hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{mode}.ne.\textcolor{stringliteral}{'qfst'}) \textcolor{keywordflow}{THEN}
+249         \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+250         \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+251         \textcolor{keyword}{CALL }suppress\_and(dumb,1,1,1) \textcolor{comment}{! Clear entries with only unresolved variables and constant}
+252         \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,fs\_tensor)
+253     \textcolor{keywordflow}{ELSE}
+254         \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+255         \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+256         \textcolor{keyword}{CALL }suppress\_and(dumb,0,1,1) \textcolor{comment}{! Clear entries with only quadratic unresolved variables }
+257         \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,fs\_tensor)
+258 \textcolor{keywordflow}{    ENDIF}
+259 
+260     allocstat=0
+261     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+262     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+263 
+264     \textcolor{comment}{! sf tensor}
+265     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+266     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+267 
+268 
+269     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+270     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+271     \textcolor{keyword}{CALL }suppress\_and(dumb,0,0,0) \textcolor{comment}{! Clear entries with only unresolved variables and constant}
+272     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,sf\_tensor)
+273 
+274     allocstat=0
+275     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+276     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+277 
+278     \textcolor{comment}{! ss tensor}
+279     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+280     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+281 
+282 
+283     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+284     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+285     \textcolor{keyword}{CALL }suppress\_or(dumb,0,1,1) \textcolor{comment}{! Clear entries with only unresolved variables and constant}
+286     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,ss\_tensor)
+287 
+288     allocstat=0
+289     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+290     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+291 
+292     \textcolor{comment}{! ss tangent linear tensor}
+293 
+294     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+295     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+296 
+297     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespacetl__ad__tensor_a6180cfcc4d4ad119ef93266ea955903c}{tltensor},dumb) \textcolor{comment}{!Copy the tensors}
+298     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+299     \textcolor{keyword}{CALL }suppress\_or(dumb,0,1,1) \textcolor{comment}{! Clear entries with only unresolved variables and constant}
+300     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,ss\_tl\_tensor)
+301 
+302     allocstat=0
+303     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+304     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+305 
+306     \textcolor{comment}{! Multiply the aotensor part that need to be by the perturbation and time}
+307     \textcolor{comment}{! separation parameter}
+308     
+309     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+310     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+311 
+312     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(ss\_tensor,dumb)
+313     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_af105ec6083969c52f5e7422d75a5cda5}{scal\_mul\_coo}(1.d0/\hyperlink{namespacestoch__params_a3995bce17d12b533df6b86ab0072b7c3}{tdelta}**2,ff\_tensor)
+314     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_af105ec6083969c52f5e7422d75a5cda5}{scal\_mul\_coo}(\hyperlink{namespacestoch__params_aa0504e89179fe42b3f3206811f1592dc}{eps\_pert}/\hyperlink{namespacestoch__params_a3995bce17d12b533df6b86ab0072b7c3}{tdelta},fs\_tensor)
+315     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor}(ff\_tensor,dumb)
+316     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor}(fs\_tensor,dumb)
+317     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_af105ec6083969c52f5e7422d75a5cda5}{scal\_mul\_coo}(\hyperlink{namespacestoch__params_aa0504e89179fe42b3f3206811f1592dc}{eps\_pert}/\hyperlink{namespacestoch__params_a3995bce17d12b533df6b86ab0072b7c3}{tdelta},sf\_tensor)
+318     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor}(sf\_tensor,dumb)
+319 
+320     allocstat=0
+321     \textcolor{keyword}{DEALLOCATE}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor}, \hyperlink{namespacestat}{stat}=allocstat)
+322     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+323 
+324     \textcolor{keyword}{ALLOCATE}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor}(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+325     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+326 
+327     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor})
+328 
+329     allocstat=0
+330     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+331     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+332 
+333     \textcolor{comment}{! MTV decomposition}
+334     \textcolor{comment}{! Unresolved tensors}
+335 
+336     \textcolor{comment}{! Hy tensor}
+337     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+338     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+339 
+340     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+341     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+342     \textcolor{keyword}{CALL }suppress\_or(dumb,0,1,1) \textcolor{comment}{! Clear entries with unresolved variables}
+343     \textcolor{keyword}{CALL }suppress\_or(dumb,1,0,0) \textcolor{comment}{! Suppress linear and nonlinear resolved terms}
+344     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,hy)
+345 
+346     allocstat=0
+347     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+348     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+349 
+350     \textcolor{comment}{! Lyx tensor}
+351     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+352     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+353 
+354     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+355     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+356     \textcolor{keyword}{CALL }suppress\_or(dumb,0,1,1) \textcolor{comment}{! Clear entries with unresolved variables}
+357     \textcolor{keyword}{CALL }suppress\_and(dumb,1,1,1) \textcolor{comment}{! Clear constant entries}
+358     \textcolor{keyword}{CALL }suppress\_and(dumb,1,0,0) \textcolor{comment}{! Clear entries with nonlinear resolved terms}
+359     \textcolor{keyword}{CALL }reorder(dumb,1,0) \textcolor{comment}{! Resolved variables must be the third (k) index}
+360     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,lyx)
+361 
+362     allocstat=0
+363     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+364     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+365 
+366     \textcolor{comment}{! Lyy tensor}
+367     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+368     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+369 
+370     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+371     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+372     \textcolor{keyword}{CALL }suppress\_or(dumb,1,0,0) \textcolor{comment}{! Clear entries with resolved variables}
+373     \textcolor{keyword}{CALL }suppress\_and(dumb,0,1,1) \textcolor{comment}{! Clear entries with nonlinear unresolved terms}
+374     \textcolor{keyword}{CALL }suppress\_and(dumb,0,0,0) \textcolor{comment}{! Clear constant entries}
+375     \textcolor{keyword}{CALL }reorder(dumb,0,1) \textcolor{comment}{! Unresolved variables must be the third (k) index}
+376     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,lyy)
+377 
+378     allocstat=0
+379     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+380     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+381 
+382     \textcolor{comment}{! Byxy tensor}
+383     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+384     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+385 
+386     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+387     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+388     \textcolor{keyword}{CALL }suppress\_and(dumb,1,1,1) \textcolor{comment}{! Clear constant or linear terms and nonlinear unresolved only entries}
+389     \textcolor{keyword}{CALL }suppress\_and(dumb,0,0,0) \textcolor{comment}{! Clear entries with only resolved variables and constant}
+390     \textcolor{keyword}{CALL }reorder(dumb,0,1) \textcolor{comment}{! Unresolved variables must be the third (k) index}
+391     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,byxy)
+392 
+393     allocstat=0
+394     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+395     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+396 
+397     \textcolor{comment}{! Byyy tensor}
+398     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+399     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+400 
+401     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+402     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+403     \textcolor{keyword}{CALL }suppress\_or(dumb,0,0,0) \textcolor{comment}{! Clear entries with resolved variables and linear and constant terms}
+404     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,byyy)
+405 
+406     allocstat=0
+407     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+408     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+409 
+410     \textcolor{comment}{! Byxx tensor}
+411     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+412     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+413 
+414     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+415     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,0,0)
+416     \textcolor{keyword}{CALL }suppress\_or(dumb,1,1,1) \textcolor{comment}{! Clear entries with unresolved variables and linear and constant terms}
+417     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,byxx)
+418 
+419     allocstat=0
+420     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+421     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+422 
+423     \textcolor{comment}{! Resolved tensors}
+424 
+425     \textcolor{comment}{! Hx tensor}
+426     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+427     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+428 
+429     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+430     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+431     \textcolor{keyword}{CALL }suppress\_or(dumb,1,0,0) \textcolor{comment}{! Clear entries with resolved variables}
+432     \textcolor{keyword}{CALL }suppress\_or(dumb,0,1,1) \textcolor{comment}{! Suppress linear and nonlinear unresolved terms}
+433     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,hx)
+434 
+435     allocstat=0
+436     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+437     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+438 
+439     \textcolor{comment}{! Lxy tensor}
+440     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+441     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+442 
+443     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+444     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+445     \textcolor{keyword}{CALL }suppress\_or(dumb,1,0,0) \textcolor{comment}{! Clear entries with resolved variables}
+446     \textcolor{keyword}{CALL }suppress\_and(dumb,0,0,0) \textcolor{comment}{! Clear constant entries}
+447     \textcolor{keyword}{CALL }suppress\_and(dumb,0,1,1) \textcolor{comment}{! Clear entries with nonlinear unresolved terms}
+448     \textcolor{keyword}{CALL }reorder(dumb,0,1) \textcolor{comment}{! Resolved variables must be the third (k) index}
+449     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,lxy)
+450 
+451     allocstat=0
+452     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+453     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+454 
+455     \textcolor{comment}{! Lxx tensor}
+456     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+457     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+458 
+459     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+460     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+461     \textcolor{keyword}{CALL }suppress\_or(dumb,0,1,1) \textcolor{comment}{! Clear entries with unresolved variables}
+462     \textcolor{keyword}{CALL }suppress\_and(dumb,1,0,0) \textcolor{comment}{! Clear entries with nonlinear resolved terms}
+463     \textcolor{keyword}{CALL }suppress\_and(dumb,1,1,1) \textcolor{comment}{! Clear constant entries}
+464     \textcolor{keyword}{CALL }reorder(dumb,1,0) \textcolor{comment}{! Resolved variables must be the third (k) index}
+465     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,lxx)
+466 
+467     allocstat=0
+468     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+469     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+470 
+471     \textcolor{comment}{! Bxxy tensor}
+472     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+473     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+474 
+475     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+476     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+477     \textcolor{keyword}{CALL }suppress\_and(dumb,1,1,1) \textcolor{comment}{! Clear constant or linear terms and nonlinear unresolved only entries}
+478     \textcolor{keyword}{CALL }suppress\_and(dumb,0,0,0) \textcolor{comment}{! Clear entries with only resolved variables and constant}
+479     \textcolor{keyword}{CALL }reorder(dumb,0,1) \textcolor{comment}{! Unresolved variables must be the third (k) index}
+480     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,bxxy)
+481 
+482     allocstat=0
+483     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+484     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+485 
+486     \textcolor{comment}{! Bxxx tensor}
+487     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+488     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+489 
+490     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+491     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+492     \textcolor{keyword}{CALL }suppress\_or(dumb,1,1,1) \textcolor{comment}{! Clear entries with unresolved variables and linear and constant terms}
+493     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,bxxx)
+494 
+495     allocstat=0
+496     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+497     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+498 
+499     \textcolor{comment}{! Bxyy tensor}
+500     \textcolor{keyword}{ALLOCATE}(dumb(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+501     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+502 
+503     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},dumb) \textcolor{comment}{!Copy the tensors}
+504     \textcolor{keyword}{CALL }init\_sub\_tensor(dumb,1,1)
+505     \textcolor{keyword}{CALL }suppress\_or(dumb,0,0,0) \textcolor{comment}{! Clear entries with resolved variables and linear and constant terms}
+506     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(dumb,bxyy)
+507 
+508     allocstat=0
+509     \textcolor{keyword}{DEALLOCATE}(dumb, \hyperlink{namespacestat}{stat}=allocstat)
+510     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+511 
+512 
+513     \textcolor{comment}{! ! Droping the unneeded part of the tensors to define them}
+514     \textcolor{comment}{! ! Resolved tensors :}
+515     \textcolor{comment}{! ! ss tensor}
+516     \textcolor{comment}{! CALL suppress\_or(ss\_tensor,0,1,1) ! Clear entries with unresolved variables}
+517     \textcolor{comment}{! ! sf tensor}
+518     \textcolor{comment}{! CALL suppress\_and(sf\_tensor,0,0,0) ! Clear entries with only resolved variables and constant}
+519     \textcolor{comment}{! ! Hx tensor}
+520     \textcolor{comment}{! CALL suppress\_or(Hx,0,1,1) ! Clear entries with unresolved variables}
+521     \textcolor{comment}{! CALL suppress\_or(Hx,1,0,0) ! Suppress linear and nonlinear resolved terms}
+522     \textcolor{comment}{! ! Lxx tensor}
+523     \textcolor{comment}{! CALL suppress\_or(Lxx,0,1,1) ! Clear entries with unresolved variables}
+524     \textcolor{comment}{! CALL suppress\_and(Lxx,1,0,0) ! Clear entries with nonlinear resolved terms}
+525     \textcolor{comment}{! CALL suppress\_and(Lxx,1,1,1) ! Clear constant entries}
+526     \textcolor{comment}{! CALL reorder(Lxx,1,0) ! Resolved variables must be the third (k) index}
+527     \textcolor{comment}{! ! Lxy tensor}
+528     \textcolor{comment}{! CALL suppress\_or(Lxy,1,0,0) ! Clear entries with resolved variables}
+529     \textcolor{comment}{! CALL suppress\_and(Lxy,0,0,0) ! Clear constant entries}
+530     \textcolor{comment}{! CALL suppress\_and(Lxy,0,1,1) ! Clear entries with nonlinear unresolved terms}
+531     \textcolor{comment}{! CALL reorder(Lxy,0,1) ! Unresolved variables must be the third (k) index}
+532     \textcolor{comment}{! ! Bxxy tensor}
+533     \textcolor{comment}{! CALL suppress\_and(Bxxy,1,1,1) ! Clear constant or linear terms and nonlinear unresolved only entries}
+534     \textcolor{comment}{! CALL suppress\_and(Bxxy,0,0,0) ! Clear entries with only resolved variables and constant}
+535     \textcolor{comment}{! CALL reorder(Bxxy,0,1) ! Unresolved variables must be the third (k) index}
+536     \textcolor{comment}{! ! Bxxx tensor}
+537     \textcolor{comment}{! CALL suppress\_or(Bxxx,1,1,1) ! Clear entries with unresolved variables and linear and constant terms}
+538     \textcolor{comment}{! ! Bxyy}
+539     \textcolor{comment}{! CALL suppress\_or(Bxyy,0,0,0) ! Clear entries with resolved variables and linear and constant terms}
+540 
+541     \textcolor{comment}{! ! Unresolved tensors :}
+542 
+543     \textcolor{comment}{! ! Hy tensor}
+544     \textcolor{comment}{! ! Lyy tensor}
+545     \textcolor{comment}{! ! Lyx tensor}
+546     \textcolor{comment}{! ! Byxy tensor}
+547     \textcolor{comment}{! ! Byyy tensor}
+548     \textcolor{comment}{! CALL suppress\_or(Byyy,0,0,0) ! Clear entries with resolved variables and linear and constant terms}
+549     \textcolor{comment}{! ! Byxx}
+550     \textcolor{comment}{! CALL suppress\_or(Byxx,1,1,1) ! Clear entries with unresolved variables and linear and constant terms}
+551 
+552 
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!init\+\_\+sub\+\_\+tensor@{init\+\_\+sub\+\_\+tensor}}
+\index{init\+\_\+sub\+\_\+tensor@{init\+\_\+sub\+\_\+tensor}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{init\+\_\+sub\+\_\+tensor(t, cst, v)}{init_sub_tensor(t, cst, v)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine dec\+\_\+tensor\+::init\+\_\+sub\+\_\+tensor (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(inout)}]{t, }
+\item[{integer, intent(in)}]{cst, }
+\item[{integer, intent(in)}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacedec__tensor_a2379bf5216a994cb1811e57f5957d477}{}\label{namespacedec__tensor_a2379bf5216a994cb1811e57f5957d477}
+
+
+Subroutine that suppress all the components of a tensor $t_{ijk}$ where if S\+F(i)=v. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & tensor over which the routine acts \\
+\hline
+{\em cst} & constant which controls if the 0 index is taken as a unresolved or a resolved one \\
+\hline
+{\em v} & constant of the conditional (0 to suppress resolved, 1 for unresolved) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 174 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+174     \textcolor{keywordtype}{USE }\hyperlink{namespaceparams}{params}\textcolor{keywordtype}{, only}:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+175     \textcolor{keywordtype}{USE }\hyperlink{namespacesf__def}{sf\_def}\textcolor{keywordtype}{, only}: \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}
+176     \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(ndim)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+177     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: cst,v
+178     \textcolor{keywordtype}{INTEGER} :: i
+179 
+180     \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(0)=cst \textcolor{comment}{! control wether 0 index is considered unresolved or not}
+181     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+182        \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(i)==v) t(i)%nelems=0
+183 \textcolor{keywordflow}{    ENDDO}
+184 
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!reorder@{reorder}}
+\index{reorder@{reorder}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{reorder(t, cst, v)}{reorder(t, cst, v)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine dec\+\_\+tensor\+::reorder (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(inout)}]{t, }
+\item[{integer, intent(in)}]{cst, }
+\item[{integer, intent(in)}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacedec__tensor_ae780336fa841c576c2e4933365a59be7}{}\label{namespacedec__tensor_ae780336fa841c576c2e4933365a59be7}
+
+
+Subroutine to reorder the tensor $t_{ijk}$ components \+: if S\+F(j)=v then it return $t_{ikj}$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & tensor over which the routine acts \\
+\hline
+{\em cst} & constant which controls if the 0 index is taken as a unresolved or a resolved one \\
+\hline
+{\em v} & constant of the conditional (0 to invert resolved, 1 for unresolved) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 148 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+148     \textcolor{keywordtype}{USE }\hyperlink{namespaceparams}{params}\textcolor{keywordtype}{, only}:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+149     \textcolor{keywordtype}{USE }\hyperlink{namespacesf__def}{sf\_def}\textcolor{keywordtype}{, only}: \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}
+150     \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(ndim)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+151     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: cst,v
+152     \textcolor{keywordtype}{INTEGER} :: i,n,li,liii
+153 
+154     \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(0)=cst \textcolor{comment}{! control wether 0 index is considered unresolved or not}
+155     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+156 
+157        n=t(i)%nelems
+158        \textcolor{keywordflow}{DO} li=1,n
+159           \textcolor{keywordflow}{IF} (\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(t(i)%elems(li)%j)==v) \textcolor{keywordflow}{THEN}
+160              liii=t(i)%elems(li)%j
+161              t(i)%elems(li)%j=t(i)%elems(li)%k
+162              t(i)%elems(li)%k=liii
+163 \textcolor{keywordflow}{          ENDIF}
+164 \textcolor{keywordflow}{       ENDDO}
+165 \textcolor{keywordflow}{    ENDDO}
+166 
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!suppress\+\_\+and@{suppress\+\_\+and}}
+\index{suppress\+\_\+and@{suppress\+\_\+and}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{suppress\+\_\+and(t, cst, v1, v2)}{suppress_and(t, cst, v1, v2)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine dec\+\_\+tensor\+::suppress\+\_\+and (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(inout)}]{t, }
+\item[{integer, intent(in)}]{cst, }
+\item[{integer, intent(in)}]{v1, }
+\item[{integer, intent(in)}]{v2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacedec__tensor_ab08c915c2a920d5cc6c0e47b21f696dc}{}\label{namespacedec__tensor_ab08c915c2a920d5cc6c0e47b21f696dc}
+
+
+Subroutine to suppress from the tensor $t_{ijk}$ components satisfying S\+F(j)=v1 and S\+F(k)=v2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & tensor over which the routine acts \\
+\hline
+{\em cst} & constant which controls if the 0 index is taken as a unresolved or a resolved one \\
+\hline
+{\em v1} & first constant of the conditional (0 to suppress resolved, 1 for unresolved) \\
+\hline
+{\em v2} & second constant of the conditional (0 to suppress resolved, 1 for unresolved) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 77 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+77     \textcolor{keywordtype}{USE }\hyperlink{namespaceparams}{params}\textcolor{keywordtype}{, only}:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+78     \textcolor{keywordtype}{USE }\hyperlink{namespacesf__def}{sf\_def}\textcolor{keywordtype}{, only}: \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}
+79     \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(ndim)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+80     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: cst,v1,v2
+81     \textcolor{keywordtype}{INTEGER} :: i,n,li,liii
+82     
+83     \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(0)=cst \textcolor{comment}{! control wether 0 index is considered unresolved or not}
+84     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+85        n=t(i)%nelems
+86        \textcolor{keywordflow}{DO} li=1,n
+87           \textcolor{comment}{! Clear entries with only resolved variables and shift rest of the items one place down.}
+88           \textcolor{comment}{! Make sure not to skip any entries while shifting!}
+89              
+90           \textcolor{keywordflow}{DO} \textcolor{keywordflow}{WHILE} ((\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(t(i)%elems(li)%j)==v1).and.(\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(t(i)%elems(li)%k)==v2))
+91              \textcolor{comment}{!print*, i,li,t(i)%nelems,n}
+92              \textcolor{keywordflow}{DO} liii=li+1,n
+93                 t(i)%elems(liii-1)%j=t(i)%elems(liii)%j
+94                 t(i)%elems(liii-1)%k=t(i)%elems(liii)%k
+95                 t(i)%elems(liii-1)%v=t(i)%elems(liii)%v
+96 \textcolor{keywordflow}{             ENDDO}
+97              t(i)%nelems=t(i)%nelems-1
+98              \textcolor{keywordflow}{IF} (li>t(i)%nelems) \textcolor{keywordflow}{exit}
+99 \textcolor{keywordflow}{          ENDDO}
+100           \textcolor{keywordflow}{IF} (li>t(i)%nelems) \textcolor{keywordflow}{exit}
+101 \textcolor{keywordflow}{       ENDDO}
+102 \textcolor{keywordflow}{    ENDDO}
+103 
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!suppress\+\_\+or@{suppress\+\_\+or}}
+\index{suppress\+\_\+or@{suppress\+\_\+or}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{suppress\+\_\+or(t, cst, v1, v2)}{suppress_or(t, cst, v1, v2)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine dec\+\_\+tensor\+::suppress\+\_\+or (
+\begin{DoxyParamCaption}
+\item[{type({\bf coolist}), dimension(ndim), intent(inout)}]{t, }
+\item[{integer, intent(in)}]{cst, }
+\item[{integer, intent(in)}]{v1, }
+\item[{integer, intent(in)}]{v2}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacedec__tensor_a03a1804765394ccacbb505b3604904a7}{}\label{namespacedec__tensor_a03a1804765394ccacbb505b3604904a7}
+
+
+Subroutine to suppress from the tensor $t_{ijk}$ components satisfying S\+F(j)=v1 or S\+F(k)=v2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & tensor over which the routine acts \\
+\hline
+{\em cst} & constant which controls if the 0 index is taken as a unresolved or a resolved one \\
+\hline
+{\em v1} & first constant of the conditional (0 to suppress resolved, 1 for unresolved) \\
+\hline
+{\em v2} & second constant of the conditional (0 to suppress resolved, 1 for unresolved) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 113 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+113     \textcolor{keywordtype}{USE }\hyperlink{namespaceparams}{params}\textcolor{keywordtype}{, only}:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+114     \textcolor{keywordtype}{USE }\hyperlink{namespacesf__def}{sf\_def}\textcolor{keywordtype}{, only}: \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}
+115     \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(ndim)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+116     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: cst,v1,v2
+117     \textcolor{keywordtype}{INTEGER} :: i,n,li,liii
+118     
+119     \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(0)=cst \textcolor{comment}{! control wether 0 index is considered unresolved or not}
+120     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+121        n=t(i)%nelems
+122        \textcolor{keywordflow}{DO} li=1,n
+123           \textcolor{comment}{! Clear entries with only resolved variables and shift rest of the items one place down.}
+124           \textcolor{comment}{! Make sure not to skip any entries while shifting!}
+125              
+126           \textcolor{keywordflow}{DO} \textcolor{keywordflow}{WHILE} ((\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(t(i)%elems(li)%j)==v1).or.(\hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf}(t(i)%elems(li)%k)==v2))
+127              \textcolor{comment}{!print*, i,li,t(i)%nelems,n}
+128              \textcolor{keywordflow}{DO} liii=li+1,n
+129                 t(i)%elems(liii-1)%j=t(i)%elems(liii)%j
+130                 t(i)%elems(liii-1)%k=t(i)%elems(liii)%k
+131                 t(i)%elems(liii-1)%v=t(i)%elems(liii)%v
+132 \textcolor{keywordflow}{             ENDDO}
+133              t(i)%nelems=t(i)%nelems-1
+134              \textcolor{keywordflow}{IF} (li>t(i)%nelems) \textcolor{keywordflow}{exit}
+135 \textcolor{keywordflow}{          ENDDO}
+136           \textcolor{keywordflow}{IF} (li>t(i)%nelems) \textcolor{keywordflow}{exit}
+137 \textcolor{keywordflow}{       ENDDO}
+138 \textcolor{keywordflow}{    ENDDO}
+139 
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!bxxx@{bxxx}}
+\index{bxxx@{bxxx}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{bxxx}{bxxx}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::bxxx}\hypertarget{namespacedec__tensor_ad4649ed646f1d4cdb0997880e4f39969}{}\label{namespacedec__tensor_ad4649ed646f1d4cdb0997880e4f39969}
+
+
+Tensor holding the quadratic part of the resolved tendencies involving resolved variables. 
+
+
+
+Definition at line 39 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+39   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: bxxx\textcolor{comment}{ !< Tensor holding the quadratic part of
+       the resolved tendencies involving resolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!bxxy@{bxxy}}
+\index{bxxy@{bxxy}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{bxxy}{bxxy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::bxxy}\hypertarget{namespacedec__tensor_ad451ae880f34cc385482e33b45070dcd}{}\label{namespacedec__tensor_ad451ae880f34cc385482e33b45070dcd}
+
+
+Tensor holding the quadratic part of the resolved tendencies involving both resolved and unresolved variables. 
+
+
+
+Definition at line 40 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+40   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: bxxy\textcolor{comment}{ !< Tensor holding the quadratic part of
+       the resolved tendencies involving both resolved and unresolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!bxyy@{bxyy}}
+\index{bxyy@{bxyy}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{bxyy}{bxyy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::bxyy}\hypertarget{namespacedec__tensor_aa11fd10e3419deddd481098f4a2d2949}{}\label{namespacedec__tensor_aa11fd10e3419deddd481098f4a2d2949}
+
+
+Tensor holding the quadratic part of the resolved tendencies involving unresolved variables. 
+
+
+
+Definition at line 41 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+41   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: bxyy\textcolor{comment}{ !< Tensor holding the quadratic part of
+       the resolved tendencies involving unresolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!byxx@{byxx}}
+\index{byxx@{byxx}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{byxx}{byxx}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::byxx}\hypertarget{namespacedec__tensor_adb81ce421da8f2b1c972c63ccdce6214}{}\label{namespacedec__tensor_adb81ce421da8f2b1c972c63ccdce6214}
+
+
+Tensor holding the quadratic part of the unresolved tendencies involving resolved variables. 
+
+
+
+Definition at line 46 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+46   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: byxx\textcolor{comment}{ !< Tensor holding the quadratic part of
+       the unresolved tendencies involving resolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!byxy@{byxy}}
+\index{byxy@{byxy}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{byxy}{byxy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::byxy}\hypertarget{namespacedec__tensor_a7c84cc16c29566626a9b6a47dde529f2}{}\label{namespacedec__tensor_a7c84cc16c29566626a9b6a47dde529f2}
+
+
+Tensor holding the quadratic part of the unresolved tendencies involving both resolved and unresolved variables. 
+
+
+
+Definition at line 47 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+47   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: byxy\textcolor{comment}{ !< Tensor holding the quadratic part of
+       the unresolved tendencies involving both resolved and unresolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!byyy@{byyy}}
+\index{byyy@{byyy}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{byyy}{byyy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::byyy}\hypertarget{namespacedec__tensor_ae146ffac640fe6d4dc52fb31f2c78956}{}\label{namespacedec__tensor_ae146ffac640fe6d4dc52fb31f2c78956}
+
+
+Tensor holding the quadratic part of the unresolved tendencies involving unresolved variables. 
+
+
+
+Definition at line 48 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+48   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: byyy\textcolor{comment}{ !< Tensor holding the quadratic part of
+       the unresolved tendencies involving unresolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!dumb@{dumb}}
+\index{dumb@{dumb}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb}{dumb}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable dec\+\_\+tensor\+::dumb\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacedec__tensor_a63c533216b73ee87a50205bfa5adecea}{}\label{namespacedec__tensor_a63c533216b73ee87a50205bfa5adecea}
+
+
+Dumb coolist to make the computations. 
+
+
+
+Definition at line 53 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+53   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\textcolor{comment}{ !< Dumb coolist to make the computations}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!ff\+\_\+tensor@{ff\+\_\+tensor}}
+\index{ff\+\_\+tensor@{ff\+\_\+tensor}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{ff\+\_\+tensor}{ff_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::ff\+\_\+tensor}\hypertarget{namespacedec__tensor_ac70c58053d278b0c95194704a1e48787}{}\label{namespacedec__tensor_ac70c58053d278b0c95194704a1e48787}
+
+
+Tensor holding the part of the unresolved tensor involving only unresolved variables. 
+
+
+
+Definition at line 31 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+31   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: ff\_tensor\textcolor{comment}{ !< Tensor holding the part of the
+       unresolved tensor involving only unresolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!fs\+\_\+tensor@{fs\+\_\+tensor}}
+\index{fs\+\_\+tensor@{fs\+\_\+tensor}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{fs\+\_\+tensor}{fs_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::fs\+\_\+tensor}\hypertarget{namespacedec__tensor_ac3f4574fab9acab6741a1660a49442b9}{}\label{namespacedec__tensor_ac3f4574fab9acab6741a1660a49442b9}
+
+
+Tensor holding the part of the unresolved tensor involving resolved variables. 
+
+
+
+Definition at line 34 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+34   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: fs\_tensor\textcolor{comment}{ !< Tensor holding the part of the
+       unresolved tensor involving resolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!hx@{hx}}
+\index{hx@{hx}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{hx}{hx}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::hx}\hypertarget{namespacedec__tensor_ac7de63dc4f2ca5ef353c9ee4442e6f78}{}\label{namespacedec__tensor_ac7de63dc4f2ca5ef353c9ee4442e6f78}
+
+
+Tensor holding the constant part of the resolved tendencies. 
+
+
+
+Definition at line 36 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+36   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: hx\textcolor{comment}{ !< Tensor holding the constant part of the
+       resolved tendencies}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!hy@{hy}}
+\index{hy@{hy}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{hy}{hy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::hy}\hypertarget{namespacedec__tensor_a9c51afb9b52f76670bcb3496d32fabf3}{}\label{namespacedec__tensor_a9c51afb9b52f76670bcb3496d32fabf3}
+
+
+Tensor holding the constant part of the unresolved tendencies. 
+
+
+
+Definition at line 43 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+43   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: hy\textcolor{comment}{ !< Tensor holding the constant part of the
+       unresolved tendencies}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!lxx@{lxx}}
+\index{lxx@{lxx}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{lxx}{lxx}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::lxx}\hypertarget{namespacedec__tensor_a9a9feb72e769222453930a8e4a5fdea3}{}\label{namespacedec__tensor_a9a9feb72e769222453930a8e4a5fdea3}
+
+
+Tensor holding the linear part of the resolved tendencies involving the resolved variables. 
+
+
+
+Definition at line 37 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+37   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: lxx\textcolor{comment}{ !< Tensor holding the linear part of the
+       resolved tendencies involving the resolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!lxy@{lxy}}
+\index{lxy@{lxy}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{lxy}{lxy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::lxy}\hypertarget{namespacedec__tensor_a994871cb59cfc0743f3d2a22aa81abc4}{}\label{namespacedec__tensor_a994871cb59cfc0743f3d2a22aa81abc4}
+
+
+Tensor holding the linear part of the resolved tendencies involving the unresolved variables. 
+
+
+
+Definition at line 38 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+38   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: lxy\textcolor{comment}{ !< Tensor holding the linear part of the
+       resolved tendencies involving the unresolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!lyx@{lyx}}
+\index{lyx@{lyx}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{lyx}{lyx}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::lyx}\hypertarget{namespacedec__tensor_aed1ce57179fc836a3c439d8c3da85049}{}\label{namespacedec__tensor_aed1ce57179fc836a3c439d8c3da85049}
+
+
+Tensor holding the linear part of the unresolved tendencies involving the resolved variables. 
+
+
+
+Definition at line 44 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+44   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: lyx\textcolor{comment}{ !< Tensor holding the linear part of the
+       unresolved tendencies involving the resolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!lyy@{lyy}}
+\index{lyy@{lyy}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{lyy}{lyy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::lyy}\hypertarget{namespacedec__tensor_a0b44998c712bdb9adad15a6bc4df8022}{}\label{namespacedec__tensor_a0b44998c712bdb9adad15a6bc4df8022}
+
+
+Tensor holding the linear part of the unresolved tendencies involving the unresolved variables. 
+
+
+
+Definition at line 45 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+45   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: lyy\textcolor{comment}{ !< Tensor holding the linear part of the
+       unresolved tendencies involving the unresolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!sf\+\_\+tensor@{sf\+\_\+tensor}}
+\index{sf\+\_\+tensor@{sf\+\_\+tensor}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{sf\+\_\+tensor}{sf_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::sf\+\_\+tensor}\hypertarget{namespacedec__tensor_a3f0627e15eba5158920d63deec399669}{}\label{namespacedec__tensor_a3f0627e15eba5158920d63deec399669}
+
+
+Tensor holding the part of the resolved tensor involving unresolved variables. 
+
+
+
+Definition at line 32 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: sf\_tensor\textcolor{comment}{ !< Tensor holding the part of the
+       resolved tensor involving unresolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!ss\+\_\+tensor@{ss\+\_\+tensor}}
+\index{ss\+\_\+tensor@{ss\+\_\+tensor}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{ss\+\_\+tensor}{ss_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::ss\+\_\+tensor}\hypertarget{namespacedec__tensor_a1e5a6c8bbb0cfa7d44245e0567b4ffca}{}\label{namespacedec__tensor_a1e5a6c8bbb0cfa7d44245e0567b4ffca}
+
+
+Tensor holding the part of the resolved tensor involving only resolved variables. 
+
+
+
+Definition at line 33 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+33   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: ss\_tensor\textcolor{comment}{ !< Tensor holding the part of the
+       resolved tensor involving only resolved variables}
+\end{DoxyCode}
+\index{dec\+\_\+tensor@{dec\+\_\+tensor}!ss\+\_\+tl\+\_\+tensor@{ss\+\_\+tl\+\_\+tensor}}
+\index{ss\+\_\+tl\+\_\+tensor@{ss\+\_\+tl\+\_\+tensor}!dec\+\_\+tensor@{dec\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{ss\+\_\+tl\+\_\+tensor}{ss_tl_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public dec\+\_\+tensor\+::ss\+\_\+tl\+\_\+tensor}\hypertarget{namespacedec__tensor_a5e65ad7fdc3a92172a2e45341284fc6b}{}\label{namespacedec__tensor_a5e65ad7fdc3a92172a2e45341284fc6b}
+
+
+Tensor of the tangent linear model tendencies of the resolved component alone. 
+
+
+
+Definition at line 50 of file dec\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+50   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: ss\_tl\_tensor\textcolor{comment}{ !< Tensor of the tangent linear
+       model tendencies of the resolved component alone}
+\end{DoxyCode}

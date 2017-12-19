@@ -1,0 +1,330 @@
+\hypertarget{namespaceint__corr}{}\section{int\+\_\+corr Module Reference}
+\label{namespaceint__corr}\index{int\+\_\+corr@{int\+\_\+corr}}
+
+
+Module to compute or load the integrals of the correlation matrices.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespaceint__corr_afb525a8e7ea02313d6480ffbbd265b3b}{init\+\_\+corrint}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the integrated matrices and tensors. \end{DoxyCompactList}\item 
+real(kind=8) function \hyperlink{namespaceint__corr_a311d5bd56c8de0d259e934f50d5388eb}{func\+\_\+ij} (s)
+\begin{DoxyCompactList}\small\item\em Function that returns the component oi and oj of the correlation matrix at time s. \end{DoxyCompactList}\item 
+real(kind=8) function \hyperlink{namespaceint__corr_af4796390cac83adc24081fa81a54af27}{func\+\_\+ijkl} (s)
+\begin{DoxyCompactList}\small\item\em Function that returns the component oi,oj,ok and ol of the outer product of the correlation matrix with itself at time s. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespaceint__corr_ac65d143c4217bb56f7c4168506c2fd4f}{comp\+\_\+corrint}
+\begin{DoxyCompactList}\small\item\em Routine that actually compute or load the integrals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+integer \hyperlink{namespaceint__corr_abddd3a2d3e1bfa4f09d96eaf090e9a95}{oi}
+\item 
+integer \hyperlink{namespaceint__corr_a114182df2066db340a9c42d9edd1583e}{oj}
+\item 
+integer \hyperlink{namespaceint__corr_a4af4666df7c0f30de448d09ae160caf4}{ok}
+\item 
+integer \hyperlink{namespaceint__corr_a3fe0c6bccf317d65552767f983f1cb62}{ol}
+\begin{DoxyCompactList}\small\item\em Integers that specify the matrices and tensor component considered as a function of time. \end{DoxyCompactList}\item 
+real(kind=8), parameter \hyperlink{namespaceint__corr_ab379731156e2a2dd2d0b11766d766a85}{real\+\_\+eps} = 2.\+2204460492503131e-\/16
+\begin{DoxyCompactList}\small\item\em Small epsilon constant to determine equality with zero. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespaceint__corr_ab3c1d22e8c15412a3b535c8301b0c42d}{corrint}
+\begin{DoxyCompactList}\small\item\em Matrix holding the integral of the correlation matrix. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist4}{coolist4}), dimension(\+:), allocatable, public \hyperlink{namespaceint__corr_a1422cac2c54e6d7837159fe9fb3a6d6b}{corr2int}
+\begin{DoxyCompactList}\small\item\em Tensor holding the integral of the correlation outer product with itself. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module to compute or load the integrals of the correlation matrices. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{int\+\_\+corr@{int\+\_\+corr}!comp\+\_\+corrint@{comp\+\_\+corrint}}
+\index{comp\+\_\+corrint@{comp\+\_\+corrint}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{comp\+\_\+corrint}{comp_corrint}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public int\+\_\+corr\+::comp\+\_\+corrint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceint__corr_ac65d143c4217bb56f7c4168506c2fd4f}{}\label{namespaceint__corr_ac65d143c4217bb56f7c4168506c2fd4f}
+
+
+Routine that actually compute or load the integrals. 
+
+
+
+Definition at line 75 of file int\+\_\+corr.\+f90.
+
+
+\begin{DoxyCode}
+75     \textcolor{keywordtype}{IMPLICIT NONE}
+76     \textcolor{keywordtype}{INTEGER} :: i,j,k,l,n,allocstat
+77     \textcolor{keywordtype}{REAL(KIND=8)} :: ss
+78     \textcolor{keywordtype}{LOGICAL} :: ex
+79 
+80     \textcolor{keyword}{INQUIRE}(file=\textcolor{stringliteral}{'corrint.def'},exist=ex)
+81     \textcolor{keywordflow}{SELECT CASE} (int\_corr\_mode)
+82     \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'file'})
+83        \textcolor{keywordflow}{IF} (ex) \textcolor{keywordflow}{THEN}
+84           \textcolor{keyword}{OPEN}(30,file=\textcolor{stringliteral}{'corrint.def'},status=\textcolor{stringliteral}{'old'})
+85           \textcolor{keyword}{READ}(30,*) corrint
+86           \textcolor{keyword}{CLOSE}(30)
+87        \textcolor{keywordflow}{ELSE}
+88           stop \textcolor{stringliteral}{"*** File corrint.def not found ! ***"}
+89 \textcolor{keywordflow}{       END IF}
+90     \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'prog'})
+91        \textcolor{keywordflow}{DO} i = 1,n\_unres
+92           \textcolor{keywordflow}{DO} j= 1,n\_unres
+93              oi=i
+94              oj=j
+95              \textcolor{comment}{!   print*, oi,oj}
+96              \textcolor{keyword}{CALL }integrate(func\_ij,ss)
+97              corrint(ind(i),ind(j))=ss
+98 \textcolor{keywordflow}{          END DO}
+99 \textcolor{keywordflow}{       END DO}
+100 
+101        \textcolor{keyword}{OPEN}(30,file=\textcolor{stringliteral}{'corrint.def'})
+102        \textcolor{keyword}{WRITE}(30,*) corrint
+103        \textcolor{keyword}{CLOSE}(30)
+104 \textcolor{keywordflow}{    END SELECT}
+105 
+106 
+107     \textcolor{keyword}{INQUIRE}(file=\textcolor{stringliteral}{'corr2int.def'},exist=ex)
+108     \textcolor{keywordflow}{SELECT CASE} (int\_corr\_mode)
+109     \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'file'})
+110        \textcolor{keywordflow}{IF} (ex) \textcolor{keywordflow}{THEN}
+111           \textcolor{keyword}{CALL }load\_tensor4\_from\_file(\textcolor{stringliteral}{"corr2int.def"},corr2int)
+112        \textcolor{keywordflow}{ELSE}
+113           stop \textcolor{stringliteral}{"*** File corr2int.def not found ! ***"}
+114 \textcolor{keywordflow}{       END IF}
+115     \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'prog'})
+116        \textcolor{keywordflow}{DO} i = 1,n\_unres
+117           n=0
+118           \textcolor{keywordflow}{DO} j= 1,n\_unres
+119              \textcolor{keywordflow}{DO} k= 1,n\_unres
+120                 \textcolor{keywordflow}{DO} l = 1,n\_unres
+121                    oi=i
+122                    oj=j
+123                    ok=k
+124                    ol=l
+125 
+126                    \textcolor{keyword}{CALL }integrate(func\_ijkl,ss)
+127                    \textcolor{keywordflow}{IF} (abs(ss)>real\_eps) n=n+1
+128 \textcolor{keywordflow}{                ENDDO}
+129 \textcolor{keywordflow}{             ENDDO}
+130 \textcolor{keywordflow}{          ENDDO}
+131           \textcolor{keywordflow}{IF} (n/=0) \textcolor{keywordflow}{THEN}
+132              \textcolor{keyword}{ALLOCATE}(corr2int(ind(i))%elems(n), \hyperlink{namespacestat}{stat}=allocstat)
+133              \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+134 
+135              n=0
+136              \textcolor{keywordflow}{DO} j= 1,n\_unres
+137                 \textcolor{keywordflow}{DO} k= 1,n\_unres
+138                    \textcolor{keywordflow}{DO} l = 1,n\_unres
+139                       oi=i
+140                       oj=j
+141                       ok=k
+142                       ol=l
+143 
+144                       \textcolor{keyword}{CALL }integrate(func\_ijkl,ss)
+145                       \textcolor{keywordflow}{IF} (abs(ss)>real\_eps) \textcolor{keywordflow}{THEN}
+146                          n=n+1
+147                          corr2int(ind(i))%elems(n)%j=ind(j)
+148                          corr2int(ind(i))%elems(n)%k=ind(k)
+149                          corr2int(ind(i))%elems(n)%l=ind(l)
+150                          corr2int(ind(i))%elems(n)%v=ss
+151 \textcolor{keywordflow}{                      END IF}
+152 \textcolor{keywordflow}{                   ENDDO}
+153 \textcolor{keywordflow}{                ENDDO}
+154 \textcolor{keywordflow}{             ENDDO}
+155              corr2int(ind(i))%nelems=n
+156 \textcolor{keywordflow}{          END IF}
+157 \textcolor{keywordflow}{       ENDDO}
+158 
+159        \textcolor{keyword}{CALL }write\_tensor4\_to\_file(\textcolor{stringliteral}{"corr2int.def"},corr2int)
+160 \textcolor{keywordflow}{    CASE DEFAULT}
+161        stop \textcolor{stringliteral}{'*** INT\_CORR\_MODE variable not properly defined in corrmod.nml ***'}
+162 \textcolor{keywordflow}{    END SELECT}
+163 
+\end{DoxyCode}
+\index{int\+\_\+corr@{int\+\_\+corr}!func\+\_\+ij@{func\+\_\+ij}}
+\index{func\+\_\+ij@{func\+\_\+ij}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{func\+\_\+ij(s)}{func_ij(s)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function int\+\_\+corr\+::func\+\_\+ij (
+\begin{DoxyParamCaption}
+\item[{real(kind=8)}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__corr_a311d5bd56c8de0d259e934f50d5388eb}{}\label{namespaceint__corr_a311d5bd56c8de0d259e934f50d5388eb}
+
+
+Function that returns the component oi and oj of the correlation matrix at time s. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & time at which the function is evaluated \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 55 of file int\+\_\+corr.\+f90.
+
+
+\begin{DoxyCode}
+55     \textcolor{keywordtype}{IMPLICIT NONE}
+56     \textcolor{keywordtype}{REAL(KIND=8)} :: s,func\_ij
+57     \textcolor{keyword}{CALL }corrcomp(s)
+58     func\_ij=corr\_ij(oi,oj)
+59     \textcolor{keywordflow}{RETURN}
+\end{DoxyCode}
+\index{int\+\_\+corr@{int\+\_\+corr}!func\+\_\+ijkl@{func\+\_\+ijkl}}
+\index{func\+\_\+ijkl@{func\+\_\+ijkl}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{func\+\_\+ijkl(s)}{func_ijkl(s)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function int\+\_\+corr\+::func\+\_\+ijkl (
+\begin{DoxyParamCaption}
+\item[{real(kind=8)}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__corr_af4796390cac83adc24081fa81a54af27}{}\label{namespaceint__corr_af4796390cac83adc24081fa81a54af27}
+
+
+Function that returns the component oi,oj,ok and ol of the outer product of the correlation matrix with itself at time s. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & time at which the function is evaluated \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 66 of file int\+\_\+corr.\+f90.
+
+
+\begin{DoxyCode}
+66     \textcolor{keywordtype}{IMPLICIT NONE}
+67     \textcolor{keywordtype}{REAL(KIND=8)} :: s,func\_ijkl
+68     \textcolor{keyword}{CALL }corrcomp(s)
+69     func\_ijkl=corr\_ij(oi,oj)*corr\_ij(ok,ol)
+70     \textcolor{keywordflow}{RETURN}
+\end{DoxyCode}
+\index{int\+\_\+corr@{int\+\_\+corr}!init\+\_\+corrint@{init\+\_\+corrint}}
+\index{init\+\_\+corrint@{init\+\_\+corrint}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{init\+\_\+corrint}{init_corrint}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public int\+\_\+corr\+::init\+\_\+corrint (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceint__corr_afb525a8e7ea02313d6480ffbbd265b3b}{}\label{namespaceint__corr_afb525a8e7ea02313d6480ffbbd265b3b}
+
+
+Subroutine to initialise the integrated matrices and tensors. 
+
+
+
+Definition at line 38 of file int\+\_\+corr.\+f90.
+
+
+\begin{DoxyCode}
+38     \textcolor{keywordtype}{INTEGER} :: allocstat
+39 
+40     \textcolor{keyword}{ALLOCATE}(corrint(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+41     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+42 
+43     \textcolor{keyword}{ALLOCATE}(corr2int(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+44     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+45 
+46     \textcolor{keyword}{CALL }init\_corr \textcolor{comment}{! Initialize the correlation matrix function}
+47 
+48     corrint=0.d0
+49         
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{int\+\_\+corr@{int\+\_\+corr}!corr2int@{corr2int}}
+\index{corr2int@{corr2int}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{corr2int}{corr2int}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist4}), dimension(\+:), allocatable, public int\+\_\+corr\+::corr2int}\hypertarget{namespaceint__corr_a1422cac2c54e6d7837159fe9fb3a6d6b}{}\label{namespaceint__corr_a1422cac2c54e6d7837159fe9fb3a6d6b}
+
+
+Tensor holding the integral of the correlation outer product with itself. 
+
+
+
+Definition at line 30 of file int\+\_\+corr.\+f90.
+
+
+\begin{DoxyCode}
+30   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist4}{coolist4}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: corr2int\textcolor{comment}{ !< Tensor holding the integral of
+       the correlation outer product with itself}
+\end{DoxyCode}
+\index{int\+\_\+corr@{int\+\_\+corr}!corrint@{corrint}}
+\index{corrint@{corrint}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{corrint}{corrint}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public int\+\_\+corr\+::corrint}\hypertarget{namespaceint__corr_ab3c1d22e8c15412a3b535c8301b0c42d}{}\label{namespaceint__corr_ab3c1d22e8c15412a3b535c8301b0c42d}
+
+
+Matrix holding the integral of the correlation matrix. 
+
+
+
+Definition at line 29 of file int\+\_\+corr.\+f90.
+
+
+\begin{DoxyCode}
+29   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: corrint\textcolor{comment}{ !< Matrix holding the integral of the
+       correlation matrix}
+\end{DoxyCode}
+\index{int\+\_\+corr@{int\+\_\+corr}!oi@{oi}}
+\index{oi@{oi}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{oi}{oi}}]{\setlength{\rightskip}{0pt plus 5cm}integer int\+\_\+corr\+::oi\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__corr_abddd3a2d3e1bfa4f09d96eaf090e9a95}{}\label{namespaceint__corr_abddd3a2d3e1bfa4f09d96eaf090e9a95}
+
+
+Definition at line 26 of file int\+\_\+corr.\+f90.
+
+
+\begin{DoxyCode}
+26   \textcolor{keywordtype}{INTEGER} :: oi,oj,ok,ol\textcolor{comment}{ !< Integers that specify the matrices and tensor component considered as a
+       function of time}
+\end{DoxyCode}
+\index{int\+\_\+corr@{int\+\_\+corr}!oj@{oj}}
+\index{oj@{oj}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{oj}{oj}}]{\setlength{\rightskip}{0pt plus 5cm}integer int\+\_\+corr\+::oj\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__corr_a114182df2066db340a9c42d9edd1583e}{}\label{namespaceint__corr_a114182df2066db340a9c42d9edd1583e}
+
+
+Definition at line 26 of file int\+\_\+corr.\+f90.
+
+\index{int\+\_\+corr@{int\+\_\+corr}!ok@{ok}}
+\index{ok@{ok}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{ok}{ok}}]{\setlength{\rightskip}{0pt plus 5cm}integer int\+\_\+corr\+::ok\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__corr_a4af4666df7c0f30de448d09ae160caf4}{}\label{namespaceint__corr_a4af4666df7c0f30de448d09ae160caf4}
+
+
+Definition at line 26 of file int\+\_\+corr.\+f90.
+
+\index{int\+\_\+corr@{int\+\_\+corr}!ol@{ol}}
+\index{ol@{ol}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{ol}{ol}}]{\setlength{\rightskip}{0pt plus 5cm}integer int\+\_\+corr\+::ol\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__corr_a3fe0c6bccf317d65552767f983f1cb62}{}\label{namespaceint__corr_a3fe0c6bccf317d65552767f983f1cb62}
+
+
+Integers that specify the matrices and tensor component considered as a function of time. 
+
+
+
+Definition at line 26 of file int\+\_\+corr.\+f90.
+
+\index{int\+\_\+corr@{int\+\_\+corr}!real\+\_\+eps@{real\+\_\+eps}}
+\index{real\+\_\+eps@{real\+\_\+eps}!int\+\_\+corr@{int\+\_\+corr}}
+\subsubsection[{\texorpdfstring{real\+\_\+eps}{real_eps}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), parameter int\+\_\+corr\+::real\+\_\+eps = 2.\+2204460492503131e-\/16\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__corr_ab379731156e2a2dd2d0b11766d766a85}{}\label{namespaceint__corr_ab379731156e2a2dd2d0b11766d766a85}
+
+
+Small epsilon constant to determine equality with zero. 
+
+
+
+Definition at line 27 of file int\+\_\+corr.\+f90.
+
+
+\begin{DoxyCode}
+27   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{PARAMETER} :: real\_eps = 2.2204460492503131e-16 \textcolor{comment}{!< Small epsilon constant to determine
+       equality with zero}
+\end{DoxyCode}

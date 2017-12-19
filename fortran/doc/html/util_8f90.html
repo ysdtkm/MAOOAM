@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="MAOOAM_small.png"/></td>
     <td style="padding-left: 0.5em;">
-    <div id="projectbrief">A Modular Arbitrary-Order Ocean-Atmosphere Model</div>
+    <div id="projectbrief">A Modular Arbitrary-Order Ocean-Atmosphere Model -- Stochastic implementation</div>
     </td>
  </tr>
  </tbody>
@@ -120,6 +120,32 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:aca7f2465fedb87fef954d8f0c30668c7"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#aca7f2465fedb87fef954d8f0c30668c7">util::init_one</a> (A)</td></tr>
 <tr class="memdesc:aca7f2465fedb87fef954d8f0c30668c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a square matrix A as a unit matrix.  <a href="namespaceutil.html#aca7f2465fedb87fef954d8f0c30668c7">More...</a><br /></td></tr>
 <tr class="separator:aca7f2465fedb87fef954d8f0c30668c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9771c95546d8658e72aa24f76612e4d8"><td class="memItemLeft" align="right" valign="top">real(kind=8) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#a9771c95546d8658e72aa24f76612e4d8">util::mat_trace</a> (A)</td></tr>
+<tr class="separator:a9771c95546d8658e72aa24f76612e4d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a0e15c77e8cd4cb03b608e4d6bfba67"><td class="memItemLeft" align="right" valign="top">real(kind=8) function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#a8a0e15c77e8cd4cb03b608e4d6bfba67">util::mat_contract</a> (A, B)</td></tr>
+<tr class="separator:a8a0e15c77e8cd4cb03b608e4d6bfba67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab832eeb8a78ffacc12e3ceac27f95ee7"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#ab832eeb8a78ffacc12e3ceac27f95ee7">util::choldc</a> (a, p)</td></tr>
+<tr class="separator:ab832eeb8a78ffacc12e3ceac27f95ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71eb7216e62e0978ad1424bd4dbd727a"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#a71eb7216e62e0978ad1424bd4dbd727a">util::printmat</a> (A)</td></tr>
+<tr class="separator:a71eb7216e62e0978ad1424bd4dbd727a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac600300c2251c6c6b555fe7255605aa5"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#ac600300c2251c6c6b555fe7255605aa5">util::cprintmat</a> (A)</td></tr>
+<tr class="separator:ac600300c2251c6c6b555fe7255605aa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52a5fbd944196d1cf077be77aefa34a2"><td class="memItemLeft" align="right" valign="top">real(kind=8) function, dimension(size(a, 1), size(a, 2)), public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#a52a5fbd944196d1cf077be77aefa34a2">util::invmat</a> (A)</td></tr>
+<tr class="separator:a52a5fbd944196d1cf077be77aefa34a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85f87eae65cbe6d073cf10511fafdd3e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#a85f87eae65cbe6d073cf10511fafdd3e">util::triu</a> (A, T)</td></tr>
+<tr class="separator:a85f87eae65cbe6d073cf10511fafdd3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3ee7743cab41502961891d342823d35"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#ac3ee7743cab41502961891d342823d35">util::diag</a> (A, d)</td></tr>
+<tr class="separator:ac3ee7743cab41502961891d342823d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e8cf4396837bb186d59791ca594a98e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#a9e8cf4396837bb186d59791ca594a98e">util::cdiag</a> (A, d)</td></tr>
+<tr class="separator:a9e8cf4396837bb186d59791ca594a98e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae789c59b87d1c0607478b1718d26cd1d"><td class="memItemLeft" align="right" valign="top">integer function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#ae789c59b87d1c0607478b1718d26cd1d">util::floordiv</a> (i, j)</td></tr>
+<tr class="separator:ae789c59b87d1c0607478b1718d26cd1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14b782ae34e59c2dcb260a5a69aae213"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#a14b782ae34e59c2dcb260a5a69aae213">util::reduce</a> (A, Ared, n, ind, rind)</td></tr>
+<tr class="separator:a14b782ae34e59c2dcb260a5a69aae213"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92433c6b81993d62682f54ff5c8834a0"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#a92433c6b81993d62682f54ff5c8834a0">util::ireduce</a> (A, Ared, n, ind, rind)</td></tr>
+<tr class="separator:a92433c6b81993d62682f54ff5c8834a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac7cb677d9eaa896447a48be3f9a973f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutil.html#aac7cb677d9eaa896447a48be3f9a973f">util::vector_outer</a> (u, v, A)</td></tr>
+<tr class="separator:aac7cb677d9eaa896447a48be3f9a973f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a class="anchor" id="a669ac8da4cdd11efd16a0ef72a4f7915"></a>
@@ -136,15 +162,15 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="util_8f90_source.html#l00084">84</a> of file <a class="el" href="util_8f90_source.html">util.f90</a>.</p>
-<div class="fragment"><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keywordtype">integer</span> :: <a class="code" href="util_8f90.html#a669ac8da4cdd11efd16a0ef72a4f7915">lcg</a></div><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordtype">integer(int64)</span> :: s</div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keywordflow">IF</span> (s == 0) <span class="keywordflow">THEN</span></div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;         s = 104729</div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="keywordflow">ELSE</span></div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;         s = mod(s, 4294967296_int64)</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordflow">      END IF</span></div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      s = mod(s * 279470273_int64, 4294967291_int64)</div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <a class="code" href="util_8f90.html#a669ac8da4cdd11efd16a0ef72a4f7915">lcg</a> = int(mod(s, int(huge(0), int64)), kind(0))</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">    END FUNCTION </span><a class="code" href="util_8f90.html#a669ac8da4cdd11efd16a0ef72a4f7915">lcg</a></div><div class="ttc" id="util_8f90_html_a669ac8da4cdd11efd16a0ef72a4f7915"><div class="ttname"><a href="util_8f90.html#a669ac8da4cdd11efd16a0ef72a4f7915">lcg</a></div><div class="ttdeci">integer function lcg(s)</div><div class="ttdef"><b>Definition:</b> <a href="util_8f90_source.html#l00084">util.f90:84</a></div></div>
+<p>Definition at line <a class="el" href="util_8f90_source.html#l00085">85</a> of file <a class="el" href="util_8f90_source.html">util.f90</a>.</p>
+<div class="fragment"><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keywordtype">integer</span> :: <a class="code" href="util_8f90.html#a669ac8da4cdd11efd16a0ef72a4f7915">lcg</a></div><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keywordtype">integer(int64)</span> :: s</div><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keywordflow">IF</span> (s == 0) <span class="keywordflow">THEN</span></div><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;         s = 104729</div><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <span class="keywordflow">ELSE</span></div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;         s = mod(s, 4294967296_int64)</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordflow">      END IF</span></div><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      s = mod(s * 279470273_int64, 4294967291_int64)</div><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      <a class="code" href="util_8f90.html#a669ac8da4cdd11efd16a0ef72a4f7915">lcg</a> = int(mod(s, int(huge(0), int64)), kind(0))</div><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">    END FUNCTION </span><a class="code" href="util_8f90.html#a669ac8da4cdd11efd16a0ef72a4f7915">lcg</a></div><div class="ttc" id="util_8f90_html_a669ac8da4cdd11efd16a0ef72a4f7915"><div class="ttname"><a href="util_8f90.html#a669ac8da4cdd11efd16a0ef72a4f7915">lcg</a></div><div class="ttdeci">integer function lcg(s)</div><div class="ttdef"><b>Definition:</b> <a href="util_8f90_source.html#l00085">util.f90:85</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 5 2017 15:58:39 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 19 2017 15:41:19 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

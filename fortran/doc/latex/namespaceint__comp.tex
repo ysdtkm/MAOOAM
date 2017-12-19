@@ -1,0 +1,407 @@
+\hypertarget{namespaceint__comp}{}\section{int\+\_\+comp Module Reference}
+\label{namespaceint__comp}\index{int\+\_\+comp@{int\+\_\+comp}}
+
+
+Utility module containing the routines to perform the integration of functions.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespaceint__comp_abe29ceac2104e45aafacb9cfaed81678}{integrate} (func, ss)
+\begin{DoxyCompactList}\small\item\em Routine to compute integrals of function from O to \#maxint. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespaceint__comp_ac2e03ae287d3d4d6f2200ec47811934f}{qromb} (func, a, b, ss)
+\begin{DoxyCompactList}\small\item\em Romberg integration routine. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespaceint__comp_a168d531430c3bc8b148e2fed9e737cb7}{qromo} (func, a, b, ss, choose)
+\begin{DoxyCompactList}\small\item\em Romberg integration routine on an open interval. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespaceint__comp_a0124c395371f5bfddb47dd0bd6cd7546}{polint} (xa, ya, n, x, y, dy)
+\begin{DoxyCompactList}\small\item\em Polynomial interpolation routine. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespaceint__comp_a28bf085971c103555a3af11940180299}{trapzd} (func, a, b, s, n)
+\begin{DoxyCompactList}\small\item\em Trapezoidal rule integration routine. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespaceint__comp_a95eecb9c6f6cec6d1fc9e7d4db234d35}{midpnt} (func, a, b, s, n)
+\begin{DoxyCompactList}\small\item\em Midpoint rule integration routine. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespaceint__comp_ace705445517d423d3b66748b94a5dc0b}{midexp} (funk, aa, bb, s, n)
+\begin{DoxyCompactList}\small\item\em Midpoint routine for bb infinite with funk decreasing infinitely rapidly at infinity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Utility module containing the routines to perform the integration of functions. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+Most are taken from the Numerical Recipes 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{int\+\_\+comp@{int\+\_\+comp}!integrate@{integrate}}
+\index{integrate@{integrate}!int\+\_\+comp@{int\+\_\+comp}}
+\subsubsection[{\texorpdfstring{integrate(func, ss)}{integrate(func, ss)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public int\+\_\+comp\+::integrate (
+\begin{DoxyParamCaption}
+\item[{external}]{func, }
+\item[{real(kind=8)}]{ss}
+\end{DoxyParamCaption}
+)}\hypertarget{namespaceint__comp_abe29ceac2104e45aafacb9cfaed81678}{}\label{namespaceint__comp_abe29ceac2104e45aafacb9cfaed81678}
+
+
+Routine to compute integrals of function from O to \#maxint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & function to integrate \\
+\hline
+{\em ss} & result of the integration \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 30 of file int\+\_\+comp.\+f90.
+
+
+\begin{DoxyCode}
+30     \textcolor{keywordtype}{REAL(KIND=8)} :: ss,func,b
+31     \textcolor{keywordtype}{EXTERNAL} func
+32     b=maxint
+33     \textcolor{comment}{! CALL qromo(func,0.D0,1.D0,ss,midexp)}
+34     \textcolor{keyword}{CALL }qromb(func,0.d0,b,ss)
+\end{DoxyCode}
+\index{int\+\_\+comp@{int\+\_\+comp}!midexp@{midexp}}
+\index{midexp@{midexp}!int\+\_\+comp@{int\+\_\+comp}}
+\subsubsection[{\texorpdfstring{midexp(funk, aa, bb, s, n)}{midexp(funk, aa, bb, s, n)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine int\+\_\+comp\+::midexp (
+\begin{DoxyParamCaption}
+\item[{external}]{funk, }
+\item[{real(kind=8)}]{aa, }
+\item[{real(kind=8)}]{bb, }
+\item[{real(kind=8)}]{s, }
+\item[{integer}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__comp_ace705445517d423d3b66748b94a5dc0b}{}\label{namespaceint__comp_ace705445517d423d3b66748b94a5dc0b}
+
+
+Midpoint routine for bb infinite with funk decreasing infinitely rapidly at infinity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em funk} & function to integrate \\
+\hline
+{\em aa} & lower limit of the integral \\
+\hline
+{\em bb} & higher limit of the integral \\
+\hline
+{\em s} & result of the integration \\
+\hline
+{\em n} & higher stage of the rule to be computed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 200 of file int\+\_\+comp.\+f90.
+
+
+\begin{DoxyCode}
+200     \textcolor{keywordtype}{INTEGER} :: n
+201     \textcolor{keywordtype}{REAL(KIND=8)} :: aa,bb,s,funk
+202     \textcolor{keywordtype}{EXTERNAL} funk
+203     \textcolor{keywordtype}{INTEGER} :: it,j
+204     \textcolor{keywordtype}{REAL(KIND=8)} :: ddel,del,sum,tnm,x,func,a,b
+205     func(x)=funk(-log(x))/x
+206     b=exp(-aa)
+207     a=0.
+208     \textcolor{keywordflow}{if} (n.eq.1) \textcolor{keywordflow}{then}
+209        s=(b-a)*func(0.5*(a+b))
+210     \textcolor{keywordflow}{else}
+211        it=3**(n-2)
+212        tnm=it
+213        del=(b-a)/(3.*tnm)
+214        ddel=del+del
+215        x=a+0.5*del
+216        sum=0.
+217        \textcolor{keywordflow}{do} j=1,it
+218           sum=sum+func(x)
+219           x=x+ddel
+220           sum=sum+func(x)
+221           x=x+del
+222 \textcolor{keywordflow}{       end do}
+223        s=(s+(b-a)*sum/tnm)/3.
+224 \textcolor{keywordflow}{    endif}
+225     \textcolor{keywordflow}{return}
+\end{DoxyCode}
+\index{int\+\_\+comp@{int\+\_\+comp}!midpnt@{midpnt}}
+\index{midpnt@{midpnt}!int\+\_\+comp@{int\+\_\+comp}}
+\subsubsection[{\texorpdfstring{midpnt(func, a, b, s, n)}{midpnt(func, a, b, s, n)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine int\+\_\+comp\+::midpnt (
+\begin{DoxyParamCaption}
+\item[{external}]{func, }
+\item[{real(kind=8)}]{a, }
+\item[{real(kind=8)}]{b, }
+\item[{real(kind=8)}]{s, }
+\item[{integer}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__comp_a95eecb9c6f6cec6d1fc9e7d4db234d35}{}\label{namespaceint__comp_a95eecb9c6f6cec6d1fc9e7d4db234d35}
+
+
+Midpoint rule integration routine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & function to integrate \\
+\hline
+{\em a} & lower limit of the integral \\
+\hline
+{\em b} & higher limit of the integral \\
+\hline
+{\em s} & result of the integration \\
+\hline
+{\em n} & higher stage of the rule to be computed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 167 of file int\+\_\+comp.\+f90.
+
+
+\begin{DoxyCode}
+167     \textcolor{keywordtype}{INTEGER} :: n
+168     \textcolor{keywordtype}{REAL(KIND=8)} :: a,b,s,func
+169     \textcolor{keywordtype}{EXTERNAL} func
+170     \textcolor{keywordtype}{INTEGER} :: it,j
+171     \textcolor{keywordtype}{REAL(KIND=8)} :: ddel,del,sum,tnm,x
+172     \textcolor{keywordflow}{if} (n.eq.1) \textcolor{keywordflow}{then}
+173        s=(b-a)*func(0.5*(a+b))
+174     \textcolor{keywordflow}{else}
+175        it=3**(n-2)
+176        tnm=it
+177        del=(b-a)/(3.*tnm)
+178        ddel=del+del
+179        x=a+0.5*del
+180        sum=0.
+181        \textcolor{keywordflow}{do} j=1,it
+182           sum=sum+func(x)
+183           x=x+ddel
+184           sum=sum+func(x)
+185           x=x+del
+186 \textcolor{keywordflow}{       end do}
+187        s=(s+(b-a)*sum/tnm)/3.
+188 \textcolor{keywordflow}{    endif}
+189     \textcolor{keywordflow}{return}
+\end{DoxyCode}
+\index{int\+\_\+comp@{int\+\_\+comp}!polint@{polint}}
+\index{polint@{polint}!int\+\_\+comp@{int\+\_\+comp}}
+\subsubsection[{\texorpdfstring{polint(xa, ya, n, x, y, dy)}{polint(xa, ya, n, x, y, dy)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine int\+\_\+comp\+::polint (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(n)}]{xa, }
+\item[{real(kind=8), dimension(n)}]{ya, }
+\item[{integer}]{n, }
+\item[{real(kind=8)}]{x, }
+\item[{real(kind=8)}]{y, }
+\item[{real(kind=8)}]{dy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__comp_a0124c395371f5bfddb47dd0bd6cd7546}{}\label{namespaceint__comp_a0124c395371f5bfddb47dd0bd6cd7546}
+
+
+Polynomial interpolation routine. 
+
+
+
+Definition at line 91 of file int\+\_\+comp.\+f90.
+
+
+\begin{DoxyCode}
+91     \textcolor{keywordtype}{INTEGER} :: n,nmax
+92     \textcolor{keywordtype}{REAL(KIND=8)} :: dy,x,y,xa(n),ya(n)
+93     parameter(nmax=10)
+94     \textcolor{keywordtype}{INTEGER} :: i,m,ns
+95     \textcolor{keywordtype}{REAL(KIND=8)} :: den,dif,dift,ho,hp,w,c(nmax),d(nmax)
+96     ns=1
+97     dif=abs(x-xa(1))
+98     \textcolor{keywordflow}{do} i=1,n
+99        dift=abs(x-xa(i))
+100        \textcolor{keywordflow}{if} (dift.lt.dif) \textcolor{keywordflow}{then}
+101           ns=i
+102           dif=dift
+103 \textcolor{keywordflow}{       endif}
+104        c(i)=ya(i)
+105        d(i)=ya(i)
+106 \textcolor{keywordflow}{    end do}
+107     y=ya(ns)
+108     ns=ns-1
+109     \textcolor{keywordflow}{do} m=1,n-1
+110        \textcolor{keywordflow}{do} i=1,n-m
+111           ho=xa(i)-x
+112           hp=xa(i+m)-x
+113           w=c(i+1)-d(i)
+114           den=ho-hp
+115           \textcolor{keywordflow}{if}(den.eq.0.)stop \textcolor{stringliteral}{'failure in polint'}
+116           den=w/den
+117           d(i)=hp*den
+118           c(i)=ho*den
+119 \textcolor{keywordflow}{       end do}
+120        \textcolor{keywordflow}{if} (2*ns.lt.n-m)\textcolor{keywordflow}{then}
+121           dy=c(ns+1)
+122        \textcolor{keywordflow}{else}
+123           dy=d(ns)
+124           ns=ns-1
+125 \textcolor{keywordflow}{       endif}
+126        y=y+dy
+127 \textcolor{keywordflow}{    end do}
+128     \textcolor{keywordflow}{return}
+\end{DoxyCode}
+\index{int\+\_\+comp@{int\+\_\+comp}!qromb@{qromb}}
+\index{qromb@{qromb}!int\+\_\+comp@{int\+\_\+comp}}
+\subsubsection[{\texorpdfstring{qromb(func, a, b, ss)}{qromb(func, a, b, ss)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine int\+\_\+comp\+::qromb (
+\begin{DoxyParamCaption}
+\item[{external}]{func, }
+\item[{real(kind=8)}]{a, }
+\item[{real(kind=8)}]{b, }
+\item[{real(kind=8)}]{ss}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__comp_ac2e03ae287d3d4d6f2200ec47811934f}{}\label{namespaceint__comp_ac2e03ae287d3d4d6f2200ec47811934f}
+
+
+Romberg integration routine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & function to integrate \\
+\hline
+{\em a} & lower limit of the integral \\
+\hline
+{\em b} & higher limit of the integral \\
+\hline
+{\em func} & function to integrate \\
+\hline
+{\em ss} & result of the integration \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file int\+\_\+comp.\+f90.
+
+
+\begin{DoxyCode}
+44     \textcolor{keywordtype}{INTEGER} :: jmax,jmaxp,k,km
+45     \textcolor{keywordtype}{REAL(KIND=8)} :: a,b,func,ss,eps
+46     \textcolor{keywordtype}{EXTERNAL} func
+47     parameter(eps=1.d-6, jmax=20, jmaxp=jmax+1, k=5, km=k-1)
+48     \textcolor{keywordtype}{INTEGER} j
+49     \textcolor{keywordtype}{REAL(KIND=8)} :: dss,h(jmaxp),s(jmaxp)
+50     h(1)=1.
+51     \textcolor{keywordflow}{DO} j=1,jmax
+52        \textcolor{keyword}{CALL }trapzd(func,a,b,s(j),j)
+53        \textcolor{keywordflow}{IF} (j.ge.k) \textcolor{keywordflow}{THEN}
+54           \textcolor{keyword}{CALL }polint(h(j-km),s(j-km),k,0.d0,ss,dss)
+55           \textcolor{keywordflow}{IF} (abs(dss).le.eps*abs(ss)) \textcolor{keywordflow}{RETURN}
+56 \textcolor{keywordflow}{       ENDIF}
+57        s(j+1)=s(j)
+58        h(j+1)=0.25*h(j)
+59 \textcolor{keywordflow}{    ENDDO}
+60     stop \textcolor{stringliteral}{'too many steps in qromb'}
+\end{DoxyCode}
+\index{int\+\_\+comp@{int\+\_\+comp}!qromo@{qromo}}
+\index{qromo@{qromo}!int\+\_\+comp@{int\+\_\+comp}}
+\subsubsection[{\texorpdfstring{qromo(func, a, b, ss, choose)}{qromo(func, a, b, ss, choose)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine int\+\_\+comp\+::qromo (
+\begin{DoxyParamCaption}
+\item[{external}]{func, }
+\item[{real(kind=8)}]{a, }
+\item[{real(kind=8)}]{b, }
+\item[{real(kind=8)}]{ss, }
+\item[{external}]{choose}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__comp_a168d531430c3bc8b148e2fed9e737cb7}{}\label{namespaceint__comp_a168d531430c3bc8b148e2fed9e737cb7}
+
+
+Romberg integration routine on an open interval. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & lower limit of the integral \\
+\hline
+{\em b} & higher limit of the integral \\
+\hline
+{\em func} & function to integrate \\
+\hline
+{\em ss} & result of the integration \\
+\hline
+{\em chose} & routine to perform the integration \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 70 of file int\+\_\+comp.\+f90.
+
+
+\begin{DoxyCode}
+70     \textcolor{keywordtype}{INTEGER} :: jmax,jmaxp,k,km
+71     \textcolor{keywordtype}{REAL(KIND=8)} :: a,b,func,ss,eps
+72     \textcolor{keywordtype}{EXTERNAL} func,choose
+73     parameter(eps=1.e-6, jmax=14, jmaxp=jmax+1, k=5, km=k-1)
+74     \textcolor{keywordtype}{INTEGER} :: j
+75     \textcolor{keywordtype}{REAL(KIND=8)} :: dss,h(jmaxp),s(jmaxp)
+76     h(1)=1.
+77     \textcolor{keywordflow}{DO} j=1,jmax
+78        \textcolor{keyword}{CALL }choose(func,a,b,s(j),j)
+79        \textcolor{keywordflow}{IF} (j.ge.k) \textcolor{keywordflow}{THEN}
+80           \textcolor{keyword}{call }polint(h(j-km),s(j-km),k,0.d0,ss,dss)
+81           \textcolor{keywordflow}{if} (abs(dss).le.eps*abs(ss)) \textcolor{keywordflow}{return}
+82 \textcolor{keywordflow}{       ENDIF}
+83        s(j+1)=s(j)
+84        h(j+1)=h(j)/9.
+85 \textcolor{keywordflow}{    ENDDO}
+86     stop \textcolor{stringliteral}{'too many steps in qromo'}
+\end{DoxyCode}
+\index{int\+\_\+comp@{int\+\_\+comp}!trapzd@{trapzd}}
+\index{trapzd@{trapzd}!int\+\_\+comp@{int\+\_\+comp}}
+\subsubsection[{\texorpdfstring{trapzd(func, a, b, s, n)}{trapzd(func, a, b, s, n)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine int\+\_\+comp\+::trapzd (
+\begin{DoxyParamCaption}
+\item[{external}]{func, }
+\item[{real(kind=8)}]{a, }
+\item[{real(kind=8)}]{b, }
+\item[{real(kind=8)}]{s, }
+\item[{integer}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceint__comp_a28bf085971c103555a3af11940180299}{}\label{namespaceint__comp_a28bf085971c103555a3af11940180299}
+
+
+Trapezoidal rule integration routine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & function to integrate \\
+\hline
+{\em a} & lower limit of the integral \\
+\hline
+{\em b} & higher limit of the integral \\
+\hline
+{\em s} & result of the integration \\
+\hline
+{\em n} & higher stage of the rule to be computed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 138 of file int\+\_\+comp.\+f90.
+
+
+\begin{DoxyCode}
+138     \textcolor{keywordtype}{INTEGER} :: n
+139     \textcolor{keywordtype}{REAL(KIND=8)} :: a,b,s,func
+140     \textcolor{keywordtype}{EXTERNAL} func
+141     \textcolor{keywordtype}{INTEGER} :: it,j
+142     \textcolor{keywordtype}{REAL(KIND=8)} :: del,sum,tnm,x
+143     \textcolor{keywordflow}{if} (n.eq.1) \textcolor{keywordflow}{then}
+144        s=0.5*(b-a)*(func(a)+func(b))
+145     \textcolor{keywordflow}{else}
+146        it=2**(n-2)
+147        tnm=it
+148        del=(b-a)/tnm
+149        x=a+0.5*del
+150        sum=0.
+151        \textcolor{keywordflow}{do} j=1,it
+152           sum=sum+func(x)
+153           x=x+del
+154 \textcolor{keywordflow}{       end do}
+155        s=0.5*(s+(b-a)*sum/tnm)
+156 \textcolor{keywordflow}{    endif}
+157     \textcolor{keywordflow}{return}
+\end{DoxyCode}

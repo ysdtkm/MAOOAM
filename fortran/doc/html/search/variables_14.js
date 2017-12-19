@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['v',['v',['../structtensor_1_1coolist__elem.html#ac569057f08f5f8ea171b87aa7b9dd428',1,'tensor::coolist_elem::v()'],['../namespacestat.html#ab2a3ce8c90189fdbd6bb313c75876473',1,'stat::v()']]]
+  ['use',['use',['../LICENSE_8txt.html#ab8202310c90e99c59d9ea1f58f920a91',1,'LICENSE.txt']]],
+  ['utot',['utot',['../namespacemtv__int__tensor.html#a4a2acf9c88ba182967568ecfdd2eae0a',1,'mtv_int_tensor']]]
 ];

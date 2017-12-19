@@ -67,7 +67,7 @@ Definition at line 37 of file rk2\+\_\+integrator.\+f90.
 
 \begin{DoxyCode}
 37     \textcolor{keywordtype}{INTEGER} :: allocstat
-38     \textcolor{keyword}{ALLOCATE}(buf\_y1(0:ndim),buf\_f0(0:ndim),buf\_f1(0:ndim) ,\hyperlink{namespacestat}{stat}=allocstat)
+38     \textcolor{keyword}{ALLOCATE}(buf\_y1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f0(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}) ,\hyperlink{namespacestat}{stat}=allocstat)
 39     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
 \end{DoxyCode}
 \index{integrator@{integrator}!step@{step}}
@@ -148,7 +148,7 @@ Definition at line 49 of file rk2\+\_\+integrator.\+f90.
 49     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
 50     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
 51     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
-52     \textcolor{keyword}{CALL }sparse\_mul3(aotensor, y, y, res)
+52     \textcolor{keyword}{CALL }sparse\_mul3(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor}, y, y, res)
 \end{DoxyCode}
 
 

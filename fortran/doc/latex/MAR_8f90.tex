@@ -1,0 +1,37 @@
+\hypertarget{MAR_8f90}{}\section{M\+A\+R.\+f90 File Reference}
+\label{MAR_8f90}\index{M\+A\+R.\+f90@{M\+A\+R.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacemar}{mar}
+\begin{DoxyCompactList}\small\item\em Multidimensional Autoregressive module to generate the correlation for the WL parameterization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacemar_a1cf5740699e284f3284e25421a56fe71}{mar\+::init\+\_\+mar}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the M\+AR. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacemar_a1b839ac2dc12dde9fb271ec07c946cec}{mar\+::mar\+\_\+step} (x)
+\begin{DoxyCompactList}\small\item\em Routine to generate one step of the M\+AR. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacemar_a8b8f9249138336ac43c7b72c32f4933b}{mar\+::mar\+\_\+step\+\_\+red} (xred)
+\begin{DoxyCompactList}\small\item\em Routine to generate one step of the reduce M\+AR. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemar_a3697eade9c0f250fbea1375687644267}{mar\+::stoch\+\_\+vec} (dW)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemar_a92dfc55f0e9c6d1fc05f03f30df2e526}{mar\+::q}
+\begin{DoxyCompactList}\small\item\em Square root of the noise covariance matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemar_a0fa33035c3ff86abcb91dfaf29dd90d4}{mar\+::qred}
+\begin{DoxyCompactList}\small\item\em Reduce version of Q. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemar_a315f9c1483809c1c037c88242c5d85e7}{mar\+::rred}
+\begin{DoxyCompactList}\small\item\em Covariance matrix of the noise. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:,\+:), allocatable, public \hyperlink{namespacemar_aed76f863f30ab18ba428596d2157163d}{mar\+::w}
+\begin{DoxyCompactList}\small\item\em W\+\_\+i matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:,\+:), allocatable, public \hyperlink{namespacemar_af8cb3185ff947cb6540a6b33838e23d7}{mar\+::wred}
+\begin{DoxyCompactList}\small\item\em Reduce W\+\_\+i matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacemar_a91d79995717316d4fcea39b2e476324c}{mar\+::buf\+\_\+y}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacemar_a5fbf8b9142fbfce9bdd17cb573a448c3}{mar\+::dw}
+\item 
+integer, public \hyperlink{namespacemar_a12c0dbfaa748dffd1cd2f96b19b53102}{mar\+::ms}
+\begin{DoxyCompactList}\small\item\em order of the M\+AR \end{DoxyCompactList}\end{DoxyCompactItemize}

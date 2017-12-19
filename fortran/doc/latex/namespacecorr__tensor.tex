@@ -1,0 +1,273 @@
+\hypertarget{namespacecorr__tensor}{}\section{corr\+\_\+tensor Module Reference}
+\label{namespacecorr__tensor}\index{corr\+\_\+tensor@{corr\+\_\+tensor}}
+
+
+Module to compute the correlations and derivatives used to compute the memory term of the WL parameterization.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacecorr__tensor_a95d9ad1c3ae4a30e2eead85010be9d5d}{init\+\_\+corr\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the correlations tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a00e5da344c9c6c9326c13bb1006986c7}{yy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle Y \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a9bb5cad0b648cdfbca5d32eac1b73976}{dy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle \partial_Y \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a921f3b41785556ae5502a7ddf0ebf6f6}{ydy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle Y \otimes \partial_Y \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a760409e00ffdf80fe461a8d7fd5c4966}{dyy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle \partial_Y \otimes Y^s \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist4}{coolist4}), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a07becc22d3c93783a90fca0e19b7dc2e}{ydyy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle Y \otimes \partial_Y \otimes Y^s \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacecorr__tensor_ad86b86fa1ec05686a778ab6b19273a38}{dumb\+\_\+vec}
+\begin{DoxyCompactList}\small\item\em Dumb vector to be used in the calculation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacecorr__tensor_aa0f6f11b738412d93dbd832a961d6e78}{dumb\+\_\+mat1}
+\begin{DoxyCompactList}\small\item\em Dumb matrix to be used in the calculation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacecorr__tensor_ad46767b09e31f58c53a5a27b12709e30}{dumb\+\_\+mat2}
+\begin{DoxyCompactList}\small\item\em Dumb matrix to be used in the calculation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacecorr__tensor_acab3c2a99b90ed8bfc314f41de01e510}{expm}
+\begin{DoxyCompactList}\small\item\em Matrix holding the product inv\+\_\+corr\+\_\+i$\ast$corr\+\_\+ij at time $s$. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module to compute the correlations and derivatives used to compute the memory term of the WL parameterization. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!init\+\_\+corr\+\_\+tensor@{init\+\_\+corr\+\_\+tensor}}
+\index{init\+\_\+corr\+\_\+tensor@{init\+\_\+corr\+\_\+tensor}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{init\+\_\+corr\+\_\+tensor}{init_corr_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public corr\+\_\+tensor\+::init\+\_\+corr\+\_\+tensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecorr__tensor_a95d9ad1c3ae4a30e2eead85010be9d5d}{}\label{namespacecorr__tensor_a95d9ad1c3ae4a30e2eead85010be9d5d}
+
+
+Subroutine to initialise the correlations tensors. 
+
+
+
+Definition at line 45 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+45     \textcolor{keywordtype}{INTEGER} :: i,j,m,allocstat
+46 
+47     \textcolor{keyword}{CALL }init\_corr
+48 
+49     print*, \textcolor{stringliteral}{'Computing the time correlation tensors...'}
+50     
+51     \textcolor{keyword}{ALLOCATE}(yy(ndim,mems),dy(ndim,mems), dyy(ndim,mems), \hyperlink{namespacestat}{stat}=allocstat)
+52     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+53 
+54     \textcolor{keyword}{ALLOCATE}(ydy(ndim,mems), ydyy(ndim,mems), \hyperlink{namespacestat}{stat}=allocstat)
+55     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+56 
+57     \textcolor{keyword}{ALLOCATE}(dumb\_vec(ndim), \hyperlink{namespacestat}{stat}=allocstat)
+58     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+59 
+60     \textcolor{keyword}{ALLOCATE}(dumb\_mat1(ndim,ndim), dumb\_mat2(ndim,ndim), \hyperlink{namespacestat}{stat}=allocstat)
+61     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+62 
+63     \textcolor{keyword}{ALLOCATE}(expm(n\_unres,n\_unres), \hyperlink{namespacestat}{stat}=allocstat)
+64     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+65 
+66     \textcolor{keywordflow}{DO} m=1,mems
+67        \textcolor{keyword}{CALL }corrcomp((m-1)*muti)
+68        
+69        \textcolor{comment}{! YY}
+70        \textcolor{keyword}{CALL }ireduce(dumb\_mat2,corr\_ij,n\_unres,ind,rind)
+71        \textcolor{keyword}{CALL }matc\_to\_coo(dumb\_mat2,yy(:,m))
+72 
+73        \textcolor{comment}{! dY}
+74        expm=matmul(inv\_corr\_i,corr\_ij)
+75        \textcolor{keyword}{CALL }ireduce(dumb\_mat2,expm,n\_unres,ind,rind)
+76        \textcolor{keyword}{CALL }matc\_to\_coo(dumb\_mat2,dy(:,m))
+77 
+78        \textcolor{comment}{! YdY}
+79        \textcolor{keywordflow}{DO} i=1,n\_unres
+80           \textcolor{keyword}{CALL }ireduce(dumb\_mat2,mean(i)*expm,n\_unres,ind,rind)
+81           \textcolor{keyword}{CALL }add\_matc\_to\_tensor(ind(i),dumb\_mat2,ydy(:,m))
+82 \textcolor{keywordflow}{       ENDDO}
+83 
+84        \textcolor{comment}{! dYY}
+85        dumb\_vec(1:n\_unres)=matmul(mean,expm)
+86        \textcolor{keywordflow}{DO} i=1,n\_unres
+87           \textcolor{keyword}{CALL }vector\_outer(expm(i,:),dumb\_vec(1:n\_unres),dumb\_mat2(1:n\_unres,1:n\_unres))
+88           \textcolor{keyword}{CALL }ireduce(dumb\_mat1,dumb\_mat2+transpose(dumb\_mat2),n\_unres,ind,rind)
+89           \textcolor{keyword}{CALL }add\_matc\_to\_tensor(ind(i),dumb\_mat1,dyy(:,m))
+90 \textcolor{keywordflow}{       ENDDO}
+91 
+92        \textcolor{comment}{! YdYY}
+93        \textcolor{keywordflow}{DO} i=1,n\_unres
+94           \textcolor{keywordflow}{DO} j=1,n\_unres
+95              \textcolor{keyword}{CALL }vector\_outer(corr\_ij(i,:),expm(j,:),dumb\_mat2(1:n\_unres,1:n\_unres))
+96              \textcolor{keyword}{CALL }ireduce(dumb\_mat1,dumb\_mat2+transpose(dumb\_mat2),n\_unres,ind,rind)
+97              \textcolor{keyword}{CALL }add\_matc\_to\_tensor4(ind(i),ind(j),dumb\_mat1,ydyy(:,m))
+98 \textcolor{keywordflow}{          ENDDO}
+99 \textcolor{keywordflow}{       ENDDO}
+100 \textcolor{keywordflow}{    ENDDO}
+101 
+102     \textcolor{keyword}{DEALLOCATE}(dumb\_mat1, dumb\_mat2, \hyperlink{namespacestat}{stat}=allocstat)
+103     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+104 
+105     \textcolor{keyword}{DEALLOCATE}(dumb\_vec, \hyperlink{namespacestat}{stat}=allocstat)
+106     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+107 
+108 
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!dumb\+\_\+mat1@{dumb\+\_\+mat1}}
+\index{dumb\+\_\+mat1@{dumb\+\_\+mat1}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb\+\_\+mat1}{dumb_mat1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable corr\+\_\+tensor\+::dumb\+\_\+mat1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorr__tensor_aa0f6f11b738412d93dbd832a961d6e78}{}\label{namespacecorr__tensor_aa0f6f11b738412d93dbd832a961d6e78}
+
+
+Dumb matrix to be used in the calculation. 
+
+
+
+Definition at line 37 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+37   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\_mat1\textcolor{comment}{ !< Dumb matrix to be used in the calculation}
+\end{DoxyCode}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!dumb\+\_\+mat2@{dumb\+\_\+mat2}}
+\index{dumb\+\_\+mat2@{dumb\+\_\+mat2}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb\+\_\+mat2}{dumb_mat2}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable corr\+\_\+tensor\+::dumb\+\_\+mat2\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorr__tensor_ad46767b09e31f58c53a5a27b12709e30}{}\label{namespacecorr__tensor_ad46767b09e31f58c53a5a27b12709e30}
+
+
+Dumb matrix to be used in the calculation. 
+
+
+
+Definition at line 38 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+38   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\_mat2\textcolor{comment}{ !< Dumb matrix to be used in the calculation}
+\end{DoxyCode}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!dumb\+\_\+vec@{dumb\+\_\+vec}}
+\index{dumb\+\_\+vec@{dumb\+\_\+vec}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb\+\_\+vec}{dumb_vec}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable corr\+\_\+tensor\+::dumb\+\_\+vec\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorr__tensor_ad86b86fa1ec05686a778ab6b19273a38}{}\label{namespacecorr__tensor_ad86b86fa1ec05686a778ab6b19273a38}
+
+
+Dumb vector to be used in the calculation. 
+
+
+
+Definition at line 36 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+36   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\_vec\textcolor{comment}{ !< Dumb vector to be used in the calculation}
+\end{DoxyCode}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!dy@{dy}}
+\index{dy@{dy}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dy}{dy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:,\+:), allocatable, public corr\+\_\+tensor\+::dy}\hypertarget{namespacecorr__tensor_a9bb5cad0b648cdfbca5d32eac1b73976}{}\label{namespacecorr__tensor_a9bb5cad0b648cdfbca5d32eac1b73976}
+
+
+Coolist holding the $\langle \partial_Y \otimes Y^s \rangle$ terms. 
+
+
+
+Definition at line 31 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+31   \textcolor{keywordtype}{TYPE}(coolist), \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: dy\textcolor{comment}{ !< Coolist holding the  \(\backslash\)f$\(\backslash\)langle \(\backslash\)partial\_Y
+       \(\backslash\)otimes Y^s \(\backslash\)rangle\(\backslash\)f$ terms}
+\end{DoxyCode}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!dyy@{dyy}}
+\index{dyy@{dyy}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dyy}{dyy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:,\+:), allocatable, public corr\+\_\+tensor\+::dyy}\hypertarget{namespacecorr__tensor_a760409e00ffdf80fe461a8d7fd5c4966}{}\label{namespacecorr__tensor_a760409e00ffdf80fe461a8d7fd5c4966}
+
+
+Coolist holding the $\langle \partial_Y \otimes Y^s \otimes Y^s \rangle$ terms. 
+
+
+
+Definition at line 33 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+33   \textcolor{keywordtype}{TYPE}(coolist), \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: dyy\textcolor{comment}{ !< Coolist holding the  \(\backslash\)f$\(\backslash\)langle \(\backslash\)partial\_Y
+       \(\backslash\)otimes Y^s \(\backslash\)otimes Y^s \(\backslash\)rangle\(\backslash\)f$ terms}
+\end{DoxyCode}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!expm@{expm}}
+\index{expm@{expm}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{expm}{expm}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable corr\+\_\+tensor\+::expm\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorr__tensor_acab3c2a99b90ed8bfc314f41de01e510}{}\label{namespacecorr__tensor_acab3c2a99b90ed8bfc314f41de01e510}
+
+
+Matrix holding the product inv\+\_\+corr\+\_\+i$\ast$corr\+\_\+ij at time $s$. 
+
+
+
+Definition at line 39 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+39   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: expm\textcolor{comment}{ !< Matrix holding the product inv\_corr\_i*corr\_ij at
+       time \(\backslash\)f$s\(\backslash\)f$}
+\end{DoxyCode}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!ydy@{ydy}}
+\index{ydy@{ydy}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{ydy}{ydy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:,\+:), allocatable, public corr\+\_\+tensor\+::ydy}\hypertarget{namespacecorr__tensor_a921f3b41785556ae5502a7ddf0ebf6f6}{}\label{namespacecorr__tensor_a921f3b41785556ae5502a7ddf0ebf6f6}
+
+
+Coolist holding the $\langle Y \otimes \partial_Y \otimes Y^s \rangle$ terms. 
+
+
+
+Definition at line 32 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{TYPE}(coolist), \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: ydy\textcolor{comment}{ !< Coolist holding the  \(\backslash\)f$\(\backslash\)langle Y \(\backslash\)otimes
+       \(\backslash\)partial\_Y \(\backslash\)otimes Y^s \(\backslash\)rangle\(\backslash\)f$ terms}
+\end{DoxyCode}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!ydyy@{ydyy}}
+\index{ydyy@{ydyy}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{ydyy}{ydyy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist4}), dimension(\+:,\+:), allocatable, public corr\+\_\+tensor\+::ydyy}\hypertarget{namespacecorr__tensor_a07becc22d3c93783a90fca0e19b7dc2e}{}\label{namespacecorr__tensor_a07becc22d3c93783a90fca0e19b7dc2e}
+
+
+Coolist holding the $\langle Y \otimes \partial_Y \otimes Y^s \otimes Y^s \rangle$ terms. 
+
+
+
+Definition at line 34 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+34   \textcolor{keywordtype}{TYPE}(coolist4), \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: ydyy\textcolor{comment}{ !< Coolist holding the  \(\backslash\)f$\(\backslash\)langle Y \(\backslash\)otimes
+       \(\backslash\)partial\_Y \(\backslash\)otimes Y^s \(\backslash\)otimes Y^s \(\backslash\)rangle\(\backslash\)f$ terms}
+\end{DoxyCode}
+\index{corr\+\_\+tensor@{corr\+\_\+tensor}!yy@{yy}}
+\index{yy@{yy}!corr\+\_\+tensor@{corr\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{yy}{yy}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:,\+:), allocatable, public corr\+\_\+tensor\+::yy}\hypertarget{namespacecorr__tensor_a00e5da344c9c6c9326c13bb1006986c7}{}\label{namespacecorr__tensor_a00e5da344c9c6c9326c13bb1006986c7}
+
+
+Coolist holding the $\langle Y \otimes Y^s \rangle$ terms. 
+
+
+
+Definition at line 30 of file corr\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+30   \textcolor{keywordtype}{TYPE}(coolist), \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: yy\textcolor{comment}{ !< Coolist holding the  \(\backslash\)f$\(\backslash\)langle Y \(\backslash\)otimes Y^s
+       \(\backslash\)rangle\(\backslash\)f$ terms}
+\end{DoxyCode}

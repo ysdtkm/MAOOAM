@@ -1,0 +1,35 @@
+\hypertarget{rk2__ss__integrator_8f90}{}\section{rk2\+\_\+ss\+\_\+integrator.\+f90 File Reference}
+\label{rk2__ss__integrator_8f90}\index{rk2\+\_\+ss\+\_\+integrator.\+f90@{rk2\+\_\+ss\+\_\+integrator.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacerk2__ss__integrator}{rk2\+\_\+ss\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Module with the stochastic uncoupled resolved nonlinear and tangent linear rk2 dynamics integration routines. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_a6e5a498fbe46f8d573aa3af2cb3dd39c}{rk2\+\_\+ss\+\_\+integrator\+::init\+\_\+ss\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the uncoupled resolved rk2 integrator. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_aebdbf0093b784435a35ecb8ef7e8bcaa}{rk2\+\_\+ss\+\_\+integrator\+::tendencies} (t, y, res)
+\begin{DoxyCompactList}\small\item\em Routine computing the tendencies of the uncoupled resolved model. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_aa89ab291aa152abdbf23c3d6820c2156}{rk2\+\_\+ss\+\_\+integrator\+::tl\+\_\+tendencies} (t, y, ys, res)
+\begin{DoxyCompactList}\small\item\em Tendencies for the tangent linear model of the uncoupled resolved dynamics in point ystar for perturbation deltay. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_a54ac83fe046cde7379bd09f7415f5708}{rk2\+\_\+ss\+\_\+integrator\+::ss\+\_\+step} (y, ys, t, dt, dtn, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform a stochastic integration step of the unresolved uncoupled dynamics (Heun algorithm). The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__ss__integrator_af5eb1776d98c24b82be878c59b978b22}{rk2\+\_\+ss\+\_\+integrator\+::ss\+\_\+tl\+\_\+step} (y, ys, t, dt, dtn, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform a stochastic integration step of the unresolved uncoupled tangent linear dynamics (Heun algorithm). The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_aa9dc56a3ff3887caced809dcb0257a1b}{rk2\+\_\+ss\+\_\+integrator\+::dwar}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_aeae3507fa2e319b59923f21622b58fc7}{rk2\+\_\+ss\+\_\+integrator\+::dwor}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_a26f660bf2b4b250a831c9fe4dc6c7726}{rk2\+\_\+ss\+\_\+integrator\+::anoise}
+\begin{DoxyCompactList}\small\item\em Additive noise term. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_a8b6b195712dd95f7eafe269379aa9dcc}{rk2\+\_\+ss\+\_\+integrator\+::buf\+\_\+y1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_aebce0ce5ca95ff293f219a8f85d44851}{rk2\+\_\+ss\+\_\+integrator\+::buf\+\_\+f0}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__ss__integrator_a1ffae309b7f72f07c598ab1882634ab3}{rk2\+\_\+ss\+\_\+integrator\+::buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Integration buffers. \end{DoxyCompactList}\end{DoxyCompactItemize}

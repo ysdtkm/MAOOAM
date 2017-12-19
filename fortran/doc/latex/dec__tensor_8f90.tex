@@ -1,0 +1,59 @@
+\hypertarget{dec__tensor_8f90}{}\section{dec\+\_\+tensor.\+f90 File Reference}
+\label{dec__tensor_8f90}\index{dec\+\_\+tensor.\+f90@{dec\+\_\+tensor.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacedec__tensor}{dec\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em The resolved-\/unresolved components decomposition of the tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacedec__tensor_ab08c915c2a920d5cc6c0e47b21f696dc}{dec\+\_\+tensor\+::suppress\+\_\+and} (t, cst, v1, v2)
+\begin{DoxyCompactList}\small\item\em Subroutine to suppress from the tensor $t_{ijk}$ components satisfying S\+F(j)=v1 and S\+F(k)=v2. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacedec__tensor_a03a1804765394ccacbb505b3604904a7}{dec\+\_\+tensor\+::suppress\+\_\+or} (t, cst, v1, v2)
+\begin{DoxyCompactList}\small\item\em Subroutine to suppress from the tensor $t_{ijk}$ components satisfying S\+F(j)=v1 or S\+F(k)=v2. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacedec__tensor_ae780336fa841c576c2e4933365a59be7}{dec\+\_\+tensor\+::reorder} (t, cst, v)
+\begin{DoxyCompactList}\small\item\em Subroutine to reorder the tensor $t_{ijk}$ components \+: if S\+F(j)=v then it return $t_{ikj}$. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacedec__tensor_a2379bf5216a994cb1811e57f5957d477}{dec\+\_\+tensor\+::init\+\_\+sub\+\_\+tensor} (t, cst, v)
+\begin{DoxyCompactList}\small\item\em Subroutine that suppress all the components of a tensor $t_{ijk}$ where if S\+F(i)=v. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacedec__tensor_ad5519f1ab9898c840a182152efe30240}{dec\+\_\+tensor\+::init\+\_\+dec\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Subroutine that initialize and compute the decomposed tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ac70c58053d278b0c95194704a1e48787}{dec\+\_\+tensor\+::ff\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor holding the part of the unresolved tensor involving only unresolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a3f0627e15eba5158920d63deec399669}{dec\+\_\+tensor\+::sf\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor holding the part of the resolved tensor involving unresolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a1e5a6c8bbb0cfa7d44245e0567b4ffca}{dec\+\_\+tensor\+::ss\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor holding the part of the resolved tensor involving only resolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ac3f4574fab9acab6741a1660a49442b9}{dec\+\_\+tensor\+::fs\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor holding the part of the unresolved tensor involving resolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ac7de63dc4f2ca5ef353c9ee4442e6f78}{dec\+\_\+tensor\+::hx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the constant part of the resolved tendencies. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a9a9feb72e769222453930a8e4a5fdea3}{dec\+\_\+tensor\+::lxx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the linear part of the resolved tendencies involving the resolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a994871cb59cfc0743f3d2a22aa81abc4}{dec\+\_\+tensor\+::lxy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the linear part of the resolved tendencies involving the unresolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ad4649ed646f1d4cdb0997880e4f39969}{dec\+\_\+tensor\+::bxxx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the resolved tendencies involving resolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ad451ae880f34cc385482e33b45070dcd}{dec\+\_\+tensor\+::bxxy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the resolved tendencies involving both resolved and unresolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_aa11fd10e3419deddd481098f4a2d2949}{dec\+\_\+tensor\+::bxyy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the resolved tendencies involving unresolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a9c51afb9b52f76670bcb3496d32fabf3}{dec\+\_\+tensor\+::hy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the constant part of the unresolved tendencies. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_aed1ce57179fc836a3c439d8c3da85049}{dec\+\_\+tensor\+::lyx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the linear part of the unresolved tendencies involving the resolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a0b44998c712bdb9adad15a6bc4df8022}{dec\+\_\+tensor\+::lyy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the linear part of the unresolved tendencies involving the unresolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_adb81ce421da8f2b1c972c63ccdce6214}{dec\+\_\+tensor\+::byxx}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the unresolved tendencies involving resolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a7c84cc16c29566626a9b6a47dde529f2}{dec\+\_\+tensor\+::byxy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the unresolved tendencies involving both resolved and unresolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_ae146ffac640fe6d4dc52fb31f2c78956}{dec\+\_\+tensor\+::byyy}
+\begin{DoxyCompactList}\small\item\em Tensor holding the quadratic part of the unresolved tendencies involving unresolved variables. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacedec__tensor_a5e65ad7fdc3a92172a2e45341284fc6b}{dec\+\_\+tensor\+::ss\+\_\+tl\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Tensor of the tangent linear model tendencies of the resolved component alone. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable \hyperlink{namespacedec__tensor_a63c533216b73ee87a50205bfa5adecea}{dec\+\_\+tensor\+::dumb}
+\begin{DoxyCompactList}\small\item\em Dumb coolist to make the computations. \end{DoxyCompactList}\end{DoxyCompactItemize}

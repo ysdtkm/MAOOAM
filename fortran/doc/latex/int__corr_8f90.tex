@@ -1,0 +1,35 @@
+\hypertarget{int__corr_8f90}{}\section{int\+\_\+corr.\+f90 File Reference}
+\label{int__corr_8f90}\index{int\+\_\+corr.\+f90@{int\+\_\+corr.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespaceint__corr}{int\+\_\+corr}
+\begin{DoxyCompactList}\small\item\em Module to compute or load the integrals of the correlation matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespaceint__corr_afb525a8e7ea02313d6480ffbbd265b3b}{int\+\_\+corr\+::init\+\_\+corrint}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the integrated matrices and tensors. \end{DoxyCompactList}\item 
+real(kind=8) function \hyperlink{namespaceint__corr_a311d5bd56c8de0d259e934f50d5388eb}{int\+\_\+corr\+::func\+\_\+ij} (s)
+\begin{DoxyCompactList}\small\item\em Function that returns the component oi and oj of the correlation matrix at time s. \end{DoxyCompactList}\item 
+real(kind=8) function \hyperlink{namespaceint__corr_af4796390cac83adc24081fa81a54af27}{int\+\_\+corr\+::func\+\_\+ijkl} (s)
+\begin{DoxyCompactList}\small\item\em Function that returns the component oi,oj,ok and ol of the outer product of the correlation matrix with itself at time s. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespaceint__corr_ac65d143c4217bb56f7c4168506c2fd4f}{int\+\_\+corr\+::comp\+\_\+corrint}
+\begin{DoxyCompactList}\small\item\em Routine that actually compute or load the integrals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+integer \hyperlink{namespaceint__corr_abddd3a2d3e1bfa4f09d96eaf090e9a95}{int\+\_\+corr\+::oi}
+\item 
+integer \hyperlink{namespaceint__corr_a114182df2066db340a9c42d9edd1583e}{int\+\_\+corr\+::oj}
+\item 
+integer \hyperlink{namespaceint__corr_a4af4666df7c0f30de448d09ae160caf4}{int\+\_\+corr\+::ok}
+\item 
+integer \hyperlink{namespaceint__corr_a3fe0c6bccf317d65552767f983f1cb62}{int\+\_\+corr\+::ol}
+\begin{DoxyCompactList}\small\item\em Integers that specify the matrices and tensor component considered as a function of time. \end{DoxyCompactList}\item 
+real(kind=8), parameter \hyperlink{namespaceint__corr_ab379731156e2a2dd2d0b11766d766a85}{int\+\_\+corr\+::real\+\_\+eps} = 2.\+2204460492503131e-\/16
+\begin{DoxyCompactList}\small\item\em Small epsilon constant to determine equality with zero. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespaceint__corr_ab3c1d22e8c15412a3b535c8301b0c42d}{int\+\_\+corr\+::corrint}
+\begin{DoxyCompactList}\small\item\em Matrix holding the integral of the correlation matrix. \end{DoxyCompactList}\item 
+type(coolist4), dimension(\+:), allocatable, public \hyperlink{namespaceint__corr_a1422cac2c54e6d7837159fe9fb3a6d6b}{int\+\_\+corr\+::corr2int}
+\begin{DoxyCompactList}\small\item\em Tensor holding the integral of the correlation outer product with itself. \end{DoxyCompactList}\end{DoxyCompactItemize}

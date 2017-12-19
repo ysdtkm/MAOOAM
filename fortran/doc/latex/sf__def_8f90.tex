@@ -1,0 +1,39 @@
+\hypertarget{sf__def_8f90}{}\section{sf\+\_\+def.\+f90 File Reference}
+\label{sf__def_8f90}\index{sf\+\_\+def.\+f90@{sf\+\_\+def.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacesf__def}{sf\+\_\+def}
+\begin{DoxyCompactList}\small\item\em Module to select the resolved-\/unresolved components. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacesf__def_aefac3d4682ec35c401bb888b10dc4f47}{sf\+\_\+def\+::load\+\_\+sf}
+\begin{DoxyCompactList}\small\item\em Subroutine to load the unresolved variable defintion vector {\ttfamily SF} from S\+F.\+nml if it exists. If it does not, then write S\+F.\+nml with no unresolved variables specified (null vector). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+logical \hyperlink{namespacesf__def_a4461dcde80d3a5a5d53bb45e55839b5d}{sf\+\_\+def\+::exists}
+\begin{DoxyCompactList}\small\item\em Boolean to test for file existence. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf\+\_\+def\+::sf}
+\begin{DoxyCompactList}\small\item\em Unresolved variable definition vector. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_a5e294b6f015b0b0499c9cee47da37627}{sf\+\_\+def\+::ind}
+\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_a2befe00671a3add2d8049605682bcd52}{sf\+\_\+def\+::rind}
+\begin{DoxyCompactList}\small\item\em Unresolved reduction indices. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_a6b226546e7059222fad5500946c1c550}{sf\+\_\+def\+::sl\+\_\+ind}
+\item 
+integer, dimension(\+:), allocatable, public \hyperlink{namespacesf__def_aab6ba7881cef9b469ab9d9323f3fcbea}{sf\+\_\+def\+::sl\+\_\+rind}
+\begin{DoxyCompactList}\small\item\em Resolved reduction indices. \end{DoxyCompactList}\item 
+integer, public \hyperlink{namespacesf__def_a1e03f6f31a13f2bfa8e84dd69874b8aa}{sf\+\_\+def\+::n\+\_\+unres}
+\begin{DoxyCompactList}\small\item\em Number of unresolved variables. \end{DoxyCompactList}\item 
+integer, public \hyperlink{namespacesf__def_af05cacb04c0c2d10c9405e71db633a43}{sf\+\_\+def\+::n\+\_\+res}
+\begin{DoxyCompactList}\small\item\em Number of resolved variables. \end{DoxyCompactList}\item 
+integer, dimension(\+:,\+:), allocatable, public \hyperlink{namespacesf__def_ac5f61e46d21a461afc857f50b9c24899}{sf\+\_\+def\+::bar}
+\item 
+integer, dimension(\+:,\+:), allocatable, public \hyperlink{namespacesf__def_a3095931864a7ebf98dce2d5642031e58}{sf\+\_\+def\+::bau}
+\item 
+integer, dimension(\+:,\+:), allocatable, public \hyperlink{namespacesf__def_aa44fe776297bd93ef2a0c8a1457dbf41}{sf\+\_\+def\+::bor}
+\item 
+integer, dimension(\+:,\+:), allocatable, public \hyperlink{namespacesf__def_a349d2708598e0e0782cc21e8566208b5}{sf\+\_\+def\+::bou}
+\begin{DoxyCompactList}\small\item\em Filter matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}

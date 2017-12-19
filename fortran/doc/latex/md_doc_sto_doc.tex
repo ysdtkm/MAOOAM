@@ -1,0 +1,148 @@
+\subsection*{The stochastic version of M\+A\+O\+O\+AM}
+
+The stochastic version of M\+A\+O\+O\+AM is given by
+
+\[ \frac{d \boldsymbol{z}}{dt} = f(\boldsymbol{z})+ \boldsymbol{q} \cdot \boldsymbol{dW} (t)\]
+
+where $\boldsymbol{dW}$ is a vector of standard Gaussian White noise and where several choice for $f(\boldsymbol{z})$ are available. For instance, the default choice is to use the full dynamics\+: \[ f(\boldsymbol{z}) = \sum_{j,k=0}^{ndim} \, \mathcal{T}_{i,j,k} \, z_k \; z_j . \] The implementation uses thus the tensorial framework of M\+A\+O\+O\+AM and add some noise to it. To study parameterization methods in M\+A\+O\+O\+AM, the models variables $\boldsymbol z$ is divised in two components\+: the resolved component $\boldsymbol x$ and the unresolved component $\boldsymbol y$ (see below for more details).
+
+Since M\+A\+O\+O\+AM is a ocean-\/atmosphere model, it can be decomposed further into oceanic and atmospheric components\+: \[ \boldsymbol z = \{ \boldsymbol{x}_{\text{a}}, \boldsymbol{x}_{\text{o}}, \boldsymbol{y}_{\text{a}}, \boldsymbol{y}_{\text{o}}\} \] and in the present implementation, the noise amplitude can be set in each component\+: \[ \frac{d \boldsymbol{x}_{\text{a}}}{dt} = f_{x,\text{a}}(\boldsymbol{z})+ \boldsymbol{q}_{x,\text{a}} \cdot \boldsymbol{dW}_{x,\text{a}} (t)\] \[ \frac{d \boldsymbol{x}_{\text{o}}}{dt} = f_{x,\text{o}}(\boldsymbol{z})+ \boldsymbol{q}_{x,\text{o}} \cdot \boldsymbol{dW}_{x,\text{o}} (t)\] \[ \frac{d \boldsymbol{y}_{\text{a}}}{dt} = f_{y,\text{a}}(\boldsymbol{z})+ \boldsymbol{q}_{y,\text{a}} \cdot \boldsymbol{dW}_{y,\text{a}} (t)\] \[ \frac{d \boldsymbol{y}_{\text{o}}}{dt} = f_{y,\text{o}}(\boldsymbol{z})+ \boldsymbol{q}_{y,\text{o}} \cdot \boldsymbol{dW}_{y,\text{o}} (t)\] through the parameters \hyperlink{namespacestoch__params_a56cee7780f23cbd0cc619c5b5bb30b6c}{stoch\+\_\+params\+::q\+\_\+ar}, \hyperlink{namespacestoch__params_a437fce848ee222fc34893831a54e32e9}{stoch\+\_\+params\+::q\+\_\+au}, \hyperlink{namespacestoch__params_adc17ebaeabac74e33023f9e7bb8583ec}{stoch\+\_\+params\+::q\+\_\+or} and \hyperlink{namespacestoch__params_a6b3308ad01c8ba1945332b05df447865}{stoch\+\_\+params\+::q\+\_\+ou}. 
+
+
+
+\subsection*{The resolved-\/unresolved components}
+
+Due to the decomposition into resoved variables $ \boldsymbol x$ and unresolved variables $ \boldsymbol y$, the equation of the M\+A\+O\+O\+AM model can be rewritten\+:
+
+\[ \frac{d \boldsymbol x}{dt} = \boldsymbol{H}^x + \boldsymbol{L}^{xx}\cdot\boldsymbol{x} + \boldsymbol{L}^{xy}\cdot\boldsymbol{y} + \boldsymbol{B}^{xxx} : \boldsymbol{x} \otimes \boldsymbol{x} + \boldsymbol{B}^{xxy} : \boldsymbol{x} \otimes \boldsymbol{y} + \boldsymbol{B}^{xyy} : \boldsymbol{y} \otimes \boldsymbol{y} + \boldsymbol{q}_{x} \cdot \boldsymbol{dW}_x \] \[ \frac{d \boldsymbol y}{dt} = \boldsymbol{H}^y + \boldsymbol{L}^{yx}\cdot\boldsymbol{x} + \boldsymbol{L}^{yy}\cdot\boldsymbol{y} + \boldsymbol{B}^{yxx} : \boldsymbol{x} \otimes \boldsymbol{x} + \boldsymbol{B}^{yxy} : \boldsymbol{x} \otimes \boldsymbol{y} + \boldsymbol{B}^{yyy} : \boldsymbol{y} \otimes \boldsymbol{y} + \boldsymbol{q}_{y} \cdot \boldsymbol{dW}_y \]
+
+where $\boldsymbol{q}_x= \{\boldsymbol{q}_{x,\text{a}},\boldsymbol{q}_{x,\text{o}}\}$ and $\boldsymbol{q}_y= \{\boldsymbol{q}_{y,\text{a}},\boldsymbol{q}_{y,\text{o}}\}$. We have thus also $\boldsymbol{dW}_x=\{\boldsymbol{dW}_{x,\text{a}},\boldsymbol{dW}_{x,\text{o}}\}$ and $\boldsymbol{dW}_y= \{\boldsymbol{dW}_{y,\text{a}},\boldsymbol{dW}_{y,\text{o}}\}$. The various terms of the equations above are accessible in the \hyperlink{namespacedec__tensor}{dec\+\_\+tensor} module. To specify which variables belong to the resolved (unresolved) component, the user must fill the S\+F.\+nml namelist file by setting the component of the vector \hyperlink{namespacesf__def_ad000452ff3b9c4c5ce070c04d0521b52}{sf\+\_\+def\+::sf} to 0 (1). This file must be filled before starting any of the stochastic and parameterization codes. If this file is not present, launch one of the programs. It will generate a new S\+F.\+nml file and then abort.
+
+The purpose of the parameterization is to reduce the $\boldsymbol x$ equation by closing it while keeping the statisical properies of the full system. To apply the parameterizations proposed in this implementation, we consider a modified version of the equation above\+:
+
+\[ \frac{d \boldsymbol x}{dt} = F_x(\boldsymbol{x}) + \boldsymbol{q}_{x} \cdot \boldsymbol{dW}_x + \frac{\varepsilon}{\delta} \, \Psi_x(\boldsymbol{x},\boldsymbol{y}) \] \[ \frac{d \boldsymbol y}{dt} = \frac{1}{\delta^2}\, \Big( F_y(\boldsymbol{y}) + \delta \, \boldsymbol{q}_{y} \cdot \boldsymbol{dW}_y \Big) + \frac{\varepsilon}{\delta} \, \Psi_y(\boldsymbol{x},\boldsymbol{y}) \]
+
+where $\varepsilon$ is the resolved-\/unresolved components coupling strength given by the parameter \hyperlink{namespacestoch__params_aa0504e89179fe42b3f3206811f1592dc}{stoch\+\_\+params\+::eps\+\_\+pert}. $\delta$ is the timescale separation parameter given by the parameter \hyperlink{namespacestoch__params_a3995bce17d12b533df6b86ab0072b7c3}{stoch\+\_\+params\+::tdelta}. By setting those to 1, one recover the first equations above.
+
+The function $\Psi_x$ includes all the $\boldsymbol x$ terms, and thus $F_x$ and $\Psi_x$ are unequivocally defined. On the other hand, depending on the value of the parameter \hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{stoch\+\_\+params\+::mode}, the terms regrouped in the function $F_y$ can be different. Indeed, if \hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{stoch\+\_\+params\+::mode} is set to
+\begin{DoxyItemize}
+\item \textquotesingle{}qfst\textquotesingle{}, then\+: \[ F_y(\boldsymbol{y})= \boldsymbol{B}^{yyy} : \boldsymbol{y} \otimes \boldsymbol{y} \]
+\item \textquotesingle{}ures\textquotesingle{}, then\+: \[ F_y(\boldsymbol{y})= \boldsymbol{H}^y + \boldsymbol{L}^{yy}\cdot\boldsymbol{y} + \boldsymbol{B}^{yyy} : \boldsymbol{y} \otimes \boldsymbol{y} \] However, for the WL parameterization, this parameter must be set to \textquotesingle{}ures\textquotesingle{} by definition. See the article accompagnying this code for more details. 
+
+
+\end{DoxyItemize}
+
+\subsection*{The M\+TV parameterization}
+
+This parameterization is also called homogenization. Its acronym comes from the names of the authors that proposed this approach for climate modes\+: Majda, Timofeyev and Vanden Eijnden (Majda et al., 2001). It is given by
+
+\[ \frac{d\boldsymbol{x}}{dt} = F_X(\boldsymbol{x}) + \frac{1}{\delta} R(\boldsymbol{x}) + G(\boldsymbol{x}) + \sqrt{2} \,\, \boldsymbol{\sigma}(\boldsymbol{x}) \cdot \boldsymbol{dW} \]
+
+where $\boldsymbol{x}$ is the set of resolved variables and $\boldsymbol{dW}$ is a vector of standard Gaussian White noise. $F_x$ is the set of tendencies of resolved system alone and $\delta$ is the timescale separation parameter.
+
+\subsubsection*{Correlations specification}
+
+The ingredients needed to compute the terms $R,G,\boldsymbol\sigma$ of this parametrization are the unresolved variables covariance matrix and the integrated correlation matrices. The unresolved variables covariance matrix is given by \[\boldsymbol\sigma_y = \langle \boldsymbol y \otimes \boldsymbol y \rangle \] and is present in the implementation through the matrices \hyperlink{namespacecorrmod_a859a67113b5271db0df70e60cbf0687b}{corrmod\+::corr\+\_\+i} and \hyperlink{namespacecorrmod_a978b78f1d6906afe06e63768535b44f7}{corrmod\+::corr\+\_\+i\+\_\+full}. Their inverses are also available through \hyperlink{namespacecorrmod_a5a938587078064124588605255e93a19}{corrmod\+::inv\+\_\+corr\+\_\+i} and \hyperlink{namespacecorrmod_af2ab9712d246a94ae1a801a011aee3d8}{corrmod\+::inv\+\_\+corr\+\_\+i\+\_\+full} . The integrated correlation matrices are given by \[ \boldsymbol\Sigma = \int_0^\infty \, ds \langle \, \boldsymbol y \otimes \boldsymbol y^s \rangle \] \[ \boldsymbol\Sigma_2 = \int_0^\infty ds \, \left(\langle \boldsymbol y \otimes \boldsymbol y^s \rangle \otimes \langle \boldsymbol y \otimes \boldsymbol y^s \rangle\right) \] and is present in the implementation through the matrices \hyperlink{namespaceint__corr_ab3c1d22e8c15412a3b535c8301b0c42d}{int\+\_\+corr\+::corrint} and \hyperlink{namespaceint__corr_a1422cac2c54e6d7837159fe9fb3a6d6b}{int\+\_\+corr\+::corr2int} .
+
+These matrices are computed from the correlation matrix $\langle \boldsymbol y \otimes \boldsymbol y^s \rangle$ which is accessible through the function \hyperlink{namespacecorrmod_ad42bfc9c0ec2cf55958a45b46839d856}{corrmod\+::corrcomp}. For instance, the covariance matrix $\boldsymbol\sigma_y$ is then simply the correlation matrix at the lagtime 0, and $\boldsymbol\Sigma$ and $\boldsymbol\Sigma_2$ can be computed via integration over the lagtime.
+
+There exists three different ways to load the correlation matrix, specified by the value of the parameters \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode} and \hyperlink{namespacestoch__params_ab901db3992a4df88db5a67fdd7be6ac6}{stoch\+\_\+params\+::int\+\_\+corr\+\_\+mode} . The \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode} specify how the correlation matrix is loaded can take three different values\+:
+\begin{DoxyItemize}
+\item \textquotesingle{}defi\textquotesingle{}\+: from an analytical definition encoded in the corrmod module function \hyperlink{namespacecorrmod_a52bbdab69c73b4313857d71c07cb3164}{corrmod\+::corrcomp\+\_\+from\+\_\+def} .
+\item \textquotesingle{}spli\textquotesingle{}\+: from a spline definition file \textquotesingle{}corrspline.\+def\textquotesingle{} .
+\item \textquotesingle{}expo\textquotesingle{}\+: from a fit with exponentials definition file \textquotesingle{}correxpo.\+def\textquotesingle{}
+\end{DoxyItemize}
+
+The \hyperlink{namespacestoch__params_ab901db3992a4df88db5a67fdd7be6ac6}{stoch\+\_\+params\+::int\+\_\+corr\+\_\+mode} specify how the correlation are integrated and can take two different values\+:
+\begin{DoxyItemize}
+\item \textquotesingle{}file\textquotesingle{}\+: Integration results provided by files \textquotesingle{}corrint.\+def\textquotesingle{} and \textquotesingle{}corr2int.\+def\textquotesingle{}
+\item \textquotesingle{}prog\textquotesingle{}\+: Integration computed directly by the program with the correlation matrix. Write \textquotesingle{}corrint.\+def\textquotesingle{} and \textquotesingle{}corr2int.\+def\textquotesingle{} files to be reused later.
+\end{DoxyItemize}
+
+These parameters can be set up in the namelist file stoch\+\_\+params.\+nml . Examples of the \char`\"{}.\+def\char`\"{} files specifying the integrals are provided with the code.
+
+\subsubsection*{Other M\+TV setup parameters}
+
+Some additional parameters complete the options possible for the M\+TV parameters \+:
+\begin{DoxyItemize}
+\item \hyperlink{namespacestoch__params_ab0b8df90daf320dc4f5810eacd7d93e7}{stoch\+\_\+params\+::mnuti} \+: Multiplicative noise update time interval -- Time interval over which the matrix $\boldsymbol\sigma(\boldsymbol x)$ is updated.
+\item \hyperlink{namespacestoch__params_a11aa6b888c2b4005aca690fb78e2c785}{stoch\+\_\+params\+::t\+\_\+trans\+\_\+stoch} \+: Transient period of the stochastic model.
+\item \hyperlink{namespacestoch__params_a50976593e79387f25e08fef6ce56b30b}{stoch\+\_\+params\+::maxint} \+: Specify the upper limit of the numerical integration if \hyperlink{namespacestoch__params_ab901db3992a4df88db5a67fdd7be6ac6}{stoch\+\_\+params\+::int\+\_\+corr\+\_\+mode} is set to \textquotesingle{}prog\textquotesingle{}.
+\end{DoxyItemize}
+
+\subsubsection*{Definition files}
+
+The following definition files are needed by the parameterization, depending on the value of the parameters described above. Examples of those files are joined to the code. The files include\+:
+\begin{DoxyItemize}
+\item \textquotesingle{}correxpo.\+def\textquotesingle{}\+: Coefficients $a_i$ of the fit of the correlations with the function \[ a_4+a_0 \, \exp\left(-\frac{t}{a_1}\right) \, \cos(a_2 \, t + a_3) \] where $t$ is the lag-\/time and $\tau$ is the decorrelation time. Used if \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode} is set to \textquotesingle{}expo\textquotesingle{}.
+\item \textquotesingle{}corrspline.\+def\textquotesingle{}\+: Coefficients $b_i$ of the spline used to model the correlation functions. Used if \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode} is set to \textquotesingle{}spli\textquotesingle{}.
+\item \textquotesingle{}corrint.\+def\textquotesingle{}\+: File holding the matrix $\boldsymbol\Sigma$. Used if \hyperlink{namespacestoch__params_ab901db3992a4df88db5a67fdd7be6ac6}{stoch\+\_\+params\+::int\+\_\+corr\+\_\+mode} is set to \textquotesingle{}file\textquotesingle{}.
+\item \textquotesingle{}corr2int.\+def\textquotesingle{}\+: File holding the matrix $\boldsymbol\Sigma_2$. 
+
+
+\end{DoxyItemize}
+
+\subsection*{The WL parameterization}
+
+This parameterization is based on the Ruelle response theory. Its acronym comes from the names of the authors that proposed this approach\+: Wouters and Lucarini (Wouters and Lucarini, 2012). It is given by
+
+\[\frac{d\boldsymbol{x}}{dt} = F_x(\boldsymbol{x}) + \varepsilon \, M_1(\boldsymbol{x}) + \varepsilon^2 \, M_2(\boldsymbol{x},t) + \varepsilon^2 \, M_3 (\boldsymbol{x},t)\]
+
+where $\varepsilon$ is the resolved-\/unresolved components coupling strength and where the different terms $M_i$ account for average, correlation and memory effects.
+
+\subsubsection*{Correlations specification}
+
+The ingredients needed to compute the $M_i$ terms of this parametrization are the unresolved variable covariance matrix $\langle \boldsymbol y \otimes \boldsymbol y \rangle$ and correlation matrix $\langle \boldsymbol y \otimes \boldsymbol y^s \rangle$. The unresolved variables covariance matrix is given by \[\boldsymbol\sigma_y = \langle \boldsymbol y \otimes \boldsymbol y \rangle \] and is present in the implementation through the matrices \hyperlink{namespacecorrmod_a859a67113b5271db0df70e60cbf0687b}{corrmod\+::corr\+\_\+i} and \hyperlink{namespacecorrmod_a978b78f1d6906afe06e63768535b44f7}{corrmod\+::corr\+\_\+i\+\_\+full}. Their inverses are also available through \hyperlink{namespacecorrmod_a5a938587078064124588605255e93a19}{corrmod\+::inv\+\_\+corr\+\_\+i} and \hyperlink{namespacecorrmod_af2ab9712d246a94ae1a801a011aee3d8}{corrmod\+::inv\+\_\+corr\+\_\+i\+\_\+full}.
+
+The correlation matrix $\langle \boldsymbol y \otimes \boldsymbol y^s \rangle$ is accessible through the function \hyperlink{namespacecorrmod_ad42bfc9c0ec2cf55958a45b46839d856}{corrmod\+::corrcomp}.
+
+As for the M\+TV case, there exists three different ways to load the correlation matrix, specified by the value of the parameters \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode} and \hyperlink{namespacestoch__params_ab901db3992a4df88db5a67fdd7be6ac6}{stoch\+\_\+params\+::int\+\_\+corr\+\_\+mode} . The \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode} specify how the correlation matrix is loaded can take three different values\+:
+\begin{DoxyItemize}
+\item \textquotesingle{}defi\textquotesingle{}\+: from an analytical definition encoded in the corrmod module function \hyperlink{namespacecorrmod_a52bbdab69c73b4313857d71c07cb3164}{corrmod\+::corrcomp\+\_\+from\+\_\+def} .
+\item \textquotesingle{}spli\textquotesingle{}\+: from a spline definition file \textquotesingle{}corrspline.\+def\textquotesingle{} .
+\item \textquotesingle{}expo\textquotesingle{}\+: from a fit with exponentials definition file \textquotesingle{}correxpo.\+def\textquotesingle{}
+\end{DoxyItemize}
+
+The correlation term $M_2$ is emulated by an order $m$ multidimensional Auto\+Regressive (M\+AR) process\+: \[ \boldsymbol u_n = \sum_{i=1}^m \boldsymbol u_{n-i} \cdot \boldsymbol W_i + \boldsymbol Q \cdot \boldsymbol\xi_n \] of which the $\boldsymbol W_i$ and $\boldsymbol Q$ matrices are also needed (the $\boldsymbol\xi_n$ are vectors of standard Gaussian white noise). It is implemented in the M\+AR module.
+
+\subsubsection*{Other WL setup parameters}
+
+Some additional parameters complete the options possible for the WL parameters \+:
+\begin{DoxyItemize}
+\item \hyperlink{namespacestoch__params_a6cfc7910476036f19018641599841686}{stoch\+\_\+params\+::muti} \+: Memory term $M_3$ update time interval.
+\item \hyperlink{namespacestoch__params_a11aa6b888c2b4005aca690fb78e2c785}{stoch\+\_\+params\+::t\+\_\+trans\+\_\+stoch} \+: Transient period of the stochastic model.
+\item \hyperlink{namespacestoch__params_a6de8fcb6d516d431ddc0285e0c296eb7}{stoch\+\_\+params\+::meml} \+: Time over which the memory kernel is numericaly integrated.
+\item \hyperlink{namespacestoch__params_aad7f7a2481dfb730a051ae2e0de9494c}{stoch\+\_\+params\+::t\+\_\+trans\+\_\+mem} \+: Transient period of the stochastic model to initialize the memory term.
+\item \hyperlink{namespacestoch__params_a760f666f9c629b98214821c8186f6ffc}{stoch\+\_\+params\+::dts} \+: Intrisic resolved dynamics time step.
+\item \hyperlink{namespacestoch__params_ac3dca68023a442b69df79caaaea78894}{stoch\+\_\+params\+::x\+\_\+int\+\_\+mode} \+: Integration mode for the resolved component (not used for the moment -- must be set to \textquotesingle{}reso\textquotesingle{}).
+\end{DoxyItemize}
+
+Note that the \hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{stoch\+\_\+params\+::mode} must absolutely be set to \textquotesingle{}ures\textquotesingle{}, by definition.
+
+\subsubsection*{Definition files}
+
+The following definition files are needed by the parameterization, depending on the value of the parameters described above. Examples of those files are joined to the code. The files include\+:
+\begin{DoxyItemize}
+\item \textquotesingle{}correxpo.\+def\textquotesingle{}\+: Coefficients $a_i$ of the fit of the correlations with the function \[ a_4+a_0 \, \exp\left(-\frac{t}{a_1}\right) \, \cos(a_2 \, t + a_3) \] where $t$ is the lag-\/time and $\tau$ is the decorrelation time. Used if \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode} is set to \textquotesingle{}expo\textquotesingle{}.
+\item \textquotesingle{}corrspline.\+def\textquotesingle{}\+: Coefficients $b_i$ of the spline used to model the correlation functions. Used if \hyperlink{namespacestoch__params_ac61a48744a1bb015b5148c421837fbe7}{stoch\+\_\+params\+::load\+\_\+mode} is set to \textquotesingle{}spli\textquotesingle{}.
+\item \textquotesingle{}M\+A\+R\+\_\+\+R\+\_\+params.\+def\textquotesingle{}\+: File specifying the $\boldsymbol R = \boldsymbol Q^2$ matrix for the M\+AR.
+\item \textquotesingle{}M\+A\+R\+\_\+\+W\+\_\+params.\+def\textquotesingle{}\+: File specifying the $\boldsymbol W_i$ matrices for the M\+AR.
+\end{DoxyItemize}
+
+The various terms are then constructed according to these definition files. 
+
+
+
+\subsection*{References}
+
+
+\begin{DoxyItemize}
+\item Vannitsem, S., Demaeyer, J., De Cruz, L., and Ghil, M.\+: Low-\/frequency variability and heat transport in a loworder nonlinear coupled ocean-\/atmosphere model, Physica D\+: Nonlinear Phenomena, 309, 71-\/85, 2015.
+\item De Cruz, L., Demaeyer, J., \& Vannitsem, S.\+: The Modular Arbitrary-\/\+Order Ocean-\/\+Atmosphere Model\+: M\+A\+O\+O\+AM v1.\+0, Geoscientific Model Development, 9(8), 2793-\/2808, 2016.
+\item Majda, A. J., Timofeyev, I., \& Vanden Eijnden, E.\+: A mathematical framework for stochastic climate models, Communications on Pure and Applied Mathematics, 54(8), 891-\/974, 2001.
+\item Franzke, C., Majda, A. J., \& Vanden-\/\+Eijnden, E.\+: Low-\/order stochastic mode reduction for a realistic barotropic model climate, Journal of the atmospheric sciences, 62(6), 1722-\/1745, 2005.
+\item Wouters, J., \& Lucarini, V.\+: Disentangling multi-\/level systems\+: averaging, correlations and memory. Journal of Statistical Mechanics\+: Theory and Experiment, 2012(03), P03003, 2012.
+\item Demaeyer, J., \& Vannitsem, S.\+: Stochastic parametrization of subgrid‐scale processes in coupled ocean–atmosphere systems\+: benefits and limitations of response theory, Quarterly Journal of the Royal Meteorological Society, 143(703), 881-\/896, 2017.
+\end{DoxyItemize}
+
+Please see the main article for the full list of references. 

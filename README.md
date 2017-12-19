@@ -1,12 +1,12 @@
-# Modular arbitrary-order ocean-atmosphere model: MAOOAM
+# Modular arbitrary-order ocean-atmosphere model: MAOOAM stochastic parameterization branch
 
-------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
 
 ## About ##
 
-(c) 2013-2016 Lesley De Cruz and Jonathan Demaeyer
+(c) 2013-2017 Lesley De Cruz and Jonathan Demaeyer
 
-See LICENSE.txt for license information.
+See [LICENSE.txt](LICENSE.txt) for license information.
 
 This software is provided as supplementary material with:
 
@@ -14,7 +14,13 @@ This software is provided as supplementary material with:
 Ocean-Atmosphere Model: MAOOAM v1.0, Geosci. Model Dev., 9, 2793-2808,
 [doi:10.5194/gmd-9-2793-2016](http://dx.doi.org/10.5194/gmd-9-2793-2016), 2016.
 
-**Please cite this article if you use (a part of) this software for a
+for the MAOOAM original code, and with
+
+*
+
+for the stochastic part.
+
+**Please cite both articles if you use (a part of) this software for a
 publication.**
 
 The authors would appreciate it if you could also send a reprint of
@@ -36,71 +42,69 @@ based on the papers of Pierini (2012), Barsugli and Battisti (1998). The
 coupling between the two components includes wind forcings, radiative and heat
 exchanges.
 
-![](./misc/figs/movie_10x10_GMD.gif)
+------------------------------------------------------------------------
+
+## Branch description ##
+
+This branch is a version of the MAOOAM model focused on stochastic methods
+and more particularly stochastic parameterizations. 
+
+------------------------------------------------------------------------
+
+## Parameterizations description ##
+
+For the moment, this code provide the implementation of two different
+stochastic parameterizations for the MAOOAM ocean-atmosphere coupled
+model.
+
+The first one is based on homogenization and follow closely the 
+approach proposed in Franzke et al. 2005. It is called hereafter "MTV", from the
+names of the authors of the paper that first proposed to apply the method 
+to climate systems (Majda et al., 2001).
+
+The second one is based on the Ruelle response theory, and is called
+hereafter "WL", from the names of the authors of the paper that proposed
+to apply response theory to parameterization problems (Wouters and Lucarini, 2012).
+
+Complete details about these parameterizations can be found in the article
+to whom this code is attached, and in the references proposed below.
+
+A short account is also proposed in the documentation.
 
 ------------------------------------------------------------------------
 
 ## Implementation notes ##
 
-As the system of differential equations is at most bilinear in y[j] (j=1..n), y
-being the array of variables, it can be expressed as a tensor contraction
-(written using Einstein convention, i.e. indices that occur twice on one side
-of an equation are summed over):
-
-    dy  / dt =  T        y   y      (y  == 1)
-      i          i,j,k    j   k       0
-
-The tensor T that encodes the differential equations is composed so that:
-
-* T[i][j][k] contains the contribution of dy[i]/dt proportional to y[j]*y[k].
-* Furthermore, y[0] is always equal to 1, so that T[i][0][0] is the constant
-  contribution to var dy[i]/dt.
-* T[i][j][0] + T[i][0][j] is the contribution to  dy[i]/dt which is linear in
-  y[j].
-
-Ideally, the tensor is composed as an upper triangular matrix (in the last two
-coordinates).
+At the present moment, the parameterizations have been solely implemented
+for the Fortran version of MAOOAM. Please read the README.md file in 
+the fortran folder for the implementation notes. 
 
 ------------------------------------------------------------------------
 
 ## References ##
 
-* Charney, J. G. and Straus, D. M.: Form-drag instability, multiple equilibria
-and propagating planetary waves in baroclinic, orographically forced, planetary
-wave systems, J. Atmos. Sci., 37, 1157-1176, 1980.
-
-* Reinhold, B. B. and Pierrehumbert, R. T.: Dynamics of weather regimes:
-quasi-stationary waves and blocking, Mon. Weather Rev., 110, 1105-1145, 1982.
-
-* Reinhold, B. B. and Pierrehumbert, R. T.: Corrections to "Dynamics of
-weather regimes: quasi-stationary waves and blocking", Mon. Weather Rev., 113,
-2055-2056, 1985.
-
-* Barsugli, J. J. and Battisti, D. S.: The basic effects of atmosphere–ocean
- thermal coupling on midlatitude variability, J. Atmos. Sci., 55, 477-493, 1998.
-
-* Pierini, S.: Low-frequency variability, coherence resonance, and phase
-selection in a low-order model of the wind-driven ocean circulation, J.  Phys.
-Oceanogr., 41, 1585-1604, 2011.
-
-* Cehelsky, P. and Tung, K. K.: Theories of multiple equilibria and weather
-regimes - A critical reexamination.  Part II: Baroclinic two-layer models,
-Journal of the atmospheric sciences, 44, 3282-3303, 1987.
-
-* Vannitsem, S. and De Cruz, L.: A 24-variable low-order coupled
-ocean-atmosphere model: OA-QG-WS v2, Geoscientific Model Development, 7,
-649-662, 2014.
-
 * Vannitsem, S., Demaeyer, J., De Cruz, L., and Ghil, M.: Low-frequency
 variability and heat transport in a loworder nonlinear coupled ocean-atmosphere
 model, Physica D: Nonlinear Phenomena, 309, 71-85, 2015. 
 
-Please see the main article for the full list of references.
+* De Cruz, L., Demaeyer, J., & Vannitsem, S.: The Modular Arbitrary-Order
+Ocean-Atmosphere Model: MAOOAM v1.0,
+Geoscientific Model Development, 9(8), 2793-2808, 2016. 
 
-------------------------------------------------------------------------
+* Majda, A. J., Timofeyev, I., & Vanden Eijnden, E.: A mathematical framework
+for stochastic climate models,
+Communications on Pure and Applied Mathematics, 54(8), 891-974, 2001.
 
-## Related projects ##
+* Franzke, C., Majda, A. J., & Vanden-Eijnden, E.: Low-order stochastic mode
+reduction for a realistic barotropic model climate,
+Journal of the atmospheric sciences, 62(6), 1722-1745, 2005.  
 
-* [DAPPER](https://github.com/nansencenter/DAPPER) - Data Assimilation Package in Python for Experimental Research.
-The MAOOAM python implementation is available within the package.
+* Wouters, J., & Lucarini, V.: Disentangling multi-level systems: averaging,
+correlations and memory.
+Journal of Statistical Mechanics: Theory and Experiment, 2012(03), P03003, 2012.
 
+* Demaeyer, J., & Vannitsem, S.: Stochastic parametrization of subgrid‐scale
+processes in coupled ocean–atmosphere systems: benefits and limitations of response theory,
+Quarterly Journal of the Royal Meteorological Society, 143(703), 881-896, 2017. 
+
+Please see the main articles for the full list of references.

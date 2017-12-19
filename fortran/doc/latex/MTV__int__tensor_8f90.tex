@@ -1,0 +1,57 @@
+\hypertarget{MTV__int__tensor_8f90}{}\section{M\+T\+V\+\_\+int\+\_\+tensor.\+f90 File Reference}
+\label{MTV__int__tensor_8f90}\index{M\+T\+V\+\_\+int\+\_\+tensor.\+f90@{M\+T\+V\+\_\+int\+\_\+tensor.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacemtv__int__tensor}{mtv\+\_\+int\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em The M\+TV tensors used to integrate the M\+TV model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacemtv__int__tensor_a5b3112e973892c80810cbff003525946}{mtv\+\_\+int\+\_\+tensor\+::init\+\_\+mtv\+\_\+int\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the M\+TV tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a8979293cdfe7d9e67f3348a444076f3c}{mtv\+\_\+int\+\_\+tensor\+::h1}
+\begin{DoxyCompactList}\small\item\em First constant vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_ad0dd8bb28d5e88e5776c48b302ae4b29}{mtv\+\_\+int\+\_\+tensor\+::h2}
+\begin{DoxyCompactList}\small\item\em Second constant vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a596c16bed479b011818d66810e590bae}{mtv\+\_\+int\+\_\+tensor\+::h3}
+\begin{DoxyCompactList}\small\item\em Third constant vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_aa82b34ace4bb21fbfc0e37ccc3db4815}{mtv\+\_\+int\+\_\+tensor\+::htot}
+\begin{DoxyCompactList}\small\item\em Total constant vector. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a2dbd181e62dbbb9aedcbd6535ca56ec5}{mtv\+\_\+int\+\_\+tensor\+::l1}
+\begin{DoxyCompactList}\small\item\em First linear tensor. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_aa6dcec8a4783e982cd8894a15ae210d4}{mtv\+\_\+int\+\_\+tensor\+::l2}
+\begin{DoxyCompactList}\small\item\em Second linear tensor. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a04155fe5ee1b9580674140eab208a7bc}{mtv\+\_\+int\+\_\+tensor\+::l3}
+\begin{DoxyCompactList}\small\item\em Third linear tensor. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_ace2795d6c48885b8f847384747e8ad5d}{mtv\+\_\+int\+\_\+tensor\+::ltot}
+\begin{DoxyCompactList}\small\item\em Total linear tensor. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a0220ca0d7f49bf405e6848492ec24995}{mtv\+\_\+int\+\_\+tensor\+::b1}
+\begin{DoxyCompactList}\small\item\em First quadratic tensor. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a71cc55d84fa25e49c9886d5ac9fc5032}{mtv\+\_\+int\+\_\+tensor\+::b2}
+\begin{DoxyCompactList}\small\item\em Second quadratic tensor. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a888f93868eeb459582a5acc909a33374}{mtv\+\_\+int\+\_\+tensor\+::btot}
+\begin{DoxyCompactList}\small\item\em Total quadratic tensor. \end{DoxyCompactList}\item 
+type(coolist4), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a3722af69dcc509f4e7d24f898a7e68ae}{mtv\+\_\+int\+\_\+tensor\+::mtot}
+\begin{DoxyCompactList}\small\item\em Tensor for the cubic terms. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a2677249c594dbc196d1554e751257d1c}{mtv\+\_\+int\+\_\+tensor\+::q1}
+\begin{DoxyCompactList}\small\item\em Constant terms for the state-\/dependent noise covariance matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a83f1ba468ee4599801c226c93115bad3}{mtv\+\_\+int\+\_\+tensor\+::q2}
+\begin{DoxyCompactList}\small\item\em Constant terms for the state-\/independent noise covariance matrix. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a4a2acf9c88ba182967568ecfdd2eae0a}{mtv\+\_\+int\+\_\+tensor\+::utot}
+\begin{DoxyCompactList}\small\item\em Linear terms for the state-\/dependent noise covariance matrix. \end{DoxyCompactList}\item 
+type(coolist4), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a35e35414488bc119d9604ada011cc842}{mtv\+\_\+int\+\_\+tensor\+::vtot}
+\begin{DoxyCompactList}\small\item\em Quadratic terms for the state-\/dependent noise covariance matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacemtv__int__tensor_a192990600ca27522b2027f6c927572f7}{mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+vec}
+\begin{DoxyCompactList}\small\item\em Dummy vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacemtv__int__tensor_a6b350b05230b163e36094160758f2ee8}{mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+mat1}
+\begin{DoxyCompactList}\small\item\em Dummy matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacemtv__int__tensor_a3c9c33307f4589ac4fecf901333721fd}{mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+mat2}
+\begin{DoxyCompactList}\small\item\em Dummy matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacemtv__int__tensor_a632f7eb0b8cc4e403730d68a985393dd}{mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+mat3}
+\begin{DoxyCompactList}\small\item\em Dummy matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacemtv__int__tensor_abb373b53bcba3f369d21fd391e0d72ff}{mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+mat4}
+\begin{DoxyCompactList}\small\item\em Dummy matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}

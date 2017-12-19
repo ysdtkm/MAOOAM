@@ -1,8 +1,8 @@
 \subsection*{About}
 
-(c) 2013-\/2016 Lesley De Cruz and Jonathan Demaeyer
+(c) 2013-\/2017 Lesley De Cruz and Jonathan Demaeyer
 
-See \href{../LICENSE.txt}{\tt L\+I\+C\+E\+N\+S\+E.\+txt} for license information.
+See \href{../../LICENSE.txt}{\tt L\+I\+C\+E\+N\+S\+E.\+txt} for license information.
 
 This software is provided as supplementary material with\+:
 
@@ -11,7 +11,14 @@ This software is provided as supplementary material with\+:
 \item De Cruz, L., Demaeyer, J. and Vannitsem, S.\+: The Modular Arbitrary-\/\+Order Ocean-\/\+Atmosphere Model\+: M\+A\+O\+O\+AM v1.\+0, Geosci. Model Dev., 9, 2793-\/2808, \href{http://dx.doi.org/10.5194/gmd-9-2793-2016}{\tt doi\+:10.\+5194/gmd-\/9-\/2793-\/2016}, 2016.
 \end{DoxyItemize}
 
-{\bfseries Please cite this article if you use (a part of) this software for a publication.}
+for the M\+A\+O\+O\+AM original code, and with
+
+
+\begin{DoxyItemize}
+\item for the stochastic part.
+\end{DoxyItemize}
+
+{\bfseries Please cite both articles if you use (a part of) this software for a publication.}
 
 The authors would appreciate it if you could also send a reprint of your paper to \href{mailto:lesley.decruz@meteo.be}{\tt lesley.\+decruz@meteo.\+be}, \href{mailto:jonathan.demaeyer@meteo.be}{\tt jonathan.\+demaeyer@meteo.\+be} and \href{mailto:svn@meteo.be}{\tt svn@meteo.\+be}.
 
@@ -29,15 +36,15 @@ By default, gfortran is selected. To select one or the other, simply modify the 
 
 To install, unpack the archive in a folder, and run\+: make
 
-Remark\+: The command \char`\"{}make clean\char`\"{} removes the compiled files.
-
-For Windows users, a minimalistic G\+NU development environment (including gfortran and make) is available at \href{http://www.mingw.org}{\tt www.\+mingw.\+org} . 
+Remark\+: The command \char`\"{}make clean\char`\"{} removes the compiled files. 
 
 
 
 \subsection*{Description of the files}
 
 The model tendencies are represented through a tensor called aotensor which includes all the coefficients. This tensor is computed once at the program initialization.
+
+The following files are part of the M\+A\+O\+O\+AM model alone\+:
 
 
 \begin{DoxyItemize}
@@ -65,11 +72,42 @@ The model tendencies are represented through a tensor called aotensor which incl
 \item modeselection.\+nml \+: A namelist to specify which spectral decomposition will be used.
 \end{DoxyItemize}
 
+with the addition of the files\+:
+
+
+\begin{DoxyItemize}
+\item \hyperlink{maooam__stoch_8f90}{maooam\+\_\+stoch.\+f90} \+: Stochastic implementation of M\+A\+O\+O\+AM.
+\item \hyperlink{maooam__MTV_8f90}{maooam\+\_\+\+M\+T\+V.\+f90} \+: Main program -\/ M\+TV implementation for M\+A\+O\+O\+AM.
+\item \hyperlink{maooam__WL_8f90}{maooam\+\_\+\+W\+L.\+f90} \+: Main program -\/ WL implementation for M\+A\+O\+O\+AM.
+\item \hyperlink{corrmod_8f90}{corrmod.\+f90} \+: Unresolved variables correlation matrix initialization module.
+\item \hyperlink{corr__tensor_8f90}{corr\+\_\+tensor.\+f90} \+: Correlations and derivatives for the memory term of the WL parameterization.
+\item \hyperlink{dec__tensor_8f90}{dec\+\_\+tensor.\+f90} \+: Tensor resolved-\/unresolved components decomposition module.
+\item \hyperlink{int__comp_8f90}{int\+\_\+comp.\+f90} \+: Utility module containing the routines to perform the integration of functions.
+\item \hyperlink{int__corr_8f90}{int\+\_\+corr.\+f90} \+: Module to compute or load the integrals of the correlation matrices.
+\item \hyperlink{MAR_8f90}{M\+A\+R.\+f90} \+: Multidimensional Auto\+Regressive (M\+AR) module to generate the correlation for the WL parameterization.
+\item \hyperlink{memory_8f90}{memory.\+f90} \+: WL parameterization memory term $M_3$ computation module.
+\item \hyperlink{MTV__int__tensor_8f90}{M\+T\+V\+\_\+int\+\_\+tensor.\+f90} \+: M\+TV tensors computation module.
+\item \hyperlink{MTV__sigma__tensor_8f90}{M\+T\+V\+\_\+sigma\+\_\+tensor.\+f90} \+: M\+TV noise sigma matrices computation module.
+\item \hyperlink{WL__tensor_8f90}{W\+L\+\_\+tensor.\+f90} \+: WL tensors computation module.
+\item \hyperlink{rk2__stoch__integrator_8f90}{rk2\+\_\+stoch\+\_\+integrator.\+f90} \+: Stochastic R\+K2 integration routines module.
+\item \hyperlink{rk2__ss__integrator_8f90}{rk2\+\_\+ss\+\_\+integrator.\+f90} \+: Stochastic uncoupled resolved nonlinear and tangent linear R\+K2 dynamics integration module.
+\item \hyperlink{rk2__MTV__integrator_8f90}{rk2\+\_\+\+M\+T\+V\+\_\+integrator.\+f90} \+: M\+TV R\+K2 integration routines module.
+\item \hyperlink{rk2__WL__integrator_8f90}{rk2\+\_\+\+W\+L\+\_\+integrator.\+f90} \+: WL R\+K2 integration routines module.
+\item \hyperlink{sf__def_8f90}{sf\+\_\+def.\+f90} \+: Module to select the resolved-\/unresolved components.
+\item S\+F.\+nml \+: A namelist to select the resolved-\/unresolved components.
+\item \hyperlink{sqrt__mod_8f90}{sqrt\+\_\+mod.\+f90} \+: Utility module with various routine to compute matrix square root.
+\item \hyperlink{stoch__mod_8f90}{stoch\+\_\+mod.\+f90} \+: Utility module containing the stochastic related routines.
+\item \hyperlink{stoch__params_8f90}{stoch\+\_\+params.\+f90} \+: Stochastic models parameters module.
+\item stoch\+\_\+params.\+nml \+: A namelist to specify the stochastic models parameters.
+\end{DoxyItemize}
+
+which belong specifically to the stochastic implementation.
 
 
 
 
-\subsection*{Usage}
+
+\subsection*{M\+A\+O\+O\+AM Usage}
 
 The user first has to fill the params.\+nml and int\+\_\+params.\+nml namelist files according to their needs. Indeed, model and integration parameters can be specified respectively in the params.\+nml and int\+\_\+params.\+nml namelist files. Some examples related to already published article are available in the params folder.
 
@@ -96,32 +134,96 @@ It will generate two files \+:
 \item mean\+\_\+field.\+dat \+: the mean field (the climatology)
 \end{DoxyItemize}
 
-The tangent linear and adjoint models of M\+A\+O\+O\+AM are provided in the \hyperlink{namespacetl__ad__tensor}{tl\+\_\+ad\+\_\+tensor}, rk2\+\_\+tl\+\_\+ad\+\_\+integrator and rk4\+\_\+tl\+\_\+ad\+\_\+integrator modules. It is documented \href{./md_tl_ad_doc.html}{\tt here}.
+The tangent linear and adjoint models of M\+A\+O\+O\+AM are provided in the \hyperlink{namespacetl__ad__tensor}{tl\+\_\+ad\+\_\+tensor}, rk2\+\_\+tl\+\_\+ad\+\_\+integrator and rk4\+\_\+tl\+\_\+ad\+\_\+integrator modules. It is documented \href{./md_tl_ad_doc.html}{\tt here}. 
 
 
 
+\subsection*{Stochastic code usage}
+
+The user first has to fill the M\+A\+O\+O\+AM model namelist files according to their needs (see the previous section). Additional namelist files for the fine tuning of the parameterization must then be filled, and some \char`\"{}definition\char`\"{} files (with the extension .def) must be provided. An example is provided with the code.
+
+Full details over the parameterization options and definition files are available \href{md_sto_doc.html}{\tt here}.
+
+The program \char`\"{}maooam\+\_\+stoch\char`\"{} will generate the evolution of the full stochastic dynamics with the command\+: \begin{DoxyVerb}./maooam_stoch
+\end{DoxyVerb}
 
 
-\subsection*{Implementation notes}
+or any other dynamics if specified as an argument (see the header of \href{./maooam_stoch.f90}{\tt maooam\+\_\+stoch.\+f90}). It will generate two files \+:
+\begin{DoxyItemize}
+\item evol\+\_\+field.\+dat \+: the recorded time evolution of the variables.
+\item mean\+\_\+field.\+dat \+: the mean field (the climatology)
+\end{DoxyItemize}
 
-As the system of differential equations is at most bilinear in $y_j$ ( $j=1..n$), $\boldsymbol{y}$ being the array of variables, it can be expressed as a tensor contraction \+:
+The program \char`\"{}maooam\+\_\+\+M\+T\+V\char`\"{} will generate the evolution of the M\+TV parameterization evolution, with the command\+: \begin{DoxyVerb}./maooam_MTV
+\end{DoxyVerb}
 
-\[ \frac{d y_i}{dt} = \sum_{j,k=0}^{ndim} \, \mathcal{T}_{i,j,k} \, y_k \; y_j \]
 
-with $y_0 = 1$.
+It will generate three files \+:
+\begin{DoxyItemize}
+\item evol\+\_\+\+M\+T\+V.\+dat \+: the recorded time evolution of the variables.
+\item ptend\+\_\+\+M\+T\+V.\+dat \+: the recorded time evolution of the tendencies (used for debugging).
+\item mean\+\_\+field\+\_\+\+M\+T\+V.\+dat \+: the mean field (the climatology)
+\end{DoxyItemize}
+
+The program \char`\"{}maooam\+\_\+\+W\+L\char`\"{} will generate the evolution of the M\+TV parameterization evolution, with the command\+: \begin{DoxyVerb}./maooam_WL
+\end{DoxyVerb}
+
+
+It will generate three files \+:
+\begin{DoxyItemize}
+\item evol\+\_\+\+W\+L.\+dat \+: the recorded time evolution of the variables.
+\item ptend\+\_\+\+W\+L.\+dat \+: the recorded time evolution of the tendencies (used for debugging).
+\item mean\+\_\+field\+\_\+\+W\+L.\+dat \+: the mean field (the climatology) 
+
+
+\end{DoxyItemize}
+
+\subsection*{M\+A\+O\+O\+AM Implementation notes}
+
+As the system of differential equations is at most bilinear in $z_j$ ( $j=1..n$), $\boldsymbol{z}$ being the array of variables, it can be expressed as a tensor contraction \+:
+
+\[ \frac{d z_i}{dt} = \sum_{j,k=0}^{ndim} \, \mathcal{T}_{i,j,k} \, z_k \; z_j \]
+
+with $z_0 = 1$.
 
 The tensor \hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor\+\_\+def\+::aotensor} is the tensor $\mathcal{T}$ that encodes the differential equations is composed so that\+:
 
 
 \begin{DoxyItemize}
-\item $\mathcal{T}_{i,j,k}$ contains the contribution of $dy_i/dt$ proportional to $ y_j \, y_k$.
-\item Furthermore, $y_0$ is always equal to 1, so that $\mathcal{T}_{i,0,0}$ is the constant contribution to $dy_i/dt$
-\item $\mathcal{T}_{i,j,0} + \mathcal{T}_{i,0,j}$ is the contribution to $dy_i/dt$ which is linear in $y_j$.
+\item $\mathcal{T}_{i,j,k}$ contains the contribution of $dz_i/dt$ proportional to $ z_j \, z_k$.
+\item Furthermore, $z_0$ is always equal to 1, so that $\mathcal{T}_{i,0,0}$ is the constant contribution to $dz_i/dt$
+\item $\mathcal{T}_{i,j,0} + \mathcal{T}_{i,0,j}$ is the contribution to $dz_i/dt$ which is linear in $z_j$.
 \end{DoxyItemize}
 
 Ideally, the tensor \hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor\+\_\+def\+::aotensor} is composed as an upper triangular matrix (in the last two coordinates).
 
-The tensor for this model is composed in the \hyperlink{namespaceaotensor__def}{aotensor\+\_\+def} module and uses the inner products defined in the \hyperlink{namespaceinprod__analytic}{inprod\+\_\+analytic} module.
+The tensor for this model is composed in the \hyperlink{namespaceaotensor__def}{aotensor\+\_\+def} module and uses the inner products defined in the \hyperlink{namespaceinprod__analytic}{inprod\+\_\+analytic} module. 
+
+
+
+\subsection*{Stochastic code implementation notes}
+
+A stochastic version of M\+A\+O\+O\+AM and two stochastic parameterization methods (M\+TV and WL) are provided with this code.
+
+The stochastic version of M\+A\+O\+O\+AM is given by
+
+\[ \frac{d \boldsymbol{z}}{dt} = f(\boldsymbol{z})+ \boldsymbol{q} \cdot \boldsymbol{dW} (t)\]
+
+where $\boldsymbol{dW}$ is a vector of standard Gaussian White noise and where several choice for $f(\boldsymbol{z})$ are available. For instance, the default choice is to use the full dynamics\+: \[ f(\boldsymbol{z}) = \sum_{j,k=0}^{ndim} \, \mathcal{T}_{i,j,k} \, z_k \; z_j . \] The implementation uses the tensorial framework described above and add some noise to it. This stochastic version is further detailed \href{md_sto_doc.html}{\tt here}.
+
+The M\+TV parameterization for M\+A\+O\+O\+AM is given by
+
+\[ \frac{d\boldsymbol{x}}{dt} = F_x(\boldsymbol{x}) + \frac{1}{\delta} R(\boldsymbol{x}) + G(\boldsymbol{x}) + \sqrt{2} \,\, \boldsymbol{\sigma}(\boldsymbol{x}) \cdot \boldsymbol{dW} \]
+
+where $\boldsymbol{x}$ is the set of resolved variables and $\boldsymbol{dW}$ is a vector of standard Gaussian White noise. $F_x$ is the set of tendencies of resolved system alone and $\delta$ is the timescale separation parameter.
+
+The WL parameterizations for M\+A\+O\+O\+AM is given by
+
+\[\frac{d\boldsymbol{x}}{dt} = F_x(\boldsymbol{x}) + \varepsilon \, M_1(\boldsymbol{x}) + \varepsilon^2 \, M_2(\boldsymbol{x},t) + \varepsilon^2 \, M_3 (\boldsymbol{x},t)\]
+
+where $\varepsilon$ is the resolved-\/unresolved components coupling strenght and where the different terms $M_i$ account for different effect.
+
+The implementation for these two approaches uses the tensorial framework described above, with the addition of new tensors to account for the terms $R,G,\sigma,M_1,M_2,M_3$. They are detailed more completely \href{md_sto_doc.html}{\tt here}.
 
 
 

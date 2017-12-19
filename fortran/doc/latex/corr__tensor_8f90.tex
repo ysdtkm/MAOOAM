@@ -1,0 +1,33 @@
+\hypertarget{corr__tensor_8f90}{}\section{corr\+\_\+tensor.\+f90 File Reference}
+\label{corr__tensor_8f90}\index{corr\+\_\+tensor.\+f90@{corr\+\_\+tensor.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacecorr__tensor}{corr\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Module to compute the correlations and derivatives used to compute the memory term of the WL parameterization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacecorr__tensor_a95d9ad1c3ae4a30e2eead85010be9d5d}{corr\+\_\+tensor\+::init\+\_\+corr\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the correlations tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+type(coolist), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a00e5da344c9c6c9326c13bb1006986c7}{corr\+\_\+tensor\+::yy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle Y \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a9bb5cad0b648cdfbca5d32eac1b73976}{corr\+\_\+tensor\+::dy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle \partial_Y \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a921f3b41785556ae5502a7ddf0ebf6f6}{corr\+\_\+tensor\+::ydy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle Y \otimes \partial_Y \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a760409e00ffdf80fe461a8d7fd5c4966}{corr\+\_\+tensor\+::dyy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle \partial_Y \otimes Y^s \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+type(coolist4), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorr__tensor_a07becc22d3c93783a90fca0e19b7dc2e}{corr\+\_\+tensor\+::ydyy}
+\begin{DoxyCompactList}\small\item\em Coolist holding the $\langle Y \otimes \partial_Y \otimes Y^s \otimes Y^s \rangle$ terms. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacecorr__tensor_ad86b86fa1ec05686a778ab6b19273a38}{corr\+\_\+tensor\+::dumb\+\_\+vec}
+\begin{DoxyCompactList}\small\item\em Dumb vector to be used in the calculation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacecorr__tensor_aa0f6f11b738412d93dbd832a961d6e78}{corr\+\_\+tensor\+::dumb\+\_\+mat1}
+\begin{DoxyCompactList}\small\item\em Dumb matrix to be used in the calculation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacecorr__tensor_ad46767b09e31f58c53a5a27b12709e30}{corr\+\_\+tensor\+::dumb\+\_\+mat2}
+\begin{DoxyCompactList}\small\item\em Dumb matrix to be used in the calculation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacecorr__tensor_acab3c2a99b90ed8bfc314f41de01e510}{corr\+\_\+tensor\+::expm}
+\begin{DoxyCompactList}\small\item\em Matrix holding the product inv\+\_\+corr\+\_\+i$\ast$corr\+\_\+ij at time $s$. \end{DoxyCompactList}\end{DoxyCompactItemize}

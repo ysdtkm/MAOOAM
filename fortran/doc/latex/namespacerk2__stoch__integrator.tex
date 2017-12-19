@@ -1,0 +1,312 @@
+\hypertarget{namespacerk2__stoch__integrator}{}\section{rk2\+\_\+stoch\+\_\+integrator Module Reference}
+\label{namespacerk2__stoch__integrator}\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+
+
+Module with the stochastic rk2 integration routines.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__stoch__integrator_af2aad21166864b46801d558106e865f5}{init\+\_\+integrator} (force)
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the integrator. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__stoch__integrator_ab4478053676fb4c82516b6427ecbdb35}{tendencies} (t, y, res)
+\begin{DoxyCompactList}\small\item\em Routine computing the tendencies of the selected model. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__stoch__integrator_a6c9446aa0badd0e16d3762e762d330d5}{step} (y, t, dt, dtn, res, tend)
+\begin{DoxyCompactList}\small\item\em Routine to perform a stochastic step of the selected dynamics (Heun algorithm). The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_abfc963ed17f278357be8da9473244c38}{dwar}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a01c22fa8c4f3e14201f3e0f32aa8cc3d}{dwau}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_afd5ed4abd1a2c69b89beb41d2718e702}{dwor}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a8c5c398d4bf895571169d6fd78300df0}{dwou}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a549cd39d4971e7b9268a4beb079feb80}{buf\+\_\+y1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a3dbdf4830785d5db95d610433de2d0bd}{buf\+\_\+f0}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_aea615b16fd861e4ccb1f26c4ee64df85}{buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Integration buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a7d810360a0ea3b9cc7878fd6cfe8e39d}{anoise}
+\begin{DoxyCompactList}\small\item\em Additive noise term. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a0bf74d9bd925f796fa25569ab96997fb}{int\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Dummy tensor that will hold the tendencies tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module with the stochastic rk2 integration routines. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+This module actually contains the Heun algorithm routines. There are four modes for this integrator\+:
+\begin{DoxyItemize}
+\item full\+: use the full dynamics
+\item ures\+: use the intrinsic unresolved dynamics
+\item qfst\+: use the quadratic terms of the unresolved tendencies
+\item reso\+: use the resolved dynamics alone 
+\end{DoxyItemize}
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!init\+\_\+integrator@{init\+\_\+integrator}}
+\index{init\+\_\+integrator@{init\+\_\+integrator}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{init\+\_\+integrator(force)}{init_integrator(force)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+stoch\+\_\+integrator\+::init\+\_\+integrator (
+\begin{DoxyParamCaption}
+\item[{character$\ast$4, intent(in), optional}]{force}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__stoch__integrator_af2aad21166864b46801d558106e865f5}{}\label{namespacerk2__stoch__integrator_af2aad21166864b46801d558106e865f5}
+
+
+Subroutine to initialize the integrator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em force} & Parameter to force the mode of the integrator \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+48     \textcolor{keywordtype}{INTEGER} :: allocstat
+49     \textcolor{keywordtype}{CHARACTER*4}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: force
+50     \textcolor{keywordtype}{CHARACTER*4} :: test
+51 
+52     \textcolor{keyword}{ALLOCATE}(buf\_y1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f0(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),buf\_f1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),\hyperlink{namespacestat}{stat}=allocstat)
+53     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+54 
+55     \textcolor{keyword}{ALLOCATE}(anoise(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),\hyperlink{namespacestat}{stat}=allocstat)
+56     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+57 
+58     \textcolor{keyword}{ALLOCATE}(dwar(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwau(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwor(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),dwou(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),
+      \hyperlink{namespacestat}{stat}=allocstat)
+59     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+60 
+61     \textcolor{keyword}{ALLOCATE}(int\_tensor(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),\hyperlink{namespacestat}{stat}=allocstat)
+62     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+63 
+64     dwar=0.d0
+65     dwor=0.d0
+66     dwau=0.d0
+67     dwou=0.d0
+68 
+69     \textcolor{keywordflow}{IF} (\textcolor{keyword}{PRESENT}(force)) \textcolor{keywordflow}{THEN}
+70        test=force
+71     \textcolor{keywordflow}{ELSE}
+72        test=\hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{mode}
+73 \textcolor{keywordflow}{    ENDIF}
+74 
+75     \textcolor{keywordflow}{SELECT CASE} (test)
+76     \textcolor{keywordflow}{CASE}(\textcolor{stringliteral}{'full'})
+77        \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(\hyperlink{namespaceaotensor__def_a0dc43bc9294a18f2fe57b67489f1702f}{aotensor},int\_tensor)
+78     \textcolor{keywordflow}{CASE}(\textcolor{stringliteral}{'ures'})
+79        \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(ff\_tensor,int\_tensor)
+80     \textcolor{keywordflow}{CASE}(\textcolor{stringliteral}{'qfst'})
+81        \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(byyy,int\_tensor)
+82     \textcolor{keywordflow}{CASE}(\textcolor{stringliteral}{'reso'})
+83        \textcolor{keyword}{CALL }\hyperlink{namespacetensor_a4a88ee8077278486c5128ad97617969e}{copy\_tensor}(ss\_tensor,int\_tensor)
+84 \textcolor{keywordflow}{    CASE DEFAULT}
+85        stop \textcolor{stringliteral}{'*** MODE variable not properly defined ***'}
+86 \textcolor{keywordflow}{    END SELECT}
+87 
+\end{DoxyCode}
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!step@{step}}
+\index{step@{step}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{step(y, t, dt, dtn, res, tend)}{step(y, t, dt, dtn, res, tend)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public rk2\+\_\+stoch\+\_\+integrator\+::step (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), intent(inout)}]{t, }
+\item[{real(kind=8), intent(in)}]{dt, }
+\item[{real(kind=8), intent(in)}]{dtn, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{tend}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacerk2__stoch__integrator_a6c9446aa0badd0e16d3762e762d330d5}{}\label{namespacerk2__stoch__integrator_a6c9446aa0badd0e16d3762e762d330d5}
+
+
+Routine to perform a stochastic step of the selected dynamics (Heun algorithm). The incremented time is returned. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & Initial point. \\
+\hline
+{\em t} & Actual integration time \\
+\hline
+{\em dt} & Integration timestep. \\
+\hline
+{\em dtn} & Stochastic integration timestep (normally square-\/root of dt). \\
+\hline
+{\em res} & Final point after the step. \\
+\hline
+{\em tend} & Partial or full tendencies used to perform the step (used for debugging). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 112 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+112     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+113     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+114     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: dt,dtn
+115     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res,tend
+116     
+117     \textcolor{keyword}{CALL }stoch\_atm\_res\_vec(dwar)
+118     \textcolor{keyword}{CALL }stoch\_atm\_unres\_vec(dwau)
+119     \textcolor{keyword}{CALL }stoch\_oc\_res\_vec(dwor)
+120     \textcolor{keyword}{CALL }stoch\_oc\_unres\_vec(dwou)
+121     anoise=(q\_ar*dwar+q\_au*dwau+q\_or*dwor+q\_ou*dwou)*dtn
+122     \textcolor{keyword}{CALL }tendencies(t,y,buf\_f0)
+123     \textcolor{keyword}{CALL }sparse\_mul3(int\_tensor,y,y,tend)
+124     buf\_y1 = y+dt*buf\_f0+anoise
+125     \textcolor{keyword}{CALL }sparse\_mul3(int\_tensor,buf\_y1,buf\_y1,buf\_f1)
+126     tend=0.5*(tend+buf\_f1)
+127     \textcolor{keyword}{CALL }tendencies(t,buf\_y1,buf\_f1)
+128     res=y+0.5*(buf\_f0+buf\_f1)*dt+anoise
+129     t=t+dt
+\end{DoxyCode}
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!tendencies@{tendencies}}
+\index{tendencies@{tendencies}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{tendencies(t, y, res)}{tendencies(t, y, res)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine rk2\+\_\+stoch\+\_\+integrator\+::tendencies (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{t, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{y, }
+\item[{real(kind=8), dimension(0\+:ndim), intent(out)}]{res}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_ab4478053676fb4c82516b6427ecbdb35}{}\label{namespacerk2__stoch__integrator_ab4478053676fb4c82516b6427ecbdb35}
+
+
+Routine computing the tendencies of the selected model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & Time at which the tendencies have to be computed. Actually not needed for autonomous systems. \\
+\hline
+{\em y} & Point at which the tendencies have to be computed. \\
+\hline
+{\em res} & vector to store the result. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+Note that it is N\+OT safe to pass {\ttfamily y} as a result buffer, as this operation does multiple passes. 
+\end{DoxyRemark}
+
+
+Definition at line 97 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+97     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
+98     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+99     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+100     \textcolor{keyword}{CALL }sparse\_mul3(int\_tensor, y, y, res)
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!anoise@{anoise}}
+\index{anoise@{anoise}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{anoise}{anoise}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::anoise\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_a7d810360a0ea3b9cc7878fd6cfe8e39d}{}\label{namespacerk2__stoch__integrator_a7d810360a0ea3b9cc7878fd6cfe8e39d}
+
+
+Additive noise term. 
+
+
+
+Definition at line 37 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+37   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: anoise\textcolor{comment}{ !< Additive noise term}
+\end{DoxyCode}
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!buf\+\_\+f0@{buf\+\_\+f0}}
+\index{buf\+\_\+f0@{buf\+\_\+f0}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f0}{buf_f0}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::buf\+\_\+f0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_a3dbdf4830785d5db95d610433de2d0bd}{}\label{namespacerk2__stoch__integrator_a3dbdf4830785d5db95d610433de2d0bd}
+
+
+Definition at line 35 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!buf\+\_\+f1@{buf\+\_\+f1}}
+\index{buf\+\_\+f1@{buf\+\_\+f1}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+f1}{buf_f1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::buf\+\_\+f1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_aea615b16fd861e4ccb1f26c4ee64df85}{}\label{namespacerk2__stoch__integrator_aea615b16fd861e4ccb1f26c4ee64df85}
+
+
+Integration buffers. 
+
+
+
+Definition at line 35 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!buf\+\_\+y1@{buf\+\_\+y1}}
+\index{buf\+\_\+y1@{buf\+\_\+y1}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{buf\+\_\+y1}{buf_y1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::buf\+\_\+y1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_a549cd39d4971e7b9268a4beb079feb80}{}\label{namespacerk2__stoch__integrator_a549cd39d4971e7b9268a4beb079feb80}
+
+
+Definition at line 35 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+35   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: buf\_y1,buf\_f0,buf\_f1\textcolor{comment}{ !< Integration buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!dwar@{dwar}}
+\index{dwar@{dwar}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwar}{dwar}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::dwar\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_abfc963ed17f278357be8da9473244c38}{}\label{namespacerk2__stoch__integrator_abfc963ed17f278357be8da9473244c38}
+
+
+Definition at line 33 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+33   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dwar,dwau,dwor,dwou\textcolor{comment}{ !< Standard gaussian noise buffers}
+\end{DoxyCode}
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!dwau@{dwau}}
+\index{dwau@{dwau}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwau}{dwau}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::dwau\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_a01c22fa8c4f3e14201f3e0f32aa8cc3d}{}\label{namespacerk2__stoch__integrator_a01c22fa8c4f3e14201f3e0f32aa8cc3d}
+
+
+Definition at line 33 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!dwor@{dwor}}
+\index{dwor@{dwor}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwor}{dwor}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::dwor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_afd5ed4abd1a2c69b89beb41d2718e702}{}\label{namespacerk2__stoch__integrator_afd5ed4abd1a2c69b89beb41d2718e702}
+
+
+Definition at line 33 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!dwou@{dwou}}
+\index{dwou@{dwou}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{dwou}{dwou}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::dwou\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_a8c5c398d4bf895571169d6fd78300df0}{}\label{namespacerk2__stoch__integrator_a8c5c398d4bf895571169d6fd78300df0}
+
+
+Standard gaussian noise buffers. 
+
+
+
+Definition at line 33 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+\index{rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}!int\+\_\+tensor@{int\+\_\+tensor}}
+\index{int\+\_\+tensor@{int\+\_\+tensor}!rk2\+\_\+stoch\+\_\+integrator@{rk2\+\_\+stoch\+\_\+integrator}}
+\subsubsection[{\texorpdfstring{int\+\_\+tensor}{int_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable rk2\+\_\+stoch\+\_\+integrator\+::int\+\_\+tensor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacerk2__stoch__integrator_a0bf74d9bd925f796fa25569ab96997fb}{}\label{namespacerk2__stoch__integrator_a0bf74d9bd925f796fa25569ab96997fb}
+
+
+Dummy tensor that will hold the tendencies tensor. 
+
+
+
+Definition at line 39 of file rk2\+\_\+stoch\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+39   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: int\_tensor\textcolor{comment}{ !< Dummy tensor that will hold the
+       tendencies tensor}
+\end{DoxyCode}

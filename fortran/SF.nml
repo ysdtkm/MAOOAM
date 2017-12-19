@@ -1,0 +1,48 @@
+!------------------------------------------------------------------------------!
+! Namelist file :                                                              !
+! Fast variables specification (1 -> fast, 0 -> slow)                          !
+!------------------------------------------------------------------------------!
+ 
+&SFLIST
+  ! psi variables
+  SF(1) = 0   ! typ= A, Nx= 0.0, Ny= 1.0
+  SF(2) = 1   ! typ= K, Nx= 1.0, Ny= 1.0
+  SF(3) = 1   ! typ= L, Nx= 1.0, Ny= 1.0
+  SF(4) = 1   ! typ= A, Nx= 0.0, Ny= 2.0
+  SF(5) = 0   ! typ= K, Nx= 1.0, Ny= 2.0
+  SF(6) = 0   ! typ= L, Nx= 1.0, Ny= 2.0
+  SF(7) = 1   ! typ= K, Nx= 2.0, Ny= 1.0
+  SF(8) = 1   ! typ= L, Nx= 2.0, Ny= 1.0
+  SF(9) = 0   ! typ= K, Nx= 2.0, Ny= 2.0
+  SF(10) = 0   ! typ= L, Nx= 2.0, Ny= 2.0
+  ! theta variables
+  SF(11) = 0   ! typ= A, Nx= 0.0, Ny= 1.0
+  SF(12) = 1   ! typ= K, Nx= 1.0, Ny= 1.0
+  SF(13) = 1   ! typ= L, Nx= 1.0, Ny= 1.0
+  SF(14) = 1   ! typ= A, Nx= 0.0, Ny= 2.0
+  SF(15) = 0   ! typ= K, Nx= 1.0, Ny= 2.0
+  SF(16) = 0   ! typ= L, Nx= 1.0, Ny= 2.0
+  SF(17) = 1   ! typ= K, Nx= 2.0, Ny= 1.0
+  SF(18) = 1   ! typ= L, Nx= 2.0, Ny= 1.0
+  SF(19) = 0   ! typ= K, Nx= 2.0, Ny= 2.0
+  SF(20) = 0   ! typ= L, Nx= 2.0, Ny= 2.0
+  ! A variables
+  SF(21) = 0   ! Nx= 0.5, Ny= 1.0
+  SF(22) = 0   ! Nx= 0.5, Ny= 2.0
+  SF(23) = 0   ! Nx= 0.5, Ny= 3.0
+  SF(24) = 0   ! Nx= 0.5, Ny= 4.0
+  SF(25) = 0   ! Nx= 1.0, Ny= 1.0
+  SF(26) = 0   ! Nx= 1.0, Ny= 2.0
+  SF(27) = 0   ! Nx= 1.0, Ny= 3.0
+  SF(28) = 0   ! Nx= 1.0, Ny= 4.0
+  ! T variables
+  SF(29) = 0   ! Nx= 0.5, Ny= 1.0
+  SF(30) = 0   ! Nx= 0.5, Ny= 2.0
+  SF(31) = 0   ! Nx= 0.5, Ny= 3.0
+  SF(32) = 0   ! Nx= 0.5, Ny= 4.0
+  SF(33) = 0   ! Nx= 1.0, Ny= 1.0
+  SF(34) = 0   ! Nx= 1.0, Ny= 2.0
+  SF(35) = 0   ! Nx= 1.0, Ny= 3.0
+  SF(36) = 0   ! Nx= 1.0, Ny= 4.0
+&END
+ 

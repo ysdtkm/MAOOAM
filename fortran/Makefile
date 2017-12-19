@@ -66,15 +66,33 @@ endif
 .SUFFIXES:
 .SUFFIXES: .f90 .o .mod .out .test
 
-PROGRAMS = maooam test_tl_ad
+PROGRAMS = maooam test_tl_ad maooam_stoch 
 
-MODULES = util.mod params.mod inprod_analytic.mod aotensor_def.mod ic_def.mod $(INTEGRATOR).mod stat.mod tensor.mod tl_ad_tensor.mod $(TL_AD_INTEGRATOR).mod $(IFPORT)
+PROGRAMS_MTV = maooam_MTV
+
+PROGRAMS_WL = maooam_WL
+
+MODULES = util.mod params.mod stoch_params.mod stoch_mod.mod inprod_analytic.mod aotensor_def.mod ic_def.mod $(INTEGRATOR).mod stat.mod tensor.mod tl_ad_tensor.mod sf_def.mod dec_tensor.mod WL_tensor.mod int_comp.mod corrmod.mod int_corr.mod MTV_int_tensor.mod MTV_sigma_tensor.mod corr_tensor.mod rk2_MTV_integrator.mod rk2_stoch_integrator.mod rk2_ss_integrator.mod sqrt_mod.mod MAR.mod rk2_WL_integrator.mod memory.mod $(TL_AD_INTEGRATOR).mod $(IFPORT)
 MODULE_OBJECTS = $(MODULES:.mod=.o)
 
 TEST_PROGRAMS = test_inprod_analytic test_aotensor
 TESTS = $(TEST_PROGRAMS:=.test)
 
-all: $(PROGRAMS) 
+TEST_MTV_PROGRAMS = test_dec_tensor test_corr test_MTV_sigma_tensor test_MTV_int_tensor
+TESTS_MTV = $(TEST_MTV_PROGRAMS:=.test)
+
+TEST_WL_PROGRAMS = test_dec_tensor test_corr test_MAR test_WL_tensor test_corr_tensor test_memory
+TESTS_WL = $(TEST_WL_PROGRAMS:=.test)
+
+all: $(PROGRAMS) stoch
+
+corr: $(PROGRAMS_CORR)
+
+mtv: corr $(PROGRAMS_MTV) 
+
+wl: corr $(PROGRAMS_WL)
+
+stoch: mtv wl
 
 debug: COMPILER_FLAGS = $(COMPILER_FLAGS_DBG) 
 debug: LD_FLAGS = $(LD_FLAGS_DBG)
@@ -92,6 +110,34 @@ test_aotensor.test: test_aotensor
 	./$< |sort  > tests/$<.out
 	diff tests/$<.out tests/$<.ref && echo PASS: $@ || echo FAIL: $@
 
+test_mtv: $(TESTS_MTV)
+
+test_dec_tensor.test: test_dec_tensor
+	./$< > tests/$<.out
+
+test_MTV_int_tensor.test: test_MTV_int_tensor
+	./$< > tests/$<.out
+
+test_corr.test: test_corr
+	./$< > tests/$<.out
+
+test_MTV_sigma_tensor.test: test_MTV_sigma_tensor
+	./$< > tests/$<.out
+
+test_wl: $(TESTS_WL)
+
+test_MAR.test: test_MAR
+	./$< > tests/$<.out
+
+test_WL_tensor.test: test_WL_tensor
+	./$< > tests/$<.out
+
+test_corr_tensor.test: test_corr_tensor
+	./$< > tests/$<.out
+
+test_memory.test: test_memory
+	./$< > tests/$<.out
+
 %.mod: %.f90  
 	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) -c $<
 
@@ -101,16 +147,33 @@ test_aotensor.test: test_aotensor
 %: %.o $(MODULE_OBJECTS)
 	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) $^ -o $@ 
 
+tensor.mod: util.mod
 inprod_analytic.mod: params.mod
 aotensor_def.mod: tensor.mod inprod_analytic.mod
 $(INTEGRATOR).mod: aotensor_def.mod
 ic_def.mod: util.mod aotensor_def.mod
 stat.mod: params.mod
 tl_ad_tensor.mod: aotensor_def.mod
+dec_tensor.mod: aotensor_def.mod sf_def.mod params.mod stoch_params.mod
+WL_tensor.mod: tensor.mod dec_tensor.mod corr_tensor.mod stoch_params.mod
+sf_def.mod: util.mod aotensor_def.mod
+corrmod.mod: params.mod sf_def.mod stoch_params.mod
+stoch_params.mod: params.mod
+int_corr.mod: params.mod sf_def.mod tensor.mod int_comp.mod corrmod.mod
+MTV_int_tensor.mod: tensor.mod dec_tensor.mod int_corr.mod stoch_params.mod
+corr_tensor.mod: tensor.mod params.mod stoch_params.mod corrmod.mod util.mod sf_def.mod
+rk2_stoch_integrator.mod: params.mod tensor.mod dec_tensor.mod stoch_params.mod stoch_mod.mod
+rk2_ss_integrator.mod: params.mod tensor.mod dec_tensor.mod stoch_params.mod stoch_mod.mod
+rk2_MTV_integrator.mod: params.mod tensor.mod MTV_int_tensor.mod MTV_sigma_tensor.mod rk2_ss_integrator.mod stoch_mod.mod
+rk2_WL_integrator.mod: params.mod tensor.mod WL_tensor.mod MAR.mod memory.mod rk2_ss_integrator.mod stoch_mod.mod
+memory.mod: params.mod stoch_params.mod tensor.mod WL_tensor.mod rk2_ss_integrator.mod
+MTV_sigma_tensor.mod: sqrt_mod.mod params.mod MTV_int_tensor.mod tensor.mod util.mod
+sqrt_mod.mod: params.mod util.mod
 $(TL_AD_INTEGRATOR).mod: tl_ad_tensor.mod
 util.mod: $(IFPORT)
+stoch_mod.mod: sf_def.mod
 
 clean:
-	$(RM) *.o *.mod $(PROGRAMS) $(TEST_PROGRAMS) tests/*.out
+	$(RM) *.o *.mod $(PROGRAMS) $(PROGRAMS_MTV) $(PROGRAMS_CORR) $(PROGRAMS_WL) $(TEST_PROGRAMS) $(TEST_MTV_PROGRAMS) $(TEST_WL_PROGRAMS) tests/*.out tests/*.dat
 
-.PHONY: clean all test %.test
+.PHONY: clean all test test_mtv mtv test_wl wl %.tes

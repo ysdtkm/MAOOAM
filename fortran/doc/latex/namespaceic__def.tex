@@ -58,8 +58,8 @@ Definition at line 32 of file ic\+\_\+def.\+f90.
 42 
 43     \textcolor{keyword}{CALL }random\_seed(size=j)
 44    
-45     \textcolor{keywordflow}{IF} (ndim == 0) stop \textcolor{stringliteral}{"*** Number of dimensions is 0! ***"}
-46     \textcolor{keyword}{ALLOCATE}(ic(0:ndim),seed(j), \hyperlink{namespacestat}{stat}=allocstat)
+45     \textcolor{keywordflow}{IF} (\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim} == 0) stop \textcolor{stringliteral}{"*** Number of dimensions is 0! ***"}
+46     \textcolor{keyword}{ALLOCATE}(ic(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}),seed(j), \hyperlink{namespacestat}{stat}=allocstat)
 47     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
 48 
 49     \textcolor{keyword}{INQUIRE}(file=\textcolor{stringliteral}{'./IC.nml'},exist=exists)

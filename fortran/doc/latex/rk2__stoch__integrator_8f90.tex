@@ -1,0 +1,37 @@
+\hypertarget{rk2__stoch__integrator_8f90}{}\section{rk2\+\_\+stoch\+\_\+integrator.\+f90 File Reference}
+\label{rk2__stoch__integrator_8f90}\index{rk2\+\_\+stoch\+\_\+integrator.\+f90@{rk2\+\_\+stoch\+\_\+integrator.\+f90}}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacerk2__stoch__integrator}{rk2\+\_\+stoch\+\_\+integrator}
+\begin{DoxyCompactList}\small\item\em Module with the stochastic rk2 integration routines. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacerk2__stoch__integrator_af2aad21166864b46801d558106e865f5}{rk2\+\_\+stoch\+\_\+integrator\+::init\+\_\+integrator} (force)
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the integrator. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__stoch__integrator_ab4478053676fb4c82516b6427ecbdb35}{rk2\+\_\+stoch\+\_\+integrator\+::tendencies} (t, y, res)
+\begin{DoxyCompactList}\small\item\em Routine computing the tendencies of the selected model. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacerk2__stoch__integrator_a6c9446aa0badd0e16d3762e762d330d5}{rk2\+\_\+stoch\+\_\+integrator\+::step} (y, t, dt, dtn, res, tend)
+\begin{DoxyCompactList}\small\item\em Routine to perform a stochastic step of the selected dynamics (Heun algorithm). The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_abfc963ed17f278357be8da9473244c38}{rk2\+\_\+stoch\+\_\+integrator\+::dwar}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a01c22fa8c4f3e14201f3e0f32aa8cc3d}{rk2\+\_\+stoch\+\_\+integrator\+::dwau}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_afd5ed4abd1a2c69b89beb41d2718e702}{rk2\+\_\+stoch\+\_\+integrator\+::dwor}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a8c5c398d4bf895571169d6fd78300df0}{rk2\+\_\+stoch\+\_\+integrator\+::dwou}
+\begin{DoxyCompactList}\small\item\em Standard gaussian noise buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a549cd39d4971e7b9268a4beb079feb80}{rk2\+\_\+stoch\+\_\+integrator\+::buf\+\_\+y1}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a3dbdf4830785d5db95d610433de2d0bd}{rk2\+\_\+stoch\+\_\+integrator\+::buf\+\_\+f0}
+\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_aea615b16fd861e4ccb1f26c4ee64df85}{rk2\+\_\+stoch\+\_\+integrator\+::buf\+\_\+f1}
+\begin{DoxyCompactList}\small\item\em Integration buffers. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a7d810360a0ea3b9cc7878fd6cfe8e39d}{rk2\+\_\+stoch\+\_\+integrator\+::anoise}
+\begin{DoxyCompactList}\small\item\em Additive noise term. \end{DoxyCompactList}\item 
+type(coolist), dimension(\+:), allocatable \hyperlink{namespacerk2__stoch__integrator_a0bf74d9bd925f796fa25569ab96997fb}{rk2\+\_\+stoch\+\_\+integrator\+::int\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Dummy tensor that will hold the tendencies tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}

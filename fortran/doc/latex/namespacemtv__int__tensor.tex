@@ -1,0 +1,628 @@
+\hypertarget{namespacemtv__int__tensor}{}\section{mtv\+\_\+int\+\_\+tensor Module Reference}
+\label{namespacemtv__int__tensor}\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+
+
+The M\+TV tensors used to integrate the M\+TV model.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacemtv__int__tensor_a5b3112e973892c80810cbff003525946}{init\+\_\+mtv\+\_\+int\+\_\+tensor}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the M\+TV tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a8979293cdfe7d9e67f3348a444076f3c}{h1}
+\begin{DoxyCompactList}\small\item\em First constant vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_ad0dd8bb28d5e88e5776c48b302ae4b29}{h2}
+\begin{DoxyCompactList}\small\item\em Second constant vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a596c16bed479b011818d66810e590bae}{h3}
+\begin{DoxyCompactList}\small\item\em Third constant vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_aa82b34ace4bb21fbfc0e37ccc3db4815}{htot}
+\begin{DoxyCompactList}\small\item\em Total constant vector. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a2dbd181e62dbbb9aedcbd6535ca56ec5}{l1}
+\begin{DoxyCompactList}\small\item\em First linear tensor. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_aa6dcec8a4783e982cd8894a15ae210d4}{l2}
+\begin{DoxyCompactList}\small\item\em Second linear tensor. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a04155fe5ee1b9580674140eab208a7bc}{l3}
+\begin{DoxyCompactList}\small\item\em Third linear tensor. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_ace2795d6c48885b8f847384747e8ad5d}{ltot}
+\begin{DoxyCompactList}\small\item\em Total linear tensor. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a0220ca0d7f49bf405e6848492ec24995}{b1}
+\begin{DoxyCompactList}\small\item\em First quadratic tensor. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a71cc55d84fa25e49c9886d5ac9fc5032}{b2}
+\begin{DoxyCompactList}\small\item\em Second quadratic tensor. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a888f93868eeb459582a5acc909a33374}{btot}
+\begin{DoxyCompactList}\small\item\em Total quadratic tensor. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist4}{coolist4}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a3722af69dcc509f4e7d24f898a7e68ae}{mtot}
+\begin{DoxyCompactList}\small\item\em Tensor for the cubic terms. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a2677249c594dbc196d1554e751257d1c}{q1}
+\begin{DoxyCompactList}\small\item\em Constant terms for the state-\/dependent noise covariance matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a83f1ba468ee4599801c226c93115bad3}{q2}
+\begin{DoxyCompactList}\small\item\em Constant terms for the state-\/independent noise covariance matrix. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist}{coolist}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a4a2acf9c88ba182967568ecfdd2eae0a}{utot}
+\begin{DoxyCompactList}\small\item\em Linear terms for the state-\/dependent noise covariance matrix. \end{DoxyCompactList}\item 
+type(\hyperlink{structtensor_1_1coolist4}{coolist4}), dimension(\+:), allocatable, public \hyperlink{namespacemtv__int__tensor_a35e35414488bc119d9604ada011cc842}{vtot}
+\begin{DoxyCompactList}\small\item\em Quadratic terms for the state-\/dependent noise covariance matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacemtv__int__tensor_a192990600ca27522b2027f6c927572f7}{dumb\+\_\+vec}
+\begin{DoxyCompactList}\small\item\em Dummy vector. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacemtv__int__tensor_a6b350b05230b163e36094160758f2ee8}{dumb\+\_\+mat1}
+\begin{DoxyCompactList}\small\item\em Dummy matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacemtv__int__tensor_a3c9c33307f4589ac4fecf901333721fd}{dumb\+\_\+mat2}
+\begin{DoxyCompactList}\small\item\em Dummy matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacemtv__int__tensor_a632f7eb0b8cc4e403730d68a985393dd}{dumb\+\_\+mat3}
+\begin{DoxyCompactList}\small\item\em Dummy matrix. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable \hyperlink{namespacemtv__int__tensor_abb373b53bcba3f369d21fd391e0d72ff}{dumb\+\_\+mat4}
+\begin{DoxyCompactList}\small\item\em Dummy matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The M\+TV tensors used to integrate the M\+TV model. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+See \+: Franzke, C., Majda, A. J., \& Vanden-\/\+Eijnden, E. (2005). Low-\/order stochastic mode reduction for a realistic barotropic model climate. Journal of the atmospheric sciences, 62(6), 1722-\/1745. 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!init\+\_\+mtv\+\_\+int\+\_\+tensor@{init\+\_\+mtv\+\_\+int\+\_\+tensor}}
+\index{init\+\_\+mtv\+\_\+int\+\_\+tensor@{init\+\_\+mtv\+\_\+int\+\_\+tensor}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{init\+\_\+mtv\+\_\+int\+\_\+tensor}{init_mtv_int_tensor}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public mtv\+\_\+int\+\_\+tensor\+::init\+\_\+mtv\+\_\+int\+\_\+tensor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacemtv__int__tensor_a5b3112e973892c80810cbff003525946}{}\label{namespacemtv__int__tensor_a5b3112e973892c80810cbff003525946}
+
+
+Subroutine to initialise the M\+TV tensor. 
+
+
+
+Definition at line 89 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+89     \textcolor{keywordtype}{INTEGER} :: allocstat,i,j,k,l
+90 
+91     print*, \textcolor{stringliteral}{'Initializing the decomposition tensors...'}
+92     \textcolor{keyword}{CALL }init\_dec\_tensor
+93     print*, \textcolor{stringliteral}{"Initializing the correlation matrices and tensors..."}
+94     \textcolor{keyword}{CALL }init\_corrint
+95     print*, \textcolor{stringliteral}{"Computing the correlation integrated matrices and tensors..."}
+96     \textcolor{keyword}{CALL }comp\_corrint
+97     
+98     \textcolor{comment}{!H part}
+99     print*, \textcolor{stringliteral}{"Computing the H term..."}
+100 
+101     \textcolor{keyword}{ALLOCATE}(h1(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), h2(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), h3(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), htot(0:\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), 
+      \hyperlink{namespacestat}{stat}=allocstat)
+102     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+103 
+104     \textcolor{keyword}{ALLOCATE}(dumb\_mat1(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), dumb\_mat2(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+105     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+106 
+107     \textcolor{keyword}{ALLOCATE}(dumb\_mat3(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), dumb\_mat4(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+108     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+109 
+110     \textcolor{comment}{!H1}
+111     \textcolor{keyword}{CALL }coo\_to\_mat\_ik(lxy,dumb\_mat1)
+112     dumb\_mat2=matmul(dumb\_mat1,corrint)
+113     \textcolor{keyword}{CALL }sparse\_mul3\_with\_mat(bxxy,dumb\_mat2,h1)
+114     
+115     \textcolor{comment}{! H2}
+116     h2=0.d0
+117     \textcolor{keywordflow}{IF} (\hyperlink{namespacestoch__params_a2c3f6439fd2d66413d065b533f2a6263}{mode}.ne.\textcolor{stringliteral}{'ures'}) \textcolor{keywordflow}{THEN}
+118        \textcolor{keyword}{CALL }coo\_to\_mat\_ik(lyy,dumb\_mat1)
+119        dumb\_mat1=matmul(inv\_corr\_i\_full,dumb\_mat1)
+120     
+121        \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+122           \textcolor{keyword}{CALL }coo\_to\_mat\_i(i,bxyy,dumb\_mat2)
+123           \textcolor{keyword}{CALL }sparse\_mul4\_with\_mat\_jl(corr2int,dumb\_mat2,dumb\_mat3)
+124           \textcolor{keyword}{CALL }sparse\_mul4\_with\_mat\_jl(corr2int,transpose(dumb\_mat2),dumb\_mat4)
+125           dumb\_mat3=dumb\_mat3+dumb\_mat4
+126           h2(i)=mat\_contract(dumb\_mat1,dumb\_mat3)
+127 \textcolor{keywordflow}{       ENDDO}
+128 \textcolor{keywordflow}{    ENDIF}
+129 
+130     \textcolor{comment}{!H3}
+131     h3=0.d0
+132     \textcolor{keyword}{CALL }sparse\_mul3\_with\_mat(bxyy,corr\_i\_full,h3)
+133 
+134     \textcolor{comment}{!Htot}
+135     htot=0.d0
+136     htot=h1+h2+h3
+137 
+138     print*, \textcolor{stringliteral}{"Computing the L terms..."}
+139     \textcolor{keyword}{ALLOCATE}(l1(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), l2(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), l3(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+140     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+141 
+142     \textcolor{comment}{!L1}
+143     \textcolor{keyword}{CALL }coo\_to\_mat\_ik(lyx,dumb\_mat1)
+144     \textcolor{keyword}{CALL }coo\_to\_mat\_ik(lxy,dumb\_mat2)
+145     dumb\_mat3=matmul(inv\_corr\_i\_full,corrint)
+146     dumb\_mat4=matmul(dumb\_mat2,matmul(transpose(dumb\_mat3),dumb\_mat1))
+147     \textcolor{keyword}{CALL }matc\_to\_coo(dumb\_mat4,l1)
+148     
+149     \textcolor{comment}{!L2}
+150     dumb\_mat4=0.d0
+151     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+152        \textcolor{keywordflow}{DO} j=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+153           \textcolor{keyword}{CALL }coo\_to\_mat\_i(i,bxyy,dumb\_mat1)
+154           \textcolor{keyword}{CALL }sparse\_mul4\_with\_mat\_jl(corr2int,dumb\_mat1+transpose(dumb\_mat1),dumb\_mat2)
+155           
+156           \textcolor{keyword}{CALL }coo\_to\_mat\_j(j,byxy,dumb\_mat1)
+157           dumb\_mat1=matmul(inv\_corr\_i\_full,dumb\_mat1)
+158           dumb\_mat4(i,j)=mat\_contract(dumb\_mat1,dumb\_mat2)
+159 \textcolor{keywordflow}{       END DO}
+160 \textcolor{keywordflow}{    END DO}
+161     \textcolor{keyword}{CALL }matc\_to\_coo(dumb\_mat4,l2)
+162 
+163     \textcolor{comment}{!L3}
+164     dumb\_mat4=0.d0
+165     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+166        \textcolor{keywordflow}{DO} j=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+167           \textcolor{keyword}{CALL }coo\_to\_mat\_j(j,bxxy,dumb\_mat1)
+168           \textcolor{keyword}{CALL }coo\_to\_mat\_i(i,bxxy,dumb\_mat2)
+169           dumb\_mat4(i,j)=mat\_trace(matmul(dumb\_mat1,matmul(corrint,transpose(dumb\_mat2))))
+170 \textcolor{keywordflow}{       ENDDO}
+171 \textcolor{keywordflow}{    END DO}
+172     \textcolor{keyword}{CALL }matc\_to\_coo(dumb\_mat4,l3)
+173 
+174     \textcolor{comment}{!Ltot}
+175 
+176     \textcolor{keyword}{ALLOCATE}(ltot(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+177     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+178     
+179     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor}(l1,ltot)
+180     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor}(l2,ltot)
+181     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor}(l3,ltot)
+182 
+183     print*, \textcolor{stringliteral}{"Computing the B terms..."}
+184     \textcolor{keyword}{ALLOCATE}(b1(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), b2(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), btot(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+185     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+186     \textcolor{keyword}{ALLOCATE}(dumb\_vec(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+187     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+188 
+189     \textcolor{comment}{! B1}
+190     \textcolor{keyword}{CALL }coo\_to\_mat\_ik(lxy,dumb\_mat1)
+191     dumb\_mat2=matmul(inv\_corr\_i\_full,corrint)
+192     
+193     dumb\_mat3=matmul(dumb\_mat1,transpose(dumb\_mat2))
+194     \textcolor{keywordflow}{DO} j=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+195        \textcolor{keywordflow}{DO} k=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+196           \textcolor{keyword}{CALL }coo\_to\_vec\_jk(j,k,byxx,dumb\_vec)
+197           dumb\_vec=matmul(dumb\_mat3,dumb\_vec)
+198           \textcolor{keyword}{CALL }add\_vec\_jk\_to\_tensor(j,k,dumb\_vec,b1)
+199 \textcolor{keywordflow}{       ENDDO}
+200 \textcolor{keywordflow}{    END DO}
+201 
+202     \textcolor{comment}{! B2}
+203     \textcolor{keyword}{CALL }coo\_to\_mat\_ik(lyx,dumb\_mat3)
+204     dumb\_mat2=matmul(inv\_corr\_i\_full,corrint)
+205 
+206     dumb\_mat4=matmul(transpose(dumb\_mat2),dumb\_mat3)
+207     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+208        \textcolor{keyword}{CALL }coo\_to\_mat\_i(i,bxxy,dumb\_mat1)
+209        dumb\_mat2=matmul(dumb\_mat1,dumb\_mat4)
+210        \textcolor{keyword}{CALL }add\_matc\_to\_tensor(i,dumb\_mat2,b2)
+211 \textcolor{keywordflow}{    ENDDO}
+212 
+213     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor}(b1,btot)
+214     \textcolor{keyword}{CALL }\hyperlink{namespacetensor_aad7cd55f3a4cec4676cc7ca34b05f1a8}{add\_to\_tensor}(b2,btot)
+215 
+216     \textcolor{comment}{!M}
+217 
+218     print*, \textcolor{stringliteral}{"Computing the M term..."}
+219 
+220     \textcolor{keyword}{ALLOCATE}(mtot(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+221     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+222 
+223     dumb\_mat2=matmul(inv\_corr\_i\_full,corrint)
+224 
+225     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+226        \textcolor{keyword}{CALL }coo\_to\_mat\_i(i,bxxy,dumb\_mat1)
+227        dumb\_mat3=matmul(dumb\_mat1,transpose(dumb\_mat2))
+228        \textcolor{keywordflow}{DO} k=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+229           \textcolor{keywordflow}{DO} l=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+230              \textcolor{keyword}{CALL }coo\_to\_vec\_jk(k,l,byxx,dumb\_vec)
+231              dumb\_vec=matmul(dumb\_mat3,dumb\_vec)
+232              \textcolor{keyword}{CALL }add\_vec\_ikl\_to\_tensor4(i,k,l,dumb\_vec,mtot)
+233 \textcolor{keywordflow}{          ENDDO}
+234 \textcolor{keywordflow}{       END DO}
+235 \textcolor{keywordflow}{    END DO}
+236 
+237     \textcolor{comment}{!Q}
+238 
+239     print*, \textcolor{stringliteral}{"Computing the Q terms..."}
+240     \textcolor{keyword}{ALLOCATE}(q1(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), q2(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim},\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+241     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+242 
+243     \textcolor{comment}{!Q1}
+244 
+245     \textcolor{keyword}{CALL }coo\_to\_mat\_ik(lxy,dumb\_mat1)
+246     q1=matmul(dumb\_mat1,matmul(corrint,transpose(dumb\_mat1)))
+247     
+248     \textcolor{comment}{!Q2}
+249 
+250     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+251        \textcolor{keywordflow}{DO} j=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+252           \textcolor{keyword}{CALL }coo\_to\_mat\_i(i,bxyy,dumb\_mat1)
+253           \textcolor{keyword}{CALL }coo\_to\_mat\_i(j,bxyy,dumb\_mat2)
+254           \textcolor{keyword}{CALL }sparse\_mul4\_with\_mat\_jl(corr2int,dumb\_mat2,dumb\_mat3)
+255           \textcolor{keyword}{CALL }sparse\_mul4\_with\_mat\_jl(corr2int,transpose(dumb\_mat2),dumb\_mat4)
+256           dumb\_mat2=dumb\_mat3+dumb\_mat4
+257           q2(i,j)=mat\_contract(dumb\_mat1,dumb\_mat2)
+258 \textcolor{keywordflow}{       END DO}
+259 \textcolor{keywordflow}{    END DO}
+260           
+261     \textcolor{comment}{!U}
+262     
+263     \textcolor{keyword}{ALLOCATE}(utot(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+264     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+265 
+266     \textcolor{keyword}{CALL }coo\_to\_mat\_ik(lxy,dumb\_mat1)
+267     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+268        \textcolor{keyword}{CALL }coo\_to\_mat\_i(i,bxxy,dumb\_mat2)
+269        dumb\_mat3=matmul(dumb\_mat1,matmul(corrint,transpose(dumb\_mat2)))
+270        \textcolor{keyword}{CALL }add\_matc\_to\_tensor(i,dumb\_mat3,utot)
+271 \textcolor{keywordflow}{    ENDDO}
+272 
+273     \textcolor{keywordflow}{DO} j=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+274        \textcolor{keyword}{CALL }coo\_to\_mat\_i(j,bxxy,dumb\_mat2)
+275        dumb\_mat3=matmul(dumb\_mat1,matmul(corrint,transpose(dumb\_mat2)))
+276        \textcolor{keywordflow}{DO} k=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+277           \textcolor{keyword}{CALL }add\_vec\_jk\_to\_tensor(j,k,dumb\_mat3(:,k),utot)
+278 \textcolor{keywordflow}{       ENDDO}
+279 \textcolor{keywordflow}{    ENDDO}
+280     
+281     \textcolor{comment}{!V}
+282     
+283     \textcolor{keyword}{ALLOCATE}(vtot(\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}), \hyperlink{namespacestat}{stat}=allocstat)
+284     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+285 
+286     \textcolor{keywordflow}{DO} i=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+287        \textcolor{keywordflow}{DO} j=1,\hyperlink{namespaceparams_a2323fe1773f086e20c14f266351c482b}{ndim}
+288           \textcolor{keyword}{CALL }coo\_to\_mat\_i(i,bxxy,dumb\_mat1)
+289           \textcolor{keyword}{CALL }coo\_to\_mat\_i(j,bxxy,dumb\_mat2)
+290           dumb\_mat3=matmul(dumb\_mat1,matmul(corrint,transpose(dumb\_mat2)))
+291           \textcolor{keyword}{CALL }add\_matc\_to\_tensor4(j,i,dumb\_mat3,vtot)
+292 \textcolor{keywordflow}{       ENDDO}
+293 \textcolor{keywordflow}{    ENDDO}
+294 
+295     \textcolor{keyword}{DEALLOCATE}(dumb\_mat1, dumb\_mat2, \hyperlink{namespacestat}{stat}=allocstat)
+296     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+297 
+298     \textcolor{keyword}{DEALLOCATE}(dumb\_mat3, dumb\_mat4, \hyperlink{namespacestat}{stat}=allocstat)
+299     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+300 
+301     \textcolor{keyword}{DEALLOCATE}(dumb\_vec, \hyperlink{namespacestat}{stat}=allocstat)
+302     \textcolor{keywordflow}{IF} (allocstat /= 0)  stop \textcolor{stringliteral}{"*** Problem to deallocate ! ***"}
+303 
+304     
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!b1@{b1}}
+\index{b1@{b1}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{b1}{b1}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::b1}\hypertarget{namespacemtv__int__tensor_a0220ca0d7f49bf405e6848492ec24995}{}\label{namespacemtv__int__tensor_a0220ca0d7f49bf405e6848492ec24995}
+
+
+First quadratic tensor. 
+
+
+
+Definition at line 54 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+54   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: b1\textcolor{comment}{ !< First quadratic tensor}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!b2@{b2}}
+\index{b2@{b2}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{b2}{b2}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::b2}\hypertarget{namespacemtv__int__tensor_a71cc55d84fa25e49c9886d5ac9fc5032}{}\label{namespacemtv__int__tensor_a71cc55d84fa25e49c9886d5ac9fc5032}
+
+
+Second quadratic tensor. 
+
+
+
+Definition at line 55 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+55   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: b2\textcolor{comment}{ !< Second quadratic tensor}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!btot@{btot}}
+\index{btot@{btot}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{btot}{btot}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::btot}\hypertarget{namespacemtv__int__tensor_a888f93868eeb459582a5acc909a33374}{}\label{namespacemtv__int__tensor_a888f93868eeb459582a5acc909a33374}
+
+
+Total quadratic tensor. 
+
+
+
+Definition at line 56 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+56   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: btot\textcolor{comment}{ !< Total quadratic tensor}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!dumb\+\_\+mat1@{dumb\+\_\+mat1}}
+\index{dumb\+\_\+mat1@{dumb\+\_\+mat1}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb\+\_\+mat1}{dumb_mat1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+mat1\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacemtv__int__tensor_a6b350b05230b163e36094160758f2ee8}{}\label{namespacemtv__int__tensor_a6b350b05230b163e36094160758f2ee8}
+
+
+Dummy matrix. 
+
+
+
+Definition at line 67 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+67   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\_mat1\textcolor{comment}{ !< Dummy matrix}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!dumb\+\_\+mat2@{dumb\+\_\+mat2}}
+\index{dumb\+\_\+mat2@{dumb\+\_\+mat2}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb\+\_\+mat2}{dumb_mat2}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+mat2\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacemtv__int__tensor_a3c9c33307f4589ac4fecf901333721fd}{}\label{namespacemtv__int__tensor_a3c9c33307f4589ac4fecf901333721fd}
+
+
+Dummy matrix. 
+
+
+
+Definition at line 68 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+68   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\_mat2\textcolor{comment}{ !< Dummy matrix}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!dumb\+\_\+mat3@{dumb\+\_\+mat3}}
+\index{dumb\+\_\+mat3@{dumb\+\_\+mat3}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb\+\_\+mat3}{dumb_mat3}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+mat3\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacemtv__int__tensor_a632f7eb0b8cc4e403730d68a985393dd}{}\label{namespacemtv__int__tensor_a632f7eb0b8cc4e403730d68a985393dd}
+
+
+Dummy matrix. 
+
+
+
+Definition at line 69 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+69   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\_mat3\textcolor{comment}{ !< Dummy matrix}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!dumb\+\_\+mat4@{dumb\+\_\+mat4}}
+\index{dumb\+\_\+mat4@{dumb\+\_\+mat4}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb\+\_\+mat4}{dumb_mat4}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+mat4\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacemtv__int__tensor_abb373b53bcba3f369d21fd391e0d72ff}{}\label{namespacemtv__int__tensor_abb373b53bcba3f369d21fd391e0d72ff}
+
+
+Dummy matrix. 
+
+
+
+Definition at line 70 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+70   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\_mat4\textcolor{comment}{ !< Dummy matrix}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!dumb\+\_\+vec@{dumb\+\_\+vec}}
+\index{dumb\+\_\+vec@{dumb\+\_\+vec}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{dumb\+\_\+vec}{dumb_vec}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable mtv\+\_\+int\+\_\+tensor\+::dumb\+\_\+vec\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacemtv__int__tensor_a192990600ca27522b2027f6c927572f7}{}\label{namespacemtv__int__tensor_a192990600ca27522b2027f6c927572f7}
+
+
+Dummy vector. 
+
+
+
+Definition at line 66 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+66   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: dumb\_vec\textcolor{comment}{ !< Dummy vector}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!h1@{h1}}
+\index{h1@{h1}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{h1}{h1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::h1}\hypertarget{namespacemtv__int__tensor_a8979293cdfe7d9e67f3348a444076f3c}{}\label{namespacemtv__int__tensor_a8979293cdfe7d9e67f3348a444076f3c}
+
+
+First constant vector. 
+
+
+
+Definition at line 42 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+42   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: h1\textcolor{comment}{   !< First constant vector}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!h2@{h2}}
+\index{h2@{h2}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{h2}{h2}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::h2}\hypertarget{namespacemtv__int__tensor_ad0dd8bb28d5e88e5776c48b302ae4b29}{}\label{namespacemtv__int__tensor_ad0dd8bb28d5e88e5776c48b302ae4b29}
+
+
+Second constant vector. 
+
+
+
+Definition at line 43 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+43   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: h2\textcolor{comment}{   !< Second constant vector}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!h3@{h3}}
+\index{h3@{h3}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{h3}{h3}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::h3}\hypertarget{namespacemtv__int__tensor_a596c16bed479b011818d66810e590bae}{}\label{namespacemtv__int__tensor_a596c16bed479b011818d66810e590bae}
+
+
+Third constant vector. 
+
+
+
+Definition at line 44 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+44   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: h3\textcolor{comment}{   !< Third constant vector}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!htot@{htot}}
+\index{htot@{htot}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{htot}{htot}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::htot}\hypertarget{namespacemtv__int__tensor_aa82b34ace4bb21fbfc0e37ccc3db4815}{}\label{namespacemtv__int__tensor_aa82b34ace4bb21fbfc0e37ccc3db4815}
+
+
+Total constant vector. 
+
+
+
+Definition at line 45 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+45   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: htot\textcolor{comment}{ !< Total constant vector}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!l1@{l1}}
+\index{l1@{l1}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{l1}{l1}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::l1}\hypertarget{namespacemtv__int__tensor_a2dbd181e62dbbb9aedcbd6535ca56ec5}{}\label{namespacemtv__int__tensor_a2dbd181e62dbbb9aedcbd6535ca56ec5}
+
+
+First linear tensor. 
+
+
+
+Definition at line 48 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+48   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: l1\textcolor{comment}{   !< First linear tensor}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!l2@{l2}}
+\index{l2@{l2}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{l2}{l2}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::l2}\hypertarget{namespacemtv__int__tensor_aa6dcec8a4783e982cd8894a15ae210d4}{}\label{namespacemtv__int__tensor_aa6dcec8a4783e982cd8894a15ae210d4}
+
+
+Second linear tensor. 
+
+
+
+Definition at line 49 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+49   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: l2\textcolor{comment}{   !< Second linear tensor}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!l3@{l3}}
+\index{l3@{l3}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{l3}{l3}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::l3}\hypertarget{namespacemtv__int__tensor_a04155fe5ee1b9580674140eab208a7bc}{}\label{namespacemtv__int__tensor_a04155fe5ee1b9580674140eab208a7bc}
+
+
+Third linear tensor. 
+
+
+
+Definition at line 50 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+50   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: l3\textcolor{comment}{   !< Third linear tensor}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!ltot@{ltot}}
+\index{ltot@{ltot}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{ltot}{ltot}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::ltot}\hypertarget{namespacemtv__int__tensor_ace2795d6c48885b8f847384747e8ad5d}{}\label{namespacemtv__int__tensor_ace2795d6c48885b8f847384747e8ad5d}
+
+
+Total linear tensor. 
+
+
+
+Definition at line 51 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+51   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: ltot\textcolor{comment}{ !< Total linear tensor}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!mtot@{mtot}}
+\index{mtot@{mtot}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{mtot}{mtot}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist4}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::mtot}\hypertarget{namespacemtv__int__tensor_a3722af69dcc509f4e7d24f898a7e68ae}{}\label{namespacemtv__int__tensor_a3722af69dcc509f4e7d24f898a7e68ae}
+
+
+Tensor for the cubic terms. 
+
+
+
+Definition at line 58 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+58   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist4}{coolist4}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: mtot\textcolor{comment}{ !< Tensor for the cubic terms}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!q1@{q1}}
+\index{q1@{q1}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{q1}{q1}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::q1}\hypertarget{namespacemtv__int__tensor_a2677249c594dbc196d1554e751257d1c}{}\label{namespacemtv__int__tensor_a2677249c594dbc196d1554e751257d1c}
+
+
+Constant terms for the state-\/dependent noise covariance matrix. 
+
+
+
+Definition at line 61 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+61   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: q1\textcolor{comment}{ !< Constant terms for the state-dependent noise
+       covariance matrix}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!q2@{q2}}
+\index{q2@{q2}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{q2}{q2}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::q2}\hypertarget{namespacemtv__int__tensor_a83f1ba468ee4599801c226c93115bad3}{}\label{namespacemtv__int__tensor_a83f1ba468ee4599801c226c93115bad3}
+
+
+Constant terms for the state-\/independent noise covariance matrix. 
+
+
+
+Definition at line 62 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+62   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: q2\textcolor{comment}{ !< Constant terms for the state-independent noise
+       covariance matrix}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!utot@{utot}}
+\index{utot@{utot}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{utot}{utot}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::utot}\hypertarget{namespacemtv__int__tensor_a4a2acf9c88ba182967568ecfdd2eae0a}{}\label{namespacemtv__int__tensor_a4a2acf9c88ba182967568ecfdd2eae0a}
+
+
+Linear terms for the state-\/dependent noise covariance matrix. 
+
+
+
+Definition at line 63 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+63   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist}{coolist}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: utot\textcolor{comment}{ !< Linear terms for the state-dependent
+       noise covariance matrix}
+\end{DoxyCode}
+\index{mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}!vtot@{vtot}}
+\index{vtot@{vtot}!mtv\+\_\+int\+\_\+tensor@{mtv\+\_\+int\+\_\+tensor}}
+\subsubsection[{\texorpdfstring{vtot}{vtot}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf coolist4}), dimension(\+:), allocatable, public mtv\+\_\+int\+\_\+tensor\+::vtot}\hypertarget{namespacemtv__int__tensor_a35e35414488bc119d9604ada011cc842}{}\label{namespacemtv__int__tensor_a35e35414488bc119d9604ada011cc842}
+
+
+Quadratic terms for the state-\/dependent noise covariance matrix. 
+
+
+
+Definition at line 64 of file M\+T\+V\+\_\+int\+\_\+tensor.\+f90.
+
+
+\begin{DoxyCode}
+64   \textcolor{keywordtype}{TYPE}(\hyperlink{structtensor_1_1coolist4}{coolist4}), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: vtot\textcolor{comment}{ !< Quadratic terms for the
+       state-dependent noise covariance matrix}
+\end{DoxyCode}

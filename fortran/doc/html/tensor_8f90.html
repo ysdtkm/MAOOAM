@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="MAOOAM_small.png"/></td>
     <td style="padding-left: 0.5em;">
-    <div id="projectbrief">A Modular Arbitrary-Order Ocean-Atmosphere Model</div>
+    <div id="projectbrief">A Modular Arbitrary-Order Ocean-Atmosphere Model -- Stochastic implementation</div>
     </td>
  </tr>
  </tbody>
@@ -105,8 +105,14 @@ Data Types</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtensor_1_1coolist__elem.html">tensor::coolist_elem</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinate list element type. Elementary elements of the sparse tensors.  <a href="structtensor_1_1coolist__elem.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtensor_1_1coolist__elem4.html">tensor::coolist_elem4</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">4d coordinate list element type. Elementary elements of the 4d sparse tensors.  <a href="structtensor_1_1coolist__elem4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtensor_1_1coolist.html">tensor::coolist</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinate list. Type used to represent the sparse tensor.  <a href="structtensor_1_1coolist.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">type &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtensor_1_1coolist4.html">tensor::coolist4</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">4d coordinate list. Type used to represent the rank-4 sparse tensor.  <a href="structtensor_1_1coolist4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -117,15 +123,57 @@ Modules</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a14f95c256cdf137ca0767ddb3c87deea"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a14f95c256cdf137ca0767ddb3c87deea">tensor::copy_coo</a> (src, dst)</td></tr>
-<tr class="memdesc:a14f95c256cdf137ca0767ddb3c87deea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to copy a coolist.  <a href="namespacetensor.html#a14f95c256cdf137ca0767ddb3c87deea">More...</a><br /></td></tr>
-<tr class="separator:a14f95c256cdf137ca0767ddb3c87deea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a88ee8077278486c5128ad97617969e"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a4a88ee8077278486c5128ad97617969e">tensor::copy_tensor</a> (src, dst)</td></tr>
+<tr class="memdesc:a4a88ee8077278486c5128ad97617969e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to copy a rank-3 tensor.  <a href="namespacetensor.html#a4a88ee8077278486c5128ad97617969e">More...</a><br /></td></tr>
+<tr class="separator:a4a88ee8077278486c5128ad97617969e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad7cd55f3a4cec4676cc7ca34b05f1a8"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#aad7cd55f3a4cec4676cc7ca34b05f1a8">tensor::add_to_tensor</a> (src, dst)</td></tr>
+<tr class="memdesc:aad7cd55f3a4cec4676cc7ca34b05f1a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to add a rank-3 tensor to another one.  <a href="namespacetensor.html#aad7cd55f3a4cec4676cc7ca34b05f1a8">More...</a><br /></td></tr>
+<tr class="separator:aad7cd55f3a4cec4676cc7ca34b05f1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c63a1dd16bf751220f016b41bdaa78c"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a4c63a1dd16bf751220f016b41bdaa78c">tensor::add_matc_to_tensor</a> (i, src, dst)</td></tr>
+<tr class="memdesc:a4c63a1dd16bf751220f016b41bdaa78c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to add a matrix to a rank-3 tensor.  <a href="namespacetensor.html#a4c63a1dd16bf751220f016b41bdaa78c">More...</a><br /></td></tr>
+<tr class="separator:a4c63a1dd16bf751220f016b41bdaa78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab32e3f9d0aab15d2fa34dc3e509ee8bf"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#ab32e3f9d0aab15d2fa34dc3e509ee8bf">tensor::add_matc_to_tensor4</a> (i, j, src, dst)</td></tr>
+<tr class="memdesc:ab32e3f9d0aab15d2fa34dc3e509ee8bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to add a matrix to a rank-4 tensor.  <a href="namespacetensor.html#ab32e3f9d0aab15d2fa34dc3e509ee8bf">More...</a><br /></td></tr>
+<tr class="separator:ab32e3f9d0aab15d2fa34dc3e509ee8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa98410f224bc3dfb96cd7031f56e916"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#aaa98410f224bc3dfb96cd7031f56e916">tensor::add_vec_jk_to_tensor</a> (j, k, src, dst)</td></tr>
+<tr class="memdesc:aaa98410f224bc3dfb96cd7031f56e916"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to add a vector to a rank-3 tensor.  <a href="namespacetensor.html#aaa98410f224bc3dfb96cd7031f56e916">More...</a><br /></td></tr>
+<tr class="separator:aaa98410f224bc3dfb96cd7031f56e916"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e443c5b0f095efdbb0df2e876b760be"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a9e443c5b0f095efdbb0df2e876b760be">tensor::add_vec_ikl_to_tensor4_perm</a> (i, k, l, src, dst)</td></tr>
+<tr class="memdesc:a9e443c5b0f095efdbb0df2e876b760be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to add a vector to a rank-4 tensor plus permutation.  <a href="namespacetensor.html#a9e443c5b0f095efdbb0df2e876b760be">More...</a><br /></td></tr>
+<tr class="separator:a9e443c5b0f095efdbb0df2e876b760be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd51ee85d6dffa3350880defc9823e8"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a4dd51ee85d6dffa3350880defc9823e8">tensor::add_vec_ikl_to_tensor4</a> (i, k, l, src, dst)</td></tr>
+<tr class="memdesc:a4dd51ee85d6dffa3350880defc9823e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to add a vector to a rank-4 tensor.  <a href="namespacetensor.html#a4dd51ee85d6dffa3350880defc9823e8">More...</a><br /></td></tr>
+<tr class="separator:a4dd51ee85d6dffa3350880defc9823e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfadc0660ec0e87b9d0dd3c383919d6b"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#adfadc0660ec0e87b9d0dd3c383919d6b">tensor::add_vec_ijk_to_tensor4</a> (i, j, k, src, dst)</td></tr>
+<tr class="memdesc:adfadc0660ec0e87b9d0dd3c383919d6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to add a vector to a rank-4 tensor.  <a href="namespacetensor.html#adfadc0660ec0e87b9d0dd3c383919d6b">More...</a><br /></td></tr>
+<tr class="separator:adfadc0660ec0e87b9d0dd3c383919d6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a75d1a9ca8b39e9ad4b151a7b4b45c70f">tensor::mat_to_coo</a> (src, dst)</td></tr>
-<tr class="memdesc:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a matrix to a tensor.  <a href="namespacetensor.html#a75d1a9ca8b39e9ad4b151a7b4b45c70f">More...</a><br /></td></tr>
+<tr class="memdesc:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a matrix to a rank-3 tensor.  <a href="namespacetensor.html#a75d1a9ca8b39e9ad4b151a7b4b45c70f">More...</a><br /></td></tr>
 <tr class="separator:a75d1a9ca8b39e9ad4b151a7b4b45c70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39f5944ef78c2d2aaac59477d8c6848f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a39f5944ef78c2d2aaac59477d8c6848f">tensor::tensor_to_coo</a> (src, dst)</td></tr>
+<tr class="memdesc:a39f5944ef78c2d2aaac59477d8c6848f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a rank-3 tensor from matrix to coolist representation.  <a href="namespacetensor.html#a39f5944ef78c2d2aaac59477d8c6848f">More...</a><br /></td></tr>
+<tr class="separator:a39f5944ef78c2d2aaac59477d8c6848f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8308730212d86ee401775f02f631310"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#ae8308730212d86ee401775f02f631310">tensor::tensor4_to_coo4</a> (src, dst)</td></tr>
+<tr class="memdesc:ae8308730212d86ee401775f02f631310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a rank-4 tensor from matrix to coolist representation.  <a href="namespacetensor.html#ae8308730212d86ee401775f02f631310">More...</a><br /></td></tr>
+<tr class="separator:ae8308730212d86ee401775f02f631310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5747516cd8a6fc9079fbb82d1b18dd98"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a5747516cd8a6fc9079fbb82d1b18dd98">tensor::print_tensor</a> (t)</td></tr>
+<tr class="memdesc:a5747516cd8a6fc9079fbb82d1b18dd98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to print a rank 3 tensor coolist.  <a href="namespacetensor.html#a5747516cd8a6fc9079fbb82d1b18dd98">More...</a><br /></td></tr>
+<tr class="separator:a5747516cd8a6fc9079fbb82d1b18dd98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb57d076f51b89419e4e8254ce13dd62"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#acb57d076f51b89419e4e8254ce13dd62">tensor::print_tensor4</a> (t)</td></tr>
+<tr class="memdesc:acb57d076f51b89419e4e8254ce13dd62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to print a rank-4 tensor coolist.  <a href="namespacetensor.html#acb57d076f51b89419e4e8254ce13dd62">More...</a><br /></td></tr>
+<tr class="separator:acb57d076f51b89419e4e8254ce13dd62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11054027a386918658f8948231af53b1"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a11054027a386918658f8948231af53b1">tensor::sparse_mul3</a> (coolist_ijk, arr_j, arr_k, res)</td></tr>
-<tr class="memdesc:a11054027a386918658f8948231af53b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a tensor with two vectors: \({\displaystyle \sum_{j,k=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k\).  <a href="namespacetensor.html#a11054027a386918658f8948231af53b1">More...</a><br /></td></tr>
+<tr class="memdesc:a11054027a386918658f8948231af53b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a rank-3 tensor coolist with two vectors: \({\displaystyle \sum_{j,k=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k\).  <a href="namespacetensor.html#a11054027a386918658f8948231af53b1">More...</a><br /></td></tr>
 <tr class="separator:a11054027a386918658f8948231af53b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08965e1040a94fc58c1efa9ff9639118"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a08965e1040a94fc58c1efa9ff9639118">tensor::sparse_mul3_mat</a> (coolist_ijk, arr_k, res)</td></tr>
+<tr class="memdesc:a08965e1040a94fc58c1efa9ff9639118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a rank-3 tensor coolist with a vector: \({\displaystyle \sum_{k=0}^{ndim}} \mathcal{T}_{i,j,k} \, b_k\). Its output is a matrix.  <a href="namespacetensor.html#a08965e1040a94fc58c1efa9ff9639118">More...</a><br /></td></tr>
+<tr class="separator:a08965e1040a94fc58c1efa9ff9639118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab365e6dbb17e7fb26fef90649dd9e445"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#ab365e6dbb17e7fb26fef90649dd9e445">tensor::sparse_mul4</a> (coolist_ijkl, arr_j, arr_k, arr_l, res)</td></tr>
+<tr class="memdesc:ab365e6dbb17e7fb26fef90649dd9e445"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a rank-4 tensor coolist with three vectors: \({\displaystyle \sum_{j,k,l=0}^{ndim}} \mathcal{T}_{i,j,k,l} \, a_j \,b_k \, c_l \).  <a href="namespacetensor.html#ab365e6dbb17e7fb26fef90649dd9e445">More...</a><br /></td></tr>
+<tr class="separator:ab365e6dbb17e7fb26fef90649dd9e445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fda12a024f8e3d0d6a167f264f6d000"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a2fda12a024f8e3d0d6a167f264f6d000">tensor::sparse_mul4_mat</a> (coolist_ijkl, arr_k, arr_l, res)</td></tr>
+<tr class="memdesc:a2fda12a024f8e3d0d6a167f264f6d000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a tensor with two vectors: \({\displaystyle \sum_{k,l=0}^{ndim}} \mathcal{T}_{i,j,k,l} \,b_k \, c_l \).  <a href="namespacetensor.html#a2fda12a024f8e3d0d6a167f264f6d000">More...</a><br /></td></tr>
+<tr class="separator:a2fda12a024f8e3d0d6a167f264f6d000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add2a6aa993cd8a23be60d1643b5c7942"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#add2a6aa993cd8a23be60d1643b5c7942">tensor::jsparse_mul</a> (coolist_ijk, arr_j, jcoo_ij)</td></tr>
 <tr class="memdesc:add2a6aa993cd8a23be60d1643b5c7942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of two tensors to determine the Jacobian: </p><p class="formulaDsp">
 \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\]
@@ -144,15 +192,60 @@ Functions/Subroutines</h2></td></tr>
 </p>
 <p> This version return a matrix.  <a href="namespacetensor.html#a4135cf70df5030070922ff199c79cc03">More...</a><br /></td></tr>
 <tr class="separator:a4135cf70df5030070922ff199c79cc03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70230d57c615d9548905bc023f5fc01d"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a70230d57c615d9548905bc023f5fc01d">tensor::sparse_mul2</a> (coolist_ij, arr_j, res)</td></tr>
-<tr class="memdesc:a70230d57c615d9548905bc023f5fc01d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a 2d sparse tensor with a vector: \({\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \).  <a href="namespacetensor.html#a70230d57c615d9548905bc023f5fc01d">More...</a><br /></td></tr>
-<tr class="separator:a70230d57c615d9548905bc023f5fc01d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9b09d91fb1bd425122c4f1ee2f0eb12"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#ad9b09d91fb1bd425122c4f1ee2f0eb12">tensor::sparse_mul2_j</a> (coolist_ijk, arr_j, res)</td></tr>
+<tr class="memdesc:ad9b09d91fb1bd425122c4f1ee2f0eb12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a 3d sparse tensor with a vectors: \({\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \).  <a href="namespacetensor.html#ad9b09d91fb1bd425122c4f1ee2f0eb12">More...</a><br /></td></tr>
+<tr class="separator:ad9b09d91fb1bd425122c4f1ee2f0eb12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90e31e5e782d63d7f05ee3c9aed370e0"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a90e31e5e782d63d7f05ee3c9aed370e0">tensor::sparse_mul2_k</a> (coolist_ijk, arr_k, res)</td></tr>
+<tr class="memdesc:a90e31e5e782d63d7f05ee3c9aed370e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a rank-3 sparse tensor coolist with a vector: \({\displaystyle \sum_{k=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_k \).  <a href="namespacetensor.html#a90e31e5e782d63d7f05ee3c9aed370e0">More...</a><br /></td></tr>
+<tr class="separator:a90e31e5e782d63d7f05ee3c9aed370e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a364522b80ab0f4785c331eb74fa1ba04"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a364522b80ab0f4785c331eb74fa1ba04">tensor::simplify</a> (tensor)</td></tr>
 <tr class="memdesc:a364522b80ab0f4785c331eb74fa1ba04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to simplify a coolist (sparse tensor). For each index \(i\), it upper triangularize the matrix </p><p class="formulaDsp">
 \[\mathcal{T}_{i,j,k} \qquad 0 \leq j,k \leq ndim.\]
 </p>
 <p>.  <a href="namespacetensor.html#a364522b80ab0f4785c331eb74fa1ba04">More...</a><br /></td></tr>
 <tr class="separator:a364522b80ab0f4785c331eb74fa1ba04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52784eb2977ec36f8ab5ba240b497633"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a52784eb2977ec36f8ab5ba240b497633">tensor::coo_to_mat_ik</a> (src, dst)</td></tr>
+<tr class="memdesc:a52784eb2977ec36f8ab5ba240b497633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a rank-3 tensor coolist component into a matrix with i and k indices.  <a href="namespacetensor.html#a52784eb2977ec36f8ab5ba240b497633">More...</a><br /></td></tr>
+<tr class="separator:a52784eb2977ec36f8ab5ba240b497633"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af104cb6f7354f1465eb53e0f3738a3d0"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#af104cb6f7354f1465eb53e0f3738a3d0">tensor::coo_to_mat_ij</a> (src, dst)</td></tr>
+<tr class="memdesc:af104cb6f7354f1465eb53e0f3738a3d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a rank-3 tensor coolist component into a matrix with i and j indices.  <a href="namespacetensor.html#af104cb6f7354f1465eb53e0f3738a3d0">More...</a><br /></td></tr>
+<tr class="separator:af104cb6f7354f1465eb53e0f3738a3d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac77bcc80d4bd189835b88db68ffafda4"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#ac77bcc80d4bd189835b88db68ffafda4">tensor::coo_to_mat_i</a> (i, src, dst)</td></tr>
+<tr class="memdesc:ac77bcc80d4bd189835b88db68ffafda4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a rank-3 tensor coolist component into a matrix.  <a href="namespacetensor.html#ac77bcc80d4bd189835b88db68ffafda4">More...</a><br /></td></tr>
+<tr class="separator:ac77bcc80d4bd189835b88db68ffafda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb370166c0ebd0885404c1703d464f89"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#abb370166c0ebd0885404c1703d464f89">tensor::coo_to_vec_jk</a> (j, k, src, dst)</td></tr>
+<tr class="memdesc:abb370166c0ebd0885404c1703d464f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a rank-3 tensor coolist component into a vector.  <a href="namespacetensor.html#abb370166c0ebd0885404c1703d464f89">More...</a><br /></td></tr>
+<tr class="separator:abb370166c0ebd0885404c1703d464f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2088d80a587fd931ca64976a87403401"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a2088d80a587fd931ca64976a87403401">tensor::coo_to_mat_j</a> (j, src, dst)</td></tr>
+<tr class="memdesc:a2088d80a587fd931ca64976a87403401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a rank-3 tensor coolist component into a matrix.  <a href="namespacetensor.html#a2088d80a587fd931ca64976a87403401">More...</a><br /></td></tr>
+<tr class="separator:a2088d80a587fd931ca64976a87403401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae291b0fab419ce7692da1933105e9ae"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#aae291b0fab419ce7692da1933105e9ae">tensor::sparse_mul4_with_mat_jl</a> (coolist_ijkl, mat_jl, res)</td></tr>
+<tr class="memdesc:aae291b0fab419ce7692da1933105e9ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a rank-4 tensor coolist with a matrix : \({\displaystyle \sum_{j,l=0}^{ndim}} \mathcal{T}_{i,j,k,l} \, m_{j,l} \).  <a href="namespacetensor.html#aae291b0fab419ce7692da1933105e9ae">More...</a><br /></td></tr>
+<tr class="separator:aae291b0fab419ce7692da1933105e9ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af65ad5ae657ecd97f70109b2c273696b"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#af65ad5ae657ecd97f70109b2c273696b">tensor::sparse_mul4_with_mat_kl</a> (coolist_ijkl, mat_kl, res)</td></tr>
+<tr class="memdesc:af65ad5ae657ecd97f70109b2c273696b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a rank-4 tensor coolist with a matrix : \({\displaystyle \sum_{j,l=0}^{ndim}} \mathcal{T}_{i,j,k,l} \, m_{k,l} \).  <a href="namespacetensor.html#af65ad5ae657ecd97f70109b2c273696b">More...</a><br /></td></tr>
+<tr class="separator:af65ad5ae657ecd97f70109b2c273696b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33bc74f9042478d58240b1a1a91db91d"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a33bc74f9042478d58240b1a1a91db91d">tensor::sparse_mul3_with_mat</a> (coolist_ijk, mat_jk, res)</td></tr>
+<tr class="memdesc:a33bc74f9042478d58240b1a1a91db91d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse multiplication of a rank-3 tensor coolist with a matrix: \({\displaystyle \sum_{j,k=0}^{ndim}} \mathcal{T}_{i,j,k} \, m_{j,k}\).  <a href="namespacetensor.html#a33bc74f9042478d58240b1a1a91db91d">More...</a><br /></td></tr>
+<tr class="separator:a33bc74f9042478d58240b1a1a91db91d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad868662d382dc1579db6847f2411c382"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#ad868662d382dc1579db6847f2411c382">tensor::matc_to_coo</a> (src, dst)</td></tr>
+<tr class="memdesc:ad868662d382dc1579db6847f2411c382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to convert a matrix to a rank-3 tensor.  <a href="namespacetensor.html#ad868662d382dc1579db6847f2411c382">More...</a><br /></td></tr>
+<tr class="separator:ad868662d382dc1579db6847f2411c382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af105ec6083969c52f5e7422d75a5cda5"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#af105ec6083969c52f5e7422d75a5cda5">tensor::scal_mul_coo</a> (s, t)</td></tr>
+<tr class="memdesc:af105ec6083969c52f5e7422d75a5cda5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routine to multiply a rank-3 tensor by a scalar.  <a href="namespacetensor.html#af105ec6083969c52f5e7422d75a5cda5">More...</a><br /></td></tr>
+<tr class="separator:af105ec6083969c52f5e7422d75a5cda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab08af814baeb0b670bd5d587ca578239"><td class="memItemLeft" align="right" valign="top">logical function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#ab08af814baeb0b670bd5d587ca578239">tensor::tensor_empty</a> (t)</td></tr>
+<tr class="memdesc:ab08af814baeb0b670bd5d587ca578239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if a rank-3 tensor coolist is empty.  <a href="namespacetensor.html#ab08af814baeb0b670bd5d587ca578239">More...</a><br /></td></tr>
+<tr class="separator:ab08af814baeb0b670bd5d587ca578239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b00b4f3cebb865971bcbaf818602ddc"><td class="memItemLeft" align="right" valign="top">logical function, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a9b00b4f3cebb865971bcbaf818602ddc">tensor::tensor4_empty</a> (t)</td></tr>
+<tr class="memdesc:a9b00b4f3cebb865971bcbaf818602ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if a rank-4 tensor coolist is empty.  <a href="namespacetensor.html#a9b00b4f3cebb865971bcbaf818602ddc">More...</a><br /></td></tr>
+<tr class="separator:a9b00b4f3cebb865971bcbaf818602ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a373dab2b483b4bc5f521934660d289aa"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a373dab2b483b4bc5f521934660d289aa">tensor::load_tensor4_from_file</a> (s, t)</td></tr>
+<tr class="memdesc:a373dab2b483b4bc5f521934660d289aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a rank-4 tensor coolist from a file definition.  <a href="namespacetensor.html#a373dab2b483b4bc5f521934660d289aa">More...</a><br /></td></tr>
+<tr class="separator:a373dab2b483b4bc5f521934660d289aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a328cec7eb0ae3c472db0f9ccdd475763"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetensor.html#a328cec7eb0ae3c472db0f9ccdd475763">tensor::write_tensor4_to_file</a> (s, t)</td></tr>
+<tr class="memdesc:a328cec7eb0ae3c472db0f9ccdd475763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a rank-4 tensor coolist from a file definition.  <a href="namespacetensor.html#a328cec7eb0ae3c472db0f9ccdd475763">More...</a><br /></td></tr>
+<tr class="separator:a328cec7eb0ae3c472db0f9ccdd475763"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -163,7 +256,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jan 5 2017 15:58:39 by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Dec 19 2017 15:41:19 by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

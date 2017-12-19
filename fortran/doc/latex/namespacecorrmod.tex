@@ -1,0 +1,846 @@
+\hypertarget{namespacecorrmod}{}\section{corrmod Module Reference}
+\label{namespacecorrmod}\index{corrmod@{corrmod}}
+
+
+Module to initialize the correlation matrix of the unresolved variables.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacecorrmod_ac2e966d475b93a6f75961bc7b7cceb7d}{init\+\_\+corr}
+\begin{DoxyCompactList}\small\item\em Subroutine to initialise the computation of the correlation. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacecorrmod_a52bbdab69c73b4313857d71c07cb3164}{corrcomp\+\_\+from\+\_\+def} (s)
+\begin{DoxyCompactList}\small\item\em Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the definition given inside the module. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacecorrmod_a4afc40b6c94d00fc18ccc378ad309a7f}{corrcomp\+\_\+from\+\_\+spline} (s)
+\begin{DoxyCompactList}\small\item\em Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the spline representation. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacecorrmod_a870374ab1a440e562713b6cdc23e18e1}{splint} (\hyperlink{namespacecorrmod_a4af3bd2a2042f69a0fc89df8eba38de7}{xa}, \hyperlink{namespacecorrmod_aae7d37a1064807c18f234f1c74d46afc}{ya}, y2a, n, x, y)
+\begin{DoxyCompactList}\small\item\em Routine to compute the spline representation parameters. \end{DoxyCompactList}\item 
+real(kind=8) function \hyperlink{namespacecorrmod_a46265e98098a79d33314d5e1f142a91d}{fs} (s, p)
+\begin{DoxyCompactList}\small\item\em Exponential fit function. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacecorrmod_aaffa69da4d652347a8bb9f6030dd76c2}{corrcomp\+\_\+from\+\_\+fit} (s)
+\begin{DoxyCompactList}\small\item\em Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the exponential representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacecorrmod_a1f1f0cbe5283ace955c2d27c4b34f2c0}{mean}
+\begin{DoxyCompactList}\small\item\em Vector holding the mean of the unresolved dynamics (reduced version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable, public \hyperlink{namespacecorrmod_a9c59d06165027aa6b1751e219726564a}{mean\+\_\+full}
+\begin{DoxyCompactList}\small\item\em Vector holding the mean of the unresolved dynamics (full version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_a978b78f1d6906afe06e63768535b44f7}{corr\+\_\+i\+\_\+full}
+\begin{DoxyCompactList}\small\item\em Covariance matrix of the unresolved variables (full version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_af2ab9712d246a94ae1a801a011aee3d8}{inv\+\_\+corr\+\_\+i\+\_\+full}
+\begin{DoxyCompactList}\small\item\em Inverse of the covariance matrix of the unresolved variables (full version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_a859a67113b5271db0df70e60cbf0687b}{corr\+\_\+i}
+\begin{DoxyCompactList}\small\item\em Covariance matrix of the unresolved variables (reduced version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_a5a938587078064124588605255e93a19}{inv\+\_\+corr\+\_\+i}
+\begin{DoxyCompactList}\small\item\em Inverse of the covariance matrix of the unresolved variables (reduced version) \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:), allocatable, public \hyperlink{namespacecorrmod_ad9983e0594dec7351fe398f0f2225c6f}{corr\+\_\+ij}
+\begin{DoxyCompactList}\small\item\em Matrix holding the correlation matrix at a given time. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:,\+:), allocatable \hyperlink{namespacecorrmod_abd47fec6688f9997847712f6f44c7f08}{y2}
+\begin{DoxyCompactList}\small\item\em Vector holding coefficient of the spline and exponential correlation representation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:,\+:,\+:), allocatable \hyperlink{namespacecorrmod_aae7d37a1064807c18f234f1c74d46afc}{ya}
+\begin{DoxyCompactList}\small\item\em Vector holding coefficient of the spline and exponential correlation representation. \end{DoxyCompactList}\item 
+real(kind=8), dimension(\+:), allocatable \hyperlink{namespacecorrmod_a4af3bd2a2042f69a0fc89df8eba38de7}{xa}
+\begin{DoxyCompactList}\small\item\em Vector holding coefficient of the spline and exponential correlation representation. \end{DoxyCompactList}\item 
+integer \hyperlink{namespacecorrmod_afec60f4bfbbc2a787462f2475348c4c2}{nspl}
+\begin{DoxyCompactList}\small\item\em Integers needed by the spline representation of the correlation. \end{DoxyCompactList}\item 
+integer \hyperlink{namespacecorrmod_a25e22cc2633ad68b74ebc21589957554}{klo}
+\item 
+integer \hyperlink{namespacecorrmod_ac3bac71aa78c9e05401de3680f0c4ffc}{khi}
+\item 
+procedure(\hyperlink{namespacecorrmod_a4afc40b6c94d00fc18ccc378ad309a7f}{corrcomp\+\_\+from\+\_\+spline}), pointer, public \hyperlink{namespacecorrmod_ad42bfc9c0ec2cf55958a45b46839d856}{corrcomp}
+\begin{DoxyCompactList}\small\item\em Pointer to the correlation computation routine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module to initialize the correlation matrix of the unresolved variables. 
+
+\begin{DoxyCopyright}{Copyright}
+2017 Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\index{corrmod@{corrmod}!corrcomp\+\_\+from\+\_\+def@{corrcomp\+\_\+from\+\_\+def}}
+\index{corrcomp\+\_\+from\+\_\+def@{corrcomp\+\_\+from\+\_\+def}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{corrcomp\+\_\+from\+\_\+def(s)}{corrcomp_from_def(s)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine corrmod\+::corrcomp\+\_\+from\+\_\+def (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_a52bbdab69c73b4313857d71c07cb3164}{}\label{namespacecorrmod_a52bbdab69c73b4313857d71c07cb3164}
+
+
+Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the definition given inside the module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & time $s$ at which the correlation is computed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 148 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+148     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: s
+149     \textcolor{keywordtype}{REAL(KIND=8)} :: y
+150     \textcolor{keywordtype}{INTEGER} :: i,j
+151 
+152     \textcolor{comment}{! Definition of the corr\_ij matrix as a function of time}
+153 
+154     corr\_ij(10,10)=((7.66977252307669*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (1.02409061
+      73830213*cos(&
+155          &0.07283568782600224*s))/exp(0.017262015588746404*s) - (0.6434985372062336*sin(0.03959716051207145
+      4*s&
+156          &))/exp(0.06567483898489704*s) + (0.6434985372062335*sin(0.07283568782600224*s))/exp(0.01726201558
+      8746404*s)) 
+157     corr\_ij(10,9)=((0.6434985372062321*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) - (0.6434985
+      372062324*co&
+158          &s(0.07283568782600224*s))/exp(0.017262015588746404*s) + (7.669772523076694*sin(0.0395971605120714
+      54*&
+159          &s))/exp(0.06567483898489704*s) + (1.024090617383021*sin(0.07283568782600224*s))/exp(0.01726201558
+      8746404*s)) 
+160     corr\_ij(10,8)=0
+161     corr\_ij(10,7)=0
+162     corr\_ij(10,6)=0
+163     corr\_ij(10,5)=((-2.236364132659011*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (6.9528041
+      48086198*cos&
+164          &(0.07283568782600224*s))/exp(0.017262015588746404*s) - (1.4494534432272481*sin(0.0395971605120714
+      54*&
+165          &s))/exp(0.06567483898489704*s) - (0.6818177416446283*sin(0.07283568782600224*s))/exp(0.0172620155
+      88746404*s)) 
+166     corr\_ij(10,4)=((1.4494534432272483*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (0.6818177
+      416446293*co&
+167          &s(0.07283568782600224*s))/exp(0.017262015588746404*s) - (2.2363641326590127*sin(0.039597160512071
+      454&
+168          &*s))/exp(0.06567483898489704*s) + (6.952804148086195*sin(0.07283568782600224*s))/exp(0.0172620155
+      88746404*s)) 
+169     corr\_ij(10,3)=0
+170     corr\_ij(10,2)=0
+171     corr\_ij(10,1)=0
+172     corr\_ij(9,10)=((-0.6434985372062344*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (0.643498
+      537206234*co&
+173          &s(0.07283568782600224*s))/exp(0.017262015588746404*s) - (7.669772523076689*sin(0.0395971605120714
+      54*&
+174          &s))/exp(0.06567483898489704*s) - (1.0240906173830204*sin(0.07283568782600224*s))/exp(0.0172620155
+      88746404*s)) 
+175     corr\_ij(9,9)=((7.66977252307669*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (1.0240906173
+      830204*cos(&
+176          &0.07283568782600224*s))/exp(0.017262015588746404*s) - (0.643498537206233*sin(0.039597160512071454
+      *s)&
+177          &)/exp(0.06567483898489704*s) + (0.6434985372062327*sin(0.07283568782600224*s))/exp(0.017262015588
+      746404*s)) 
+178     corr\_ij(9,8)=0
+179     corr\_ij(9,7)=0
+180     corr\_ij(9,6)=0
+181     corr\_ij(9,5)=((-1.4494534432272477*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) - (0.6818177
+      416446249*c&
+182          &os(0.07283568782600224*s))/exp(0.017262015588746404*s) + (2.2363641326590105*sin(0.03959716051207
+      145&
+183          &4*s))/exp(0.06567483898489704*s) - (6.952804148086195*sin(0.07283568782600224*s))/exp(0.017262015
+      588746404*s)) 
+184     corr\_ij(9,4)=((-2.2363641326590127*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (6.9528041
+      48086194*co&
+185          &s(0.07283568782600224*s))/exp(0.017262015588746404*s) - (1.4494534432272486*sin(0.039597160512071
+      454&
+186          &*s))/exp(0.06567483898489704*s) - (0.6818177416446249*sin(0.07283568782600224*s))/exp(0.017262015
+      588746404*s)) 
+187     corr\_ij(9,3)=0
+188     corr\_ij(9,2)=0
+189     corr\_ij(9,1)=0
+190     corr\_ij(8,10)=0
+191 
+192     corr\_ij(8,9)=0
+193     corr\_ij(8,8)=(9.135647293470983/exp(0.05076718239027029*s) + 2.2233889637758932/exp(0.01628546700064885
+      4*s)) 
+194     corr\_ij(8,7)=0
+195     corr\_ij(8,6)=0
+196     corr\_ij(8,5)=0
+197     corr\_ij(8,4)=0
+198     corr\_ij(8,3)=(-5.938566084855411/exp(0.05076718239027029*s) + 11.97129741027622/exp(0.01628546700064885
+      4*s)) 
+199     corr\_ij(8,2)=0
+200     corr\_ij(8,1)=0
+201     corr\_ij(7,10)=0
+202 
+203     corr\_ij(7,9)=0
+204     corr\_ij(7,8)=0
+205     corr\_ij(7,7)=((11.518026982819887*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (0.05351107
+      793747755*c&
+206          &os(0.11425932545092894*s))/exp(0.019700737327669783*s) - (0.14054811601869432*sin(0.0293414097268
+      719&
+207          &26*s))/exp(0.04435489221745234*s) + (0.14054811601869702*sin(0.11425932545092894*s))/exp(0.019700
+      737327669783*s)) 
+208     corr\_ij(7,6)=((0.14054811601869532*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) - (0.1405481
+      1601869702*&
+209          &cos(0.11425932545092894*s))/exp(0.019700737327669783*s) + (11.518026982819887*sin(0.0293414097268
+      719&
+210          &26*s))/exp(0.04435489221745234*s) + (0.0535110779374777*sin(0.11425932545092894*s))/exp(0.0197007
+      37327669783*s)) 
+211     corr\_ij(7,5)=0
+212     corr\_ij(7,4)=0
+213     corr\_ij(7,3)=0
+214     corr\_ij(7,2)=((-0.732907009016115*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (2.72884503
+      1386875*cos&
+215          &(0.11425932545092894*s))/exp(0.019700737327669783*s) - (2.4717920234033532*sin(0.0293414097268719
+      26*&
+216          &s))/exp(0.04435489221745234*s) - (0.24003801347124257*sin(0.11425932545092894*s))/exp(0.019700737
+      327669783*s)) 
+217     corr\_ij(7,1)=((2.4717920234033532*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (0.24003801
+      34712426*co&
+218          &s(0.11425932545092894*s))/exp(0.019700737327669783*s) - (0.7329070090161153*sin(0.029341409726871
+      926&
+219          &*s))/exp(0.04435489221745234*s) + (2.728845031386876*sin(0.11425932545092894*s))/exp(0.0197007373
+      27669783*s)) 
+220     corr\_ij(6,10)=0
+221 
+222     corr\_ij(6,9)=0
+223     corr\_ij(6,8)=0
+224     corr\_ij(6,7)=((-0.1405481160186977*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (0.1405481
+      1601869713*&
+225          &cos(0.11425932545092894*s))/exp(0.019700737327669783*s) - (11.518026982819885*sin(0.0293414097268
+      719&
+226          &26*s))/exp(0.04435489221745234*s) - (0.05351107793747755*sin(0.11425932545092894*s))/exp(0.019700
+      737327669783*s)) 
+227     corr\_ij(6,6)=((11.518026982819885*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (0.05351107
+      793747768*c&
+228          &os(0.11425932545092894*s))/exp(0.019700737327669783*s) - (0.14054811601869832*sin(0.0293414097268
+      719&
+229          &26*s))/exp(0.04435489221745234*s) + (0.14054811601869707*sin(0.11425932545092894*s))/exp(0.019700
+      737327669783*s)) 
+230     corr\_ij(6,5)=0
+231     corr\_ij(6,4)=0
+232     corr\_ij(6,3)=0
+233     corr\_ij(6,2)=((-2.471792023403353*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) - (0.24003801
+      34712425*co&
+234          &s(0.11425932545092894*s))/exp(0.019700737327669783*s) + (0.7329070090161155*sin(0.029341409726871
+      926&
+235          &*s))/exp(0.04435489221745234*s) - (2.7288450313868755*sin(0.11425932545092894*s))/exp(0.019700737
+      327669783*s)) 
+236     corr\_ij(6,1)=((-0.7329070090161154*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (2.7288450
+      31386876*co&
+237          &s(0.11425932545092894*s))/exp(0.019700737327669783*s) - (2.4717920234033524*sin(0.029341409726871
+      926&
+238          &*s))/exp(0.04435489221745234*s) - (0.24003801347124343*sin(0.11425932545092894*s))/exp(0.01970073
+      7327669783*s)) 
+239     corr\_ij(5,10)=((0.5794534449999711*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (4.1369865
+      70427212*cos&
+240          &(0.07283568782600224*s))/exp(0.017262015588746404*s) - (1.0360597341248128*sin(0.0395971605120714
+      54*&
+241          &s))/exp(0.06567483898489704*s) + (3.167330918996692*sin(0.07283568782600224*s))/exp(0.01726201558
+      8746404*s)) 
+242     corr\_ij(5,9)=((1.0360597341248134*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) - (3.16733091
+      89966856*co&
+243          &s(0.07283568782600224*s))/exp(0.017262015588746404*s) + (0.5794534449999746*sin(0.039597160512071
+      454&
+244          &*s))/exp(0.06567483898489704*s) + (4.1369865704272115*sin(0.07283568782600224*s))/exp(0.017262015
+      588746404*s)) 
+245     corr\_ij(5,8)=0
+246     corr\_ij(5,7)=0
+247     corr\_ij(5,6)=0
+248     corr\_ij(5,5)=((-0.37825091063447547*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (30.09469
+      0926061638*&
+249          &cos(0.07283568782600224*s))/exp(0.017262015588746404*s) + (0.16085380971100194*sin(0.039597160512
+      071&
+250          &454*s))/exp(0.06567483898489704*s) - (0.1608538097109995*sin(0.07283568782600224*s))/exp(0.017262
+      015588746404*s)) 
+251     corr\_ij(5,4)=((-0.16085380971100238*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (0.160853
+      80971100127&
+252          &*cos(0.07283568782600224*s))/exp(0.017262015588746404*s) - (0.37825091063447586*sin(0.03959716051
+      207&
+253          &1454*s))/exp(0.06567483898489704*s) + (30.09469092606163*sin(0.07283568782600224*s))/exp(0.017262
+      015588746404*s)) 
+254     corr\_ij(5,3)=0
+255     corr\_ij(5,2)=0
+256     corr\_ij(5,1)=0
+257     corr\_ij(4,10)=((-1.0360597341248106*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (3.167330
+      918996689*co&
+258          &s(0.07283568782600224*s))/exp(0.017262015588746404*s) - (0.5794534449999716*sin(0.039597160512071
+      454&
+259          &*s))/exp(0.06567483898489704*s) - (4.1369865704272115*sin(0.07283568782600224*s))/exp(0.017262015
+      588746404*s)) 
+260     corr\_ij(4,9)=((0.5794534449999711*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (4.13698657
+      04272115*co&
+261          &s(0.07283568782600224*s))/exp(0.017262015588746404*s) - (1.0360597341248114*sin(0.039597160512071
+      454&
+262          &*s))/exp(0.06567483898489704*s) + (3.1673309189966843*sin(0.07283568782600224*s))/exp(0.017262015
+      588746404*s)) 
+263     corr\_ij(4,8)=0
+264     corr\_ij(4,7)=0
+265     corr\_ij(4,6)=0
+266     corr\_ij(4,5)=((0.16085380971100194*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) - (0.1608538
+      0971100371*&
+267          &cos(0.07283568782600224*s))/exp(0.017262015588746404*s) + (0.37825091063447497*sin(0.039597160512
+      071&
+268          &454*s))/exp(0.06567483898489704*s) - (30.094690926061617*sin(0.07283568782600224*s))/exp(0.017262
+      015588746404*s)) 
+269     corr\_ij(4,4)=((-0.37825091063447536*cos(0.039597160512071454*s))/exp(0.06567483898489704*s) + (30.09469
+      0926061617*&
+270          &cos(0.07283568782600224*s))/exp(0.017262015588746404*s) + (0.16085380971100172*sin(0.039597160512
+      071&
+271          &454*s))/exp(0.06567483898489704*s) - (0.16085380971100616*sin(0.07283568782600224*s))/exp(0.01726
+      2015588746404*s)) 
+272     corr\_ij(4,3)=0
+273     corr\_ij(4,2)=0
+274     corr\_ij(4,1)=0
+275     corr\_ij(3,10)=0
+276 
+277     corr\_ij(3,9)=0
+278     corr\_ij(3,8)=(0.24013456462471527/exp(0.05076718239027029*s) + 5.792596760796093/exp(0.0162854670006488
+      54*s)) 
+279     corr\_ij(3,7)=0
+280     corr\_ij(3,6)=0
+281     corr\_ij(3,5)=0
+282     corr\_ij(3,4)=0
+283     corr\_ij(3,3)=(-0.15609785880208227/exp(0.05076718239027029*s) + 31.18882918422289/exp(0.016285467000648
+      854*s)) 
+284     corr\_ij(3,2)=0
+285     corr\_ij(3,1)=0
+286     corr\_ij(2,10)=0
+287 
+288     corr\_ij(2,9)=0
+289     corr\_ij(2,8)=0
+290     corr\_ij(2,7)=((1.6172201305728584*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (0.37871789
+      179790255*c&
+291          &os(0.11425932545092894*s))/exp(0.019700737327669783*s) + (1.2889451151208258*sin(0.02934140972687
+      192&
+292          &6*s))/exp(0.04435489221745234*s) + (1.4228849217537705*sin(0.11425932545092894*s))/exp(0.01970073
+      7327669783*s)) 
+293     corr\_ij(2,6)=((-1.2889451151208255*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) - (1.4228849
+      217537702*c&
+294          &os(0.11425932545092894*s))/exp(0.019700737327669783*s) + (1.6172201305728586*sin(0.02934140972687
+      192&
+295          &6*s))/exp(0.04435489221745234*s) + (0.3787178917979035*sin(0.11425932545092894*s))/exp(0.01970073
+      7327669783*s)) 
+296     corr\_ij(2,5)=0
+297     corr\_ij(2,4)=0
+298     corr\_ij(2,3)=0
+299     corr\_ij(2,2)=((0.1789135645266575*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (26.8170244
+      57844113*co&
+300          &s(0.11425932545092894*s))/exp(0.019700737327669783*s) - (0.4268927977731004*sin(0.029341409726871
+      926&
+301          &*s))/exp(0.04435489221745234*s) + (0.4268927977730982*sin(0.11425932545092894*s))/exp(0.019700737
+      327669783*s)) 
+302     corr\_ij(2,1)=((0.4268927977731007*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) - (0.42689279
+      777309963*c&
+303          &os(0.11425932545092894*s))/exp(0.019700737327669783*s) + (0.17891356452665746*sin(0.0293414097268
+      719&
+304          &26*s))/exp(0.04435489221745234*s) + (26.81702445784412*sin(0.11425932545092894*s))/exp(0.01970073
+      7327669783*s)) 
+305     corr\_ij(1,10)=0
+306 
+307     corr\_ij(1,9)=0
+308     corr\_ij(1,8)=0
+309     corr\_ij(1,7)=((1.288945115120824*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (1.422884921
+      7537711*cos&
+310          &(0.11425932545092894*s))/exp(0.019700737327669783*s) - (1.617220130572856*sin(0.02934140972687192
+      6*s&
+311          &))/exp(0.04435489221745234*s) - (0.3787178917979028*sin(0.11425932545092894*s))/exp(0.01970073732
+      7669783*s)) 
+312     corr\_ij(1,6)=((1.6172201305728564*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (0.37871789
+      179790377*c&
+313          &os(0.11425932545092894*s))/exp(0.019700737327669783*s) + (1.2889451151208242*sin(0.02934140972687
+      192&
+314          &6*s))/exp(0.04435489221745234*s) + (1.4228849217537711*sin(0.11425932545092894*s))/exp(0.01970073
+      7327669783*s)) 
+315     corr\_ij(1,5)=0
+316     corr\_ij(1,4)=0
+317     corr\_ij(1,3)=0
+318     corr\_ij(1,2)=((-0.4268927977731002*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (0.4268927
+      977730981*c&
+319          &os(0.11425932545092894*s))/exp(0.019700737327669783*s) - (0.1789135645266573*sin(0.02934140972687
+      192&
+320          &6*s))/exp(0.04435489221745234*s) - (26.81702445784412*sin(0.11425932545092894*s))/exp(0.019700737
+      327669783*s)) 
+321     corr\_ij(1,1)=((0.1789135645266574*cos(0.029341409726871926*s))/exp(0.04435489221745234*s) + (26.8170244
+      57844113*co&
+322          &s(0.11425932545092894*s))/exp(0.019700737327669783*s) - (0.42689279777310024*sin(0.02934140972687
+      192&
+323          &6*s))/exp(0.04435489221745234*s) + (0.4268927977730997*sin(0.11425932545092894*s))/exp(0.01970073
+      7327669783*s)) 
+324     
+325     corr\_ij=q\_au**2*corr\_ij
+326 
+\end{DoxyCode}
+\index{corrmod@{corrmod}!corrcomp\+\_\+from\+\_\+fit@{corrcomp\+\_\+from\+\_\+fit}}
+\index{corrcomp\+\_\+from\+\_\+fit@{corrcomp\+\_\+from\+\_\+fit}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{corrcomp\+\_\+from\+\_\+fit(s)}{corrcomp_from_fit(s)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine corrmod\+::corrcomp\+\_\+from\+\_\+fit (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_aaffa69da4d652347a8bb9f6030dd76c2}{}\label{namespacecorrmod_aaffa69da4d652347a8bb9f6030dd76c2}
+
+
+Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the exponential representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & time $s$ at which the correlation is computed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 399 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+399     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: s
+400     \textcolor{keywordtype}{REAL(KIND=8)} :: y
+401     \textcolor{keywordtype}{INTEGER} :: i,j
+402 
+403     corr\_ij=0.d0
+404     \textcolor{keywordflow}{DO} i=1,n\_unres
+405        \textcolor{keywordflow}{DO} j=1,n\_unres
+406           corr\_ij(i,j)=fs(s,ya(i,j,:))
+407 \textcolor{keywordflow}{       END DO}
+408 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!corrcomp\+\_\+from\+\_\+spline@{corrcomp\+\_\+from\+\_\+spline}}
+\index{corrcomp\+\_\+from\+\_\+spline@{corrcomp\+\_\+from\+\_\+spline}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{corrcomp\+\_\+from\+\_\+spline(s)}{corrcomp_from_spline(s)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine corrmod\+::corrcomp\+\_\+from\+\_\+spline (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_a4afc40b6c94d00fc18ccc378ad309a7f}{}\label{namespacecorrmod_a4afc40b6c94d00fc18ccc378ad309a7f}
+
+
+Subroutine to compute the correlation of the unresolved variables $\langle Y \otimes Y^s \rangle$ at time $s$ from the spline representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & time $s$ at which the correlation is computed \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 333 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+333     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: s
+334     \textcolor{keywordtype}{REAL(KIND=8)} :: y
+335     \textcolor{keywordtype}{INTEGER} :: i,j
+336     corr\_ij=0.d0
+337     \textcolor{keywordflow}{DO} i=1,n\_unres
+338        \textcolor{keywordflow}{DO} j=1,n\_unres
+339           \textcolor{keyword}{CALL }splint(xa,ya(i,j,:),y2(i,j,:),nspl,s,y)
+340           corr\_ij(i,j)=y
+341 \textcolor{keywordflow}{       END DO}
+342 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!fs@{fs}}
+\index{fs@{fs}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{fs(s, p)}{fs(s, p)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function corrmod\+::fs (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), intent(in)}]{s, }
+\item[{real(kind=8), dimension(5), intent(in)}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_a46265e98098a79d33314d5e1f142a91d}{}\label{namespacecorrmod_a46265e98098a79d33314d5e1f142a91d}
+
+
+Exponential fit function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & time $s$ at which the function is evaluated \\
+\hline
+{\em p} & vector holding the coefficients of the fit function \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 388 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+388     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: s
+389     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(5)}, \textcolor{keywordtype}{INTENT(IN)} :: p
+390     \textcolor{keywordtype}{REAL(KIND=8)} :: fs
+391     fs=p(1)*exp(-s/p(2))*cos(p(3)*s+p(4))
+392     \textcolor{keywordflow}{RETURN} 
+\end{DoxyCode}
+\index{corrmod@{corrmod}!init\+\_\+corr@{init\+\_\+corr}}
+\index{init\+\_\+corr@{init\+\_\+corr}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{init\+\_\+corr}{init_corr}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public corrmod\+::init\+\_\+corr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacecorrmod_ac2e966d475b93a6f75961bc7b7cceb7d}{}\label{namespacecorrmod_ac2e966d475b93a6f75961bc7b7cceb7d}
+
+
+Subroutine to initialise the computation of the correlation. 
+
+
+
+Definition at line 46 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+46     \textcolor{keywordtype}{INTEGER} :: allocstat,i,j,k,nf
+47     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(5)} :: dumb
+48     \textcolor{keywordtype}{LOGICAL} :: ex
+49 
+50     \textcolor{comment}{! Selection of the loading mode}
+51     \textcolor{keywordflow}{SELECT CASE} (load\_mode)
+52     \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'defi'})
+53        corrcomp => corrcomp\_from\_def
+54     \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'spli'})
+55        \textcolor{keyword}{INQUIRE}(file=\textcolor{stringliteral}{'corrspline.def'},exist=ex)
+56        \textcolor{keywordflow}{IF} (.not.ex) stop \textcolor{stringliteral}{"*** File corrspline.def not found ! ***"}
+57        \textcolor{keyword}{OPEN}(20,file=\textcolor{stringliteral}{'corrspline.def'},status=\textcolor{stringliteral}{'old'})
+58        \textcolor{keyword}{READ}(20,*) nf,nspl
+59        \textcolor{keywordflow}{IF} (nf /= n\_unres) stop \textcolor{stringliteral}{"*** Dimension in files corrspline.def and sf.nml do not correspond ! ***"}
+60        \textcolor{keyword}{ALLOCATE}(xa(nspl), ya(n\_unres,n\_unres,nspl), y2(n\_unres,n\_unres,nspl), 
+      \hyperlink{namespacestat}{stat}=allocstat)
+61        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+62        \textcolor{keyword}{READ}(20,*) xa
+63        maxint=xa(nspl)/2
+64        \textcolor{keywordflow}{DO} k=1,n\_unres*n\_unres
+65           \textcolor{keyword}{READ}(20,*) i,j
+66           \textcolor{keyword}{READ}(20,*) ya(i,j,:)
+67           \textcolor{keyword}{READ}(20,*) y2(i,j,:)
+68 \textcolor{keywordflow}{       ENDDO}
+69        \textcolor{keyword}{CLOSE}(20)
+70        corrcomp => corrcomp\_from\_spline
+71        klo=1
+72        khi=nspl
+73     \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'expo'})
+74        \textcolor{keyword}{INQUIRE}(file=\textcolor{stringliteral}{'correxpo.def'},exist=ex)
+75        \textcolor{keywordflow}{IF} (.not.ex) stop \textcolor{stringliteral}{"*** File correxpo.def not found ! ***"}
+76        \textcolor{keyword}{OPEN}(20,file=\textcolor{stringliteral}{'correxpo.def'},status=\textcolor{stringliteral}{'old'})
+77        \textcolor{keyword}{READ}(20,*) nf,maxint
+78        \textcolor{keywordflow}{IF} (nf /= n\_unres) stop \textcolor{stringliteral}{"*** Dimension in files correxpo.def and sf.nml do not correspond ! ***"}
+79        \textcolor{keyword}{ALLOCATE}(ya(n\_unres,n\_unres,5), \hyperlink{namespacestat}{stat}=allocstat)
+80        \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+81        \textcolor{keywordflow}{DO} k=1,n\_unres*n\_unres
+82           \textcolor{keyword}{READ}(20,*) i,j,dumb
+83           ya(i,j,:)=dumb
+84 \textcolor{keywordflow}{       ENDDO}
+85        \textcolor{keyword}{CLOSE}(20)
+86        corrcomp => corrcomp\_from\_fit
+87 \textcolor{keywordflow}{    CASE DEFAULT}
+88        stop \textcolor{stringliteral}{'*** LOAD\_MODE variable not properly defined in corrmod.nml ***'}
+89 \textcolor{keywordflow}{    END SELECT}
+90 
+91     \textcolor{keyword}{ALLOCATE}(mean(n\_unres),mean\_full(0:ndim), \hyperlink{namespacestat}{stat}=allocstat)
+92     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+93     
+94     \textcolor{keyword}{ALLOCATE}(inv\_corr\_i(n\_unres,n\_unres), \hyperlink{namespacestat}{stat}=allocstat)
+95     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+96 
+97     \textcolor{keyword}{ALLOCATE}(corr\_i(n\_unres,n\_unres), \hyperlink{namespacestat}{stat}=allocstat)
+98     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+99 
+100     \textcolor{keyword}{ALLOCATE}(corr\_ij(n\_unres,n\_unres), \hyperlink{namespacestat}{stat}=allocstat)
+101     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+102 
+103     \textcolor{keyword}{ALLOCATE}(corr\_i\_full(ndim,ndim), \hyperlink{namespacestat}{stat}=allocstat)
+104     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+105 
+106     \textcolor{keyword}{ALLOCATE}(inv\_corr\_i\_full(ndim,ndim), \hyperlink{namespacestat}{stat}=allocstat)
+107     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
+108 
+109     corr\_ij=0.d0
+110 
+111     \textcolor{keyword}{CALL }corrcomp(0.d0)
+112     corr\_i=corr\_ij
+113     inv\_corr\_i=invmat(corr\_i)
+114 
+115     corr\_i\_full=0.d0
+116     \textcolor{keywordflow}{DO} i=1,n\_unres
+117        \textcolor{keywordflow}{DO} j=1,n\_unres
+118           corr\_i\_full(ind(i),ind(j))=corr\_i(i,j)
+119 \textcolor{keywordflow}{       ENDDO}
+120 \textcolor{keywordflow}{    ENDDO}
+121     
+122     inv\_corr\_i\_full=0.d0
+123     \textcolor{keywordflow}{DO} i=1,n\_unres
+124        \textcolor{keywordflow}{DO} j=1,n\_unres
+125           inv\_corr\_i\_full(ind(i),ind(j))=inv\_corr\_i(i,j)
+126 \textcolor{keywordflow}{       ENDDO}
+127 \textcolor{keywordflow}{    ENDDO}
+128 
+129     mean=0.d0
+130     \textcolor{keyword}{INQUIRE}(file=\textcolor{stringliteral}{'mean.def'},exist=ex)
+131     \textcolor{keywordflow}{IF} (ex) \textcolor{keywordflow}{THEN}
+132        \textcolor{keyword}{OPEN}(20,file=\textcolor{stringliteral}{'mean.def'},status=\textcolor{stringliteral}{'old'})
+133        \textcolor{keyword}{READ}(20,*) mean
+134        \textcolor{keyword}{CLOSE}(20)
+135 \textcolor{keywordflow}{    ENDIF}
+136 
+137     mean\_full=0.d0
+138     \textcolor{keywordflow}{DO} i=1,n\_unres
+139        mean\_full(ind(i))=mean(i)
+140 \textcolor{keywordflow}{    ENDDO}
+141 
+\end{DoxyCode}
+\index{corrmod@{corrmod}!splint@{splint}}
+\index{splint@{splint}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{splint(xa, ya, y2a, n, x, y)}{splint(xa, ya, y2a, n, x, y)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine corrmod\+::splint (
+\begin{DoxyParamCaption}
+\item[{real(kind=8), dimension(n), intent(in)}]{xa, }
+\item[{real(kind=8), dimension(n), intent(in)}]{ya, }
+\item[{real(kind=8), dimension(n), intent(in)}]{y2a, }
+\item[{integer, intent(in)}]{n, }
+\item[{real(kind=8), intent(in)}]{x, }
+\item[{real(kind=8), intent(out)}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_a870374ab1a440e562713b6cdc23e18e1}{}\label{namespacecorrmod_a870374ab1a440e562713b6cdc23e18e1}
+
+
+Routine to compute the spline representation parameters. 
+
+
+
+Definition at line 347 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+347     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: n
+348     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{DIMENSION(n)} :: xa,y2a,ya
+349     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: x
+350     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(OUT)} :: y
+351     \textcolor{keywordtype}{INTEGER} :: k
+352     \textcolor{keywordtype}{REAL(KIND=8)} :: a,b,h
+353     \textcolor{keywordflow}{if} ((khi-klo.gt.1).or.(xa(klo).gt.x).or.(xa(khi).lt.x)) \textcolor{keywordflow}{then}
+354        \textcolor{keywordflow}{if} ((khi-klo.eq.1).and.(xa(klo).lt.x)) \textcolor{keywordflow}{then}
+355           khi=klo
+356           \textcolor{keywordflow}{DO} \textcolor{keywordflow}{WHILE} (xa(khi).lt.x)
+357              khi=khi+1
+358 \textcolor{keywordflow}{          END DO}
+359           klo=khi-1
+360        \textcolor{keywordflow}{else}
+361           khi=n
+362           klo=1
+363           \textcolor{keywordflow}{DO} \textcolor{keywordflow}{WHILE} (khi-klo.gt.1)
+364              k=(khi+klo)/2
+365              \textcolor{keywordflow}{if}(xa(k).gt.x)\textcolor{keywordflow}{then}
+366                 khi=k
+367              \textcolor{keywordflow}{else}
+368                 klo=k
+369 \textcolor{keywordflow}{             endif}
+370 \textcolor{keywordflow}{          END DO}
+371 \textcolor{keywordflow}{       end if}
+372     \textcolor{comment}{!    print*, "search",x,khi-klo,xa(klo),xa(khi)}
+373     \textcolor{comment}{! else}
+374     \textcolor{comment}{!    print*, "ok",x,khi-klo,xa(klo),xa(khi)}
+375 \textcolor{keywordflow}{    endif}
+376     h=xa(khi)-xa(klo)
+377     \textcolor{keywordflow}{if} (h.eq.0.) stop \textcolor{stringliteral}{'bad xa input in splint'}
+378     a=(xa(khi)-x)/h
+379     b=(x-xa(klo))/h
+380     y=a*ya(klo)+b*ya(khi)+((a**3-a)*y2a(klo)+(b**3-b)*y2a(khi))*(h**2)/6.
+381     \textcolor{keywordflow}{return}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{corrmod@{corrmod}!corr\+\_\+i@{corr\+\_\+i}}
+\index{corr\+\_\+i@{corr\+\_\+i}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{corr\+\_\+i}{corr_i}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public corrmod\+::corr\+\_\+i}\hypertarget{namespacecorrmod_a859a67113b5271db0df70e60cbf0687b}{}\label{namespacecorrmod_a859a67113b5271db0df70e60cbf0687b}
+
+
+Covariance matrix of the unresolved variables (reduced version) 
+
+
+
+Definition at line 30 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+30   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: corr\_i\textcolor{comment}{ !< Covariance matrix of the unresolved
+       variables (reduced version)}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!corr\+\_\+i\+\_\+full@{corr\+\_\+i\+\_\+full}}
+\index{corr\+\_\+i\+\_\+full@{corr\+\_\+i\+\_\+full}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{corr\+\_\+i\+\_\+full}{corr_i_full}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public corrmod\+::corr\+\_\+i\+\_\+full}\hypertarget{namespacecorrmod_a978b78f1d6906afe06e63768535b44f7}{}\label{namespacecorrmod_a978b78f1d6906afe06e63768535b44f7}
+
+
+Covariance matrix of the unresolved variables (full version) 
+
+
+
+Definition at line 28 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+28   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: corr\_i\_full\textcolor{comment}{ !< Covariance matrix of the unresolved
+       variables (full version)}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!corr\+\_\+ij@{corr\+\_\+ij}}
+\index{corr\+\_\+ij@{corr\+\_\+ij}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{corr\+\_\+ij}{corr_ij}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public corrmod\+::corr\+\_\+ij}\hypertarget{namespacecorrmod_ad9983e0594dec7351fe398f0f2225c6f}{}\label{namespacecorrmod_ad9983e0594dec7351fe398f0f2225c6f}
+
+
+Matrix holding the correlation matrix at a given time. 
+
+
+
+Definition at line 32 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+32   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: corr\_ij\textcolor{comment}{ !< Matrix holding the correlation matrix at
+       a given time}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!corrcomp@{corrcomp}}
+\index{corrcomp@{corrcomp}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{corrcomp}{corrcomp}}]{\setlength{\rightskip}{0pt plus 5cm}procedure({\bf corrcomp\+\_\+from\+\_\+spline}), pointer, public corrmod\+::corrcomp}\hypertarget{namespacecorrmod_ad42bfc9c0ec2cf55958a45b46839d856}{}\label{namespacecorrmod_ad42bfc9c0ec2cf55958a45b46839d856}
+
+
+Pointer to the correlation computation routine. 
+
+
+
+Definition at line 41 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+41   \textcolor{keywordtype}{PROCEDURE}(corrcomp\_from\_spline), \textcolor{keywordtype}{POINTER}, \textcolor{keywordtype}{PUBLIC} :: corrcomp
+\end{DoxyCode}
+\index{corrmod@{corrmod}!inv\+\_\+corr\+\_\+i@{inv\+\_\+corr\+\_\+i}}
+\index{inv\+\_\+corr\+\_\+i@{inv\+\_\+corr\+\_\+i}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{inv\+\_\+corr\+\_\+i}{inv_corr_i}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public corrmod\+::inv\+\_\+corr\+\_\+i}\hypertarget{namespacecorrmod_a5a938587078064124588605255e93a19}{}\label{namespacecorrmod_a5a938587078064124588605255e93a19}
+
+
+Inverse of the covariance matrix of the unresolved variables (reduced version) 
+
+
+
+Definition at line 31 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+31   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: inv\_corr\_i\textcolor{comment}{ !< Inverse of the covariance matrix of
+       the unresolved variables (reduced version)}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!inv\+\_\+corr\+\_\+i\+\_\+full@{inv\+\_\+corr\+\_\+i\+\_\+full}}
+\index{inv\+\_\+corr\+\_\+i\+\_\+full@{inv\+\_\+corr\+\_\+i\+\_\+full}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{inv\+\_\+corr\+\_\+i\+\_\+full}{inv_corr_i_full}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:), allocatable, public corrmod\+::inv\+\_\+corr\+\_\+i\+\_\+full}\hypertarget{namespacecorrmod_af2ab9712d246a94ae1a801a011aee3d8}{}\label{namespacecorrmod_af2ab9712d246a94ae1a801a011aee3d8}
+
+
+Inverse of the covariance matrix of the unresolved variables (full version) 
+
+
+
+Definition at line 29 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+29   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: inv\_corr\_i\_full\textcolor{comment}{ !< Inverse of the covariance matrix
+       of the unresolved variables (full version)}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!khi@{khi}}
+\index{khi@{khi}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{khi}{khi}}]{\setlength{\rightskip}{0pt plus 5cm}integer corrmod\+::khi\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_ac3bac71aa78c9e05401de3680f0c4ffc}{}\label{namespacecorrmod_ac3bac71aa78c9e05401de3680f0c4ffc}
+
+
+Definition at line 38 of file corrmod.\+f90.
+
+\index{corrmod@{corrmod}!klo@{klo}}
+\index{klo@{klo}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{klo}{klo}}]{\setlength{\rightskip}{0pt plus 5cm}integer corrmod\+::klo\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_a25e22cc2633ad68b74ebc21589957554}{}\label{namespacecorrmod_a25e22cc2633ad68b74ebc21589957554}
+
+
+Definition at line 38 of file corrmod.\+f90.
+
+\index{corrmod@{corrmod}!mean@{mean}}
+\index{mean@{mean}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{mean}{mean}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable, public corrmod\+::mean}\hypertarget{namespacecorrmod_a1f1f0cbe5283ace955c2d27c4b34f2c0}{}\label{namespacecorrmod_a1f1f0cbe5283ace955c2d27c4b34f2c0}
+
+
+Vector holding the mean of the unresolved dynamics (reduced version) 
+
+
+
+Definition at line 26 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+26   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: mean\textcolor{comment}{ !< Vector holding the mean of the unresolved
+       dynamics (reduced version)}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!mean\+\_\+full@{mean\+\_\+full}}
+\index{mean\+\_\+full@{mean\+\_\+full}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{mean\+\_\+full}{mean_full}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable, public corrmod\+::mean\+\_\+full}\hypertarget{namespacecorrmod_a9c59d06165027aa6b1751e219726564a}{}\label{namespacecorrmod_a9c59d06165027aa6b1751e219726564a}
+
+
+Vector holding the mean of the unresolved dynamics (full version) 
+
+
+
+Definition at line 27 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+27   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: mean\_full\textcolor{comment}{ !< Vector holding the mean of the unresolved
+       dynamics (full version)}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!nspl@{nspl}}
+\index{nspl@{nspl}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{nspl}{nspl}}]{\setlength{\rightskip}{0pt plus 5cm}integer corrmod\+::nspl\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_afec60f4bfbbc2a787462f2475348c4c2}{}\label{namespacecorrmod_afec60f4bfbbc2a787462f2475348c4c2}
+
+
+Integers needed by the spline representation of the correlation. 
+
+
+
+Definition at line 38 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+38   \textcolor{keywordtype}{INTEGER} :: nspl,klo,khi
+\end{DoxyCode}
+\index{corrmod@{corrmod}!xa@{xa}}
+\index{xa@{xa}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{xa}{xa}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable corrmod\+::xa\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_a4af3bd2a2042f69a0fc89df8eba38de7}{}\label{namespacecorrmod_a4af3bd2a2042f69a0fc89df8eba38de7}
+
+
+Vector holding coefficient of the spline and exponential correlation representation. 
+
+
+
+Definition at line 35 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+35   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: xa\textcolor{comment}{ !< Vector holding coefficient of the spline and exponential
+       correlation representation}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!y2@{y2}}
+\index{y2@{y2}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{y2}{y2}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:,\+:), allocatable corrmod\+::y2\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_abd47fec6688f9997847712f6f44c7f08}{}\label{namespacecorrmod_abd47fec6688f9997847712f6f44c7f08}
+
+
+Vector holding coefficient of the spline and exponential correlation representation. 
+
+
+
+Definition at line 33 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+33   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: y2\textcolor{comment}{ !< Vector holding coefficient of the spline and
+       exponential correlation representation}
+\end{DoxyCode}
+\index{corrmod@{corrmod}!ya@{ya}}
+\index{ya@{ya}!corrmod@{corrmod}}
+\subsubsection[{\texorpdfstring{ya}{ya}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:,\+:,\+:), allocatable corrmod\+::ya\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacecorrmod_aae7d37a1064807c18f234f1c74d46afc}{}\label{namespacecorrmod_aae7d37a1064807c18f234f1c74d46afc}
+
+
+Vector holding coefficient of the spline and exponential correlation representation. 
+
+
+
+Definition at line 34 of file corrmod.\+f90.
+
+
+\begin{DoxyCode}
+34   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:,:)}, \textcolor{keywordtype}{ALLOCATABLE} :: ya\textcolor{comment}{ !< Vector holding coefficient of the spline and
+       exponential correlation representation}
+\end{DoxyCode}

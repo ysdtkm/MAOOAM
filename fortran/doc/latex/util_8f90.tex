@@ -17,7 +17,33 @@ subroutine, public \hyperlink{namespaceutil_a3c2dcf05b068a55f0066d2b393e75dc7}{u
 integer function \hyperlink{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}{lcg} (s)
 \item 
 subroutine, public \hyperlink{namespaceutil_aca7f2465fedb87fef954d8f0c30668c7}{util\+::init\+\_\+one} (A)
-\begin{DoxyCompactList}\small\item\em Initialize a square matrix A as a unit matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Initialize a square matrix A as a unit matrix. \end{DoxyCompactList}\item 
+real(kind=8) function, public \hyperlink{namespaceutil_a9771c95546d8658e72aa24f76612e4d8}{util\+::mat\+\_\+trace} (A)
+\item 
+real(kind=8) function, public \hyperlink{namespaceutil_a8a0e15c77e8cd4cb03b608e4d6bfba67}{util\+::mat\+\_\+contract} (A, B)
+\item 
+subroutine, public \hyperlink{namespaceutil_ab832eeb8a78ffacc12e3ceac27f95ee7}{util\+::choldc} (a, p)
+\item 
+subroutine, public \hyperlink{namespaceutil_a71eb7216e62e0978ad1424bd4dbd727a}{util\+::printmat} (A)
+\item 
+subroutine, public \hyperlink{namespaceutil_ac600300c2251c6c6b555fe7255605aa5}{util\+::cprintmat} (A)
+\item 
+real(kind=8) function, dimension(size(a, 1), size(a, 2)), public \hyperlink{namespaceutil_a52a5fbd944196d1cf077be77aefa34a2}{util\+::invmat} (A)
+\item 
+subroutine, public \hyperlink{namespaceutil_a85f87eae65cbe6d073cf10511fafdd3e}{util\+::triu} (A, T)
+\item 
+subroutine, public \hyperlink{namespaceutil_ac3ee7743cab41502961891d342823d35}{util\+::diag} (A, d)
+\item 
+subroutine, public \hyperlink{namespaceutil_a9e8cf4396837bb186d59791ca594a98e}{util\+::cdiag} (A, d)
+\item 
+integer function, public \hyperlink{namespaceutil_ae789c59b87d1c0607478b1718d26cd1d}{util\+::floordiv} (i, j)
+\item 
+subroutine, public \hyperlink{namespaceutil_a14b782ae34e59c2dcb260a5a69aae213}{util\+::reduce} (A, Ared, n, ind, rind)
+\item 
+subroutine, public \hyperlink{namespaceutil_a92433c6b81993d62682f54ff5c8834a0}{util\+::ireduce} (A, Ared, n, ind, rind)
+\item 
+subroutine, public \hyperlink{namespaceutil_aac7cb677d9eaa896447a48be3f9a973f}{util\+::vector\+\_\+outer} (u, v, A)
+\end{DoxyCompactItemize}
 
 
 \subsection{Function/\+Subroutine Documentation}
@@ -30,18 +56,18 @@ subroutine, public \hyperlink{namespaceutil_aca7f2465fedb87fef954d8f0c30668c7}{u
 )}\hypertarget{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}{}\label{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}
 
 
-Definition at line 84 of file util.\+f90.
+Definition at line 85 of file util.\+f90.
 
 
 \begin{DoxyCode}
-84       \textcolor{keywordtype}{integer} :: \hyperlink{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}{lcg}
-85       \textcolor{keywordtype}{integer(int64)} :: s
-86       \textcolor{keywordflow}{IF} (s == 0) \textcolor{keywordflow}{THEN}
-87          s = 104729
-88       \textcolor{keywordflow}{ELSE}
-89          s = mod(s, 4294967296\_int64)
-90 \textcolor{keywordflow}{      END IF}
-91       s = mod(s * 279470273\_int64, 4294967291\_int64)
-92       \hyperlink{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}{lcg} = int(mod(s, int(huge(0), int64)), kind(0))
-93 \textcolor{keyword}{    END FUNCTION }\hyperlink{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}{lcg}
+85       \textcolor{keywordtype}{integer} :: \hyperlink{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}{lcg}
+86       \textcolor{keywordtype}{integer(int64)} :: s
+87       \textcolor{keywordflow}{IF} (s == 0) \textcolor{keywordflow}{THEN}
+88          s = 104729
+89       \textcolor{keywordflow}{ELSE}
+90          s = mod(s, 4294967296\_int64)
+91 \textcolor{keywordflow}{      END IF}
+92       s = mod(s * 279470273\_int64, 4294967291\_int64)
+93       \hyperlink{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}{lcg} = int(mod(s, int(huge(0), int64)), kind(0))
+94 \textcolor{keyword}{    END FUNCTION }\hyperlink{util_8f90_a669ac8da4cdd11efd16a0ef72a4f7915}{lcg}
 \end{DoxyCode}
