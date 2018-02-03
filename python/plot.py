@@ -6,7 +6,6 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 import subprocess
 from mpl_toolkits.mplot3d import Axes3D
-import multiprocessing, functools
 
 NMODEL = 36
 PINTVL = 10
@@ -17,10 +16,10 @@ g = 9.81
 
 def main():
     mkdirs()
-    nad, timd = read_npy("evol_field.npy", 0.0, 0.1)
-    # plot_time(nad, timd)
+    nad, timd = read_file("evol_field.dat", 0.0)
+    plot_time(nad, timd)
     plot_anime(nad)
-    # plot_3d_trajectory(nad[:, 21], nad[:, 29], nad[:, 0])
+    plot_3d_trajectory(nad[:, 21], nad[:, 29], nad[:, 0])
 
 def mkdirs():
     subprocess.run("rm -rf img", check=True, shell=True)
@@ -30,19 +29,10 @@ def mkdirs():
     subprocess.run("mkdir -p img/o_psi", check=True, shell=True)
     subprocess.run("mkdir -p img/o_t", check=True, shell=True)
 
-def read_npy(file, st, ed):
-    na = np.load(file)
-    nt = na.shape[0]
-    nad = na[int(nt * st):int(nt * ed), 1:]
-    timd = na[int(nt * st):int(nt * ed), 0]
-    return nad, timd
-
 def read_file(file, discard):
     # return np.ndarray[time, NMODEL]
-
     with open(file, "r") as f:
         ar = f.read().split()
-
     ar2 = []
     n = len(ar)
     na = np.empty((n // (NMODEL + 1), NMODEL))
@@ -50,7 +40,6 @@ def read_file(file, discard):
     for i in range(n // (NMODEL + 1)):
         tim[i]   = ar[i * (NMODEL + 1)]
         na[i, :] = ar[i * (NMODEL + 1) + 1:(i + 1) * (NMODEL + 1)]
-
     nt = na.shape[0]
     nad = na[int(nt * discard):nt, :]
     timd = tim[int(nt * discard):nt]
@@ -74,9 +63,8 @@ def plot_snap(cmaxs, nad, i):
 def plot_anime(nad):
     cmaxs = {"a_gph": 500, "a_t": 20, "o_psi": 5e+5, "o_t": 40}
     nt = nad.shape[0]
-    p = multiprocessing.Pool(4)
-    p.map(functools.partial(plot_snap, cmaxs, nad), range(nt - PINTVL * ANIMAX, nt, PINTVL))
-    p.close()
+    for i in range(nt - PINTVL * ANIMAX, nt, PINTVL):
+        plot_snap(cmaxs, nad, i)
     for dir in cmaxs:
         subprocess.run("convert -delay 8 -loop 0 ./img/%s/*.png ./img/%s/anime.gif" % (dir, dir), check=True, shell=True)
 
