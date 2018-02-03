@@ -71,6 +71,7 @@ MODULE params
   REAL(KIND=8) :: dt        !< Integration time step
   REAL(KIND=8) :: tw        !< Write all variables every tw time units
   LOGICAL :: writeout       !< Write to file boolean
+  LOGICAL :: progress
   
   INTEGER :: nboc   !< Number of atmospheric blocks
   INTEGER :: nbatm  !< Number of oceanic blocks
@@ -100,7 +101,7 @@ CONTAINS
     NAMELIST /modeselection/ oms,ams
     NAMELIST /numblocs/ nboc,nbatm
 
-    NAMELIST /int_params/ t_trans,t_run,dt,tw,writeout
+    NAMELIST /int_params/ t_trans,t_run,dt,tw,writeout,progress
 
     OPEN(8, file="params.nml", status='OLD', recl=80, delim='APOSTROPHE')
 
