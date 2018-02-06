@@ -10,7 +10,7 @@
   DT = 1.D-2           !  the time step
   WRITEOUT = T         !  write out all variables every tw time units
   TW = 1.D2            !
-  PROGRESS = T
+  PROGRESS = F
 &END
 
 
