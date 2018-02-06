@@ -3,9 +3,9 @@
 !
 !>  Tensor utility module
 !
-!> @copyright                                                               
+!> @copyright
 !> 2015 Lesley De Cruz & Jonathan Demaeyer.
-!> See LICENSE.txt for license information.                                  
+!> See LICENSE.txt for license information.
 !
 !---------------------------------------------------------------------------!
 
@@ -28,14 +28,14 @@ MODULE tensor
      TYPE(coolist_elem), DIMENSION(:), ALLOCATABLE :: elems !< Lists of elements tensor::coolist_elem
      INTEGER :: nelems = 0 !< Number of elements in the list.
   END TYPE coolist
-  
+
   !> Parameter to test the equality with zero.
   REAL(KIND=8), PARAMETER :: real_eps = 2.2204460492503131e-16
 
   PUBLIC :: sparse_mul3,sparse_mul2,copy_coo,mat_to_coo,jsparse_mul,jsparse_mul_mat,simplify
 
 CONTAINS
-    
+
   !> Routine to copy a coolist.
   !> @param src Source coolist
   !> @param dst Destination coolist
@@ -44,7 +44,7 @@ CONTAINS
     TYPE(coolist), DIMENSION(ndim), INTENT(IN) :: src
     TYPE(coolist), DIMENSION(ndim), INTENT(OUT) :: dst
     INTEGER :: i,j,AllocStat
-    
+
     DO i=1,ndim
        IF (dst(i)%nelems/=0) STOP "*** copy_coo : Destination coolist not empty ! ***"
        ALLOCATE(dst(i)%elems(src(i)%nelems), STAT=AllocStat)
@@ -86,14 +86,14 @@ CONTAINS
        dst(i)%nelems=n
     ENDDO
   END SUBROUTINE mat_to_coo
-  
+
   !> Sparse multiplication of a tensor with two vectors:  \f${\displaystyle \sum_{j,k=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k\f$.
   !> @param coolist_ijk a coordinate list (sparse tensor) of which index
   !> 2 and 3 will be contracted.
   !> @param arr_j the vector to be contracted with index 2 of coolist_ijk
   !> @param arr_k the vector to be contracted with index 3 of coolist_ijk
   !> @param res vector (buffer) to store the result of the contraction
-  !> @remark Note that it is NOT safe to pass `arr_j`/`arr_k` as a result buffer, 
+  !> @remark Note that it is NOT safe to pass `arr_j`/`arr_k` as a result buffer,
   !> as this operation does multiple passes.
   SUBROUTINE sparse_mul3(coolist_ijk, arr_j, arr_k, res)
     TYPE(coolist), DIMENSION(ndim), INTENT(IN):: coolist_ijk
@@ -115,7 +115,7 @@ CONTAINS
   !> It's implemented slightly differently: for every \f$\mathcal{T}_{i,j,k}\f$, we add to \f$J_{i,j}\f$ as follows:
   !> \f[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\f]
   !> This version return a coolist (sparse tensor).
-  !> @param coolist_ijk a coordinate list (sparse tensor) of which index 
+  !> @param coolist_ijk a coordinate list (sparse tensor) of which index
   !> 2 or 3 will be contracted.
   !> @param arr_j the vector to be contracted with index 2 and then index 3 of ffi_coo_ijk
   !> @param jcoo_ij a coolist (sparse tensor) to store the result of the contraction
@@ -158,7 +158,7 @@ CONTAINS
   !> It's implemented slightly differently: for every \f$\mathcal{T}_{i,j,k}\f$, we add to \f$J_{i,j}\f$ as follows:
   !> \f[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\f]
   !> This version return a matrix.
-  !> @param coolist_ijk a coordinate list (sparse tensor) of which index 
+  !> @param coolist_ijk a coordinate list (sparse tensor) of which index
   !> 2 or 3 will be contracted.
   !> @param arr_j the vector to be contracted with index 2 and then index 3 of ffi_coo_ijk
   !> @param jcoo_ij a matrix to store the result of the contraction
@@ -185,7 +185,7 @@ CONTAINS
   !> 2 will be contracted.
   !> @param arr_j the vector to be contracted with index 2 of coolist_ijk
   !> @param res vector (buffer) to store the result of the contraction
-  !> @remark Note that it is NOT safe to pass `arr_j` as a result buffer, 
+  !> @remark Note that it is NOT safe to pass `arr_j` as a result buffer,
   !> as this operation does multiple passes.
   SUBROUTINE sparse_mul2(coolist_ij, arr_j, res)
     TYPE(coolist), DIMENSION(ndim), INTENT(IN):: coolist_ij
@@ -200,7 +200,7 @@ CONTAINS
       END DO
    END DO
  END SUBROUTINE sparse_mul2
- 
+
  !> Routine to simplify a coolist (sparse tensor). For each index \f$i\f$, it upper triangularize the matrix
  !> \f[\mathcal{T}_{i,j,k} \qquad 0 \leq j,k \leq ndim.\f]
  !> @param tensor a coordinate list (sparse tensor) which will be simplified.
@@ -216,7 +216,7 @@ CONTAINS
          DO lii=li-1,1,-1
             IF ((j==tensor(i)%elems(lii)%j).AND.(k==tensor(i)%elems(lii)%k)) THEN
                ! Found another entry with the same i,j,k: merge both into
-               ! the one listed first (of those two). 
+               ! the one listed first (of those two).
                tensor(i)%elems(lii)%v=tensor(i)%elems(lii)%v+tensor(i)%elems(li)%v
                ! Shift the rest of the items one place down.
                DO liii=li+1,n
@@ -247,7 +247,7 @@ CONTAINS
 
    ENDDO
  END SUBROUTINE simplify
-    
+
 
 END MODULE tensor
 

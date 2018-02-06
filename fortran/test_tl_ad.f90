@@ -3,10 +3,10 @@
 !
 !> Tests for the Tangent Linear (TL) and Adjoint (AD) model versions
 !> of MAOOAM.
-!     
-!> @copyright                                                               
+!
+!> @copyright
 !> 2016 Lesley De Cruz & Jonathan Demaeyer.
-!> See LICENSE.txt for license information.                                  
+!> See LICENSE.txt for license information.
 !
 !---------------------------------------------------------------------------!
 
@@ -26,7 +26,7 @@ PROGRAM test_tl_ad
   REAL(KIND=8) :: t=0.D0
   REAL(KIND=8) :: norm1,norm2,gasdev
   INTEGER :: i,idum1,n
-  
+
   ! Compute the tensors
 
   CALL init_aotensor
@@ -43,7 +43,7 @@ PROGRAM test_tl_ad
   ALLOCATE(dy1(0:ndim),dy1_tl(0:ndim),dy_bis(0:ndim)&
        &,dy1_bis_tl(0:ndim),dy1_ad(0:ndim),dy1_bis_ad(0:ndim))!, STAT&
        ! &=AllocStat)
- 
+
 
   ! Test Taylor property for the Tangent Linear.
   ! lim(\lambda->0) M(x+\lambda dx) - M(x) / M'(\lambda dx) = 1
@@ -76,7 +76,7 @@ PROGRAM test_tl_ad
      dy=2.D0**(-n)/sqrt(real(ndim))
      dy(0)=0.D0
      PRINT*, "Perturbation size:",dot_product(dy,dy)
-     
+
      y0 = y0_IC*1
      y0prime = y0 + dy
      CALL step(y0,t,dt,y1)
@@ -98,7 +98,7 @@ PROGRAM test_tl_ad
   END DO
 
   ! Test 2: Adjoint Identity: <M(TL).x,y> = <x,M(AD).y>
-  
+
   DO i=1,100
      ! Any perturbation.
      DO n=1,ndim
@@ -114,13 +114,13 @@ PROGRAM test_tl_ad
      ! Calculate M(TL).x in dy1_tl
      dy0 = dy*1
      CALL tl_step(dy0,y0_IC,t,dt,dy1_tl)
-     
+
      ! Calculate M(AD).x in dy1_ad
      CALL ad_step(dy0,y0_IC,t,dt,dy1_ad)
 
      ! Calculate M(TL).y in dy1_bis_tl
      CALL tl_step(dy0_bis,y0_IC,t,dt,dy1_bis_tl)
-     
+
      ! Calculate M(AD).y in dy1_bis_ad
      CALL ad_step(dy0_bis,y0_IC,t,dt,dy1_bis_ad)
 

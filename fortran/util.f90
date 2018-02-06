@@ -4,9 +4,9 @@
 !
 !>  Utility module
 !
-!> @copyright                                                               
+!> @copyright
 !> 2015 Lesley De Cruz & Jonathan Demaeyer.
-!> See LICENSE.txt for license information.                                  
+!> See LICENSE.txt for license information.
 !
 !---------------------------------------------------------------------------!
 
@@ -18,28 +18,28 @@ MODULE util
   PUBLIC :: str,rstr,init_random_seed,init_one
 
 CONTAINS
-    
+
   ! SUBROUTINE scalar_allocate(x)
   !   INTEGER :: AllocStat
-  !   IF (.NOT. ALLOCATED(x)) THEN 
+  !   IF (.NOT. ALLOCATED(x)) THEN
   !      ALLOCATE(x, STAT=AllocStat)
-  
+
   !> Convert an integer to string.
-  CHARACTER(len=20) FUNCTION str(k) 
+  CHARACTER(len=20) FUNCTION str(k)
     INTEGER, INTENT(IN) :: k
     WRITE (str, *) k
     str = ADJUSTL(str)
   END FUNCTION str
 
   !> Convert a real to string with a given format
-  CHARACTER(len=40) FUNCTION rstr(x,fm) 
+  CHARACTER(len=40) FUNCTION rstr(x,fm)
     REAL(KIND=8), INTENT(IN) :: x
     CHARACTER(len=20), INTENT(IN) :: fm
     WRITE (rstr, TRIM(ADJUSTL(fm))) x
     rstr = ADJUSTL(rstr)
   END FUNCTION rstr
 
-  !> Random generator initialization routine  
+  !> Random generator initialization routine
   SUBROUTINE init_random_seed()
     USE iso_fortran_env, only: int64
     USE IFPORT !, only: getpid

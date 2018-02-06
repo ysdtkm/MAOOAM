@@ -1,16 +1,16 @@
 
 !  maooam.f90
 !
-!> Fortran 90 implementation of the modular arbitrary-order ocean-atmosphere 
+!> Fortran 90 implementation of the modular arbitrary-order ocean-atmosphere
 !> model MAOOAM.
 !
-!> @copyright                                                               
+!> @copyright
 !> 2015 Lesley De Cruz & Jonathan Demaeyer.
-!> See LICENSE.txt for license information.                                  
+!> See LICENSE.txt for license information.
 !
 !---------------------------------------------------------------------------!
 
-PROGRAM maooam 
+PROGRAM maooam
   USE params, only: ndim, dt, tw, t_trans, t_run, writeout, progress
   USE aotensor_def, only: init_aotensor
   USE IC_def, only: load_IC, IC
@@ -51,7 +51,7 @@ PROGRAM maooam
   PRINT*, 'Starting the time evolution...'
 
   CALL init_stat
-  
+
   t=0.D0
 
   IF (writeout) WRITE(10,*) t,X(1:ndim)
@@ -76,4 +76,4 @@ PROGRAM maooam
   IF (writeout) WRITE(10,*) X(1:ndim)
   IF (writeout) CLOSE(10)
 
-END PROGRAM maooam 
+END PROGRAM maooam

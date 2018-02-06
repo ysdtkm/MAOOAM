@@ -5,16 +5,16 @@
 !>  with temperature which allows for an extensible set of modes
 !>  in the ocean and in the atmosphere.
 !
-!> @copyright                                                               
+!> @copyright
 !> 2015 Lesley De Cruz & Jonathan Demaeyer.
-!> See LICENSE.txt for license information.                                  
+!> See LICENSE.txt for license information.
 !
 !---------------------------------------------------------------------------!
-!                                                                           
-!> @remark                                                                 
-!> Generated Fortran90/95 code 
+!
+!> @remark
+!> Generated Fortran90/95 code
 !> from aotensor.lua
-!                                                                           
+!
 !---------------------------------------------------------------------------!
 
 
@@ -200,7 +200,7 @@ CONTAINS
   !> anymore at this point.
   SUBROUTINE init_aotensor
     INTEGER :: i
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
 
     CALL init_params  ! Iniatialise the parameter
 
@@ -219,7 +219,7 @@ CONTAINS
 
     DEALLOCATE(count_elems, STAT=AllocStat)
     IF (AllocStat /= 0) STOP "*** Deallocation problem ! ***"
-    
+
     CALL compute_aotensor(coeff)
 
     CALL simplify(aotensor)
@@ -228,6 +228,6 @@ CONTAINS
 
   END SUBROUTINE init_aotensor
 END MODULE aotensor_def
-      
+
 
 

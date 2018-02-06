@@ -8,16 +8,16 @@
 !>  weather regimes-A critical reexamination. Part II: Baroclinic two-layer
 !>  models. Journal of the atmospheric sciences, 44(21), 3282-3303, 1987.
 !
-!> @copyright                                                               
+!> @copyright
 !> 2015 Lesley De Cruz & Jonathan Demaeyer.
-!> See LICENSE.txt for license information.                                  
+!> See LICENSE.txt for license information.
 !
 !---------------------------------------------------------------------------!
-!                                                                           
-!> @remark                                                                 
-!> Generated Fortran90/95 code 
+!
+!> @remark
+!> Generated Fortran90/95 code
 !> from inprod_analytic.lua
-!                                                                           
+!
 !---------------------------------------------------------------------------!
 
 MODULE inprod_analytic
@@ -36,7 +36,7 @@ MODULE inprod_analytic
   PUBLIC :: init_inprod, deallocate_inprod
 
   !> Atmospheric bloc specification type
-  TYPE :: atm_wavenum 
+  TYPE :: atm_wavenum
      CHARACTER :: typ
      INTEGER :: M=0,P=0,H=0
      REAL(KIND=8) :: Nx=0.,Ny=0.
@@ -61,12 +61,12 @@ MODULE inprod_analytic
   END TYPE ocean_tensors
 
   !> Atmospheric blocs specification
-  TYPE(atm_wavenum), DIMENSION(:), ALLOCATABLE, PUBLIC :: awavenum 
+  TYPE(atm_wavenum), DIMENSION(:), ALLOCATABLE, PUBLIC :: awavenum
   !> Oceanic blocs specification
-  TYPE(ocean_wavenum), DIMENSION(:), ALLOCATABLE, PUBLIC :: owavenum 
+  TYPE(ocean_wavenum), DIMENSION(:), ALLOCATABLE, PUBLIC :: owavenum
 
   !> Atmospheric tensors
-  TYPE(atm_tensors), PUBLIC :: atmos 
+  TYPE(atm_tensors), PUBLIC :: atmos
   !> Oceanic tensors
   TYPE(ocean_tensors), PUBLIC :: ocean
 
@@ -147,14 +147,14 @@ CONTAINS
   !--------------------------------------------------------!
   ! 1. Inner products in the equations for the atmosphere  !
   !--------------------------------------------------------!
-  
+
   !> Eigenvalues of the Laplacian (atmospheric)
-  !> 
+  !>
   !> \f$ a_{i,j} = (F_i, \nabla^2 F_j)\f$ .
   SUBROUTINE calculate_a
     INTEGER :: i
     TYPE(atm_wavenum) :: Ti
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
     IF (natm == 0 ) THEN
        STOP "*** Problem with calculate_a : natm==0 ! ***"
     ELSE
@@ -172,7 +172,7 @@ CONTAINS
   END SUBROUTINE calculate_a
 
   !> Streamfunction advection terms (atmospheric)
-  !> 
+  !>
   !> \f$ b_{i,j,k} = (F_i, J(F_j, \nabla^2 F_k))\f$ .
   !
   !> @remark
@@ -180,7 +180,7 @@ CONTAINS
   !> this routine
   SUBROUTINE calculate_b
     INTEGER :: i,j,k
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
 
     IF ((.NOT. ALLOCATED(atmos%a)) .OR. (.NOT. ALLOCATED(atmos%g))) THEN
        STOP "*** atmos%a and atmos%g must be defined before calling calculate_b ! ***"
@@ -206,7 +206,7 @@ CONTAINS
   END SUBROUTINE calculate_b
 
   !> Beta term for the atmosphere
-  !> 
+  !>
   !> \f$ c_{i,j} = (F_i, \partial_x F_j)\f$ .
   !
   !> @remark
@@ -216,7 +216,7 @@ CONTAINS
     INTEGER :: i,j
     TYPE(atm_wavenum) :: Ti, Tj
     REAL(KIND=8) :: val
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
 
     IF (natm == 0 ) THEN
        STOP "*** Problem with calculate_c_atm : natm==0 ! ***"
@@ -233,7 +233,7 @@ CONTAINS
           Ti = awavenum(i)
           Tj = awavenum(j)
           val = 0.D0
-          IF ((Ti%typ == "K") .AND. (Tj%typ == "L")) THEN 
+          IF ((Ti%typ == "K") .AND. (Tj%typ == "L")) THEN
              val = n * Ti%M * delta(Ti%M - Tj%H) * delta(Ti%P - Tj%P)
           END IF
           IF (val /= 0.D0) THEN
@@ -245,7 +245,7 @@ CONTAINS
   END SUBROUTINE calculate_c_atm
 
   !> Forcing of the ocean on the atmosphere.
-  !> 
+  !>
   !> \f$ d_{i,j} = (F_i, \nabla^2 \eta_j)\f$ .
   !
   !> @remark
@@ -253,7 +253,7 @@ CONTAINS
   !> calling this routine !
   SUBROUTINE calculate_d
     INTEGER :: i,j
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
 
     IF ((.NOT. ALLOCATED(atmos%s)) .OR. (.NOT. ALLOCATED(ocean%M))) THEN
        STOP "*** atmos%s and ocean%M must be defined before calling calculate_d ! ***"
@@ -278,7 +278,7 @@ CONTAINS
   END SUBROUTINE calculate_d
 
   !> Temperature advection terms (atmospheric)
-  !> 
+  !>
   !> \f$ g_{i,j,k} = (F_i, J(F_j, F_k))\f$ .
   !
   ! @remark
@@ -374,14 +374,14 @@ CONTAINS
   END SUBROUTINE calculate_g
 
   !> Forcing (thermal) of the ocean on the atmosphere.
-  !> 
+  !>
   !> \f$ s_{i,j} = (F_i, \eta_j)\f$ .
   SUBROUTINE calculate_s
     INTEGER :: i,j
     TYPE(atm_wavenum) :: Ti
     TYPE(ocean_wavenum) :: Dj
     REAL(KIND=8) :: val
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
     IF (natm == 0 ) THEN
        STOP "*** Problem with calculate_s : natm==0 ! ***"
     ELSEIF (noc == 0) then
@@ -424,7 +424,7 @@ CONTAINS
   !--------------------------------------------------------!
 
   !> Forcing of the atmosphere on the ocean.
-  !> 
+  !>
   !> \f$ K_{i,j} = (\eta_i, \nabla^2 F_j)\f$ .
   !
   !> @remark
@@ -432,7 +432,7 @@ CONTAINS
   !> this function !
   SUBROUTINE calculate_K
     INTEGER :: i,j
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
 
     IF ((.NOT. ALLOCATED(atmos%a)) .OR. (.NOT. ALLOCATED(atmos%s))) THEN
        STOP "*** atmos%a and atmos%s must be defined before calling calculate_K ! ***"
@@ -458,12 +458,12 @@ CONTAINS
   END SUBROUTINE calculate_K
 
   !> Forcing of the ocean fields on the ocean.
-  !> 
+  !>
   !> \f$ M_{i,j} = (eta_i, \nabla^2 \eta_j)\f$ .
   SUBROUTINE calculate_M
     INTEGER :: i
     TYPE(ocean_wavenum) :: Di
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
     IF (noc == 0 ) THEN
        STOP "*** Problem with calculate_M : noc==0 ! ***"
     ELSE
@@ -481,13 +481,13 @@ CONTAINS
   END SUBROUTINE calculate_M
 
   !> Beta term for the ocean
-  !> 
+  !>
   !> \f$ N_{i,j} = (\eta_i, \partial_x \eta_j) \f$.
   SUBROUTINE calculate_N
     INTEGER :: i,j
     TYPE(ocean_wavenum) :: Di,Dj
     REAL(KIND=8) :: val
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
     IF (noc == 0 ) THEN
        STOP "*** Problem with calculate_N : noc==0 ! ***"
     ELSE
@@ -510,13 +510,13 @@ CONTAINS
   END SUBROUTINE calculate_N
 
   !> Temperature advection term (passive scalar)
-  !> 
+  !>
   !> \f$ O_{i,j,k} = (\eta_i, J(\eta_j, \eta_k))\f$ .
   SUBROUTINE calculate_O
     INTEGER :: i,j,k
     REAL(KIND=8) :: vs3,vs4,val
     TYPE(ocean_wavenum) :: Di,Dj,Dk
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
     IF (noc == 0 ) THEN
        STOP "*** Problem with calculate_O : noc==0 ! ***"
     ELSE
@@ -559,7 +559,7 @@ CONTAINS
   END SUBROUTINE calculate_O
 
   !> Streamfunction advection terms (oceanic)
-  !> 
+  !>
   !> \f$ C_{i,j,k} = (\eta_i, J(\eta_j,\nabla^2 \eta_k))\f$ .
   !
   !> @remark
@@ -567,7 +567,7 @@ CONTAINS
   SUBROUTINE calculate_C_oc
     INTEGER :: i,j,k
     REAL(KIND=8) :: val
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
 
     IF ((.NOT. ALLOCATED(ocean%O)) .OR. (.NOT. ALLOCATED(ocean%M))) THEN
        STOP "*** ocean%O and ocean%M must be defined before calling calculate_C ! ***"
@@ -595,7 +595,7 @@ CONTAINS
   END SUBROUTINE calculate_C_oc
 
   !> Short-wave radiative forcing of the ocean
-  !> 
+  !>
   !> \f$ W_{i,j} = (\eta_i, F_j)\f$ .
   !
   !> @remark
@@ -603,7 +603,7 @@ CONTAINS
   !> this function !
   SUBROUTINE calculate_W
     INTEGER :: i,j
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
 
     IF (.NOT. ALLOCATED(atmos%s)) THEN
        STOP "*** atmos%s must be defined before calling calculate_W ! ***"
@@ -719,7 +719,7 @@ CONTAINS
 
   !> Deallocation of the inner products
   SUBROUTINE deallocate_inprod
-    INTEGER :: AllocStat 
+    INTEGER :: AllocStat
 
     ! Deallocation of atmospheric inprod
     AllocStat=0

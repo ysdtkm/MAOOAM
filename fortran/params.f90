@@ -1,18 +1,18 @@
 
-! params.f90                                                                
+! params.f90
 !
-!>  The model parameters module. 
+!>  The model parameters module.
 !
-!> @copyright                                                               
+!> @copyright
 !> 2015 Lesley De Cruz & Jonathan Demaeyer.
-!> See LICENSE.txt for license information.                                  
+!> See LICENSE.txt for license information.
 !
 !---------------------------------------------------------------------------
-!                                                                           
-!>  @remark                                                                 
-!>  Once the init_params() subroutine is called, the parameters are loaded           
-!>  globally in the main program and its subroutines and function           
-!                                                                           
+!
+!>  @remark
+!>  Once the init_params() subroutine is called, the parameters are loaded
+!>  globally in the main program and its subroutines and function
+!
 !---------------------------------------------------------------------------
 
 MODULE params
@@ -72,7 +72,7 @@ MODULE params
   REAL(KIND=8) :: tw        !< Write all variables every tw time units
   LOGICAL :: writeout       !< Write to file boolean
   LOGICAL :: progress
-  
+
   INTEGER :: nboc   !< Number of atmospheric blocks
   INTEGER :: nbatm  !< Number of oceanic blocks
   INTEGER :: natm=0 !< Number of atmospheric basis functions
@@ -129,7 +129,7 @@ CONTAINS
 
   END SUBROUTINE init_nml
 
-  !> Parameters initialisation routine 
+  !> Parameters initialisation routine
   SUBROUTINE init_params
     INTEGER, DIMENSION(2) :: s
     INTEGER :: i

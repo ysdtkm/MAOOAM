@@ -22,7 +22,7 @@ GCC_LD_FLAGS = -llapack -lblas
 # Debug Case:
 IFORT_COMPILER_FLAGS_DBG = -O0 -check all -traceback -fpe0 -check bounds -debug all -check uninit -ftrapuv -assume byterecl
 IFORT_LD_FLAGS_DBG = -llapack -lblas
-GCC_COMPILER_FLAGS_DBG = -g -O0 -fbounds-check -Wall -Wextra -Wconversion -pedantic -ffpe-trap=zero,overflow,underflow 
+GCC_COMPILER_FLAGS_DBG = -g -O0 -fbounds-check -Wall -Wextra -Wconversion -pedantic -ffpe-trap=zero,overflow,underflow
 GCC_LD_FLAGS_DBG = -llapack -lblas
 
 
@@ -40,7 +40,7 @@ ifeq ($(COMPILER),gfortran)
   #Derive gfortran version from gcc version and check if >=4.6.0.
   GVERSION := $(shell gcc -dumpversion)
   GE40600 := $(shell expr `gcc -dumpversion | sed -e 's/\.\([0-9][0-9]\)/\1/g' -e 's/\.\([0-9]\)/0\1/g' -e 's/^[0-9]\{3,4\}$$/&00/'` \>= 40600)
-  
+
   ifeq ($(COMPILER),gfortran)
     ifeq ($(GE40600), 0)
       $(error GCC/gfortran version $(GVERSION) detected. This program uses features of gfortran >= 4.6.0. Please update your toolchain)
@@ -74,13 +74,13 @@ MODULE_OBJECTS = $(MODULES:.mod=.o)
 TEST_PROGRAMS = test_inprod_analytic test_aotensor
 TESTS = $(TEST_PROGRAMS:=.test)
 
-all: $(PROGRAMS) 
+all: $(PROGRAMS)
 
-debug: COMPILER_FLAGS = $(COMPILER_FLAGS_DBG) 
+debug: COMPILER_FLAGS = $(COMPILER_FLAGS_DBG)
 debug: LD_FLAGS = $(LD_FLAGS_DBG)
 debug: all
 
-test: COMPILER_FLAGS = $(COMPILER_FLAGS_DBG) 
+test: COMPILER_FLAGS = $(COMPILER_FLAGS_DBG)
 test: LD_FLAGS = $(LD_FLAGS_DBG)
 test: $(TESTS)
 
@@ -88,18 +88,18 @@ test_inprod_analytic.test: test_inprod_analytic
 	./$< |sort  > tests/$<.out
 	diff tests/$<.out tests/$<.ref && echo PASS: $@ || echo FAIL: $@
 
-test_aotensor.test: test_aotensor 
+test_aotensor.test: test_aotensor
 	./$< |sort  > tests/$<.out
 	diff tests/$<.out tests/$<.ref && echo PASS: $@ || echo FAIL: $@
 
-%.mod: %.f90  
+%.mod: %.f90
 	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) -c $<
 
 %.o: %.f90 $(MODULES)
 	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) -c $<
 
 %: %.o $(MODULE_OBJECTS)
-	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) $^ -o $@ 
+	$(COMPILER) $(LD_FLAGS) $(COMPILER_FLAGS) $^ -o $@
 
 inprod_analytic.mod: params.mod
 aotensor_def.mod: tensor.mod inprod_analytic.mod
