@@ -18,7 +18,7 @@ endif
 IFORT_COMPILER_FLAGS = -assume byterecl -O2
 IFORT_LD_FLAGS = -mkl
 GCC_COMPILER_FLAGS = -O2 -Wall
-GCC_LD_FLAGS = -llapack -lblas
+GCC_LD_FLAGS = -I/usr/local/include -L/usr/lib/lapack -llapack -lblas
 # Debug Case:
 IFORT_COMPILER_FLAGS_DBG = -O0 -check all -traceback -fpe0 -check bounds -debug all -check uninit -ftrapuv -assume byterecl
 IFORT_LD_FLAGS_DBG = -llapack -lblas
@@ -68,7 +68,7 @@ endif
 
 PROGRAMS = maooam test_tl_ad
 
-MODULES = util.mod params.mod inprod_analytic.mod aotensor_def.mod ic_def.mod $(INTEGRATOR).mod stat.mod tensor.mod tl_ad_tensor.mod $(TL_AD_INTEGRATOR).mod $(IFPORT)
+MODULES = util.mod params.mod inprod_analytic.mod aotensor_def.mod ic_def.mod $(INTEGRATOR).mod stat.mod tensor.mod tl_ad_tensor.mod wrap_lapack.mod $(TL_AD_INTEGRATOR).mod $(IFPORT)
 MODULE_OBJECTS = $(MODULES:.mod=.o)
 
 TEST_PROGRAMS = test_inprod_analytic test_aotensor
