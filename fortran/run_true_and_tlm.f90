@@ -138,30 +138,34 @@ PROGRAM run_true_and_tlm
   !    PRINT*, "<y,M(AD).x> = ", norm2
   !    PRINT*, "Ratio       = ", norm1/norm2
   ! END DO
-
-  CONTAINS
-
-  SUBROUTINE tl_matrix_analytic(xctl, dt, tlm)
-    USE params, only: ndim
-    USE integrator, only: step
-    IMPLICIT NONE
-    REAL(8), DIMENSION(0:ndim), INTENT(IN) :: xctl
-    REAL(8), INTENT(IN) :: dt
-    REAL(8), DIMENSION(0:ndim, 0:ndim), INTENT(OUT) :: tlm
-    REAL(8), PARAMETER :: eps = 1.0D-8
-    REAL(8), DIMENSION(0:ndim) :: xptb, xctl2, xptb2
-    REAL(8) :: dummy_t = 0.0D0
-    INTEGER :: j
-
-    CALL step(xctl, dummy_t, dt, xctl2)
-
-    do j = 1, ndim
-      xptb(:) = xctl(:)
-      xptb(j) = xptb(j) + eps
-      CALL step(xptb, dummy_t, dt, xptb2)
-      tlm(:, j) = (xptb2(:) - xctl2(:)) / eps
-    end do
-  END SUBROUTINE tl_matrix_analytic
-
 END PROGRAM run_true_and_tlm
+
+SUBROUTINE tl_matrix_analytic(xctl, dt, nt, tlm)
+  USE params, only: ndim
+  USE integrator, only: step
+  USE tl_ad_integrator, only: tl_step
+  IMPLICIT NONE
+  REAL(8), DIMENSION(0:ndim), INTENT(INOUT) :: xctl
+  REAL(8), INTENT(IN) :: dt
+  INTEGER, INTENT(IN) :: nt
+  REAL(8), DIMENSION(0:ndim, 0:ndim), INTENT(OUT) :: tlm
+
+  INTEGER :: i, j, k
+  REAL(8) :: t_dummy = 0.0, tmp(0:ndim)
+
+  tlm(:, :) = 0.0D0
+  do i = 0, ndim
+    tlm(i, i) = 1.0D0
+  end do
+
+  do k = 1, nt
+    do j = 0, ndim
+      CALL tl_step(tlm(:, j), xctl, t_dummy, dt, tmp(:))
+      tlm(:, j) = tmp(:)
+    end do
+    CALL step(xctl, t_dummy, dt, tmp)
+    xctl(:) = tmp(:)
+  end do
+END SUBROUTINE tl_matrix_analytic
+
 
