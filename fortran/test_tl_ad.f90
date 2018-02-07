@@ -17,6 +17,7 @@ PROGRAM test_tl_ad
   USE integrator, only: init_integrator,step
   USE tl_ad_tensor, only: init_tltensor, init_adtensor
   USE tl_ad_integrator, only: init_tl_ad_integrator,tl_step,ad_step
+  USE wrap_lapack
   IMPLICIT NONE
 
   REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: y0_IC,y0,y0prime,dy0,dy0_bis
