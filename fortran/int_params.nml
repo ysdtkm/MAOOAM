@@ -9,7 +9,7 @@
   T_RUN = 1.D3         !  length of trajectory on the attractor (e.g. 5.D8).
   DT = 1.D-2           !  the time step
   WRITEOUT = T         !  write out all variables every tw time units
-  TW = 1.D2            !
+  TW = 1.D0            !
   PROGRESS = F
 &END
 

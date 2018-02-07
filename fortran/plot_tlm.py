@@ -16,8 +16,11 @@ g = 9.81
 
 def main():
     mkdirs()
-    nad, timd = read_file("evol_field_tlm.dat")
-    print(nad.shape)
+    traj, tlm, tim = read_file("evol_field_tlm.dat")
+    print(traj.shape)
+    plt.imshow(tlm[0].reshape((NMODEL, NMODEL)))
+    plt.colorbar()
+    plt.savefig("img/tmp.pdf")
     # plot_time(nad, timd)
     # plot_anime(nad)
     # plot_3d_trajectory(nad[:, 21], nad[:, 29], nad[:, 0])
@@ -36,13 +39,17 @@ def read_file(file):
         ar = f.read().split()
     ar2 = []
     n = len(ar)
-    na = np.empty((n // (NMODEL ** 2 + NMODEL + 1), NMODEL ** 2 + NMODEL))
-    tim = np.empty((n // (NMODEL ** 2 + NMODEL + 1)))
-    for i in range(n // (NMODEL ** 2 + NMODEL + 1)):
-        tim[i]   = ar[i * (NMODEL ** 2 + NMODEL + 1)]
-        na[i, :] = ar[i * (NMODEL ** 2 + NMODEL + 1) + 1:(i + 1) * (NMODEL ** 2 + NMODEL + 1)]
-    nt = na.shape[0]
-    return na, tim
+    nrec = NMODEL ** 2 + NMODEL + 1
+
+    na = np.empty((n // nrec, NMODEL))
+    ntl = np.empty((n // nrec, NMODEL ** 2))
+    tim = np.empty((n // nrec))
+
+    for i in range(n // nrec):
+        tim[i]   = ar[i * nrec]
+        na[i, :] = ar[i * nrec + 1:i * nrec + NMODEL + 1]
+        ntl[i, :] = ar[i * nrec + NMODEL + 1:i * nrec + NMODEL ** 2 + NMODEL + 1]
+    return na, ntl, tim
 
 # def plot_time(nad, timd):
 #     for i in range(NMODEL):
