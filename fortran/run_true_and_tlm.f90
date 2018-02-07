@@ -1,5 +1,6 @@
 PROGRAM run_true_and_tlm
   USE params, only:ndim,dt,t_trans,t_run,tw,writeout
+  USE IC_def, only: load_IC, IC
   USE aotensor_def, only: init_aotensor
   USE integrator, only: init_integrator,step
   USE tl_ad_tensor, only: init_tltensor, init_adtensor
@@ -17,6 +18,7 @@ PROGRAM run_true_and_tlm
   INTEGER :: i,idum1,n
 
   CALL init_aotensor
+  CALL load_IC
   CALL init_tltensor
   CALL init_adtensor
   CALL init_integrator
@@ -24,10 +26,7 @@ PROGRAM run_true_and_tlm
 
   ALLOCATE (y0_IC(0:ndim), tlm(0:ndim, 0:ndim))
 
-  y0_IC(0) = 1.D0
-  DO i = 1, ndim
-    y0_IC(i) = 0.01 * (-1) ** i
-  ENDDO
+  y0_IC = IC
 
   ! Evolve during transient period
   DO WHILE (t < t_trans)
