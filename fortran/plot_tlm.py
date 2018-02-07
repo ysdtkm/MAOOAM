@@ -18,10 +18,6 @@ oneday = 8.64  # [timeunit/day] a46p51
 def main():
     mkdirs()
     traj, tlm, tim = read_file("evol_field_tlm.dat")
-    plt.imshow(tlm[0, :, :])
-    plt.colorbar()
-    plt.savefig("img/tmp.pdf")
-    print(np.linalg.svd(tlm[0, :, :]))
 
     nt = len(tim)
     dt = tim[1] - tim[0]
@@ -35,7 +31,8 @@ def main():
         blv, ble = orth_norm_vectors(blv)
         all_ble[i, :] = ble[:] / (dt / oneday)
         all_blv[i, :, :] = blv[:, :]
-    print(np.mean(all_ble, axis=0))
+    plt.plot(np.mean(all_ble, axis=0))
+    plt.savefig("img/tmp.pdf")
 
 def orth_norm_vectors(lv):
   # lv     <- np.array[NMODEL,NMODEL] : Lyapunov vectors (column)
