@@ -22,37 +22,21 @@ PROGRAM run_true_and_tlm
   CALL init_integrator
   CALL init_tl_ad_integrator
 
-  ! ALLOCATE(y0_IC(0:ndim),dy(0:ndim),y0(0:ndim),y0prime(0:ndim)&
-  !      &,y1(0:ndim))!, STAT=AllocStat)
-  ! ALLOCATE(y1prime(0:ndim),dy0(0:ndim),dy0_bis(0:ndim))!, STAT&
-  !      ! &=AllocStat)
-  ! ALLOCATE(dy1(0:ndim),dy1_tl(0:ndim),dy_bis(0:ndim)&
-  !      &,dy1_bis_tl(0:ndim),dy1_ad(0:ndim),dy1_bis_ad(0:ndim))!, STAT&
-  !      ! &=AllocStat)
-  ! ALLOCATE(tlm(0:ndim, 0:ndim))
+  ALLOCATE (y0_IC(0:ndim))
+  ALLOCATE (tlm(0:ndim, 0:ndim))
 
+  idum1 = -1254
+  y0_IC(0) = 1.D0
+  DO i = 1, ndim
+    y0_IC(i) = 0.01 * (-1) ** i
+  ENDDO
 
-  ! ! Test Taylor property for the Tangent Linear.
-  ! ! lim(\lambda->0) M(x+\lambda dx) - M(x) / M'(\lambda dx) = 1
-
-  ! idum1=-1254
-
-  ! y0_IC(0)=1.D0
-
-  ! ! Set all values to random.
-
-  ! DO i=1,ndim
-  !    y0_IC(i)=0.01*gasdev(idum1)
-  ! ENDDO
-
-  ! ! Evolve during transient period
-
-  ! ! PRINT*, 'Random values:',y0_IC(0:ndim)
-  ! DO WHILE (t<t_trans)
-  !    CALL step(y0_IC,t,dt,y0)
-  !    y0_IC=y0
-  ! END DO
-  ! PRINT*, 'Initial values:',y0_IC(0:ndim)
+  ! Evolve during transient period
+  DO WHILE (t < t_trans)
+     CALL step(y0_IC, t, dt, y0)
+     y0_IC=y0
+  END DO
+  PRINT *, 'Initial values:', y0_IC(0:ndim)
 
   ! ! Test 1: Taylor test
   ! ! Integrate the original model by one step, integrate with perturbed
