@@ -66,7 +66,7 @@ endif
 .SUFFIXES:
 .SUFFIXES: .f90 .o .mod .out .test
 
-PROGRAMS = maooam test_tl_ad
+PROGRAMS = maooam test_tl_ad run_true_and_tlm
 
 MODULES = util.mod params.mod inprod_analytic.mod aotensor_def.mod ic_def.mod $(INTEGRATOR).mod stat.mod tensor.mod tl_ad_tensor.mod wrap_lapack.mod $(TL_AD_INTEGRATOR).mod $(IFPORT)
 MODULE_OBJECTS = $(MODULES:.mod=.o)
