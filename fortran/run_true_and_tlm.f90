@@ -16,14 +16,11 @@ PROGRAM run_true_and_tlm
   REAL(KIND=8) :: norm1,norm2,gasdev
   INTEGER :: i,idum1,n
 
-  ! Compute the tensors
-
   CALL init_aotensor
   CALL init_tltensor
   CALL init_adtensor
-
-  CALL init_integrator  ! Initialize the model integrator
-  CALL init_tl_ad_integrator  ! Initialize the TL & AD integrator
+  CALL init_integrator
+  CALL init_tl_ad_integrator
 
   ! ALLOCATE(y0_IC(0:ndim),dy(0:ndim),y0(0:ndim),y0prime(0:ndim)&
   !      &,y1(0:ndim))!, STAT=AllocStat)
