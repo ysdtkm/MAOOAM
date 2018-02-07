@@ -118,6 +118,7 @@ PROGRAM test_tl_ad
      dy0 = dy*1
      CALL tl_step(dy0,y0_IC,t,dt,dy1_tl)
      CALL tl_matrix(y0_IC, dt, tlm)
+     call wrt_mat(tlm)
      print *, maxval(abs(dy1_tl - matmul(tlm, dy0)))
 
      ! Calculate M(AD).x in dy1_ad
