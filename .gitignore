@@ -8,3 +8,5 @@ maooam
 img/
 *.so
 tags
+*.o
+*.out
