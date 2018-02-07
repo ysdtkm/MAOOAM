@@ -34,7 +34,7 @@ PROGRAM run_true_and_tlm
      y0_IC = y0
   END DO
 
-  IF (writeout) OPEN(10,file='evol_field.dat')
+  IF (writeout) OPEN(10,file='evol_field_tlm.dat')
   DO WHILE (t < t_run)
     print *, t
     CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
