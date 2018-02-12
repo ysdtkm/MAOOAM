@@ -55,10 +55,6 @@ def orth_norm_vectors(lv):
 def mkdirs():
     subprocess.run("rm -rf img", check=True, shell=True)
     subprocess.run("mkdir -p img", check=True, shell=True)
-    subprocess.run("mkdir -p img/a_gph", check=True, shell=True)
-    subprocess.run("mkdir -p img/a_t", check=True, shell=True)
-    subprocess.run("mkdir -p img/o_psi", check=True, shell=True)
-    subprocess.run("mkdir -p img/o_t", check=True, shell=True)
 
 def read_file(file):
     # return np.ndarray[time, NMODEL]
