@@ -5,11 +5,8 @@ import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
 import subprocess
-from mpl_toolkits.mplot3d import Axes3D
 
 NMODEL = 36
-PINTVL = 10
-ANIMAX = 3
 
 f0 = 1.032e-4
 g = 9.81
@@ -32,6 +29,7 @@ def main():
         all_ble[i, :] = ble[:] / (dt / oneday)
         all_blv[i, :, :] = blv[:, :]
     plt.plot(np.mean(all_ble, axis=0))
+    print(np.mean(all_ble, axis=0))
     plt.savefig("img/tmp.pdf")
 
 def orth_norm_vectors(lv):
