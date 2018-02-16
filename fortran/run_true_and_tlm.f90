@@ -7,14 +7,9 @@ PROGRAM run_true_and_tlm
   USE tl_ad_integrator, only: init_tl_ad_integrator,tl_step,ad_step
   IMPLICIT NONE
 
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: y0_IC,y0,y0prime,dy0,dy0_bis
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: y1,y1prime
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: dy,dy_bis
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: dy1,dy1_tl,dy1_bis_tl,dy1_ad,dy1_bis_ad
+  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: y0_IC,y0
   REAL(KIND=8), DIMENSION(:, :), ALLOCATABLE :: tlm
   REAL(KIND=8) :: t=0.D0
-  REAL(KIND=8) :: norm1,norm2,gasdev
-  INTEGER :: i,idum1,n
 
   CALL init_aotensor
   CALL load_IC
