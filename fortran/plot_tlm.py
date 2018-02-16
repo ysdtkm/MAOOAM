@@ -58,8 +58,10 @@ def mkdirs():
 
 def read_file(file):
     # return np.ndarray[time, NMODEL]
+    ar = []
     with open(file, "r") as f:
-        ar = f.read().split()
+        for l in f:
+            ar += l.split()
     ar2 = []
     n = len(ar)
     nrec = NMODEL ** 2 + NMODEL + 1
