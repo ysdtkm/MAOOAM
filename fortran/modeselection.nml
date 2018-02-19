@@ -6,12 +6,13 @@
 !  Number of blocs
 &NUMBLOCS
   NBOC  = 36        !  Number of oceanic blocs
-  NBATM = 81        !  Number of atmospheric blocs
+  NBATM = 36        !  Number of atmospheric blocs
 &END
 
 !  Mode selection parameters
 &MODESELECTION
   ! Oceanic blocs
+  ! ( x block number accounts for half-integer wavenumber e.g 1 => 1/2 , 2 => 1, etc...) 
   OMS(1,:)  = 1,1
   OMS(2,:)  = 1,2
   OMS(3,:)  = 1,3
@@ -48,7 +49,6 @@
   OMS(34,:) = 6,4
   OMS(35,:) = 6,5
   OMS(36,:) = 6,6
-  ! ( x block number accounts for half-integer wavenumber e.g 1 => 1/2 , 2 => 1, etc...) 
   ! Atmospheric blocs
   AMS(1,:)  = 1,1
   AMS(2,:)  = 1,2
@@ -56,81 +56,36 @@
   AMS(4,:)  = 1,4
   AMS(5,:)  = 1,5
   AMS(6,:)  = 1,6
-  AMS(7,:)  = 1,7
-  AMS(8,:)  = 1,8
-  AMS(9,:)  = 1,9
-  AMS(10,:) = 2,1
-  AMS(11,:) = 2,2
-  AMS(12,:) = 2,3
-  AMS(13,:) = 2,4
-  AMS(14,:) = 2,5
-  AMS(15,:) = 2,6
-  AMS(16,:) = 2,7
-  AMS(17,:) = 2,8
-  AMS(18,:) = 2,9
-  AMS(19,:) = 3,1
-  AMS(20,:) = 3,2
-  AMS(21,:) = 3,3
-  AMS(22,:) = 3,4
-  AMS(23,:) = 3,5
-  AMS(24,:) = 3,6
-  AMS(25,:) = 3,7
-  AMS(26,:) = 3,8
-  AMS(27,:) = 3,9
-  AMS(28,:) = 4,1
-  AMS(29,:) = 4,2
-  AMS(30,:) = 4,3
-  AMS(31,:) = 4,4
-  AMS(32,:) = 4,5
-  AMS(33,:) = 4,6
-  AMS(34,:) = 4,7
-  AMS(35,:) = 4,8
-  AMS(36,:) = 4,9
-  AMS(37,:) = 5,1
-  AMS(38,:) = 5,2
-  AMS(39,:) = 5,3
-  AMS(40,:) = 5,4
-  AMS(41,:) = 5,5
-  AMS(42,:) = 5,6
-  AMS(43,:) = 5,7
-  AMS(44,:) = 5,8
-  AMS(45,:) = 5,9
-  AMS(46,:) = 6,1
-  AMS(47,:) = 6,2
-  AMS(48,:) = 6,3
-  AMS(49,:) = 6,4
-  AMS(50,:) = 6,5
-  AMS(51,:) = 6,6
-  AMS(52,:) = 6,7
-  AMS(53,:) = 6,8
-  AMS(54,:) = 6,9
-  AMS(55,:) = 7,1
-  AMS(56,:) = 7,2
-  AMS(57,:) = 7,3
-  AMS(58,:) = 7,4
-  AMS(59,:) = 7,5
-  AMS(60,:) = 7,6
-  AMS(61,:) = 7,7
-  AMS(62,:) = 7,8
-  AMS(63,:) = 7,9
-  AMS(64,:) = 8,1
-  AMS(65,:) = 8,2
-  AMS(66,:) = 8,3
-  AMS(67,:) = 8,4
-  AMS(68,:) = 8,5
-  AMS(69,:) = 8,6
-  AMS(70,:) = 8,7
-  AMS(71,:) = 8,8
-  AMS(72,:) = 8,9
-  AMS(73,:) = 9,1
-  AMS(74,:) = 9,2
-  AMS(75,:) = 9,3
-  AMS(76,:) = 9,4
-  AMS(77,:) = 9,5
-  AMS(78,:) = 9,6
-  AMS(79,:) = 9,7
-  AMS(80,:) = 9,8
-  AMS(81,:) = 9,9
+  AMS(7,:)  = 2,1
+  AMS(8,:)  = 2,2
+  AMS(9,:)  = 2,3
+  AMS(10,:) = 2,4
+  AMS(11,:) = 2,5
+  AMS(12,:) = 2,6
+  AMS(13,:) = 3,1
+  AMS(14,:) = 3,2
+  AMS(15,:) = 3,3
+  AMS(16,:) = 3,4
+  AMS(17,:) = 3,5
+  AMS(18,:) = 3,6
+  AMS(19,:) = 4,1
+  AMS(20,:) = 4,2
+  AMS(21,:) = 4,3
+  AMS(22,:) = 4,4
+  AMS(23,:) = 4,5
+  AMS(24,:) = 4,6
+  AMS(25,:) = 5,1
+  AMS(26,:) = 5,2
+  AMS(27,:) = 5,3
+  AMS(28,:) = 5,4
+  AMS(29,:) = 5,5
+  AMS(30,:) = 5,6
+  AMS(31,:) = 6,1
+  AMS(32,:) = 6,2
+  AMS(33,:) = 6,3
+  AMS(34,:) = 6,4
+  AMS(35,:) = 6,5
+  AMS(36,:) = 6,6
 &END
 
 ! End of mode selection Namelist
