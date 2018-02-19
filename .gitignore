@@ -1,4 +1,5 @@
 __pycache__/
+*.pyc
 *.dat
 *.mod
 test_tl_ad

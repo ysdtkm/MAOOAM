@@ -7,8 +7,9 @@ import matplotlib.pyplot as plt
 import subprocess
 
 N = 228   # atm 6x6 ocn 6x6
+# N = 318   # atm 6x6 ocn 9x9
 DT = 1.0  # write interval in [timeunit]
-NT = 100  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+NT = 1000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
 
 def main():

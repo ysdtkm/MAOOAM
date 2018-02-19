@@ -151,12 +151,12 @@ import numpy as np
 # Integration parameters
 # -----------------------------------------------------------
 
-t_trans = 10  # transient period (e.g. 1.e7)
-t_run = 100  # length of trajectory on the attractor (e.g. 5.e8)
+t_trans = 1  # transient period (e.g. 1.e7)
+t_run = 10  # length of trajectory on the attractor (e.g. 5.e8)
 dt = 1.e-2  # the time step
 writeout = True  # write out all variables every tw time units
 tw = 1.0  # the time step of writing
-f2py = True # activate the f2py optimization (about 10x faster)
+f2py = False # activate the f2py optimization (about 10x faster)
 
 # -----------------------------------------------------------
 # Number of blocks
