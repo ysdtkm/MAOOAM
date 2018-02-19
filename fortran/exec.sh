@@ -22,7 +22,7 @@ cp -f ${modeldir}/*.nml .
 
 echo "#!/bin/bash"                  > tmp.sh
 echo "#SBATCH -n 1"                >> tmp.sh
-echo "#SBATCH -t 4:30:00"          >> tmp.sh
+echo "#SBATCH -t 15:30:00"         >> tmp.sh
 echo "#SBATCH -J ${word}"          >> tmp.sh
 echo "set -e"                      >> tmp.sh
 echo "./maooam"                    >> tmp.sh
