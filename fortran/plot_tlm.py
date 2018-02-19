@@ -12,13 +12,13 @@ NT = 100  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
 
 def main():
-    np.set_printoptions(formatter={'float': '{: 0.5f}'.format})
+    np.set_printoptions(formatter={'float': '{: 0.4f}'.format})
     mkdirs()
     fname = "evol_field_tlm.dat"
     all_blv = np.empty((NT, N, N))
+    all_ble = np.zeros((NT, N))
     blv = np.random.normal(0.0, 1.0, (N, N))
     blv, ble = orth_norm_vectors(blv)
-    all_ble = np.zeros((NT, N))
     for i in range(0, NT):
         traj, tlm = read_file_part(fname, i)
         blv = np.dot(tlm[:, :], blv)
@@ -57,6 +57,7 @@ def mkdirs():
 def read_file_part(fname, it):
     dbyte = it * (N ** 2 + N) * 8
     x = np.memmap(fname, offset=dbyte, dtype=np.float64, mode='r', shape=(N ** 2 + N))
+    assert x.shape == (N ** 2 + N, )
     traj = x[:N]
     tlm = x[N:].reshape((N, N))
     return traj, tlm
