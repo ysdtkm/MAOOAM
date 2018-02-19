@@ -16,12 +16,12 @@
   F0 = 1.032D-4      !  Coriolis parameter at 45 degrees latitude
   N = 1.5D0          !  aspect ratio (n = 2Ly/Lx ; Lx = 2*pi*L/n; Ly = pi*L)
   RRA = 6370.D3      !  earth radius
-  PHI0_NPI = 0.25D0  !  (TBC) latitude exprimed in fraction of pi
+  PHI0_NPI = 0.25D0  !  latitude exprimed in fraction of pi
 &END
 
 !  Parameters for the ocean
 &OPARAMS
-  GP = 3.1D-2         !  (TBC) reduced gravity
+  GP = 3.1D-2         !  reduced gravity
   R = 1.D-7           !  frictional coefficient at the bottom of the ocean
   H = 136.5           !  depth of the water layer of the ocean
   D = 1.1D-7          !  the coupling parameter (should be divided by f0 in order to be adimensional)
@@ -29,9 +29,9 @@
 
 !  Parameters for the atmosphere
 &APARAMS
-  K = 0.0145D0         !  (TBC) atmosphere bottom friction coefficient
-  KP = 0.0290D0        !  (TBC) atmosphere internal friction coefficient
-  SIG0 = 0.1D0         !  (TBC) static stability of the atmosphere
+  K = 0.0145D0        !  atmosphere bottom friction coefficient
+  KP = 0.0290D0       !  atmosphere internal friction coefficient
+  SIG0 = 0.1D0        !  static stability of the atmosphere
 &END
 
 !  Temperature-related parameters for the ocean
@@ -51,7 +51,7 @@
 
 !  Other temperature-related parameters/constants
 &OTPARAMS
-  SC = 1.D0          !  (TBC) Ratio of surface to atmosphere temperature
+  SC = 1.D0          !  Ratio of surface to atmosphere temperature
   LAMBDA = 15.06D0   !  Sensible + turbulent heat exchange between ocean and atmosphere
   RR = 287.D0        !  Gas constant of dry air
   SB = 5.6D-8        !  Stefan–Boltzmann constant
