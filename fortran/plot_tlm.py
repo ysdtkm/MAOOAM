@@ -1,32 +1,31 @@
 #!/usr/bin/env python
 
+import os
 import numpy as np
 import matplotlib as mpl
-mpl.use('Agg')
+# mpl.use('Agg')
 import matplotlib.pyplot as plt
 import subprocess
 
-NMODEL = 36
+NMODEL = 228
+DT = 1.0  # write interval in [timeunit]
+NT = 100
 
-f0 = 1.032e-4
-g = 9.81
-oneday = 8.64  # [timeunit/day] a46p51
+ONEDAY = 8.64  # [timeunit/day] a46p51
 
 def main():
+    np.set_printoptions(formatter={'float': '{: 0.5f}'.format})
     mkdirs()
-    traj, tlm, tim = read_file("evol_field_tlm.dat")
-
-    nt = len(tim)
-    dt = tim[1] - tim[0]
-
-    all_blv = np.empty((nt, NMODEL, NMODEL))
+    fname = "evol_field_tlm.dat"
+    all_blv = np.empty((NT, NMODEL, NMODEL))
     blv = np.random.normal(0.0, 1.0, (NMODEL, NMODEL))
     blv, ble = orth_norm_vectors(blv)
-    all_ble = np.zeros((nt, NMODEL))
-    for i in range(0, nt):
-        blv = np.dot(tlm[i, :, :], blv)
+    all_ble = np.zeros((NT, NMODEL))
+    for i in range(0, NT):
+        traj, tlm = read_file_part(fname, i)
+        blv = np.dot(tlm[:, :], blv)
         blv, ble = orth_norm_vectors(blv)
-        all_ble[i, :] = ble[:] / (dt / oneday)
+        all_ble[i, :] = ble[:] / (DT / ONEDAY)
         all_blv[i, :, :] = blv[:, :]
     plt.plot(np.mean(all_ble, axis=0))
     print(np.mean(all_ble, axis=0))
@@ -56,26 +55,12 @@ def mkdirs():
     subprocess.run("rm -rf img", check=True, shell=True)
     subprocess.run("mkdir -p img", check=True, shell=True)
 
-def read_file(file):
-    # return np.ndarray[time, NMODEL]
-    ar = []
-    with open(file, "r") as f:
-        for l in f:
-            ar += l.split()
-    ar2 = []
-    n = len(ar)
-    nrec = NMODEL ** 2 + NMODEL + 1
-
-    na = np.empty((n // nrec, NMODEL))
-    ntl = np.empty((n // nrec, NMODEL ** 2))
-    tim = np.empty((n // nrec))
-
-    for i in range(n // nrec):
-        tim[i]   = ar[i * nrec]
-        na[i, :] = ar[i * nrec + 1:i * nrec + NMODEL + 1]
-        ntl[i, :] = ar[i * nrec + NMODEL + 1:i * nrec + NMODEL ** 2 + NMODEL + 1]
-    ntl = ntl.reshape((n // nrec, NMODEL, NMODEL))
-    return na, ntl, tim
+def read_file_part(fname, it):
+    dbyte = it * (NMODEL ** 2 + NMODEL) * 8
+    x = np.memmap(fname, offset=dbyte, dtype=np.float64, mode='r', shape=(NMODEL ** 2 + NMODEL))
+    traj = x[:NMODEL]
+    tlm = x[NMODEL:].reshape((NMODEL, NMODEL))
+    return traj, tlm
 
 if __name__ == "__main__":
     main()
