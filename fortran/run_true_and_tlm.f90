@@ -34,7 +34,6 @@ PROGRAM run_true_and_tlm
   DO WHILE (t < t_run)
     print *, t
     CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
-    WRITE(10, rec=irec) t; irec = irec + 1
     DO i = 1, ndim
       WRITE(10, rec=irec) y0_IC(i); irec = irec + 1
     END DO
