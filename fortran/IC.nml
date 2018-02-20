@@ -435,7 +435,7 @@
 &RAND
   init_type= 'read'
   size_of_random_noise =   0.0000000D+00
-  seed(1) =    495959870
-  seed(2) =    211090879
+  seed(1) =   1220232480
+  seed(2) =    867848388
 &END
  
