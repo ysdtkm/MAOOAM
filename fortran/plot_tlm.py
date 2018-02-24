@@ -11,14 +11,14 @@ N = 36
 # N = 228   # atm 6x6 ocn 6x6
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
-DT = 100.0  # write interval in [timeunit]
-NT = 100  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+DT = 1.0  # write interval in [timeunit]
+NT = 1000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
 
 def main():
     np.set_printoptions(formatter={'float': '{: 0.4f}'.format})
     mkdirs()
-    fname = "/lustre/tyoshida/shrt/exec/m203/evol_field_tlm.dat"
+    fname = "/lustre/tyoshida/shrt/exec/m200/evol_field_tlm.dat"
     # all_blv = np.empty((NT, N, N))
     all_ble = np.zeros((NT, N))
     blv = np.random.normal(0.0, 1.0, (N, N))

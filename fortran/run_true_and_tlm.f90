@@ -30,12 +30,13 @@ PROGRAM run_true_and_tlm
      y0_IC = y0
   END DO
 
+  ! y0_IC (trajectory) is at time t, TLM are of times t -> t + dt
   IF (WRITE_TXT) THEN
     IF (writeout) OPEN(10,file='evol_field_tlm.dat')
     DO WHILE (t < t_run)
-      print *, t
+      IF (writeout) WRITE(10,*) t, y0_IC(1:ndim)
       CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
-      IF (writeout) WRITE(10,*) t, y0_IC(1:ndim), tlm(1:ndim, 1:ndim)
+      IF (writeout) WRITE(10,*) tlm(1:ndim, 1:ndim)
     END DO
     IF (writeout) CLOSE(10)
   ELSE
@@ -43,8 +44,8 @@ PROGRAM run_true_and_tlm
     irec = 1
     DO WHILE (t < t_run)
       print *, t
-      CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
       WRITE(10, rec=irec) y0_IC(1:ndim); irec = irec + 1
+      CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
       DO i = 1, ndim
         WRITE(10, rec=irec) tlm(1:ndim, i); irec = irec + 1
       END DO
