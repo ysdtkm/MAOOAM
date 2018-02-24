@@ -30,30 +30,31 @@ PROGRAM run_true_and_tlm
   END DO
 
 
-  IF (writeout) OPEN(10,file='evol_field_tlm.dat')
-  DO WHILE (t < t_run)
-    print *, t
-    CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
-    IF (writeout) WRITE(10,*) t, y0_IC(1:ndim), tlm(1:ndim, 1:ndim)
-  END DO
-  IF (writeout) CLOSE(10)
-
-!  OPEN(10, file='evol_field_tlm.dat', form="unformatted", access="direct", recl=8)
-!  irec = 1
-!  DO WHILE (t < t_run)
-!    print *, t
-!    CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
-!    DO i = 1, ndim
-!      WRITE(10, rec=irec) y0_IC(i); irec = irec + 1
-!    END DO
-!    DO i = 1, ndim
-!      DO j = 1, ndim
-!        WRITE(10, rec=irec) tlm(j, i); irec = irec + 1
-!      END DO
-!    END DO
-!    ! WRITE(10,*) t, y0_IC(1:ndim), tlm(1:ndim, 1:ndim)
-!  END DO
-!  CLOSE(10)
+  IF (.FALSE.) THEN
+    IF (writeout) OPEN(10,file='evol_field_tlm.dat')
+    DO WHILE (t < t_run)
+      print *, t
+      CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
+      IF (writeout) WRITE(10,*) t, y0_IC(1:ndim), tlm(1:ndim, 1:ndim)
+    END DO
+    IF (writeout) CLOSE(10)
+  ELSE
+    OPEN(10, file='evol_field_tlm.dat', form="unformatted", access="direct", recl=8)
+    irec = 1
+    DO WHILE (t < t_run)
+      print *, t
+      CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
+      DO i = 1, ndim
+        WRITE(10, rec=irec) y0_IC(i); irec = irec + 1
+      END DO
+      DO i = 1, ndim
+        DO j = 1, ndim
+          WRITE(10, rec=irec) tlm(j, i); irec = irec + 1
+        END DO
+      END DO
+    END DO
+    CLOSE(10)
+  END IF
 
   DEALLOCATE (y0_IC, tlm)
 
