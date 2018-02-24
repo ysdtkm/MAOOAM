@@ -11,6 +11,7 @@ PROGRAM run_true_and_tlm
   REAL(KIND=8), DIMENSION(:, :), ALLOCATABLE :: tlm
   REAL(KIND=8) :: t=0.D0
   INTEGER :: irec, i, j
+  LOGICAL :: WRITE_TXT = .FALSE.
 
   CALL init_aotensor
   CALL load_IC
@@ -29,8 +30,7 @@ PROGRAM run_true_and_tlm
      y0_IC = y0
   END DO
 
-
-  IF (.FALSE.) THEN
+  IF (WRITE_TXT) THEN
     IF (writeout) OPEN(10,file='evol_field_tlm.dat')
     DO WHILE (t < t_run)
       print *, t
@@ -39,19 +39,13 @@ PROGRAM run_true_and_tlm
     END DO
     IF (writeout) CLOSE(10)
   ELSE
-    OPEN(10, file='evol_field_tlm.dat', form="unformatted", access="direct", recl=8)
+    OPEN(10, file='evol_field_tlm.dat', form="unformatted", access="direct", recl=8*ndim)
     irec = 1
     DO WHILE (t < t_run)
       print *, t
       CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
-      DO i = 1, ndim
-        WRITE(10, rec=irec) y0_IC(i); irec = irec + 1
-      END DO
-      DO i = 1, ndim
-        DO j = 1, ndim
-          WRITE(10, rec=irec) tlm(j, i); irec = irec + 1
-        END DO
-      END DO
+      WRITE(10, rec=irec) y0_IC(1:ndim); irec = irec + 1
+      WRITE(10, rec=irec) tlm(1:ndim, 1:ndim); irec = irec + ndim
     END DO
     CLOSE(10)
   END IF
