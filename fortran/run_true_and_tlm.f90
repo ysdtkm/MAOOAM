@@ -45,7 +45,9 @@ PROGRAM run_true_and_tlm
       print *, t
       CALL tl_matrix_analytic(y0_IC, t, dt, int(tw / dt), tlm)
       WRITE(10, rec=irec) y0_IC(1:ndim); irec = irec + 1
-      WRITE(10, rec=irec) tlm(1:ndim, 1:ndim); irec = irec + ndim
+      DO i = 1, ndim
+        WRITE(10, rec=irec) tlm(1:ndim, i); irec = irec + 1
+      END DO
     END DO
     CLOSE(10)
   END IF
