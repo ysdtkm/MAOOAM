@@ -17,7 +17,7 @@ ONEDAY = 8.64  # [timeunit/day] a46p51
 def main():
     np.set_printoptions(formatter={'float': '{: 0.4f}'.format})
     mkdirs()
-    fname = "/lustre/tyoshida/shrt/exec/m197/evol_field_tlm.dat"
+    fname = "/lustre/tyoshida/shrt/exec/m199/evol_field_tlm.dat"
     # all_blv = np.empty((NT, N, N))
     all_ble = np.zeros((NT, N))
     blv = np.random.normal(0.0, 1.0, (N, N))
