@@ -5,29 +5,33 @@ import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
 import subprocess
+import mydebug
 
 N = 36
 # N = 228   # atm 6x6 ocn 6x6
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
-DT = 1.0  # write interval in [timeunit]
-NT = 10000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+DT = 10.0  # write interval in [timeunit]
+NT = 1000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
 
 def main():
     np.set_printoptions(formatter={'float': '{: 0.4f}'.format})
     mkdirs()
-    fname = "/lustre/tyoshida/shrt/exec/m199/evol_field_tlm.dat"
+    fname = "/lustre/tyoshida/shrt/exec/m202/evol_field_tlm.dat"
     # all_blv = np.empty((NT, N, N))
     all_ble = np.zeros((NT, N))
     blv = np.random.normal(0.0, 1.0, (N, N))
     blv, ble = orth_norm_vectors(blv)
-    for i in range(0, NT):
+    tlms = np.empty((NT, N, N))
+    for i in range(NT):
         traj, tlm = read_file_part(fname, i)
+        tlms[i, :, :] = tlm
         blv = np.dot(tlm[:, :], blv)
         blv, ble = orth_norm_vectors(blv)
         all_ble[i, :] = ble[:] / (DT / ONEDAY)
         # all_blv[i, :, :] = blv[:, :]
+    mydebug.dump_array(tlms)
     mean_ble = np.mean(all_ble[NT//2:, :], axis=0)
     plt.plot(mean_ble)
     print(mean_ble)
@@ -50,7 +54,7 @@ def mkdirs():
 
 def read_file_part(fname, it):
     dbyte = it * (N ** 2 + N) * 8
-    x = np.memmap(fname, offset=dbyte, dtype=np.float64, mode='r', shape=(N ** 2 + N))
+    x = np.array(np.memmap(fname, offset=dbyte, dtype=np.float64, mode='r', shape=(N ** 2 + N)))
     assert x.shape == (N ** 2 + N, )
     traj = x[:N]
     tlm = x[N:].reshape((N, N))
