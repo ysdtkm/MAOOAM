@@ -10,20 +10,80 @@ N = 36
 # N = 228   # atm 6x6 ocn 6x6
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
-DT = 1.0  # write interval in [timeunit]
+DT = 10.0  # write interval in [timeunit]
 NT = 1000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
-FNAME = "/lustre/tyoshida/shrt/exec/m200/evol_field_tlm.dat"
-LOGNORM = True
+FNAME = "/lustre/tyoshida/shrt/exec/m204/evol_field_tlm.dat"
+GINELLI = True
 
 def main():
+    np.random.seed(10 ** 8 + 7)
     np.set_printoptions(formatter={'float': '{: 0.4f}'.format})
     mkdirs()
-    trajs, gs, ms, rs = integ_forward_ginelli()
-    cs = integ_backward_ginelli(rs)
-    vs = obtain_clvs_ginelli(cs, gs)
+    if GINELLI:
+        trajs, gs, ms, rs = integ_forward_ginelli()
+        cs = integ_backward_ginelli(rs)
+        vs = obtain_clvs_ginelli(cs, gs)
+    else:
+        trajs, gs, ms = integ_forward()
+        fs = integ_backward(ms)
+        vs = calc_clv(gs, fs)
     test_growth_rate(ms, vs)
-    test_growth_rate_long(ms, vs, 100, [0, 1, 24, 29])
+    test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
+
+def integ_forward():
+    all_traj = np.empty((NT, N))
+    all_blv = np.empty((NT, N, N))
+    all_tlm = np.empty((NT, N, N))
+    blv = np.random.normal(0.0, 1.0, (N, N))
+    blv, ble = orth_norm_vectors(blv)
+    for i in range(NT):
+        traj, tlm = read_file_part(FNAME, i)
+        all_traj[i, :] = traj
+        all_blv[i, :, :] = blv
+        all_tlm[i, :, :] = tlm
+        blv = np.dot(tlm, blv)
+        blv, ble = orth_norm_vectors(blv)
+    return all_traj, all_blv, all_tlm
+
+def integ_backward(all_tlm):
+    all_flv = np.empty((NT, N, N))
+    flv = np.random.normal(0.0, 1.0, (N, N))
+    flv, fle = orth_norm_vectors(flv)
+    for i in reversed(range(NT)):
+        traj, tlm = read_file_part(FNAME, i)
+        flv = np.dot(tlm.T, flv)
+        flv, fle = orth_norm_vectors(flv)
+        all_flv[i, :, :] = flv
+    return all_flv
+
+def calc_clv(all_blv, all_flv):
+    all_clv = np.empty((NT, N, N))
+    for i in range(NT):
+        for k in range(N):
+            all_clv[i, :, k] = vector_common(all_blv[i, :, :k+1], all_flv[i, :, k:], k)
+    return all_clv
+
+def orth_norm_vectors(lv):
+    lv_oath, r = np.linalg.qr(lv)
+    le = np.zeros(N)
+    eigvals = np.abs(np.diag(r))
+    le = np.log(eigvals)
+    return lv_orth, le
+
+def vector_common(blv, flv, k):
+    ab = np.empty((N, N+1))
+    ab[:, :k+1] = blv[:, :]
+    ab[:, k+1:] = - flv[:, :]
+    coefs = nullspace(ab)
+    clv = np.dot(ab[:, :k+1], coefs[:k+1, np.newaxis])[:,0]
+    clv /= np.linalg.norm(clv)
+    return clv
+
+def nullspace(a):
+    # refer to 658Ep19
+    u, s, vh = np.linalg.svd(a)
+    return vh.T[:,-1]
 
 def integ_forward_ginelli():
     # trajs[i, :] and gs[i, :, :] are at time i
@@ -88,7 +148,7 @@ def normalize_column(m):
     return m
 
 def test_growth_rate(ms, vs):
-    rate = [0.0 for j in range(N)]
+    rate = np.zeros(N)
     for i in range(NT):
         v = vs[i, :, :]
         m = ms[i, :, :]
@@ -112,18 +172,19 @@ def test_growth_rate_long(ms, vs, ntg, ilist):
     for jt in range(ntg):
         growths[:, jt + 1, :] /= lengths[:, jt, :]
     growths[:, 0, :] = np.nan
-    if LOGNORM:
-        growth_mean = np.mean(np.log(growths), axis=0) / (DT / ONEDAY)
-    else:
-        growth_mean = np.log(np.mean(growths, axis=0)) / (DT / ONEDAY)
-    plot_growth_rate(growth_mean, ilist)
+    growth_log_mean = np.mean(np.log(growths), axis=0) / (DT / ONEDAY)
+    growth_mean_log = np.log(np.mean(growths, axis=0)) / (DT / ONEDAY)
+    plot_growth_rate(growth_log_mean, ntg, ilist, "lognorm")
+    plot_growth_rate(growth_mean_log, ntg, ilist, "L2_norm")
 
-def plot_growth_rate(growth_mean, ilist):
+def plot_growth_rate(growth_mean, ntg, ilist, suff):
     # growth_mean.shape = (ntg + 1, len(ilist))
+    x = (np.arange(float(ntg)) + 0.5) * (DT / ONEDAY)
     for k, i in enumerate(ilist):
-        plt.plot(growth_mean[:, k], label="CLV %02d" % (i + 1))
+        plt.plot(x, growth_mean[1:, k], label="CLV %02d" % (i + 1))
+    plt.xlabel("days")
     plt.legend()
-    plt.savefig("img/fig_8.png")
+    plt.savefig("img/fig_8_%s.png" % suff)
     plt.close()
 
 def mkdirs():
