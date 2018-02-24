@@ -15,7 +15,7 @@ NT = 10000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
 FNAME = "/lustre/tyoshida/shrt/exec/m204/evol_field_tlm.dat"
 GINELLI = True
-NT_ABORT = 100
+NT_ABORT = 1000
 
 def main():
     np.random.seed(10 ** 8 + 7)
@@ -178,12 +178,13 @@ def test_growth_rate_long(ms, vs, ntg, ilist):
             for jt in range(ntg):
                 vi = np.dot(ms[it + jt, :, :], vi[:])
                 lengths[it, jt + 1, k] = np.linalg.norm(vi)
-    growths = np.copy(lengths)
-    for jt in range(ntg):
-        growths[:, jt + 1, :] /= lengths[:, jt, :]
-    growths[:, 0, :] = np.nan
-    growth_log_mean = np.mean(np.log(growths), axis=0) / (DT / ONEDAY)
-    growth_mean_log = np.log(np.mean(growths, axis=0)) / (DT / ONEDAY)
+    length_log_mean = np.mean(np.log(lengths), axis=0)
+    length_mean_log = np.log(np.mean(lengths, axis=0))
+    growth_log_mean = np.copy(length_log_mean)
+    growth_mean_log = np.copy(length_mean_log)
+    for jt in reversed(range(ntg)):
+        growth_log_mean[jt + 1, :] -= growth_log_mean[jt, :]
+        growth_mean_log[jt + 1, :] -= growth_mean_log[jt, :]
     plot_growth_rate(growth_log_mean, ntg, ilist, "lognorm")
     plot_growth_rate(growth_mean_log, ntg, ilist, "L2_norm")
 
