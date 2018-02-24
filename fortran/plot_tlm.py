@@ -11,10 +11,11 @@ N = 36
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
 DT = 10.0  # write interval in [timeunit]
-NT = 1000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+NT = 10000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
 FNAME = "/lustre/tyoshida/shrt/exec/m204/evol_field_tlm.dat"
 GINELLI = True
+NT_ABORT = 100
 
 def main():
     np.random.seed(10 ** 8 + 7)
@@ -28,8 +29,15 @@ def main():
         trajs, gs, ms = integ_forward()
         fs = integ_backward(ms)
         vs = calc_clv(gs, fs)
+    vs += np.random.randn(*vs.shape) * 1.0e-6
+    trajs, gs, ms, vs = trim_spinup(trajs, gs, ms, vs)
     test_growth_rate(ms, vs)
     test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
+
+def trim_spinup(trajs, gs, ms, vs):
+    st = NT_ABORT
+    ed = NT - NT_ABORT
+    return trajs[st:ed, :], gs[st:ed, :, :], ms[st:ed, :, :], vs[st:ed, :, :]
 
 def integ_forward():
     all_traj = np.empty((NT, N))
@@ -148,21 +156,23 @@ def normalize_column(m):
     return m
 
 def test_growth_rate(ms, vs):
+    nt = ms.shape[0]
     rate = np.zeros(N)
-    for i in range(NT):
+    for i in range(nt):
         v = vs[i, :, :]
         m = ms[i, :, :]
         vn = np.dot(m, v)
         for j in range(N):
             r = np.log(np.linalg.norm(vn[:, j]) / np.linalg.norm(v[:, j]))
-            rate[j] += r / (DT / ONEDAY) / NT
+            rate[j] += r / (DT / ONEDAY) / nt
     print("Growth rate:")
     print(rate)
 
 def test_growth_rate_long(ms, vs, ntg, ilist):
-    lengths = np.zeros((NT - ntg, ntg + 1, len(ilist)))
+    nt = ms.shape[0]
+    lengths = np.zeros((nt - ntg, ntg + 1, len(ilist)))
     for k, i in enumerate(ilist):
-        for it in range(NT - ntg):
+        for it in range(nt - ntg):
             vi = vs[it, :, i]
             lengths[it, 0, k] = np.linalg.norm(vi)
             for jt in range(ntg):
