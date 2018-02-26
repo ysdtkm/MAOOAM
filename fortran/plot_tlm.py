@@ -29,7 +29,7 @@ def main():
         trajs, gs, ms = integ_forward()
         fs = integ_backward(ms)
         vs = calc_clv(gs, fs)
-    vs += np.random.randn(*vs.shape) * 1.0e-6
+    # vs += np.random.randn(*vs.shape) * 1.0e-6
     trajs, gs, ms, vs = trim_spinup(trajs, gs, ms, vs)
     test_growth_rate(ms, vs)
     test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
