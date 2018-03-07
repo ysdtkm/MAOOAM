@@ -100,7 +100,6 @@ def plot_matrix(mat, out, title="", cmax=None, ipol="none"):
     plt.close()
 
 def reconstruct_grid(waves, x, y, elem):
-    # return np.arrays of atm_psi[K], atm_gph [m], ocn_psi[m2s-1], ocn_tmp [K]
     def get_atm(is_temp):
         types = ["A", "K", "L", "A", "K", "L", "K", "L", "K", "L"]
         hs = [0, 1, 1, 0, 1, 1, 2, 2, 2, 2]
@@ -172,5 +171,57 @@ def all_reconstruct_grid(waves, nx, ny):
             o_tmp[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "o_tmp")
     return a_gph, a_tmp, o_psi, o_tmp
 
+def test_reconstruct_grid():
+    nad, timd = read_file("evol_field.dat", 0.0)
+    state = model_state_exsample()
+    x = 1.2 * np.pi / 1.5
+    y = 0.6 * np.pi
+    a_gph = reconstruct_grid(state, x, y, "a_gph")
+    a_tmp = reconstruct_grid(state, x, y, "a_tmp")
+    o_psi = reconstruct_grid(state, x, y, "o_psi")
+    o_tmp = reconstruct_grid(state, x, y, "o_tmp")
+    print(a_gph, a_tmp, o_psi, o_tmp)
+
+def model_state_exsample():
+    xini = np.array([
+        4.695340259215241E-002,
+        2.795833230987369E-002,
+        -2.471191763590483E-002,
+        -7.877635082773315E-003,
+        -4.448292568544942E-003,
+        -2.756238610924190E-002,
+        -4.224400051368891E-003,
+        5.914241112882518E-003,
+        -1.779437742222920E-004,
+        5.224450720394076E-003,
+        4.697982667229096E-002,
+        5.149282577209392E-003,
+        -1.949084549066326E-002,
+        4.224006062949761E-004,
+        -1.247786759371923E-002,
+        -9.825952138046594E-003,
+        -2.610941795170075E-005,
+        2.239286581216401E-003,
+        -7.891896725509534E-004,
+        7.470171905055880E-004,
+        -9.315932162526787E-007,
+        3.650179005106874E-005,
+        1.064122403269511E-006,
+        3.937836448211443E-008,
+        -2.208288760403859E-007,
+        -3.753762121228048E-006,
+        -7.105126469908465E-006,
+        1.518110190916469E-008,
+        -5.773178576933025E-004,
+        0.187369278208256,
+        1.369868543156558E-003,
+        7.023608700166264E-002,
+        -4.539810680860224E-004,
+        -1.882650440363933E-003,
+        -3.900412687995408E-005,
+        -1.753655087903711E-007])
+    return xini
+
 if __name__ == "__main__":
+    test_reconstruct_grid()
     main()
