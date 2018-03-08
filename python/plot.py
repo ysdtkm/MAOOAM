@@ -99,7 +99,7 @@ def plot_matrix(mat, out, title="", cmax=None, ipol="none"):
     plt.savefig(out)
     plt.close()
 
-def reconstruct_grid(waves, x, y, elem):
+def get_grid_val(waves, x, y, elem):
     def get_atm(is_temp):
         types = ["A", "K", "L", "A", "K", "L", "K", "L", "K", "L"]
         hs = [0, 1, 1, 0, 1, 1, 2, 2, 2, 2]
@@ -133,9 +133,9 @@ def reconstruct_grid(waves, x, y, elem):
         return gridval
 
     assert waves.__class__ == np.ndarray
+    assert waves.shape == (36,)
     assert y.__class__ in [float, np.float32, np.float64]
     assert x.__class__ in [float, np.float32, np.float64]
-    assert waves.shape == (36,)
 
     n = 1.5
     na = 10
@@ -152,7 +152,22 @@ def reconstruct_grid(waves, x, y, elem):
     elif elem == "o_tmp":
         return get_ocn(True)
     else:
-        raise Exception("reconstruct_grid overflow. Element %s not found." % elem)
+        raise Exception("get_grid_val overflow. Element %s not found." % elem)
+
+def test_get_grid_val():
+    n = 1.5
+    state = model_state_exsample()
+    x = 1.2 * np.pi / n  # 0.0 <= x <= 2.0 * pi / n
+    y = 0.8 * np.pi      # 0.0 <= y <= pi
+
+    # get_grid_val() returns one of four variables
+    # {atmosphere|ocean} x {streamfunction|temperature} at point (x, y)
+    # unit: [m^2/s] for streamfunction and [K] for temperature
+    a_psi = get_grid_val(state, x, y, "a_psi")
+    a_tmp = get_grid_val(state, x, y, "a_tmp")
+    o_psi = get_grid_val(state, x, y, "o_psi")
+    o_tmp = get_grid_val(state, x, y, "o_tmp")
+    print(a_psi, a_tmp, o_psi, o_tmp)
 
 def all_reconstruct_grid(waves, nx, ny):
     n = 1.5
@@ -164,24 +179,12 @@ def all_reconstruct_grid(waves, nx, ny):
     o_tmp = np.empty((ny, nx))
     for ix in range(nx):
         for iy in range(ny):
-            a_psi[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "a_psi")
-            a_tmp[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "a_tmp")
-            o_psi[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "o_psi")
-            o_tmp[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "o_tmp")
+            a_psi[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "a_psi")
+            a_tmp[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "a_tmp")
+            o_psi[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "o_psi")
+            o_tmp[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "o_tmp")
     o_psi -= np.mean(o_psi)
-    print(o_psi)
     return a_psi, a_tmp, o_psi, o_tmp
-
-def test_reconstruct_grid():
-    nad, timd = read_file("evol_field.dat", 0.0)
-    state = model_state_exsample()
-    x = 1.2 * np.pi / 1.5
-    y = 0.8 * np.pi
-    a_psi = reconstruct_grid(state, x, y, "a_psi")
-    a_tmp = reconstruct_grid(state, x, y, "a_tmp")
-    o_psi = reconstruct_grid(state, x, y, "o_psi")
-    o_tmp = reconstruct_grid(state, x, y, "o_tmp")
-    print(a_psi, a_tmp, o_psi, o_tmp)
 
 def model_state_exsample():
     xini = np.array([
@@ -224,5 +227,4 @@ def model_state_exsample():
     return xini
 
 if __name__ == "__main__":
-    test_reconstruct_grid()
-    main()
+    test_get_grid_val()
