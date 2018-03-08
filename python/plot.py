@@ -129,7 +129,6 @@ def reconstruct_grid(waves, x, y, elem):
         if is_temp:
             gridval *= (f0 ** 2 * L ** 2) / R
         else:
-            gridval -= np.mean(gridval)
             gridval *= L ** 2 * f0
         return gridval
 
@@ -144,7 +143,7 @@ def reconstruct_grid(waves, x, y, elem):
     R = 287.0
     L = 5000000.0 / np.pi
 
-    if elem == "a_gph":
+    if elem == "a_psi":
         return get_atm(False)
     elif elem == "a_tmp":
         return get_atm(True)
@@ -159,28 +158,30 @@ def all_reconstruct_grid(waves, nx, ny):
     n = 1.5
     x_grid = np.linspace(0, 2.0 * np.pi / n, nx)
     y_grid = np.linspace(np.pi, 0, ny)
-    a_gph = np.empty((ny, nx))
+    a_psi = np.empty((ny, nx))
     a_tmp = np.empty((ny, nx))
     o_psi = np.empty((ny, nx))
     o_tmp = np.empty((ny, nx))
     for ix in range(nx):
         for iy in range(ny):
-            a_gph[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "a_gph")
+            a_psi[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "a_psi")
             a_tmp[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "a_tmp")
             o_psi[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "o_psi")
             o_tmp[iy, ix] = reconstruct_grid(waves, x_grid[ix], y_grid[iy], "o_tmp")
-    return a_gph, a_tmp, o_psi, o_tmp
+    o_psi -= np.mean(o_psi)
+    print(o_psi)
+    return a_psi, a_tmp, o_psi, o_tmp
 
 def test_reconstruct_grid():
     nad, timd = read_file("evol_field.dat", 0.0)
     state = model_state_exsample()
     x = 1.2 * np.pi / 1.5
-    y = 0.6 * np.pi
-    a_gph = reconstruct_grid(state, x, y, "a_gph")
+    y = 0.8 * np.pi
+    a_psi = reconstruct_grid(state, x, y, "a_psi")
     a_tmp = reconstruct_grid(state, x, y, "a_tmp")
     o_psi = reconstruct_grid(state, x, y, "o_psi")
     o_tmp = reconstruct_grid(state, x, y, "o_tmp")
-    print(a_gph, a_tmp, o_psi, o_tmp)
+    print(a_psi, a_tmp, o_psi, o_tmp)
 
 def model_state_exsample():
     xini = np.array([
