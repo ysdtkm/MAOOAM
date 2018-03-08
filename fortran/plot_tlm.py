@@ -13,7 +13,7 @@ N = 36
 DT = 10.0  # write interval in [timeunit]
 NT = 30  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
-FNAME = "/lustre/tyoshida/prgm/MAOOAM/fortran/evol_field_tlm.dat"
+FNAME = "/lustre/tyoshida/shrt/exec/m274/evol_field_tlm.dat"
 GINELLI = True
 NT_ABORT = 1000
 T_VERIF_LIST = [0, 1000, 2000, 3000]
