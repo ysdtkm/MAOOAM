@@ -11,12 +11,12 @@ N = 36
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
 DT = 10.0  # write interval in [timeunit]
-NT = 30  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+NT = 30000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
-FNAME = "/lustre/tyoshida/shrt/exec/m274/evol_field_tlm.dat"
+FNAME = "/lustre/tyoshida/shrt/exec/m275/evol_field_tlm.dat"
 GINELLI = True
-NT_ABORT = 1000
-T_VERIF_LIST = [0, 1000, 2000, 3000]
+NT_ABORT = 10000
+T_VERIF_LIST = [0, 10000, 20000, 30000]
 
 def main():
     np.random.seed(10 ** 8 + 7)
@@ -215,11 +215,15 @@ def print_verif(trajs, ms, gs, rs, cs, vs):
             print(cs[i, :, :])
             print("CLVs:")
             print(vs[i, :, :])
-        else:
-            print("Traj:")
+        elif i == NT:
+            print("Traj: None")
+            g = np.dot(ms[i - 1, :, :], gs[i - 1, :, :])
+            g, r = np.linalg.qr(g)
             print("Q:")
-            print("C:")
-            print("CLVs:")
+            print(g)
+            assert np.allclose(r, rs[i - 1, :, :])
+            print("C: Identity")
+            print("CLVs: same as Q")
         if i > 0:
             print("R:")
             print(rs[i - 1, :, :])
@@ -234,7 +238,6 @@ def read_file_part(fname, it):
     assert x.shape == (N ** 2 + N, )
     traj = x[:N]
     tlm = x[N:].reshape((N, N))
-    print(it, traj); assert 0
     return traj, tlm
 
 if __name__ == "__main__":
