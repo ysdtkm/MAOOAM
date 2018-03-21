@@ -156,7 +156,7 @@ def get_grid_val(waves, x, y, elem):
 
 def test_get_grid_val():
     n = 1.5
-    state = model_state_exsample()
+    state = model_state_example()
     x = 1.2 * np.pi / n  # 0.0 <= x <= 2.0 * pi / n
     y = 0.8 * np.pi      # 0.0 <= y <= pi
 
@@ -186,7 +186,7 @@ def all_reconstruct_grid(waves, nx, ny):
     o_psi -= np.mean(o_psi)
     return a_psi, a_tmp, o_psi, o_tmp
 
-def model_state_exsample():
+def model_state_example():
     xini = np.array([
         4.695340259215241E-002,
         2.795833230987369E-002,
