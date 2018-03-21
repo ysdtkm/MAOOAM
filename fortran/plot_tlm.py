@@ -11,25 +11,26 @@ N = 36
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
 DT = 10.0  # write interval in [timeunit]
-NT = 10000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+NT = 30000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
-FNAME = "/lustre/tyoshida/shrt/exec/m204/evol_field_tlm.dat"
+FNAME = "/lustre/tyoshida/shrt/exec/m275/evol_field_tlm.dat"
 GINELLI = True
-NT_ABORT = 1000
+NT_ABORT = 10000
+T_VERIF_LIST = [0, 10000, 20000, 30000]
 
 def main():
     np.random.seed(10 ** 8 + 7)
-    np.set_printoptions(formatter={'float': '{: 0.4f}'.format})
+    np.set_printoptions(formatter={'float': '{: 0.4f}'.format}, threshold=np.inf, linewidth=400)
     mkdirs()
     if GINELLI:
         trajs, gs, ms, rs = integ_forward_ginelli()
         cs = integ_backward_ginelli(rs)
         vs = obtain_clvs_ginelli(cs, gs)
+        print_verif(trajs, ms, gs, rs, cs, vs)
     else:
         trajs, gs, ms = integ_forward()
         fs = integ_backward(ms)
         vs = calc_clv(gs, fs)
-    # vs += np.random.randn(*vs.shape) * 1.0e-6
     trajs, gs, ms, vs = trim_spinup(trajs, gs, ms, vs)
     test_growth_rate(ms, vs)
     test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
@@ -96,7 +97,8 @@ def nullspace(a):
 def integ_forward_ginelli():
     # trajs[i, :] and gs[i, :, :] are at time i
     # ms[i, :, :] and rs[i, :, :] are times i -> i + 1
-    g = np.random.normal(0.0, 1.0, (N, N))
+    # g = np.random.normal(0.0, 1.0, (N, N))
+    g = np.identity(N)
     g, r = np.linalg.qr(g)
     trajs = np.empty((NT, N))
     gs = np.empty((NT, N, N))
@@ -116,7 +118,8 @@ def integ_backward_ginelli(rs):
     # rs[i, :, :] is times i -> i + 1
     # cs[i, :, :] is at time i
     cs = np.empty((NT, N, N))
-    c = np.random.normal(0.0, 1.0, (N, N))
+    # c = np.random.normal(0.0, 1.0, (N, N))
+    c = np.identity(N)
     dummy, c = np.linalg.qr(c)
     c = normalize_column(c)
     for i in reversed(range(NT)):
@@ -197,6 +200,33 @@ def plot_growth_rate(growth_mean, ntg, ilist, suff):
     plt.legend()
     plt.savefig("img/fig_8_%s.png" % suff)
     plt.close()
+
+def print_verif(trajs, ms, gs, rs, cs, vs):
+    # trajs[i, :], gs[i, :, :], cs[i, :, :], and vs[i, :, :] are at time i
+    # ms[i, :, :] and rs[i, :, :] are times i -> i + 1
+    for i in T_VERIF_LIST:
+        print(i)
+        if i < NT:
+            print("Traj:")
+            print(trajs[i, :])
+            print("Q:")
+            print(gs[i, :, :])
+            print("C:")
+            print(cs[i, :, :])
+            print("CLVs:")
+            print(vs[i, :, :])
+        elif i == NT:
+            print("Traj: None")
+            g = np.dot(ms[i - 1, :, :], gs[i - 1, :, :])
+            g, r = np.linalg.qr(g)
+            print("Q:")
+            print(g)
+            assert np.allclose(r, rs[i - 1, :, :])
+            print("C: Identity")
+            print("CLVs: same as Q")
+        if i > 0:
+            print("R:")
+            print(rs[i - 1, :, :])
 
 def mkdirs():
     subprocess.run("rm -rf img", check=True, shell=True)
