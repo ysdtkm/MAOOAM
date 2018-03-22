@@ -23,9 +23,10 @@ cp -f ${modeldir}/*.nml .
 
 echo "#!/bin/bash"                  > tmp.sh
 echo "#SBATCH -n 1"                >> tmp.sh
-echo "#SBATCH -t 03:30:00"          >> tmp.sh
+echo "#SBATCH -t 03:30:00"         >> tmp.sh
 echo "#SBATCH -J ${word}"          >> tmp.sh
 echo "set -e"                      >> tmp.sh
+echo "export OMP_NUM_THREADS=2"    >> tmp.sh
 # echo "./maooam"                    >> tmp.sh
 echo "./run_true_and_tlm"          >> tmp.sh
 
