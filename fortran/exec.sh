@@ -22,7 +22,7 @@ cp -f ${modeldir}/run_true_and_tlm .
 cp -f ${modeldir}/*.nml .
 
 echo "#!/bin/bash"                  > tmp.sh
-echo "#SBATCH -n 1"                >> tmp.sh
+echo "#SBATCH -n 20"                >> tmp.sh
 echo "#SBATCH -t 00:15:00"         >> tmp.sh
 echo "#SBATCH -J ${word}"          >> tmp.sh
 echo "set -e"                      >> tmp.sh
