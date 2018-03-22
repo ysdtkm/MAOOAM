@@ -28,6 +28,6 @@ echo "#SBATCH -J ${word}"          >> tmp.sh
 echo "set -e"                      >> tmp.sh
 echo "export OMP_NUM_THREADS=4"    >> tmp.sh
 # echo "./maooam"                    >> tmp.sh
-echo "./run_true_and_tlm"          >> tmp.sh
+echo "time ./run_true_and_tlm"          >> tmp.sh
 
 sbatch tmp.sh
