@@ -69,22 +69,24 @@ SUBROUTINE tl_matrix_analytic(xctl, t, dt, nt, tlm)
   REAL(8), INTENT(OUT) :: tlm(0:ndim, 0:ndim)
 
   INTEGER :: i, j, k
-  REAL(8) :: t_dummy = 0.0, tmp(0:ndim)
+  REAL(8) :: t_dummy(0:ndim), tmp(0:ndim, 0:ndim)
 
+  t_dummy(:) = 0.0
   tlm(:, :) = 0.0D0
   do i = 0, ndim
     tlm(i, i) = 1.0D0
   end do
 
   do k = 1, nt
-    ! !$omp parallel do
+    !$omp parallel do
     do j = 0, ndim
-      CALL tl_step(tlm(:, j), xctl, t_dummy, dt, tmp(:))
-      tlm(:, j) = tmp(:)
+      CALL tl_step(tlm(:, j), xctl, t_dummy(j), dt, tmp(:, j))
+      tlm(:, j) = tmp(:, j)
     end do
-    ! !$omp end parallel do
-    CALL step(xctl, t, dt, tmp)
-    xctl(:) = tmp(:)
+    !$omp end parallel do
+    do j = 0, ndim
+    CALL step(xctl, t, dt, tmp(:, 0))
+    xctl(:) = tmp(:, 0)
   end do
 END SUBROUTINE tl_matrix_analytic
 
