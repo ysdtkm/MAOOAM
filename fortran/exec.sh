@@ -26,7 +26,7 @@ echo "#SBATCH -n 20"                >> tmp.sh
 echo "#SBATCH -t 00:15:00"         >> tmp.sh
 echo "#SBATCH -J ${word}"          >> tmp.sh
 echo "set -e"                      >> tmp.sh
-echo "export OMP_NUM_THREADS=1"    >> tmp.sh
+echo "export OMP_NUM_THREADS=4"    >> tmp.sh
 # echo "./maooam"                    >> tmp.sh
 echo "./run_true_and_tlm"          >> tmp.sh
 
