@@ -84,7 +84,6 @@ SUBROUTINE tl_matrix_analytic(xctl, t, dt, nt, tlm)
       tlm(:, j) = tmp(:, j)
     end do
     !$omp end parallel do
-    do j = 0, ndim
     CALL step(xctl, t, dt, tmp(:, 0))
     xctl(:) = tmp(:, 0)
   end do
