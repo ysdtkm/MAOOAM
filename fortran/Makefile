@@ -16,9 +16,9 @@ endif
 # Define relevant compiler options for debug case and normal case for each compiler
 # Normal Case:
 IFORT_COMPILER_FLAGS = -assume byterecl -O2
-IFORT_LD_FLAGS = -openmp -mkl
+IFORT_LD_FLAGS = -mkl
 GCC_COMPILER_FLAGS = -O2
-GCC_LD_FLAGS = -fopenmp -I/usr/local/include -L/usr/lib/lapack -llapack -lblas
+GCC_LD_FLAGS = -I/usr/local/include -L/usr/lib/lapack -llapack -lblas
 # Debug Case:
 IFORT_COMPILER_FLAGS_DBG = -O0 -check all -traceback -fpe0 -check bounds -debug all -check uninit -ftrapuv -assume byterecl
 IFORT_LD_FLAGS_DBG = -llapack -lblas
