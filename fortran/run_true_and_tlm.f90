@@ -61,7 +61,6 @@ SUBROUTINE tl_matrix_analytic(xctl, t, dt, nt, tlm)
   USE params, only: ndim
   USE integrator, only: step
   USE tl_ad_integrator, only: tl_step
-  !$ use omp_lib
   IMPLICIT NONE
   REAL(8), INTENT(INOUT) :: xctl(0:ndim), t
   REAL(8), INTENT(IN) :: dt
@@ -69,23 +68,21 @@ SUBROUTINE tl_matrix_analytic(xctl, t, dt, nt, tlm)
   REAL(8), INTENT(OUT) :: tlm(0:ndim, 0:ndim)
 
   INTEGER :: i, j, k
-  REAL(8) :: t_dummy(0:ndim), tmp(0:ndim, 0:ndim)
+  REAL(8) :: t_dummy, tmp(0:ndim)
 
-  t_dummy(:) = 0.0
+  t_dummy = 0.0
   tlm(:, :) = 0.0D0
   do i = 0, ndim
     tlm(i, i) = 1.0D0
   end do
 
   do k = 1, nt
-    !$omp parallel do
     do j = 0, ndim
-      CALL tl_step(tlm(:, j), xctl, t_dummy(j), dt, tmp(:, j))
-      tlm(:, j) = tmp(:, j)
+      CALL tl_step(tlm(:, j), xctl, t_dummy, dt, tmp(:))
+      tlm(:, j) = tmp(:)
     end do
-    !$omp end parallel do
-    CALL step(xctl, t, dt, tmp(:, 0))
-    xctl(:) = tmp(:, 0)
+    CALL step(xctl, t, dt, tmp(:))
+    xctl(:) = tmp(:)
   end do
 END SUBROUTINE tl_matrix_analytic
 
