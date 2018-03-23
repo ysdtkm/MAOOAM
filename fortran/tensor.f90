@@ -207,7 +207,7 @@ CONTAINS
  SUBROUTINE simplify(tensor)
    TYPE(coolist), DIMENSION(ndim), INTENT(INOUT):: tensor
    INTEGER :: i,j,k
-   INTEGER :: li,lii,liii,n
+   INTEGER :: li,lii,liii,n,lp
    DO i= 1,ndim
       n=tensor(i)%nelems
       DO li=n,2,-1
@@ -235,7 +235,8 @@ CONTAINS
       DO li=1,n
          ! Clear new "almost" zero entries and shift rest of the items one place down.
          ! Make sure not to skip any entries while shifting!
-         DO WHILE (ABS(tensor(i)%elems(li)%v) < real_eps)
+         DO lp=1,n
+            if (ABS(tensor(i)%elems(li)%v) >= real_eps) exit
             DO liii=li+1,n
                tensor(i)%elems(liii-1)%j=tensor(i)%elems(liii)%j
                tensor(i)%elems(liii-1)%k=tensor(i)%elems(liii)%k

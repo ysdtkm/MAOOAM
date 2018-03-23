@@ -192,6 +192,5 @@ CONTAINS
     LSBpo=couple*2*epsa*sB*To0**3/(Ga*f0) ! long wave radiation from ocean absorbed by atmosphere
     LSBpa=8*epsa*sB*Ta0**3/(Ga*f0) ! long wave radiation lost by atmosphere to space & ocea
 
-
   END SUBROUTINE init_params
 END MODULE params
