@@ -8,6 +8,7 @@ maooam
 *.png
 *.pdf
 img/
+dat/
 *.so
 tags
 *.o

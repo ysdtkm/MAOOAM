@@ -11,12 +11,12 @@ N = 36
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
 DT = 10.0  # write interval in [timeunit]
-NT = 30000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+NT = 100  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
-FNAME = "/lustre/tyoshida/shrt/exec/m275/evol_field_tlm.dat"
+FNAME = "dat/evol_field_tlm_2.00.dat"
 GINELLI = True
-NT_ABORT = 10000
-T_VERIF_LIST = [0, 10000, 20000, 30000]
+NT_ABORT = 0
+T_VERIF_LIST = [0]
 
 def main():
     np.random.seed(10 ** 8 + 7)
@@ -26,14 +26,14 @@ def main():
         trajs, gs, ms, rs = integ_forward_ginelli()
         cs = integ_backward_ginelli(rs)
         vs = obtain_clvs_ginelli(cs, gs)
-        print_verif(trajs, ms, gs, rs, cs, vs)
+        # print_verif(trajs, ms, gs, rs, cs, vs)
     else:
         trajs, gs, ms = integ_forward()
         fs = integ_backward(ms)
         vs = calc_clv(gs, fs)
     trajs, gs, ms, vs = trim_spinup(trajs, gs, ms, vs)
     test_growth_rate(ms, vs)
-    test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
+    # test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
 
 def trim_spinup(trajs, gs, ms, vs):
     st = NT_ABORT
