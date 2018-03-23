@@ -207,6 +207,8 @@ nboc, nbatm = 2 * 4, 2 * 2  # number of blocks
 # Scale parameters for the ocean and the atmosphere
 # -----------------------------------------------------------
 
+Couple = 0.0
+
 scale = 5.e6  # the characteristic space scale, L*pi
 f0 = 1.032e-4  # Coriolis parameter at 45 degrees latitude
 n = 1.5e0  # aspect ratio (n = 2Ly/Lx ; Lx = 2*pi*L/n; Ly = pi*L)
@@ -217,10 +219,10 @@ phi0_npi = 0.25e0  # latitude exprimed in fraction of pi
 gp = 3.1e-2  # reduced gravity
 r = 1.e-8  # frictional coefficient at the bottom of the ocean
 h = 5.e2  # depth of the water layer of the ocean
-d = 1.e-8  # the coupling parameter (should be divided by f0 to be adim)
+d = Couple * 1.e-8  # eq. 3 RHS 2nd term # the coupling parameter (should be divided by f0 to be adim)
 
 # Parameters for the atmosphere
-k = 0.02  # atmosphere bottom friction coefficient
+k = Couple * 0.02  # eq. 2 RHS 3rd term # atmosphere bottom friction coefficient
 kp = 0.04  # atmosphere internal friction coefficient
 sig0 = 0.1e0  # static stability of the atmosphere
 
@@ -237,7 +239,7 @@ Ta0 = 270.0  # Stationary solution for the 0-th order atmospheric temperature
 
 # Other temperature-related parameters/constants
 sc = 1.  # Ratio of surface to atmosphere temperature
-lambdaa = 20.00  # Sensible+turbulent heat exchange between oc and atm
+lambdaa = Couple * 20.00  # Eqs. 4 and 5 RHS 1st terms # Sensible+turbulent heat exchange between oc and atm
 rr = 287.e0  # Gas constant of dry air
 sb = 5.6e-8  # Stefan-Boltzmann constant
 
@@ -273,10 +275,10 @@ Lpa = lambdaa / (Ga * f0)
 sbpo = 4 * sb * To0**3 / (Go * f0)
 
 # long wave radiation from atmosphere absorbed by ocean
-sbpa = 8 * epsa * sb * Ta0**3 / (Go * f0)
+sbpa = Couple * 8 * epsa * sb * Ta0**3 / (Go * f0)  # eq. 4 RHS 2nd term
 
 # long wave radiation from ocean absorbed by atmosphere
-LSBpo = 2 * epsa * sb * To0**3 / (Ga * f0)
+LSBpo = Couple * 2 * epsa * sb * To0**3 / (Ga * f0)  # eq. 5 RHS 3rd term
 
 # long wave radiation lost by atmosphere to space & ocean
 LSBpa = 8 * epsa * sb * Ta0**3 / (Ga * f0)
