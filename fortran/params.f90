@@ -21,6 +21,7 @@ MODULE params
 
   PUBLIC
 
+  REAL(KIND=8) :: couple
   REAL(KIND=8) :: n         !< \f$n = 2 L_y / L_x\f$ - Aspect ratio
   REAL(KIND=8) :: phi0      !< Latitude in radian
   REAL(KIND=8) :: rra       !< Earth radius
@@ -91,7 +92,7 @@ CONTAINS
   SUBROUTINE init_nml
     INTEGER :: AllocStat
 
-    NAMELIST /aoscale/  scale,f0,n,rra,phi0_npi
+    NAMELIST /aoscale/  couple,scale,f0,n,rra,phi0_npi
     NAMELIST /oparams/  gp,r,H,d
     NAMELIST /aparams/  k,kp,sig0
     NAMELIST /toparams/ Go,Co,To0
@@ -113,6 +114,10 @@ CONTAINS
     READ(8,nml=otparams)
 
     CLOSE(8)
+
+    d = d * couple
+    k = k * couple
+    lambda = lambda * couple
 
     OPEN(8, file="modeselection.nml", status='OLD', recl=80, delim='APOSTROPHE')
     READ(8,nml=numblocs)
@@ -183,10 +188,9 @@ CONTAINS
     Cpa=Ca/(Ga*f0) * RR/(f0**2*L**2)/2 ! Cpa acts on psi1-psi3, not on theta
     Lpa=lambda/(Ga*f0)
     sBpo=4*sB*To0**3/(Go*f0) ! long wave radiation lost by ocean to atmosphere space
-    sBpa=8*epsa*sB*Ta0**3/(Go*f0) ! long wave radiation from atmosphere absorbed by ocean
-    LSBpo=2*epsa*sB*To0**3/(Ga*f0) ! long wave radiation from ocean absorbed by atmosphere
+    sBpa=couple*8*epsa*sB*Ta0**3/(Go*f0) ! long wave radiation from atmosphere absorbed by ocean
+    LSBpo=couple*2*epsa*sB*To0**3/(Ga*f0) ! long wave radiation from ocean absorbed by atmosphere
     LSBpa=8*epsa*sB*Ta0**3/(Ga*f0) ! long wave radiation lost by atmosphere to space & ocea
-
 
   END SUBROUTINE init_params
 END MODULE params

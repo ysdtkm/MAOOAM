@@ -106,6 +106,8 @@ aotensor_def.mod: tensor.mod inprod_analytic.mod
 $(INTEGRATOR).mod: aotensor_def.mod
 ic_def.mod: util.mod aotensor_def.mod
 stat.mod: params.mod
+wrap_lapack.mod: params.mod
+tensor.mod: params.mod
 tl_ad_tensor.mod: aotensor_def.mod
 $(TL_AD_INTEGRATOR).mod: tl_ad_tensor.mod
 util.mod: $(IFPORT)

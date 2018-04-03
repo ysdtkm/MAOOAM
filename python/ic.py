@@ -22,7 +22,11 @@
 """
 import numpy as np
 
-X0 = np.random.randn(36) * 0.01
+np.random.seed((10 ** 8 + 7) * 1)
+x0_atm = np.random.randn(20)
+np.random.seed((10 ** 8 + 7) * 4)
+x0_ocn = np.random.randn(16)
+X0 = np.concatenate((x0_atm, x0_ocn)) * 0.01
 
 # # psi variables
 # X0[0] = 0.02  # typ=A, NX0=0, Ny= 1.0
