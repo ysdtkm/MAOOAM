@@ -11,12 +11,12 @@ N = 36
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
 DT = 10.0  # write interval in [timeunit]
-NT = 30000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+NT = 100  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
-FNAME = "/lustre/tyoshida/shrt/exec/m275/evol_field_tlm.dat"
+FNAME = "./evol_field_tlm.dat"
 GINELLI = True
-NT_ABORT = 10000
-T_VERIF_LIST = [0, 10000, 20000, 30000]
+NT_ABORT = 0
+T_VERIF_LIST = [0, 100]
 
 def main():
     np.random.seed(10 ** 8 + 7)
@@ -26,14 +26,14 @@ def main():
         trajs, gs, ms, rs = integ_forward_ginelli()
         cs = integ_backward_ginelli(rs)
         vs = obtain_clvs_ginelli(cs, gs)
-        print_verif(trajs, ms, gs, rs, cs, vs)
+        # print_verif(trajs, ms, gs, rs, cs, vs)
     else:
         trajs, gs, ms = integ_forward()
         fs = integ_backward(ms)
         vs = calc_clv(gs, fs)
     trajs, gs, ms, vs = trim_spinup(trajs, gs, ms, vs)
     test_growth_rate(ms, vs)
-    test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
+    test_growth_rate_long(ms, vs, 10, [0, 1, 4, 9, 14, 19, 24, 29, 35])
 
 def trim_spinup(trajs, gs, ms, vs):
     st = NT_ABORT
@@ -188,6 +188,8 @@ def test_growth_rate_long(ms, vs, ntg, ilist):
     for jt in reversed(range(ntg)):
         growth_log_mean[jt + 1, :] -= growth_log_mean[jt, :]
         growth_mean_log[jt + 1, :] -= growth_mean_log[jt, :]
+    growth_log_mean /= (DT / ONEDAY)
+    growth_mean_log /= (DT / ONEDAY)
     plot_growth_rate(growth_log_mean, ntg, ilist, "lognorm")
     plot_growth_rate(growth_mean_log, ntg, ilist, "L2_norm")
 
