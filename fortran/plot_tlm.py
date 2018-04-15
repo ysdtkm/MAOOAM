@@ -13,17 +13,10 @@ N = 36
 DT = 10.0  # write interval in [timeunit]
 NT = 100  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
-<<<<<<< HEAD
-FNAME = "./evol_field_tlm.dat"
-GINELLI = True
-NT_ABORT = 0
-T_VERIF_LIST = [0, 100]
-=======
 FNAME = "dat/evol_field_tlm_2.00.dat"
 GINELLI = True
 NT_ABORT = 0
 T_VERIF_LIST = [0]
->>>>>>> 817a3d10cc58afd2be9cd8d16c105a11a76a0121
 
 def main():
     np.random.seed(10 ** 8 + 7)
@@ -40,11 +33,7 @@ def main():
         vs = calc_clv(gs, fs)
     trajs, gs, ms, vs = trim_spinup(trajs, gs, ms, vs)
     test_growth_rate(ms, vs)
-<<<<<<< HEAD
-    test_growth_rate_long(ms, vs, 10, [0, 1, 4, 9, 14, 19, 24, 29, 35])
-=======
-    # test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
->>>>>>> 817a3d10cc58afd2be9cd8d16c105a11a76a0121
+    test_growth_rate_long(ms, vs, 100, [0, 1, 4, 9, 14, 19, 24, 29, 35])
 
 def trim_spinup(trajs, gs, ms, vs):
     st = NT_ABORT
