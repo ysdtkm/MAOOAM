@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 
 n = 36
 
-class Maooam_Fortran:
+class MaooamFortran:
     module_maooam = np.ctypeslib.load_library("step_maooam.so", ".")
     module_maooam.step_maooam_.argtypes = [
         np.ctypeslib.ndpointer(dtype=np.float64),
         np.ctypeslib.ndpointer(dtype=np.float64)]
     module_maooam.step_maooam_.restype = c_void_p
 
-    def __init__(self, dt=0.01):
+    def __init__(self, dt):
         assert dt.__class__ in [float, np.float32, np.float64]
         self.dt = np.array([dt])
 
@@ -25,7 +25,7 @@ class Maooam_Fortran:
 def main():
     nt = 10000000
     intvl = 100
-    mf = Maooam_Fortran(0.01)
+    mf = MaooamFortran(0.01)
     x0 = __model_state_example()
     xhist = np.empty((nt // intvl, n))
     for i in range(nt):
