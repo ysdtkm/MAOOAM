@@ -8,8 +8,6 @@ import matplotlib.pyplot as plt
 n = 36
 
 class Maooam_Fortran:
-    one = np.array([1.0])
-
     module_maooam = np.ctypeslib.load_library("step_maooam.so", ".")
     module_maooam.step_maooam_.argtypes = [
         np.ctypeslib.ndpointer(dtype=np.float64),
@@ -21,12 +19,11 @@ class Maooam_Fortran:
         self.dt = np.array([dt])
 
     def step(self, x0):
-        y0 = np.concatenate((self.one, x0))
-        self.module_maooam.step_maooam_(y0, self.dt)
-        return y0[1:]
+        self.module_maooam.step_maooam_(x0, self.dt)
+        return x0
 
 def main():
-    nt = 100000
+    nt = 1000000
     intvl = 100
     mf = Maooam_Fortran(0.01)
     x0 = __model_state_example()

@@ -3,4 +3,4 @@ rm -f *.pdf *.dat
 make clean
 make
 ./maooam
-python call_ft.py
+time python call_ft.py

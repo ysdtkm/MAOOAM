@@ -5,10 +5,10 @@ subroutine step_maooam(x0, dt)
 
   implicit none
 
-  real(8), intent(inout) :: x0(0:ndim)
+  real(8), intent(inout) :: x0(ndim)
   real(8), intent(in) :: dt
   real(8) :: t_dummy
-  real(8), save, allocatable :: x1(:)
+  real(8), save, allocatable :: y0(:), y1(:)
   logical, save :: first_time = .true.
   integer :: stat
 
@@ -17,12 +17,13 @@ subroutine step_maooam(x0, dt)
     call init_integrator
     first_time = .false.
     t_dummy = 0.0d0
-    allocate (x1(0:ndim), stat=stat)
-    if (stat /= 0) stop "*** Allocation error of x1 ! ***"
+    allocate (y0(0:ndim), y1(0:ndim), stat=stat)
+    if (stat /= 0) stop "*** Allocation error at step_maooam! ***"
   end if
 
-  x1(:) = 0.0
-  call step(x0, t_dummy, dt, x1)
-  x0 = x1
+  y0(0) = 1.0
+  y0(1:ndim) = x0(1:ndim)
+  call step(y0, t_dummy, dt, y1)
+  x0(1:ndim) = y1(1:ndim)
 end subroutine step_maooam
 
