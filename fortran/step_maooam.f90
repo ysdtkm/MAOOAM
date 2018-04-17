@@ -5,10 +5,9 @@ subroutine step_maooam(x0, dt)
 
   implicit none
 
-  real(8), intent(inout) :: x0(ndim)
+  real(8), intent(inout) :: x0(0:ndim)
   real(8), intent(in) :: dt
-  real(8) :: t_dummy, x1(ndim)
-  integer :: i
+  real(8) :: t_dummy
   logical, save :: first_time = .true.
 
   if (first_time) then
