@@ -101,15 +101,13 @@ CONTAINS
     REAL(KIND=8), DIMENSION(0:ndim), INTENT(OUT) :: res
     INTEGER :: i,j,k,n
     res=0.D0
-    print *, 1.11
     DO i=1,ndim
        DO n=1,coolist_ijk(i)%nelems
          j=coolist_ijk(i)%elems(n)%j
          k=coolist_ijk(i)%elems(n)%k
          res(i) = res(i) + coolist_ijk(i)%elems(n)%v * arr_j(j)*arr_k(k)
       END DO
-   END DO
-    print *, 1.13
+    END DO
   END SUBROUTINE sparse_mul3
 
   !> Sparse multiplication of two tensors to determine the Jacobian:

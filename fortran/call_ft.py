@@ -12,8 +12,8 @@ add_np.step_maooam_.argtypes = [
 add_np.step_maooam_.restype = c_void_p
 
 x0 = np.random.randn(n) * 0.01
-print(x0)
 dt = np.array([0.1])
-add_np.step_maooam_(x0, dt)
-print(x0)
+for i in range(10):
+    add_np.step_maooam_(x0, dt)
+    print(x0)
 
