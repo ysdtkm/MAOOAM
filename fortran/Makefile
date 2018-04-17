@@ -66,7 +66,7 @@ endif
 .SUFFIXES:
 .SUFFIXES: .f90 .o .mod .out .test
 
-PROGRAMS = maooam test_tl_ad run_true_and_tlm
+PROGRAMS = maooam test_tl_ad run_true_and_tlm step_maooam.so
 
 MODULES = util.mod params.mod inprod_analytic.mod aotensor_def.mod ic_def.mod $(INTEGRATOR).mod stat.mod tensor.mod tl_ad_tensor.mod wrap_lapack.mod $(TL_AD_INTEGRATOR).mod $(IFPORT)
 MODULE_OBJECTS = $(MODULES:.mod=.o)
@@ -94,6 +94,9 @@ test_aotensor.test: test_aotensor
 
 %.mod: %.f90
 	$(COMPILER) $(COMPILER_FLAGS) -c $< $(LD_FLAGS)
+
+%.so: %.f90 $(MODULE_OBJECTS)
+	$(COMPILER) -shared $(COMPILER_FLAGS) $^ -o $@ $(LD_FLAGS)
 
 %.o: %.f90 $(MODULES)
 	$(COMPILER) $(COMPILER_FLAGS) -c $< $(LD_FLAGS)
