@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 n = 36
 
 class Maooam_Fortran:
-    dt = np.array([0.01])
     one = np.array([1.0])
 
     module_maooam = np.ctypeslib.load_library("step_maooam.so", ".")
@@ -17,19 +16,25 @@ class Maooam_Fortran:
         np.ctypeslib.ndpointer(dtype=np.float64)]
     module_maooam.step_maooam_.restype = c_void_p
 
+    def __init__(self, dt=0.01):
+        assert dt.__class__ in [float, np.float32, np.float64]
+        self.dt = np.array([dt])
+
     def step(self, x0):
         y0 = np.concatenate((self.one, x0))
         self.module_maooam.step_maooam_(y0, self.dt)
         return y0[1:]
 
 def main():
-    nt = 100000
-    mf = Maooam_Fortran()
+    nt = 10000000
+    intvl = 100
+    mf = Maooam_Fortran(0.01)
     x0 = __model_state_example()
-    xhist = np.empty((nt, n))
+    xhist = np.empty((nt // intvl, n))
     for i in range(nt):
         x0 = mf.step(x0)
-        xhist[i, :] = x0
+        if i % intvl == 0:
+            xhist[i // intvl, :] = x0
     print(x0)
     plot_xhist(xhist, "python.pdf")
     plot_fortran()
