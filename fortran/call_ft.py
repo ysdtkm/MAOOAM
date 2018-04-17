@@ -11,15 +11,15 @@ class Maooam_Fortran:
     dt = np.array([0.01])
     one = np.array([1.0])
 
-    add_np = np.ctypeslib.load_library("step_maooam.so", ".")
-    add_np.step_maooam_.argtypes = [
+    module_maooam = np.ctypeslib.load_library("step_maooam.so", ".")
+    module_maooam.step_maooam_.argtypes = [
         np.ctypeslib.ndpointer(dtype=np.float64),
         np.ctypeslib.ndpointer(dtype=np.float64)]
-    add_np.step_maooam_.restype = c_void_p
+    module_maooam.step_maooam_.restype = c_void_p
 
     def step(self, x0):
         y0 = np.concatenate((self.one, x0))
-        self.add_np.step_maooam_(y0, self.dt)
+        self.module_maooam.step_maooam_(y0, self.dt)
         return y0[1:]
 
 def main():
