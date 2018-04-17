@@ -15,7 +15,7 @@ endif
 
 # Define relevant compiler options for debug case and normal case for each compiler
 # Normal Case:
-IFORT_COMPILER_FLAGS = -assume byterecl -O2
+IFORT_COMPILER_FLAGS = -assume byterecl -O2 -fPIC
 IFORT_LD_FLAGS = -mkl
 GCC_COMPILER_FLAGS = -O2 -fPIC
 GCC_LD_FLAGS = -I/usr/local/include -L/usr/lib/lapack -llapack -lblas

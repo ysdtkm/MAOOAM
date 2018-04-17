@@ -83,11 +83,13 @@ def __model_state_example():
 
 def read_text_dat(filename):
     with open(filename, "r") as f:
-        lines = f.readlines()
+        # lines = f.readlines()
+        words = f.read().split()
+    lines = [words[i:i + n + 1] for i in range(0, len(words), n + 1)]
     nl = len(lines)
     xhist = np.empty((nl, n))
     for i, l in enumerate(lines):
-        li = list(map(float, l.split()))
+        li = list(map(float, l))
         xhist[i, :] = li[1:]
     return xhist
 
