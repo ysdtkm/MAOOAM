@@ -26,7 +26,7 @@ class Maooam_Fortran:
         return y0[1:]
 
 def main():
-    nt = 10000000
+    nt = 100000
     intvl = 100
     mf = Maooam_Fortran(0.01)
     x0 = __model_state_example()

@@ -1,6 +1,6 @@
 set -e
 rm -f *.pdf *.dat
 make clean
-COMPILER=ifort make
+make
 ./maooam
 python call_ft.py
