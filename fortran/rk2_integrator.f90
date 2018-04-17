@@ -63,11 +63,13 @@ CONTAINS
     REAL(KIND=8), INTENT(IN) :: dt
     REAL(KIND=8), DIMENSION(0:ndim), INTENT(OUT) :: res
 
+    print *, 1.1
     CALL tendencies(t,y,buf_f0)
     buf_y1 = y+dt*buf_f0
     CALL tendencies(t+dt,buf_y1,buf_f1)
     res=y+0.5*(buf_f0+buf_f1)*dt
     t=t+dt
+    print *, 1.3
   END SUBROUTINE step
 
 END MODULE integrator
