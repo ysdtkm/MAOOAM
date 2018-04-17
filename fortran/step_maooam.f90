@@ -11,6 +11,8 @@ subroutine step_maooam(x0, dt)
   real(8) :: t_dummy
   logical, save :: first_time = .true.
 
+  print *, 1
+
   allocate(x1(ndim))
 
   if (first_time) then
@@ -24,5 +26,6 @@ subroutine step_maooam(x0, dt)
   x0 = x1
 
   deallocate(x1)
+  print *, 3
 end subroutine step_maooam
 
