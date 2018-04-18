@@ -23,22 +23,29 @@ class MaooamFortran:
         return x0
 
 def main():
-    nt = 10000000
+    nt = 10 ** 7  # steps
     intvl = 100
-    mf = MaooamFortran(0.01)
+    mf = MaooamFortran(0.1)
     x0 = __model_state_example()
     xhist = np.empty((nt // intvl, n))
     for i in range(nt):
         x0 = mf.step(x0)
         if i % intvl == 0:
             xhist[i // intvl, :] = x0
-    print(x0)
+    # print(x0)
+    print(np.std(xhist, axis=0))
     plot_xhist(xhist, "python.pdf")
     plot_fortran()
 
 def plot_xhist(data, imgname):
+    assert data.shape[1] == n
+    mi = np.min(data, axis=0)
+    ma = np.max(data, axis=0)
+    assert np.all(ma > mi)
+    data[:, :] -= mi[np.newaxis, :]
+    data[:, :] /= (ma - mi)[np.newaxis, :]
     cm = plt.imshow(data, aspect="auto")
-    cm.set_clim(-0.03, 0.03)
+    cm.set_clim(0, 1)
     plt.colorbar(cm)
     plt.savefig(imgname)
     plt.close()
