@@ -18,7 +18,7 @@ def main():
     mkdirs()
     nad, timd = read_file("evol_field.dat", 0.0)
     plot_time(nad, timd)
-    plot_anime(nad)
+    # plot_anime(nad)
     # plot_3d_trajectory(nad[:, 21], nad[:, 29], nad[:, 0])
 
 def mkdirs():
@@ -227,4 +227,4 @@ def model_state_example():
     return xini
 
 if __name__ == "__main__":
-    test_get_grid_val()
+    main()
