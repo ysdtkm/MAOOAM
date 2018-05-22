@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 import numpy as np
 import matplotlib as mpl
 mpl.use('Agg')
@@ -49,7 +50,7 @@ def plot_time(nad, timd):
     for i in range(NMODEL):
         plt.plot(timd * 3.07e-4, nad[:, i])
         plt.xlabel("model year")
-        plt.savefig("img/x_%02d.png" % i)
+        plt.savefig("img/x_%02d.pdf" % i)
         plt.close()
 
 def plot_snap(cmaxs, nad, i):
@@ -58,7 +59,7 @@ def plot_snap(cmaxs, nad, i):
     datas = {"a_gph": psia * f0 / g, "a_t": ta, "o_psi": psio, "o_t": to}
     for cmp in cmaxs:
         title = "%s %04d" % (cmp, it)
-        plot_matrix(datas[cmp], "img/%s/%s_%04d.png" % (cmp, cmp, it), title, cmaxs[cmp], ipol="none")
+        plot_matrix(datas[cmp], "img/%s/%s_%04d.pdf" % (cmp, cmp, it), title, cmaxs[cmp], ipol="none")
 
 def plot_anime(nad):
     # cmaxs = {"a_gph": 500, "a_t": 20, "o_psi": 5e+5, "o_t": 40}  # DDV2016
@@ -67,7 +68,7 @@ def plot_anime(nad):
     for i in range(nt - PINTVL * ANIMAX, nt, PINTVL):
         plot_snap(cmaxs, nad, i)
     for dir in cmaxs:
-        subprocess.run("convert -delay 8 -loop 0 ./img/%s/*.png ./img/%s/anime.gif" % (dir, dir), check=True, shell=True)
+        subprocess.run("convert -delay 8 -loop 0 ./img/%s/*.pdf ./img/%s/anime.gif" % (dir, dir), check=True, shell=True)
 
 def plot_3d_trajectory(x, y, z):
     # 3D trajectory
@@ -82,19 +83,25 @@ def plot_3d_trajectory(x, y, z):
     ax.set_xlabel("Psi o 2")
     ax.set_ylabel("Theta o 2")
     ax.set_zlabel("Psi a 1")
-    plt.savefig("./img/traj.png")
+    plt.savefig("./img/traj.pdf")
     plt.close()
 
-def plot_matrix(mat, out, title="", cmax=None, ipol="none"):
-    # plt.rcParams["font.size"] = 14
+def plot_matrix(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygrid=None):
+    plt.rcParams["font.size"] = 16
+    plt.tight_layout()
     fig, ax = plt.subplots(1)
     if cmax is None:
         cmax = np.max(np.abs(mat))
-    cm = ax.imshow(mat, cmap=plt.cm.RdBu_r, aspect=0.7, interpolation=ipol)
+    if xgrid is None or ygrid is None:
+        cm = ax.imshow(mat, cmap=plt.cm.RdBu_r, aspect=0.7, interpolation=ipol)
+    else:
+        cm = ax.pcolormesh(xgrid, ygrid, mat, cmap=plt.cm.RdBu_r)
     cm.set_clim(-1.0 * cmax, cmax)
     x0, x1 = ax.get_xlim()
     y0, y1 = ax.get_ylim()
     plt.colorbar(cm)
+    plt.xlabel("x (nondimensional)")
+    plt.ylabel("y (nondimensional)")
     plt.title(title)
     plt.savefig(out)
     plt.close()
@@ -184,7 +191,7 @@ def all_reconstruct_grid(waves, nx, ny):
             o_psi[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "o_psi")
             o_tmp[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "o_tmp")
     o_psi -= np.mean(o_psi)
-    return a_psi, a_tmp, o_psi, o_tmp
+    return a_psi, a_tmp, o_psi, o_tmp, x_grid, y_grid
 
 def model_state_example():
     xini = np.array([
@@ -226,5 +233,21 @@ def model_state_example():
         -1.753655087903711E-007])
     return xini
 
+def plot_observation_grids():
+    mkdirs()
+    nad = model_state_example()
+    sys.path.append("../../DA_Tutorial/MAOOAM")
+    import module_obs_network
+    x2da, y2da = module_obs_network.__get_obs_grid_atmos()
+    x2do, y2do = module_obs_network.__get_obs_grid_ocean()
+    psia, ta, psio, to, x_grid, y_grid = all_reconstruct_grid(nad, 20, 20)
+    extent = (min(x_grid) - 0.5, max(x_grid) + 0.5, min(y_grid) - 0.5, max(y_grid) + 0.5)
+    datas = {"a_gph": psia * f0 / g, "a_t": ta, "o_psi": psio, "o_t": to}
+    cmaxs = {"a_gph": 500, "a_t": 20, "o_psi": 3e+4, "o_t": 40}  # VL2016
+    for cmp in cmaxs:
+        title = "%s" % (cmp)
+        plot_matrix(datas[cmp], "img/%s/%s.pdf" % (cmp, cmp), title, cmaxs[cmp], ipol="none",
+            xgrid=x_grid, ygrid=y_grid)
+
 if __name__ == "__main__":
-    test_get_grid_val()
+    plot_observation_grids()
