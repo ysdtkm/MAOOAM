@@ -239,18 +239,16 @@ def plot_obs_network(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygr
     fig, ax = plt.subplots(1)
     if cmax is None:
         cmax = np.max(np.abs(mat))
-    if xgrid is None or ygrid is None:
-        cm = ax.imshow(mat, cmap=plt.cm.RdBu_r, aspect=0.7, interpolation=ipol)
-    else:
-        cm = ax.pcolormesh(xgrid, ygrid, mat, cmap=plt.cm.RdBu_r)
+    cm = ax.pcolormesh(xgrid, ygrid, mat, cmap=plt.cm.RdBu_r)
     cm.set_clim(-1.0 * cmax, cmax)
     sc = ax.scatter(obss[0], obss[1], marker="x", s=100, color="red")
     sc.set_clip_on(False)
     ax.set_xlim(min(xgrid), max(xgrid))
     ax.set_ylim(min(ygrid), max(ygrid))
-    plt.colorbar(cm, orientation="horizontal")
-    plt.xlabel("x (nondimensional)")
-    plt.ylabel("y (nondimensional)")
+    ax.set_aspect(1)
+    plt.colorbar(cm, shrink=0.8)  # , orientation="horizontal")
+    plt.xlabel("x' (nondimensional)")
+    plt.ylabel("y' (nondimensional)")
     plt.title(title)
     plt.savefig(out)
     plt.close()
