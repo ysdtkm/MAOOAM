@@ -233,7 +233,7 @@ def model_state_example():
         -1.753655087903711E-007])
     return xini
 
-def plot_obs_network(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygrid=None):
+def plot_obs_network(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygrid=None, obss=None):
     plt.rcParams["font.size"] = 14
     plt.tight_layout()
     fig, ax = plt.subplots(1)
@@ -244,9 +244,11 @@ def plot_obs_network(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygr
     else:
         cm = ax.pcolormesh(xgrid, ygrid, mat, cmap=plt.cm.RdBu_r)
     cm.set_clim(-1.0 * cmax, cmax)
-    x0, x1 = ax.get_xlim()
-    y0, y1 = ax.get_ylim()
-    plt.colorbar(cm)
+    sc = ax.scatter(obss[0], obss[1], marker="x", s=100, color="red")
+    sc.set_clip_on(False)
+    ax.set_xlim(min(xgrid), max(xgrid))
+    ax.set_ylim(min(ygrid), max(ygrid))
+    plt.colorbar(cm, orientation="horizontal")
     plt.xlabel("x (nondimensional)")
     plt.ylabel("y (nondimensional)")
     plt.title(title)
@@ -263,12 +265,13 @@ def plot_observation_grids():
     psia, ta, psio, to, x_grid, y_grid = all_reconstruct_grid(nad, 100, 100)
     datas = {"a_gph": psia * f0 / g, "a_t": ta, "o_psi": psio, "o_t": to}
     cmaxs = {"a_gph": 500, "a_t": 20, "o_psi": 3e+4, "o_t": 40}  # VL2016
-    names = {"a_gph": "geopotential height [m]", "a_t": "atmospheric temperature anomaly [K]",
-             "o_psi": "ocean streamfunction [m2/s]", "o_t": "oceanic temperature anomaly [K]"}
+    names = {"a_gph": "atmospheric observation network", "a_t": "atmospheric observation network",
+             "o_psi": "ocean observation network", "o_t": "oceanic observation network"}
+    obss = {"a_gph": (x2da, y2da), "a_t": (x2da, y2da), "o_psi": (x2do, y2do), "o_t": (x2do, y2do)}
     for cmp in cmaxs:
         title = "%s" % names[cmp]
         plot_obs_network(datas[cmp], "img/%s/%s.pdf" % (cmp, cmp), title, cmaxs[cmp], ipol="none",
-            xgrid=x_grid, ygrid=y_grid, )
+            xgrid=x_grid, ygrid=y_grid, obss=obss[cmp])
 
 if __name__ == "__main__":
     plot_observation_grids()
