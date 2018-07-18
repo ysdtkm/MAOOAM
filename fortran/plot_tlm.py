@@ -11,7 +11,7 @@ N = 36
 # N = 318   # atm 6x6 ocn 9x9
 # N = 414   # atm 9x9 ocn 6x6
 DT = 10.0  # write interval in [timeunit]
-NT = 300  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
+NT = 100000  # number of write. filesize = 8 * (N ** 2 + N) * NT [bytes]
 ONEDAY = 8.64  # [timeunit/day] a46p51
 FNAME = "evol_field_tlm.dat"
 GINELLI = True
