@@ -3,10 +3,12 @@
 import sys
 import numpy as np
 import matplotlib as mpl
-mpl.use('Agg')
+mpl.use('pdf')
 import matplotlib.pyplot as plt
 import subprocess
 from mpl_toolkits.mplot3d import Axes3D
+sys.path.append("../../DA_Tutorial/MAOOAM")
+from module_obs_network import get_grid_val
 
 NMODEL = 36
 PINTVL = 10
@@ -88,7 +90,6 @@ def plot_3d_trajectory(x, y, z):
 
 def plot_matrix(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygrid=None):
     plt.rcParams["font.size"] = 16
-    plt.tight_layout()
     fig, ax = plt.subplots(1)
     if cmax is None:
         cmax = np.max(np.abs(mat))
@@ -103,63 +104,8 @@ def plot_matrix(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygrid=No
     plt.xlabel("x (nondimensional)")
     plt.ylabel("y (nondimensional)")
     plt.title(title)
-    plt.savefig(out)
+    plt.savefig(out, bbox_inches="tight")
     plt.close()
-
-def get_grid_val(waves, x, y, elem):
-    def get_atm(is_temp):
-        types = ["A", "K", "L", "A", "K", "L", "K", "L", "K", "L"]
-        hs = [0, 1, 1, 0, 1, 1, 2, 2, 2, 2]
-        ps = [1, 1, 1, 2, 2, 2, 1, 1, 2, 2]
-        gridval = 0.0
-        for j in range(na):
-            j_all = j + na if is_temp else j
-            if types[j] == "A":
-                gridval = gridval + waves[j_all] * np.sqrt(2.0) * np.cos(ps[j] * y)
-            elif types[j] == "K":
-                gridval = gridval + waves[j_all] * 2.0 * np.cos(hs[j] * n * x) * np.sin(ps[j] * y)
-            else:
-                gridval = gridval + waves[j_all] * 2.0 * np.sin(hs[j] * n * x) * np.sin(ps[j] * y)
-        if is_temp:
-            gridval *= (f0 ** 2 * L ** 2) / R
-        else:
-            gridval *= L ** 2 * f0
-        return gridval
-
-    def get_ocn(is_temp):
-        hos = [1, 1, 1, 1, 2, 2, 2, 2]
-        pos = [1, 2, 3, 4, 1, 2, 3, 4]
-        gridval = 0.0
-        for j in range(no):
-            j_all = j + (na * 2 + no) if is_temp else j + na * 2
-            gridval = gridval + waves[j_all] * 2.0 * np.sin(0.5 * hos[j] * n * x) * np.sin(pos[j] * y)
-        if is_temp:
-            gridval *= (f0 ** 2 * L ** 2) / R
-        else:
-            gridval *= L ** 2 * f0
-        return gridval
-
-    assert waves.__class__ == np.ndarray
-    assert waves.shape == (36,)
-    assert y.__class__ in [float, np.float32, np.float64]
-    assert x.__class__ in [float, np.float32, np.float64]
-
-    n = 1.5
-    na = 10
-    no = 8
-    R = 287.0
-    L = 5000000.0 / np.pi
-
-    if elem == "a_psi":
-        return get_atm(False)
-    elif elem == "a_tmp":
-        return get_atm(True)
-    elif elem == "o_psi":
-        return get_ocn(False)
-    elif elem == "o_tmp":
-        return get_ocn(True)
-    else:
-        raise Exception("get_grid_val overflow. Element %s not found." % elem)
 
 def test_get_grid_val():
     n = 1.5
@@ -170,10 +116,10 @@ def test_get_grid_val():
     # get_grid_val() returns one of four variables
     # {atmosphere|ocean} x {streamfunction|temperature} at point (x, y)
     # unit: [m^2/s] for streamfunction and [K] for temperature
-    a_psi = get_grid_val(state, x, y, "a_psi")
-    a_tmp = get_grid_val(state, x, y, "a_tmp")
-    o_psi = get_grid_val(state, x, y, "o_psi")
-    o_tmp = get_grid_val(state, x, y, "o_tmp")
+    a_psi = get_grid_val(state, x, y, True, "psi")
+    a_tmp = get_grid_val(state, x, y, True, "tmp")
+    o_psi = get_grid_val(state, x, y, False, "psi")
+    o_tmp = get_grid_val(state, x, y, False, "tmp")
     print(a_psi, a_tmp, o_psi, o_tmp)
 
 def all_reconstruct_grid(waves, nx, ny):
@@ -186,10 +132,10 @@ def all_reconstruct_grid(waves, nx, ny):
     o_tmp = np.empty((ny, nx))
     for ix in range(nx):
         for iy in range(ny):
-            a_psi[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "a_psi")
-            a_tmp[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "a_tmp")
-            o_psi[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "o_psi")
-            o_tmp[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], "o_tmp")
+            a_psi[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], True, "psi")
+            a_tmp[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], True, "tmp")
+            o_psi[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], False, "psi")
+            o_tmp[iy, ix] = get_grid_val(waves, x_grid[ix], y_grid[iy], False, "tmp")
     o_psi -= np.mean(o_psi)
     return a_psi, a_tmp, o_psi, o_tmp, x_grid, y_grid
 
@@ -235,11 +181,11 @@ def model_state_example():
 
 def plot_obs_network(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygrid=None, obss=None):
     plt.rcParams["font.size"] = 14
-    plt.tight_layout()
     fig, ax = plt.subplots(1)
     if cmax is None:
         cmax = np.max(np.abs(mat))
-    cm = ax.pcolormesh(xgrid, ygrid, mat, cmap=plt.cm.RdBu_r)
+    extent = (min(xgrid), max(xgrid), min(ygrid), max(ygrid))
+    cm = ax.imshow(mat, extent=extent, cmap=plt.cm.RdBu_r)
     cm.set_clim(-1.0 * cmax, cmax)
     sc = ax.scatter(obss[0], obss[1], marker="x", s=100, color="red")
     sc.set_clip_on(False)
@@ -250,7 +196,7 @@ def plot_obs_network(mat, out, title="", cmax=None, ipol="none", xgrid=None, ygr
     plt.xlabel("x' (nondimensional)")
     plt.ylabel("y' (nondimensional)")
     plt.title(title)
-    plt.savefig(out)
+    plt.savefig(out, bbox_inches="tight")
     plt.close()
 
 def plot_observation_grids():
@@ -263,8 +209,8 @@ def plot_observation_grids():
     psia, ta, psio, to, x_grid, y_grid = all_reconstruct_grid(nad, 100, 100)
     datas = {"a_gph": psia * f0 / g, "a_t": ta, "o_psi": psio, "o_t": to}
     cmaxs = {"a_gph": 500, "a_t": 20, "o_psi": 3e+4, "o_t": 40}  # VL2016
-    names = {"a_gph": "atmospheric observation network", "a_t": "atmospheric observation network",
-             "o_psi": "ocean observation network", "o_t": "oceanic observation network"}
+    names = {"a_gph": "Atmospheric observation network", "a_t": "Atmospheric observation network",
+             "o_psi": "Ocean observation network", "o_t": "Oceanic observation network"}
     obss = {"a_gph": (x2da, y2da), "a_t": (x2da, y2da), "o_psi": (x2do, y2do), "o_t": (x2do, y2do)}
     for cmp in cmaxs:
         title = "%s" % names[cmp]
